@@ -1,14 +1,43 @@
 import { Link, Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
+import { useState } from "react";
+/**
+ * check out [react-icons](https://react-icons.github.io/react-icons/) for more info...
+ */
+import { FaLaravel, FaReact } from "react-icons/fa";
 
 export default function Welcome({
   auth,
   laravelVersion,
   phpVersion,
 }: PageProps<{ laravelVersion: string; phpVersion: string }>) {
+  const [count, setCount] = useState(0);
+
   return (
     <>
+      <div className="mx-auto text-center w-100 p-24 bg-gray-100">
+        <h1 className="font-serif text-9xl">Hello World!</h1>
+        <h4 className="flex justify-evenly m-10">
+          <FaLaravel style={{ color: "red", fontSize: "4.5rem" }} />
+          <FaReact className="fill-blue-500 text-7xl" />
+          
+        </h4>
+        <button
+          className="mt-10 m-10 bg-indigo-600 px-4 py-3 text-center text-sm font-semibold inline-block text-white cursor-pointer uppercase transition duration-200 ease-in-out rounded-md hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2 active:scale-95"
+          onClick={() => setCount((count) => count + 1)}
+        >
+          count is {count}
+        </button>
+        <p className="mt-32">
+          Edit <code>resources\js\Pages\Welcome.tsx</code> and save to test HMR
+        </p>
+      </div>
+      {/**
+       *==========================================================================
+       *  */}
+
       <Head title="Welcome" />
+
       <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
         <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
           {auth.user ? (
