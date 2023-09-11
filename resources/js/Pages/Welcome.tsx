@@ -5,7 +5,12 @@ import { useState } from "react";
  * check out [react-icons](https://react-icons.github.io/react-icons/) for more info...
  */
 import { FaLaravel, FaReact } from "react-icons/fa";
-
+let data:any[] = [];
+data[0] = "far";
+data[0] = "far";
+data[0] = "far";
+data[0] = "far";
+data[0] = "far";
 export default function Welcome({
   auth,
   laravelVersion,
@@ -20,7 +25,6 @@ export default function Welcome({
         <h4 className="flex justify-evenly m-10">
           <FaLaravel style={{ color: "red", fontSize: "4.5rem" }} />
           <FaReact className="fill-blue-500 text-7xl" />
-          
         </h4>
         <button
           className="mt-10 m-10 bg-indigo-600 px-4 py-3 text-center text-sm font-semibold inline-block text-white cursor-pointer uppercase transition duration-200 ease-in-out rounded-md hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2 active:scale-95"
