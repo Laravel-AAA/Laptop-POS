@@ -5,12 +5,8 @@ import { useState } from "react";
  * check out [react-icons](https://react-icons.github.io/react-icons/) for more info...
  */
 import { FaLaravel, FaReact } from "react-icons/fa";
-let data:any[] = [];
-data[0] = "far";
-data[0] = "far";
-data[0] = "far";
-data[0] = "far";
-data[0] = "far";
+
+
 export default function Welcome({
   auth,
   laravelVersion,
