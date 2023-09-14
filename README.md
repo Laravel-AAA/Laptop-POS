@@ -1,6 +1,6 @@
-# Laptop Accounting
+# Laptop Point of Sale
 
-This is a simple Accounting program.
+This is a simple Point of Sale (POS) application.
 
 # Workflow
 
@@ -15,11 +15,11 @@ This is a simple Accounting program.
 
 Clone the repo to your local computer:
 ```shell
-git clone https://github.com/Laravel-AAA/Laptop-Accounting
+git clone https://github.com/Laravel-AAA/Laptop-POS
 ```
 Navigate to the cloned project folder:
 ```shell
-cd laptop-accounting
+cd laptop-pos
 ```
 Install the dependencies:
 ```shell
