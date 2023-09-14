@@ -26,8 +26,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard');//tsx component location on resources/js/Pages folder
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/inventory', function () {
+    return Inertia::render('Inventory/Inventory');//tsx component location on resources/js/Pages folder
+})->middleware(['auth', 'verified'])->name('inventory');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

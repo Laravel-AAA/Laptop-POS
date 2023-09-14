@@ -1,7 +1,7 @@
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import { Link } from "@inertiajs/react";
 import { PropsWithChildren } from "react";
-import Card from "./CardLayout";
+import FormCard from "./FormCardLayout";
 import HeaderFooter from "./HeaderFooterLayout/HeaderFooterLayout";
 import { PageProps, User } from "@/types";
 
@@ -18,7 +18,7 @@ export default function Guest({
           </Link>
         </div>
 
-        <Card>{children}</Card>
+        <FormCard>{children}</FormCard>
       </div>
     </HeaderFooter>
   );

@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="flex items-center gap-4">
           <a
             href="https://github.com/sponsors/taylorotwell"
-            className="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+            className="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
