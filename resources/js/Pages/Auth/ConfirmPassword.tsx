@@ -5,8 +5,9 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, useForm } from "@inertiajs/react";
+import { PageProps } from "@/types";
 
-export default function ConfirmPassword() {
+export default function ConfirmPassword({auth}:PageProps) {
   const { data, setData, post, processing, errors, reset } = useForm({
     password: "",
   });
@@ -24,7 +25,7 @@ export default function ConfirmPassword() {
   };
 
   return (
-    <GuestLayout>
+    <GuestLayout auth={auth}>
       <Head title="Confirm Password" />
 
       <div className="mb-4 text-sm text-gray-600">
