@@ -4,13 +4,13 @@ import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
-import { User } from "@/types";
+import { IUser } from "@/types";
 
 export default function Authenticated({
   user,
   header,
   children,
-}: PropsWithChildren<{ user: User; header?: string }>) {
+}: PropsWithChildren<{ user: IUser; header?: string }>) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false);
 

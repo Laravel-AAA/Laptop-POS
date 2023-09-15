@@ -1,12 +1,12 @@
 import { PropsWithChildren } from "react";
 import Footer from "./Partials/Footer";
 import Header from "./Partials/Header";
-import { User } from "@/types";
+import { IUser } from "@/types";
 
 export default function HeaderFooter({
   children,
   auth,
-}: PropsWithChildren<{ auth: { user: User } }>) {
+}: PropsWithChildren<{ auth: { user: IUser } }>) {
   return (
     <>
       <div className="bg-dots-darker p-6 lg:p-8 dark:bg-dots-lighter min-h-screen bg-center bg-gray-100 dark:bg-gray-900 selection:bg-red-500 selection:text-white">

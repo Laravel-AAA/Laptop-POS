@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/react";
 import { PropsWithChildren } from "react";
 import FormCard from "./FormCardLayout";
 import HeaderFooter from "./HeaderFooterLayout/HeaderFooterLayout";
-import { PageProps, User } from "@/types";
+import { PageProps } from "@/types";
 
 export default function Guest({
   children,

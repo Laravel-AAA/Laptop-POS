@@ -31,7 +31,11 @@ cp .env.expample .env
 ```
 
 Configure the database information in the `.env` file (`DB_*`).
-
+```js
+DB_DATABASE=yourdatabase_name
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
 Sets the `APP_KEY` value in your `.env` file:
 ```shell
