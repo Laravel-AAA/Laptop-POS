@@ -1,19 +1,22 @@
-import { useState, PropsWithChildren, ReactNode } from "react";
+import { useState, PropsWithChildren, ReactNode, ReactElement } from "react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
-import NavLink from "@/Components/NavLink";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
+import ResponsiveNavLink from "@/Layouts/AuthenticatedLayout/Partials/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
 import { IUser } from "@/types";
+import NavLink from "./Partials/NavLink";
 
 export default function Authenticated({
   user,
   header,
   children,
-}: PropsWithChildren<{ user: IUser; header?: string }>) {
+}: PropsWithChildren<{ user: IUser; header?: ReactElement }>) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false);
-
+  const routes: { link: string; name: string }[] = [
+    { name: "Dashboard", link: "dashboard" },
+    { name: "Inventory", link: "product.index" },
+  ];
   return (
     <div className="min-h-screen bg-gray-100">
       <nav className="bg-white border-b border-gray-100">
@@ -27,7 +30,16 @@ export default function Authenticated({
               </div>
 
               <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <NavLink
+                {routes.map((r) => (
+                  <NavLink
+                    key={r.link}
+                    href={route(r.link)}
+                    active={route().current(r.link)}
+                  >
+                    {r.name}
+                  </NavLink>
+                ))}
+                {/* <NavLink
                   href={route("dashboard")}
                   active={route().current("dashboard")}
                 >
@@ -38,7 +50,7 @@ export default function Authenticated({
                   active={route().current("inventory")}
                 >
                   Inventory
-                </NavLink>
+                </NavLink> */}
               </div>
             </div>
 
@@ -130,18 +142,21 @@ export default function Authenticated({
           }
         >
           <div className="pt-2 pb-3 space-y-1">
-            <ResponsiveNavLink
-              href={route("dashboard")}
-              active={route().current("dashboard")}
-            >
-              Dashboard
-            </ResponsiveNavLink>
-            <ResponsiveNavLink
+            {routes.map((r) => (
+              <ResponsiveNavLink
+                key={r.link}
+                href={route(r.link)}
+                active={route().current(r.link)}
+              >
+                {r.name}
+              </ResponsiveNavLink>
+            ))}
+            {/* <ResponsiveNavLink
               href={route("inventory")}
               active={route().current("inventory")}
             >
               Inventory
-            </ResponsiveNavLink>
+            </ResponsiveNavLink> */}
           </div>
 
           <div className="pt-4 pb-1 border-t border-gray-200">
@@ -170,16 +185,18 @@ export default function Authenticated({
         </div>
       </nav>
 
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-            {header||route()
-              .current()
-              ?.split(" ")
-              .map((i) => i[0].toUpperCase() + i.substring(1).toLowerCase())
-              .join(" ") ||
-              "Oops! `header` and `route().current()` return are unexpected"}
-          </h2>
+      <header className="bg-white shadow my-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {header || (
+            <h2 className="font-semibold py-6 text-xl text-gray-800 leading-tight">
+              {route().current()?.toString()[0].toUpperCase() +
+                (route()
+                  .current()
+                  ?.substring(1)
+                  .toLowerCase()
+                  .split(".")?.[0] ?? "")}
+            </h2>
+          )}
         </div>
       </header>
 

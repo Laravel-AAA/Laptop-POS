@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,12 +27,13 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');//tsx component location on resources/js/Pages folder
+    return Inertia::render('Dashboard'); //tsx component location on resources/js/Pages folder
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/inventory', function () {
-    return Inertia::render('Inventory/Inventory');//tsx component location on resources/js/Pages folder
-})->middleware(['auth', 'verified'])->name('inventory');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/inventory', [ProductController::class, 'index'])->name('product.index'); //notice the endpoint `/inventory` can easily change but the real deal url is `product.index` that will be used in frontend and backend.
+    //todo: Route::delete('/product', [ProductController::class, 'destroy'])->name('product.destroy');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,4 +41,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

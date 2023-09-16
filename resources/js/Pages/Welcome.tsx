@@ -5,7 +5,7 @@ import { useState } from "react";
  * check out [react-icons](https://react-icons.github.io/react-icons/) for more info...
  */
 import { FaLaravel, FaReact } from "react-icons/fa";
-import HeaderFooter from "@/Layouts/HeaderFooterLayout/HeaderFooterLayout";
+import HeaderFooter from "@/Layouts/HeaderFooterLayout";
 
 export default function Welcome({
   auth,

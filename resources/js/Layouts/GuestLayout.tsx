@@ -2,7 +2,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import { Link } from "@inertiajs/react";
 import { PropsWithChildren } from "react";
 import FormCard from "./FormCardLayout";
-import HeaderFooter from "./HeaderFooterLayout/HeaderFooterLayout";
+import HeaderFooter from "./HeaderFooterLayout";
 import { PageProps } from "@/types";
 
 export default function Guest({
