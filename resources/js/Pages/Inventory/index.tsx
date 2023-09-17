@@ -13,8 +13,8 @@ import { useState } from "react";
 export default function Inventory({
   auth,
   products,
-  productsCount,//number of products
-}: PageProps<{ products: IProduct[], productsCount: number }>) {
+  productsCount, //number of products
+}: PageProps<{ products: IProduct[]; productsCount: number }>) {
   // const products: IProduct[] = [
   //   {
   //     name: "Apple MacBook Pro M1 13.3 Silver 16GB/512GB",

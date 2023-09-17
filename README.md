@@ -49,9 +49,10 @@ php artisan migrate
 php artisan migrate:fresh
 ```
 
-I don't know what is this but I found someone doing it and it looks safe 🙃:
-```shell
-php artisan storage:link
+Seed the database with fake data. 
+Note: there will be a user with email of `asdf@asdf.asdf` and password of `asdfasdf`, you can login directly with it. 
+```bash
+php artisan db:seed
 ```
 
 Install all dependencies:
