@@ -74,7 +74,7 @@ export default function Welcome({
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
               <a
                 href="https://laravel.com/docs"
-                className="duration-250 flex scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 transition-all focus:outline focus:outline-2 focus:outline-indigo-500 motion-safe:hover:scale-[1.01] dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5"
+                className="duration-250 flex scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 transition-all focus:outline focus:outline-2 focus:outline-primary-500 motion-safe:hover:scale-[1.01] dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5"
               >
                 <div>
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-50 dark:bg-red-800/20">
@@ -122,7 +122,7 @@ export default function Welcome({
 
               <a
                 href="https://laracasts.com"
-                className="duration-250 flex scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 transition-all focus:outline focus:outline-2 focus:outline-indigo-500 motion-safe:hover:scale-[1.01] dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5"
+                className="duration-250 flex scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 transition-all focus:outline focus:outline-2 focus:outline-primary-500 motion-safe:hover:scale-[1.01] dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5"
               >
                 <div>
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-50 dark:bg-red-800/20">
@@ -169,7 +169,7 @@ export default function Welcome({
 
               <a
                 href="https://laravel-news.com"
-                className="duration-250 flex scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 transition-all focus:outline focus:outline-2 focus:outline-indigo-500 motion-safe:hover:scale-[1.01] dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5"
+                className="duration-250 flex scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 transition-all focus:outline focus:outline-2 focus:outline-primary-500 motion-safe:hover:scale-[1.01] dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5"
               >
                 <div>
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-50 dark:bg-red-800/20">
@@ -215,7 +215,7 @@ export default function Welcome({
                 </svg>
               </a>
 
-              <div className="duration-250 flex scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 transition-all focus:outline focus:outline-2 focus:outline-indigo-500 motion-safe:hover:scale-[1.01] dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5">
+              <div className="duration-250 flex scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 transition-all focus:outline focus:outline-2 focus:outline-primary-500 motion-safe:hover:scale-[1.01] dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5">
                 <div>
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-50 dark:bg-red-800/20">
                     <svg
@@ -242,28 +242,28 @@ export default function Welcome({
                     such as{" "}
                     <a
                       href="https://forge.laravel.com"
-                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-indigo-500 dark:hover:text-white"
+                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-primary-500 dark:hover:text-white"
                     >
                       Forge
                     </a>
                     ,{" "}
                     <a
                       href="https://vapor.laravel.com"
-                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-indigo-500 dark:hover:text-white"
+                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-primary-500 dark:hover:text-white"
                     >
                       Vapor
                     </a>
                     ,{" "}
                     <a
                       href="https://nova.laravel.com"
-                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-indigo-500 dark:hover:text-white"
+                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-primary-500 dark:hover:text-white"
                     >
                       Nova
                     </a>
                     , and{" "}
                     <a
                       href="https://envoyer.io"
-                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-indigo-500 dark:hover:text-white"
+                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-primary-500 dark:hover:text-white"
                     >
                       Envoyer
                     </a>{" "}
@@ -271,42 +271,42 @@ export default function Welcome({
                     with powerful open source libraries like{" "}
                     <a
                       href="https://laravel.com/docs/billing"
-                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-indigo-500 dark:hover:text-white"
+                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-primary-500 dark:hover:text-white"
                     >
                       Cashier
                     </a>
                     ,{" "}
                     <a
                       href="https://laravel.com/docs/dusk"
-                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-indigo-500 dark:hover:text-white"
+                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-primary-500 dark:hover:text-white"
                     >
                       Dusk
                     </a>
                     ,{" "}
                     <a
                       href="https://laravel.com/docs/broadcasting"
-                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-indigo-500 dark:hover:text-white"
+                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-primary-500 dark:hover:text-white"
                     >
                       Echo
                     </a>
                     ,{" "}
                     <a
                       href="https://laravel.com/docs/horizon"
-                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-indigo-500 dark:hover:text-white"
+                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-primary-500 dark:hover:text-white"
                     >
                       Horizon
                     </a>
                     ,{" "}
                     <a
                       href="https://laravel.com/docs/sanctum"
-                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-indigo-500 dark:hover:text-white"
+                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-primary-500 dark:hover:text-white"
                     >
                       Sanctum
                     </a>
                     ,{" "}
                     <a
                       href="https://laravel.com/docs/telescope"
-                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-indigo-500 dark:hover:text-white"
+                      className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-primary-500 dark:hover:text-white"
                     >
                       Telescope
                     </a>

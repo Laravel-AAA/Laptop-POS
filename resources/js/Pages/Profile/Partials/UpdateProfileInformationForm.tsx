@@ -77,20 +77,20 @@ export default function UpdateProfileInformation({
 
         {mustVerifyEmail && user.email_verified_at === null && (
           <div>
-            <p className="text-sm mt-2 text-gray-800">
+            <p className="mt-2 text-sm text-gray-800">
               Your email address is unverified.
               <Link
                 href={route("verification.send")}
                 method="post"
                 as="button"
-                className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
               >
                 Click here to re-send the verification email.
               </Link>
             </p>
 
             {status === "verification-link-sent" && (
-              <div className="mt-2 font-medium text-sm text-green-600">
+              <div className="mt-2 text-sm font-medium text-green-600">
                 A new verification link has been sent to your email address.
               </div>
             )}

@@ -7,7 +7,7 @@ import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { PageProps } from "@/types";
 
-export default function Register({auth}:PageProps) {
+export default function Register({ auth }: PageProps) {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: "",
     email: "",
@@ -103,10 +103,10 @@ export default function Register({auth}:PageProps) {
           <InputError message={errors.password_confirmation} className="mt-2" />
         </div>
 
-        <div className="flex items-center justify-end mt-4">
+        <div className="mt-4 flex items-center justify-end">
           <Link
             href={route("login")}
-            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
           >
             Already registered?
           </Link>
