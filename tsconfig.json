@@ -1,18 +1,32 @@
 {
+    "include": [
+        "resources/js/**/*.ts",
+        "resources/js/**/*.tsx",
+        "resources/js/**/*.d.ts"
+    ],
+    "exclude": [
+        "./node_modules"
+    ],
     "compilerOptions": {
         "allowJs": true,
         "module": "ESNext",
         "moduleResolution": "bundler",
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
         "jsx": "react-jsx",
         "strict": true,
+        "noImplicitAny": false,
         "isolatedModules": true,
         "target": "ESNext",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "noEmit": true,
         "paths": {
-            "@/*": ["./resources/js/*"]
-        }
+            "@/*": [
+                "./resources/js/*"
+            ]
+        },
     },
-    "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx", "resources/js/**/*.d.ts"]
 }
