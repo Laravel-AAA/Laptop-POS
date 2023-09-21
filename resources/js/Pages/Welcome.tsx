@@ -9,6 +9,7 @@ import HeaderFooter from "@/Layouts/HeaderFooterLayout";
 import AlertModal from "@/Components/Modals/AlertModal";
 import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
+import AddEditProductModal from "@/Components/Modals/Add-Edit/AddEditProductModal";
 
 export default function Welcome({
   auth,
@@ -16,7 +17,11 @@ export default function Welcome({
   phpVersion,
 }: PageProps<{ laravelVersion: string; phpVersion: string }>) {
   const [count, setCount] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [openEverything, setOpenEverything] = useState(false);
+  const [openNoButtons, setOpenNoButtons] = useState(false);
+  const [openNoIcon, setOpenNoIcon] = useState(false);
+  const [openNoIconButtons, setOpenNoIconButtons] = useState(false);
+  const [openAddEditProduct, setOpenAddEditProduct] = useState(false);
   return (
     <HeaderFooter auth={auth}>
       <AlertModal
@@ -28,10 +33,35 @@ export default function Welcome({
           danger: { text: "YES" },
           secondary: { text: "Noo😭" },
         }}
-        open={open}
-        setOpen={setOpen}
+        open={openEverything}
+        setOpen={setOpenEverything}
       />
-      <div className="w-100 mx-auto p-24 text-center">
+      <AlertModal
+        icon="danger"
+        paragraph="Lorem aksdf adsf lskf ldkf s today is the day so i think we can mdade it as soon as possible"
+        title="Are you sure?"
+        open={openNoButtons}
+        setOpen={setOpenNoButtons}
+      />
+      <AlertModal
+        paragraph="Lorem  soon as possible"
+        title="Are you sure?"
+        buttons={{
+          primary: { text: "I think so" },
+          danger: { text: "YES" },
+          secondary: { text: "Noo😭" },
+        }}
+        open={openNoIcon}
+        setOpen={setOpenNoIcon}
+      />
+      <AlertModal
+        paragraph="Lorem aksdf adsf lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as soon as possible"
+        title="Are you sure?"
+        open={openNoIconButtons}
+        setOpen={setOpenNoIconButtons}
+      />
+      <AddEditProductModal open={openAddEditProduct} setOpen={setOpenAddEditProduct}/>
+      <div className="w-full mx-auto p-24 text-center">
         <h1 className="font-serif text-9xl">Hello World!</h1>
         <h4 className="m-10 flex justify-evenly">
           <FaLaravel style={{ color: "red", fontSize: "4.5rem" }} />
@@ -41,8 +71,23 @@ export default function Welcome({
           count is {count}
         </PrimaryButton>
         &nbsp;&nbsp;
-        <SecondaryButton onClick={() => setOpen(!open)}>
-          Open Alert
+        <SecondaryButton onClick={() => setOpenEverything(true)}>
+          Every thing
+        </SecondaryButton>
+        &nbsp;&nbsp;
+        <SecondaryButton onClick={() => setOpenNoButtons(true)}>
+No buttons
+        </SecondaryButton>
+        &nbsp;&nbsp;
+        <SecondaryButton onClick={() => setOpenNoIcon(true)}>
+        no icon
+        </SecondaryButton>
+        &nbsp;&nbsp;
+        <SecondaryButton onClick={() => setOpenNoIconButtons(true)}>
+        no icon & buttons
+        </SecondaryButton>
+        &nbsp;&nbsp;<SecondaryButton onClick={() => setOpenAddEditProduct(true)}>
+        add edit product
         </SecondaryButton>
         <p className="mt-32">
           Edit <code>resources\js\Pages\Welcome.tsx</code> and save to test HMR
