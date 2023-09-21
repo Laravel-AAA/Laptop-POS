@@ -60,7 +60,7 @@ export default function Welcome({
         open={openNoIconButtons}
         setOpen={setOpenNoIconButtons}
       />
-      <AddEditProductModal open={openAddEditProduct} setOpen={setOpenAddEditProduct}/>
+      <AddEditProductModal modalAction="create" open={openAddEditProduct} setOpen={setOpenAddEditProduct}/>
       <div className="w-full mx-auto p-24 text-center">
         <h1 className="font-serif text-9xl">Hello World!</h1>
         <h4 className="m-10 flex justify-evenly">
