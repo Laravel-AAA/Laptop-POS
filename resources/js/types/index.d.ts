@@ -11,12 +11,15 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
   };
 };
 
-export interface IProduct {
+export interface IProduct extends ICreateProduct {
   id: number;
+}
+
+export interface ICreateProduct {
   name: string;
-  img: string;
+  img?: string;
   /**barcode numbers */
-  gs1: string;
-  price: number;
-  quantity: number;
+  barcode?: string;
+  price?: number;
+  quantity?: number;
 }

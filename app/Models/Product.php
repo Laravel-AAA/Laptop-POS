@@ -19,7 +19,7 @@ class Product extends Model
         'name',
         'img',
         /**barcode numbers */
-        'gs1',
+        'barcode',
         'price',
         'quantity',
     ];

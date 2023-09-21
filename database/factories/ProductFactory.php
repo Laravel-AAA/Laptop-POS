@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             'user_id' => User::factory(),
             'name' => fake()->sentence(3),
             'img' => fake()->imageUrl(640, 480, 'Product'),
-            'gs1' => fake()->isbn13(),
+            'barcode' => fake()->isbn13(),
             'price' => $this->fakePrice(),
             'quantity' => fake()->biasedNumberBetween(0, 50, 'sqrt'),
         ];

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -20,5 +20,34 @@ class ProductController extends Controller
             'products' => $products,
             'productsCount' => count($products),
         ]);
+    }
+
+    function store(Request $request)
+    {
+        // dd($request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'price' => 'nullable|decimal:0,8|numeric|min:0|max:9999',
+        //     'img' => 'nullable|string|max:255',
+        //     'barcode' => 'nullable|string|max:16',
+        //     'quantity' => 'nullable|integer|numeric|min:0|max:9999'
+        // ]));
+        // $product = $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'price' => 'nullable|decimal:0,8|min:0|max:9999',
+        //     'img' => 'nullable|string|max:255',
+        //     'barcode' => 'nullable|string|max:16',
+        //     'quantity' => 'nullable|integer|min:0|max:9999'
+        // ]);
+        // Product::create([...$product, 'user_id' => $request->user()->id]);
+        $request->user()->products()->create($request->validate([
+            'name' => ['required', 'string', 'max:255', Rule::unique('products')->where(function ($query) {
+                return $query->where('user_id', Auth::id());//unique only to the same user
+            })],
+            'price' => 'nullable|decimal:0,8|min:0|max:9999',
+            'img' => 'nullable|string|max:255',
+            'barcode' => 'nullable|string|max:16',
+            'quantity' => 'nullable|integer|min:0|max:9999'
+        ]));
+        return to_route('product.index');
     }
 }

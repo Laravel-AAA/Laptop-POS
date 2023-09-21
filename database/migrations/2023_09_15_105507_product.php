@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('img');
-            $table->string('gs1', 16);
-            $table->decimal('price');
-            $table->integer('quantity');
+            $table->string('img')->nullable();
+            $table->string('barcode', 16)->nullable();
+            $table->decimal('price')->nullable();
+            $table->integer('quantity')->nullable();
             $table->timestamps();
             $table->foreignIdFor(User::class)->constrained();
         });
