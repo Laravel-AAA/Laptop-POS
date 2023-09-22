@@ -1,4 +1,4 @@
-name: Laravel
+name: Laravel Tests
 
 on:
   workflow_dispatch:
