@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Laravel-AAA_Laptop-POS&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Laravel-AAA_Laptop-POS)
+
 # Laptop Point of Sale
 
 This is a simple Point of Sale (POS) application.
