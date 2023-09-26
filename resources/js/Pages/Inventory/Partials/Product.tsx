@@ -11,7 +11,7 @@ export default function Product({ product }: PropsProduct) {
               src={
                 product.img.startsWith("http")
                   ? product.img
-                  : "storage/products-images/" + product.img
+                  : "products-images/" + product.img
               }
               alt={"Image " + product.img ?? "" + " of product " + product.name}
             />
