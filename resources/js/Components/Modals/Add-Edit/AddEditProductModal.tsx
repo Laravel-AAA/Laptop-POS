@@ -13,7 +13,7 @@ import { ProductModalAction } from "@/Pages/Inventory";
 export default function AddEditProductModal({
   open,
   setOpen,
-  modalAction
+  modalAction,
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -29,18 +29,23 @@ export default function AddEditProductModal({
     reset,
     clearErrors,
     cancel,
+    progress,
   } = useForm<ICreateProduct>("product.create", {
     name: "",
-    quantity: undefined,
-    price: undefined,
     barcode: "",
-    img: "",
   });
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    post(route("product.store"), { onSuccess: () => {setOpen(false);clearErrors();reset();} });
+    post(route("product.store"), {
+      method:'post',
+      onSuccess: () => {
+        setOpen(false);
+        clearErrors();
+        reset();
+      },
+    });
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -115,6 +120,26 @@ export default function AddEditProductModal({
           />
 
           <InputError message={errors.barcode} className="mt-2" />
+        </div>
+
+        <div className="mt-4">
+          <InputLabel htmlFor="Image" value="Image" />
+
+          <TextInput
+            id="img"
+            type="file"
+            name="Image"
+            value={data.img}
+            className="mt-1 block w-full "
+            onChange={(e) => setData("imageFile", e.target.files?.[0])}
+          />
+          {progress && (
+            <progress value={progress.percentage} max="100">
+              {progress.percentage}%
+            </progress>
+          )}
+
+          <InputError message={errors.img||errors.imageFile} className="mt-2" />
         </div>
 
         <div className="mt-4 flex flex-col gap-4 sm:flex-row-reverse">

@@ -14,8 +14,8 @@ export default function SecondaryButton({
       className={
         `inline-block
                 cursor-pointer items-center rounded-md border
-                border-secondary-400 border-transparent
-                bg-white px-4 py-2 text-center shadow-sm
+                border-secondary-300
+                bg-white px-4 py-2 text-center
                 text-xs font-semibold uppercase tracking-widest text-secondary-800
                 transition duration-200 ease-in-out
                 hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-secondary-300

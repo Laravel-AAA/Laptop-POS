@@ -17,7 +17,8 @@ export interface IProduct extends ICreateProduct {
 
 export interface ICreateProduct {
   name: string;
-  img?: string;
+  imageFile?: File;
+  img?:string;
   /**barcode numbers */
   barcode?: string;
   price?: number;
