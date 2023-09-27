@@ -1,4 +1,4 @@
-import{j as o}from"./app-146acb23.js";function s({className:r="",disabled:i,children:e,...t}){return o.jsx("button",{...t,className:`inline-block cursor-pointer items-center rounded-md border
+import{j as o}from"./app-1216230a.js";function s({className:r="",disabled:i,children:e,...t}){return o.jsx("button",{...t,className:`inline-block cursor-pointer items-center rounded-md border
         border-transparent bg-primary-800 px-4
         py-2 text-center  text-xs font-semibold
         uppercase tracking-widest
