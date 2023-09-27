@@ -4,26 +4,26 @@
  */
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { IProduct, PageProps } from "@/types";
+import { ILaravelPaginate, IProduct, PageProps } from "@/types";
 import { Head } from "@inertiajs/react";
 import Product from "./Partials/Product";
 import TextInput from "@/Components/TextInput";
 import { useState } from "react";
-import PrimaryButton from "@/Components/PrimaryButton";
 import { FaPlus } from "react-icons/fa";
 import SecondaryButton from "@/Components/SecondaryButton";
 import AddEditProductModal from "@/Components/Modals/Add-Edit/AddEditProductModal";
+import Pagination from "@/Components/Pagination";
 
 export default function Inventory({
   auth,
-  products,
-  productsCount, //number of products
-}: PageProps<{ products: IProduct[]; productsCount: number }>) {
+  products: paginateProducts
+}: PageProps<{ products: ILaravelPaginate<IProduct> }>) {
   const [searchValue, setSearch] = useState("");
   const [productModalAction, setProductModalAction] =
     useState<ProductModalAction>("create");
   const [isAddEditProductModal, setAddEditProductModal] = useState(false);
-
+  const products: IProduct[] = paginateProducts.data;
+  
   return (
     <>
       <AddEditProductModal
@@ -62,7 +62,8 @@ export default function Inventory({
             </label>
             <div className="mt-3 self-center sm:mt-0">
               <p className="m-0 mr-3 inline p-0 text-center text-gray-500">
-                Total:&nbsp;<span className="text-black">{productsCount}</span>
+                Total:&nbsp;
+                <span className="text-black">{paginateProducts.total}</span>
               </p>
               <SecondaryButton
                 className="inline-flex pl-2 pr-2"
@@ -85,6 +86,7 @@ export default function Inventory({
               <Product key={p.id} product={p} />
             ))}
         </div>
+        <Pagination paginateItems={paginateProducts} />
       </AuthenticatedLayout>
     </>
   );
