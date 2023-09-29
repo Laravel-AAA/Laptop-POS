@@ -16,8 +16,6 @@ export default function FormImage({
 }) {
   const state = modalAction.state;
   const img = form.data.img;
-  // const [removeImage, setRemoveImage] = useState<boolean>(false);
-  // const [changeImage, setChangeImage] = useState<boolean>(false);
   /** In edit modalAction.state the image can be change/removed/default.
    * - change when user click change.
    * - removed when user click remove.
@@ -25,7 +23,7 @@ export default function FormImage({
    */
   const [editImageState, setEditImageState] = useState<
     "removed" | "change" | "default"
-  >("default");
+  >(() => "default");
   const imageElement = (
     <div className="mt-1  rounded-md border border-gray-300">
       <img
@@ -45,7 +43,9 @@ export default function FormImage({
         className="mt-1 block w-full"
         hidden={img}
         disabled={state == "show"}
-        onChange={(e) => form.setData("imageFile", e.target.files?.[0])}
+        onChange={(e) => {
+          form.setData("imageFile", e.target.files?.[0]);
+        }}
       />
       {form.progress && (
         <div className="my-1 h-2.5 w-full rounded-md bg-gray-200 dark:bg-gray-700">
@@ -80,10 +80,19 @@ export default function FormImage({
         <>
           {imageElement}
           <div className="mb-4 mt-1 flex justify-center gap-8">
-            <TertiaryButton onClick={() => setEditImageState("change")}>
+            <TertiaryButton
+              onClick={() => {
+                setEditImageState("change");
+              }}
+            >
               Change&nbsp;Image
             </TertiaryButton>
-            <DangerButton onClick={() => setEditImageState("removed")}>
+            <DangerButton
+              onClick={() => {
+                setEditImageState("removed");
+                form.setData("img", null);
+              }}
+            >
               Remove&nbsp;Image
             </DangerButton>
           </div>

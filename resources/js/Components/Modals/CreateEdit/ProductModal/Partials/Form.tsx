@@ -12,7 +12,9 @@ export default function Form({
   setModalAction: React.Dispatch<React.SetStateAction<IModalAction<IProduct>>>;
 }) {
   const form = useForm<ICreateProduct>(
-    modalAction.data?.id.toString() ?? "create",
+    modalAction.data
+      ? modalAction.data.id.toString() + modalAction.data.img //if img changed the the form needs to update the FormImage
+      : modalAction.state,
     modalAction.state == "create"
       ? {
           name: "", //name is required
@@ -21,7 +23,7 @@ export default function Form({
   );
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-
+    
     form.post(
       route(
         `product.${modalAction.state == "edit" ? "update" : "store"}`,
@@ -29,9 +31,9 @@ export default function Form({
       ),
       {
         onSuccess: () => {
-          setModalAction((prev) => ({ ...prev, open: false }));
           form.clearErrors();
           form.reset();
+          setModalAction({ state: "create", data: undefined, open: false });
         },
       },
     );
