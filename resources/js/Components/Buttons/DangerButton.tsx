@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 
 export default function DangerButton({
+  type = "button",
   className = "",
   disabled,
   children,
@@ -8,6 +9,7 @@ export default function DangerButton({
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
+      type={type}
       {...props}
       className={
         `inline-block cursor-pointer items-center rounded-md

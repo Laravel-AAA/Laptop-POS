@@ -34,13 +34,13 @@ export default forwardRef(function TextInput(
       className={
         `rounded-md border-gray-300 border  shadow-sm placeholder:italic
         placeholder:text-slate-400 focus:border-primary-500 focus:ring-primary-500
-          file:rounded-md file:rounded-e-none file:border disabled:opacity-25 file:cursor-pointer
+          file:rounded-md file:rounded-e-none file:border disabled:opacity-60 file:cursor-pointer
         file:border-transparent file:bg-primary-800 file:px-4
         file:py-[0.69rem] file:text-center file:text-xs file:font-semibold
         file:uppercase file:tracking-widest file:mr-3
         file:text-white file:transition
         file:duration-200 file:ease-in-out file:hover:bg-primary-700
-         file:active:scale-95 file:disabled:opacity-25 ` +
+         file:active:scale-95  ` +
         className
       }
       ref={localRef}
