@@ -12,7 +12,7 @@ use Inertia\Inertia;
 
 class ProductController extends Controller
 {
-    function index(Request $request)
+    protected function index(Request $request)
     {
 
         // dd($request->user()->id);
@@ -25,7 +25,7 @@ class ProductController extends Controller
         ]);
     }
 
-    function store(Request $request)
+    protected function store(Request $request)
     {
         // dd($request->validate([
         //     'name' => 'required|string|max:255',
@@ -62,8 +62,8 @@ class ProductController extends Controller
         return to_route('product.index');
     }
 
-    function destroy(Request $request)
-    { //TODO: delete the image of the product if exit
+    protected function destroy(Request $request)
+    {
         $product = $request->user()->products()->findOrFail($request->id);
         if ($product->img)
             Storage::delete('public/products-images/' . $product->img);
@@ -71,7 +71,7 @@ class ProductController extends Controller
         return to_route('product.index');
     }
 
-    function update(Request $request)
+    protected function update(Request $request)
     {
 
         $product = $request->validate([
@@ -86,7 +86,7 @@ class ProductController extends Controller
         ]);
         $oldProduct = $request->user()->products()->findOrFail($request->id);
         //1- if img is null delete it.
-        if ($oldProduct->img && ($request->hasFile('imageFile')||$product['img']==null)) {
+        if ($oldProduct->img && ($request->hasFile('imageFile') || $product['img'] == null)) {
             Storage::delete('public/products-images/' . $oldProduct->img);
         }
         //2- if imageFile exist store it.

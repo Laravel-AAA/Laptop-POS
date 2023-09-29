@@ -29,7 +29,7 @@ export default function FormImage({
       <img
         className="mx-auto h-40"
         src={img?.startsWith("http") ? img : "products-images/" + img}
-        alt={"Image " + img ?? "" + " of product " + form.data.name}
+        alt={"Image " + (img ?? "") + " of product " + form.data.name}
       />
     </div>
   );

@@ -27,7 +27,7 @@ export default function Product({
                 ? product.img
                 : "products-images/" + product.img
             }
-            alt={"Image " + product.img ?? "" + " of product " + product.name}
+            alt={"Image " + ( product.img ?? "" ) + " of product " + product.name}
           />
         ) : (
           <BsImage className="mx-auto text-primary-700 mt-4 h-24 w-24" />
