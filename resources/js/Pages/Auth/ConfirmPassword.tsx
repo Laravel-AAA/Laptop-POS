@@ -51,7 +51,7 @@ export default function ConfirmPassword({auth}:PageProps) {
         </div>
 
         <div className="flex items-center justify-end mt-4">
-          <PrimaryButton className="ml-4" disabled={processing}>
+          <PrimaryButton type="submit" className="ml-4" disabled={processing}>
             Confirm
           </PrimaryButton>
         </div>

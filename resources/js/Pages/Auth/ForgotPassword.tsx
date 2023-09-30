@@ -45,7 +45,7 @@ export default function ForgotPassword({ status,auth }: PageProps<{ status?: str
         <InputError message={errors.email} className="mt-2" />
 
         <div className="flex items-center justify-end mt-4">
-          <PrimaryButton className="ml-4" disabled={processing}>
+          <PrimaryButton type="submit" className="ml-4" disabled={processing}>
             Email Password Reset Link
           </PrimaryButton>
         </div>

@@ -34,6 +34,7 @@
         "@inertiajs/inertia": "^0.11.1",
         "@inertiajs/inertia-react": "^0.8.1",
         "@material-tailwind/react": "^2.1.2",
-        "@react-icons/all-files": "^4.1.0"
+        "@react-icons/all-files": "^4.1.0",
+        "react-use": "^17.4.0"
     }
 }

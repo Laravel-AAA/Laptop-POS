@@ -57,3 +57,12 @@ export type IModalAction<T extends object> = {
   state: 'edit' | 'show';
   data: T
 });
+
+//shared filter between resources
+interface IFilter {
+  search: string;
+}
+
+export interface IFilterProduct extends IFilter {
+
+}

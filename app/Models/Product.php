@@ -37,7 +37,15 @@ class Product extends Model
     {
         return $this->belongsTo(User::class)->withDefault([
             'quantity' => 0,
-            'img'=>'my-default.png'
+            'img' => 'my-default.png'
         ]);
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('price', 'like', '%' . $search . '%');
+        });
     }
 }

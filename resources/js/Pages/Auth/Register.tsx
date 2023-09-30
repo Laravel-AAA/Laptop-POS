@@ -111,7 +111,7 @@ export default function Register({ auth }: PageProps) {
             Already registered?
           </Link>
 
-          <PrimaryButton className="ml-4" disabled={processing}>
+          <PrimaryButton type="submit" className="ml-4" disabled={processing}>
             Register
           </PrimaryButton>
         </div>

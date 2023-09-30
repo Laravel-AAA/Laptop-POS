@@ -1,12 +1,5 @@
-import React, { ChangeEvent, FormEvent, Key } from "react";
-import { useForm } from "@inertiajs/react";
-import InputLabel from "@/Components/Inputs/InputLabel";
-import TextInput from "@/Components/Inputs/TextInput";
-import InputError from "@/Components/Inputs/InputError";
-import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import { ICreateProduct, IModalAction, IProduct } from "@/types";
-import SecondaryButton from "@/Components/Buttons/SecondaryButton";
-import DangerButton from "@/Components/Buttons/DangerButton";
+import React from "react";
+import { IModalAction, IProduct } from "@/types";
 import Form from "./Partials/Form";
 import TemplateModal from "../../TemplateModal";
 
@@ -26,8 +19,7 @@ export default function CreateEditProductModal({
     if (modalAction.state == "edit") return "Edit Product";
     return "View Product";
   }
-  if (modalAction.open)
-    document.getElementById("templateModal")?.scrollTo({ top: 0 });
+  // document.getElementById("templateModal")?.scrollTo({ top: 0 });//not working
   return (
     <TemplateModal
       title={getTitle()}

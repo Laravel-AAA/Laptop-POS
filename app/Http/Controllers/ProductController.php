@@ -19,9 +19,14 @@ class ProductController extends Controller
         // dd(Product::all()->where('user_id',$request->user()->id));
         // dd($request->user()->products()->latest()->get());
         // dd(DB::table('products')->where('user_id','=',$request->user()->id)->get());
-        $products = $request->user()->products()->latest()->paginate(15);
+
+        //filter is a scope function in the Product model
+        $products = $request->user()->products()->latest()->filter($request->only('search'))
+            ->paginate(15)->appends($request->all());
+
         return Inertia::render('Inventory/index', [
             'products' => $products,
+            'filter' => $request->only('search'),
         ]);
     }
 
