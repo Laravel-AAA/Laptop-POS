@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      php: 8.1
+      nodejs: 18
+    commands:
+      - npm install
+      - composer install
+  build:
+    commands:
+      - npm run build
+      - php artisan migrate
+artifacts:
+  files:
+    - '**/*'
+  base-directory: '.'

@@ -5,12 +5,13 @@
         "resources/js/**/*.d.ts"
     ],
     "exclude": [
-        "./node_modules"
+        "node_modules/**/**"
     ],
     "compilerOptions": {
         "allowJs": true,
         "module": "ESNext",
         "moduleResolution": "bundler",
+        "skipLibCheck": true,
         "lib": [
             "ESNext",
             "DOM"

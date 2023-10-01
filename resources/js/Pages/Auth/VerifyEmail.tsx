@@ -1,5 +1,5 @@
 import GuestLayout from "@/Layouts/GuestLayout";
-import PrimaryButton from "@/Components/PrimaryButton";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import { PageProps } from "@/types";
@@ -35,7 +35,7 @@ export default function VerifyEmail({
 
       <form onSubmit={submit}>
         <div className="mt-4 flex items-center justify-between">
-          <PrimaryButton disabled={processing}>
+          <PrimaryButton type="submit" disabled={processing}>
             Resend Verification Email
           </PrimaryButton>
 

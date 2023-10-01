@@ -1,10 +1,10 @@
 import { useEffect, FormEventHandler } from "react";
 import Checkbox from "@/Components/Checkbox";
 import GuestLayout from "@/Layouts/GuestLayout";
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
+import InputError from "@/Components/Inputs/InputError";
+import InputLabel from "@/Components/Inputs/InputLabel";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton";
+import TextInput from "@/Components/Inputs/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { PageProps } from "@/types";
 
@@ -97,7 +97,7 @@ export default function Login({
             </Link>
           )}
 
-          <PrimaryButton className="ml-4" disabled={processing}>
+          <PrimaryButton type="submit" className="ml-4" disabled={processing}>
             Log in
           </PrimaryButton>
         </div>

@@ -1,5 +1,5 @@
-import { Link, Head } from "@inertiajs/react";
-import { PageProps } from "@/types";
+import { Head } from "@inertiajs/react";
+import { IModalAction, IProduct, PageProps } from "@/types";
 import { useState } from "react";
 /**
  * check out [react-icons](https://react-icons.github.io/react-icons/) for more info...
@@ -7,9 +7,9 @@ import { useState } from "react";
 import { FaLaravel, FaReact } from "react-icons/fa";
 import HeaderFooter from "@/Layouts/HeaderFooterLayout";
 import AlertModal from "@/Components/Modals/AlertModal";
-import PrimaryButton from "@/Components/PrimaryButton";
-import SecondaryButton from "@/Components/SecondaryButton";
-import AddEditProductModal from "@/Components/Modals/Add-Edit/AddEditProductModal";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton";
+import SecondaryButton from "@/Components/Buttons/SecondaryButton";
+import CreateEditProductModal from "@/Components/Modals/CreateEdit/ProductModal/CreateEditProductModal";
 
 export default function Welcome({
   auth,
@@ -21,7 +21,10 @@ export default function Welcome({
   const [openNoButtons, setOpenNoButtons] = useState(false);
   const [openNoIcon, setOpenNoIcon] = useState(false);
   const [openNoIconButtons, setOpenNoIconButtons] = useState(false);
-  const [openAddEditProduct, setOpenAddEditProduct] = useState(false);
+  const [modalAction, setModalAction] = useState<IModalAction<IProduct>>({
+    open: false,
+    state: "create",
+  });
   return (
     <HeaderFooter auth={auth}>
       <AlertModal
@@ -33,15 +36,15 @@ export default function Welcome({
           danger: { text: "YES" },
           secondary: { text: "Noo😭" },
         }}
-        open={openEverything}
-        setOpen={setOpenEverything}
+        isOpen={openEverything}
+        requestClose={()=>setOpenEverything(false)}
       />
       <AlertModal
         icon="danger"
         paragraph="Lorem aksdf adsf lskf ldkf s today is the day so i think we can mdade it as soon as possible"
         title="Are you sure?"
-        open={openNoButtons}
-        setOpen={setOpenNoButtons}
+        isOpen={openNoButtons}
+        requestClose={()=>setOpenNoButtons(false)}
       />
       <AlertModal
         paragraph="Lorem  soon as possible"
@@ -51,17 +54,21 @@ export default function Welcome({
           danger: { text: "YES" },
           secondary: { text: "Noo😭" },
         }}
-        open={openNoIcon}
-        setOpen={setOpenNoIcon}
+        isOpen={openNoIcon}
+        requestClose={()=>setOpenNoIcon(false)}
       />
       <AlertModal
         paragraph="Lorem aksdf adsf lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as soon as possible"
         title="Are you sure?"
-        open={openNoIconButtons}
-        setOpen={setOpenNoIconButtons}
+        isOpen={openNoIconButtons}
+        requestClose={()=>setOpenNoIconButtons(false)}
       />
-      <AddEditProductModal modalAction="create" open={openAddEditProduct} setOpen={setOpenAddEditProduct}/>
-      <div className="w-full mx-auto p-24 text-center">
+      <CreateEditProductModal
+        modalAction={modalAction}
+        setModalAction={setModalAction}
+      />
+
+      <div className="mx-auto w-full p-24 text-center">
         <h1 className="font-serif text-9xl">Hello World!</h1>
         <h4 className="m-10 flex justify-evenly">
           <FaLaravel style={{ color: "red", fontSize: "4.5rem" }} />
@@ -76,18 +83,59 @@ export default function Welcome({
         </SecondaryButton>
         &nbsp;&nbsp;
         <SecondaryButton onClick={() => setOpenNoButtons(true)}>
-No buttons
+          No buttons
         </SecondaryButton>
         &nbsp;&nbsp;
         <SecondaryButton onClick={() => setOpenNoIcon(true)}>
-        no icon
+          no icon
         </SecondaryButton>
         &nbsp;&nbsp;
         <SecondaryButton onClick={() => setOpenNoIconButtons(true)}>
-        no icon & buttons
+          no icon & buttons
         </SecondaryButton>
-        &nbsp;&nbsp;<SecondaryButton onClick={() => setOpenAddEditProduct(true)}>
-        add edit product
+        &nbsp;&nbsp;
+        <SecondaryButton
+          onClick={() => setModalAction({ open: true, state: "create" })}
+        >
+          Create Product
+        </SecondaryButton>
+        &nbsp;&nbsp;
+        <SecondaryButton
+          onClick={() =>
+            setModalAction({
+              open: true,
+              state: "edit",
+              data: {
+                id: 1,
+                img: "blah/blah",
+                name: "Milk",
+                barcode: "21214214",
+                price: 111,
+                quantity: 2,
+              },
+            })
+          }
+        >
+          Edit Product
+        </SecondaryButton>
+        &nbsp;&nbsp;
+        <SecondaryButton
+          onClick={() =>
+            setModalAction({
+              open: true,
+              state: "show",
+              data: {
+                id: 3,
+                img: "blah/blah/3",
+                name: "Milk3",
+                barcode: "23234233",
+                price: 113,
+                quantity: 3,
+              },
+            })
+          }
+        >
+          Show Product
         </SecondaryButton>
         <p className="mt-32">
           Edit <code>resources\js\Pages\Welcome.tsx</code> and save to test HMR
