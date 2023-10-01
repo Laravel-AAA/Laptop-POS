@@ -3,8 +3,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "start": "vite",
-        "serve": "vite",
+        "start": "npm run dev",
+        "serve": "npm run dev",
         "build": "tsc && vite build"
     },
     "devDependencies": {
