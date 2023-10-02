@@ -18,7 +18,7 @@
         "@types/ziggy-js": "^1.3.2",
         "@vitejs/plugin-react": "^4.1.0",
         "autoprefixer": "^10.4.12",
-        "axios": "^1.1.2",
+        "axios": "^1.5.1",
         "eslint-config-react-app": "^7.0.1",
         "laravel-vite-plugin": "^0.8.0",
         "postcss": "^8.4.18",
