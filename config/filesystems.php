@@ -1,4 +1,45 @@
 <?php
+//disks are consider as folders.
+//FILESYSTEM_DISK is determine weather the files will be stored in `local` or in the cloud `s3`.
+
+//for DRY
+$cloudDriver = [
+    'driver' => 's3',
+    'key' => env('AWS_ACCESS_KEY_ID'),
+    'secret' => env('AWS_SECRET_ACCESS_KEY'),
+    'region' => env('AWS_DEFAULT_REGION'),
+    'bucket' => env('AWS_BUCKET'),
+    'url' => env('AWS_URL'),
+    'endpoint' => env('AWS_ENDPOINT'),
+    'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+    'throw' => true,
+    'visibility' => 'public',
+    'root' => '',
+    'scheme' => 'http' //todo: remove this line when the server is served on https.
+];
+//for DRY
+$localDriver = [
+    'driver' => 'local',
+    'root' => storage_path('app'),
+    'throw' => false,
+];
+
+$isLocal = env('FILESYSTEM_DISK') == 'local';
+if ($isLocal) {
+    $appDisk = [...$localDriver, 'root' => storage_path('app')];
+    $publicDisk = [
+        ...$localDriver,
+        'root' => storage_path('app/public'),
+        'url' => env('APP_URL') . '/storage',
+        'visibility' => 'public',
+    ];
+    $productsImages = [...$localDriver, 'root' => storage_path('app/public/products-images')];
+} else { //Cloud
+    $appDisk = [...$cloudDriver, 'root' => 'app'];
+    $publicDisk = [...$cloudDriver, 'root' => 'app/public'];
+    $productsImages = [...$cloudDriver, 'root' => 'products-images'];
+}
+
 
 return [
 
@@ -29,32 +70,12 @@ return [
     */
 
     'disks' => [
+        //here local is `app` folder/disk. Don't confuse with local driver.
+        'local' => $appDisk,
 
-        'local' => [
-            'driver' => 'local',
-            'root' => storage_path('app'),
-            'throw' => false,
-        ],
+        'public' => $publicDisk,
 
-        'public' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-            'throw' => false,
-        ],
-
-        's3' => [
-            'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
-            'throw' => false,
-        ],
+        'products-images' => $productsImages,
 
     ],
 
@@ -70,6 +91,7 @@ return [
     */
 
     'links' => [
+        //this is used only for local files. On the cloud we don't use such an approach.
         public_path('products-images') => storage_path('app/public/products-images'),
     ],
 

@@ -57,6 +57,11 @@ Note: there will be a user with email of `asdf@asdf.asdf` and password of `asdfa
 php artisan db:seed
 ```
 
+Generate a link folder (shortcut) on the public directory to serve the client with files that located on a private directory.
+```bash
+php artisan storage:link
+```
+
 Install all dependencies:
 ```shell
 npm install
