@@ -1,4 +1,4 @@
-name: Laravel Tests
+name: Laravel Test
 
 on:
   workflow_dispatch:
@@ -8,8 +8,7 @@ on:
     branches: [ "dev", "staging", "production" ]
 
 jobs:
-  laravel-tests:
-
+  laravel-test:
     runs-on: ubuntu-latest
 
     steps:
