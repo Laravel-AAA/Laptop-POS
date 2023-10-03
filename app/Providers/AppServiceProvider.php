@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $appURL = env('APP_URL');
+        $assetURL = env('ASSET_URL');
+        if (str_starts_with($appURL, 'https') || str_starts_with($assetURL, 'https'))
+            URL::forceScheme('https');
     }
 }
