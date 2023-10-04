@@ -23,7 +23,7 @@ export default function Form({
   );
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    
+
     form.post(
       route(
         `product.${modalAction.state == "edit" ? "update" : "store"}`,
@@ -33,7 +33,11 @@ export default function Form({
         onSuccess: () => {
           form.clearErrors();
           form.reset();
-          setModalAction({ state: "create", data: undefined, open: false });
+          setModalAction(() => ({
+            state: "create",
+            data: undefined,
+            open: false,
+          }));
         },
       },
     );

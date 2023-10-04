@@ -15,7 +15,7 @@ $cloudDriver = [
     'throw' => true,
     'visibility' => 'public',
     'root' => '',
-    'scheme' => 'http' //todo: remove this line when the server is served on https.
+    // 'scheme' => 'http' //the server should be served on https or uncomment this line.
 ];
 //for DRY
 $localDriver = [

@@ -30,7 +30,7 @@ export default function InventoryHeader({
       const truthyKeys = Object.keys(filter).filter((k) => filter[k]);
       let query = {};
       for (const k of truthyKeys) query[k] = filter[k];
-      
+
       console.log(filter);
       router.get(route(route().current() ?? ""), query as any, {
         replace: true,
@@ -51,7 +51,7 @@ export default function InventoryHeader({
 
           <TextInput
             id="search"
-            type="text"
+            type="search"
             name="search"
             autoComplete="off"
             value={filter.search}
