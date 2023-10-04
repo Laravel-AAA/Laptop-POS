@@ -93,12 +93,13 @@ export default function DeleteUserForm({
             />
 
             <InputError message={errors.password} className="mt-2" />
+          <InputError message={(errors as any).hasProducts} className="mt-2" />
           </div>
 
           <div className="mt-6 flex justify-end">
             <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
 
-            <DangerButton className="ml-3" disabled={processing}>
+            <DangerButton type="submit" className="ml-3" disabled={processing}>
               Delete Account
             </DangerButton>
           </div>

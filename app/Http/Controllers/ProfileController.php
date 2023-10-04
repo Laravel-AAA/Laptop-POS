@@ -48,8 +48,13 @@ class ProfileController extends Controller
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
+        //!user should have no product to be able to delete his account to insure images are deleted and prevent accident deletion
 
         $user = $request->user();
+        $productsCount = $user->products()->count();
+        if ($productsCount != 0) {
+            return redirect()->back()->withErrors(['hasProducts' => 'You have to delete all products. Found ' . $productsCount . ' products.']);
+        }
 
         Auth::logout();
 
