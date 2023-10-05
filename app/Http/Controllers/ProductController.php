@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Product\ProductStoreRequest;
+use App\Http\Requests\Product\ProductUpdateRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate as FacadesGate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
     protected function index(Request $request)
     {
-
-        // dd($request->user()->id);
-        // dd(Product::all()->where('user_id',$request->user()->id));
-        // dd($request->user()->products()->latest()->get());
-        // dd(DB::table('products')->where('user_id','=',$request->user()->id)->get());
-
         //filter is a scope function in the Product model
         $products = $request->user()->products()->latest()->filter($request->only('search'))
             ->paginate(15)->appends($request->all());
@@ -30,38 +28,9 @@ class ProductController extends Controller
         ]);
     }
 
-    protected function store(Request $request)
+    protected function store(ProductStoreRequest $request)
     {
-        // dd($request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'price' => 'nullable|decimal:0,8|numeric|min:0|max:9999',
-        //     'img' => 'nullable|string|max:255',
-        //     'barcode' => 'nullable|string|max:16',
-        //     'quantity' => 'nullable|integer|numeric|min:0|max:9999'
-        // ]));
-        // $product = $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'price' => 'nullable|decimal:0,8|min:0|max:9999',
-        //     'img' => 'nullable|string|max:255',
-        //     'barcode' => 'nullable|string|max:16',
-        //     'quantity' => 'nullable|integer|min:0|max:9999'
-        // ]);
-        // Product::create([...$product, 'user_id' => $request->user()->id]);
-        $product = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('products')->where(function ($query) {
-                    return $query->where('user_id', Auth::id()); //unique only to the same user
-                })
-            ],
-            'price' => 'nullable|decimal:0,8|min:0|max:9999',
-            'imageFile' => 'nullable|image|mimes:jpeg,jpg,png,apng,bmp,avif,webp,gif,svg|max:2048',
-            //size of 2 MB at most
-            'barcode' => 'nullable|string|max:16',
-            'quantity' => 'nullable|integer|min:0|max:9999'
-        ]);
+        $product = $request->validated();
 
         if ($request->hasFile('imageFile')) {
             $product['img'] = $this->storeImg($request);
@@ -71,44 +40,28 @@ class ProductController extends Controller
         return to_route('product.index');
     }
 
-    protected function destroy(Request $request)
+    protected function destroy(Product $product)
     {
-        $product = $request->user()->products()->findOrFail($request->id);
+        Gate::authorize('delete', $product);
+
         if ($product->img)
             $this->deleteImg($product->img);
         $product->delete();
         return to_route('product.index');
     }
 
-    protected function update(Request $request)
+    protected function update(ProductUpdateRequest $request, Product $product)
     {
-
-        $product = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('products')->where(function ($query) {
-                    return $query->where('user_id', Auth::id()); //unique only to the same user
-                })->ignore($request->route('id'))
-            ],
-            'price' => 'nullable|decimal:0,8|min:0|max:9999',
-            'imageFile' => 'nullable|image|mimes:jpeg,jpg,png,apng,bmp,avif,webp,gif,svg|max:2048',
-            //size of 2 MB at most
-            'barcode' => 'nullable|string|max:16',
-            'quantity' => 'nullable|integer|min:0|max:9999',
-            'img' => 'nullable|string|max:250',
-        ]);
-        $oldProduct = $request->user()->products()->findOrFail($request->id);
-        //1- if img is null delete it.
-        if ($oldProduct->img && ($request->hasFile('imageFile') || $product['img'] == null)) {
-            $this->deleteImg($oldProduct->img);
+        $newProduct = $request->validated();
+        //1- if img is null OR there is new image THEN delete the old image.
+        if ($product->img && ($request->hasFile('imageFile') || $newProduct['img'] == null)) {
+            $this->deleteImg($product->img);
         }
-        //2- if imageFile exist store it.
+        //2- if there is new image store it.
         if ($request->hasFile('imageFile')) {
-            $product['img'] = $this->storeImg($request);
+            $newProduct['img'] = $this->storeImg($request);
         }
-        $oldProduct->update($product);
+        $product->update($newProduct);
     }
 
 

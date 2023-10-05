@@ -33,8 +33,8 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/inventory', [ProductController::class, 'index'])->name('product.index'); //notice the endpoint `/inventory` can easily change but the real deal url is `product.index` that will be used in frontend.
     Route::post('/inventory', [ProductController::class, 'store'])->name('product.store');
-    Route::patch('/inventory/{id}', [ProductController::class, 'update'])->name('product.update');
-    Route::delete('/inventory/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+    Route::patch('/inventory/{product}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/inventory/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
 });
 
 Route::middleware('auth')->group(function () {

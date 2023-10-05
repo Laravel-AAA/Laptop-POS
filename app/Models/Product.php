@@ -37,7 +37,7 @@ class Product extends Model
     {
         return $this->belongsTo(User::class)->withDefault([
             'quantity' => 0,
-            'img' => 'my-default.png'
+            'img' => null,
         ]);
     }
 

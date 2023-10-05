@@ -6,3 +6,4 @@
 - Pay-as-you-go OR limited db records depends on the plan.
 - Team management so that one subscription for a team to allow multiple computers work in the same account. (account has-many users).
 - Let an account has its own logo, and will be used all over the app.
+- QR code on the bill (URL) that can be access by the customer to see their bill.
