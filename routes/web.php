@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,6 +37,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/inventory', [ProductController::class, 'store'])->name('product.store');
     Route::patch('/inventory/{product}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/inventory/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+    Route::Resource('bill', BillController::class)->only(['index', 'store', 'update', 'destroy']);
+    Route::Resource('transaction', TransactionController::class)->only(['index', 'store', 'update', 'destroy']);
 });
 
 Route::middleware('auth')->group(function () {
