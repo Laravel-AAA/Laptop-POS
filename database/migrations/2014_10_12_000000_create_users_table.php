@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -19,6 +18,15 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            //TODO: make these on Business table which will have many users.
+            $table->string('businessLongName', 64)->nullable();
+            $table->string('businessShortName', 16);
+            $table->string('businessLogo')->nullable();
+            $table->string('businessPhone',16)->nullable();
+            $table->decimal('taxPercent');
+            $table->string('businessAddress')->nullable();
+            $table->string('taxIdentificationNumber')->nullable();
         });
     }
 
