@@ -111,7 +111,7 @@ export default function Welcome({
                 name: "Milk",
                 barcode: "21214214",
                 price: 111,
-                quantity: 2,
+                stock: 2,
               },
             })
           }
@@ -130,7 +130,7 @@ export default function Welcome({
                 name: "Milk3",
                 barcode: "23234233",
                 price: 113,
-                quantity: 3,
+                stock: 3,
               },
             })
           }

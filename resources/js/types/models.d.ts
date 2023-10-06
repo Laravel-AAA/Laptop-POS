@@ -10,7 +10,7 @@ export interface Product {
   img: string | null;
   barcode: string | null;
   price: number | null;
-  quantity: number | null;
+  stock: number | null;
   created_at: string | null;
   updated_at: string | null;
   user_id: number;

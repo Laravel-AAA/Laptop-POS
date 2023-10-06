@@ -43,11 +43,11 @@ export default function Product({
             ${/* &#xFDFC; */}&nbsp;{product.price ?? "N/A"}
           </p>
           <div className="flex flex-col justify-center">
-            {product.quantity == 0 ? (
+            {product.stock == 0 ? (
               <p className="font-thin text-red-500">Out of Stock</p>
             ) : (
               <p className="font-thin text-gray-500">
-                Qty {product.quantity ?? "N/A"}
+                Qty {product.stock ?? "N/A"}
               </p>
             )}
           </div>

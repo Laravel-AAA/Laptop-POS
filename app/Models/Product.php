@@ -29,7 +29,7 @@ class Product extends Model
         /**barcode numbers */
         'barcode',
         'price',
-        'quantity',
+        'stock',
     ];
 
     /**
@@ -38,13 +38,13 @@ class Product extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'quantity' => 'integer',
+        'stock' => 'integer',
         'price' => 'float',
     ];
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->withDefault([
-            'quantity' => 0,
+            'stock' => 0,
             'img' => null,
         ]);
     }

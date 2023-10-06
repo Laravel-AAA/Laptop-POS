@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Product\ProductStoreRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
 use App\Models\Product;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate as FacadesGate;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
 
@@ -76,7 +73,13 @@ class ProductController extends Controller
     private function storeImg(Request $request): string
     {
         if (env('FILESYSTEM_DISK') == 's3')
-            return Storage::disk('products-images')->url($request->imageFile->store('', 'products-images'));
+            return $this->productsImagesStorage()->url($request->imageFile->store('', 'products-images'));
         return $request->imageFile->store('', 'products-images');
+    }
+
+    //to ignore an error of intelephense extension.
+    private function productsImagesStorage(): FilesystemAdapter
+    {
+        return Storage::disk('products-images');
     }
 }

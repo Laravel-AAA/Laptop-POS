@@ -46,19 +46,19 @@ export default function FormInputs({
         <InputError message={form.errors.price} className="mt-2" />
       </div>
       <div className="mt-4">
-        <InputLabel htmlFor="quantity" value="Quantity" />
+        <InputLabel htmlFor="stock" value="Stock" />
 
         <TextInput
-          id="quantity"
+          id="stock"
           type="number"
-          name="quantity"
-          value={form.data.quantity}
+          name="stock"
+          value={form.data.stock}
           className="mt-1 block w-full"
           disabled={modalAction.state == "show"}
-          onChange={(e) => form.setData("quantity", Number(e.target.value))}
+          onChange={(e) => form.setData("stock", Number(e.target.value))}
         />
 
-        <InputError message={form.errors.quantity} className="mt-2" />
+        <InputError message={form.errors.stock} className="mt-2" />
       </div>
       <div className="mt-4">
         <InputLabel htmlFor="barcode" value="Barcode" />

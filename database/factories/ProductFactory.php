@@ -23,7 +23,7 @@ class ProductFactory extends Factory
             'img' => fake()->imageUrl(640, 480, 'Product'),
             'barcode' => fake()->isbn13(),
             'price' => $this->fakePrice(),
-            'quantity' => fake()->biasedNumberBetween(0, 50, 'sqrt'),
+            'stock' => fake()->biasedNumberBetween(0, 50, 'sqrt'),
         ];
     }
 
