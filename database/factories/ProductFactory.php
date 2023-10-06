@@ -24,6 +24,7 @@ class ProductFactory extends Factory
             'barcode' => fake()->isbn13(),
             'price' => $this->fakePrice(),
             'stock' => fake()->biasedNumberBetween(0, 50, 'sqrt'),
+            'description' => fake()->sentence(substr(fake()->numberBetween(0, 30), 0, 500)),
         ];
     }
 

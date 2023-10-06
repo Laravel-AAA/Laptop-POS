@@ -36,7 +36,8 @@ class ProductStoreRequest extends FormRequest
             'imageFile' => 'nullable|image|mimes:jpeg,jpg,png,apng,bmp,avif,webp,gif,svg|max:2048',
             //size of 2 MB at most
             'barcode' => 'nullable|string|max:16',
-            'stock' => 'nullable|integer|min:0|max:9999'
+            'stock' => 'nullable|integer|min:0|max:9999',
+            'description' => 'nullable|string|max:500',
 
         ];
     }

@@ -11,6 +11,7 @@ export interface Product {
   barcode: string | null;
   price: number | null;
   stock: number | null;
+  description?:string;
   created_at: string | null;
   updated_at: string | null;
   user_id: number;

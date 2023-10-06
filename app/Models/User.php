@@ -51,6 +51,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'taxPercent' => 'float'
     ];
 
     public function products(): HasMany

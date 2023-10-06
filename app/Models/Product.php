@@ -11,7 +11,7 @@ class Product extends Model
 {
     use HasFactory, HasUlids;
 
-      /**
+    /**
      * The table associated with the model.
      *
      * @var string
@@ -30,6 +30,7 @@ class Product extends Model
         'barcode',
         'price',
         'stock',
+        'description',
     ];
 
     /**
@@ -43,10 +44,7 @@ class Product extends Model
     ];
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class)->withDefault([
-            'stock' => 0,
-            'img' => null,
-        ]);
+        return $this->belongsTo(User::class);
     }
 
     public function scopeFilter($query, array $filters)

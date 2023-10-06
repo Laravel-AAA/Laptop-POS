@@ -16,7 +16,7 @@ class ProductUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('update',$this->product);
+        return $this->user()->can('update', $this->product);
     }
 
     /**
@@ -41,6 +41,7 @@ class ProductUpdateRequest extends FormRequest
             'barcode' => 'nullable|string|max:16',
             'stock' => 'nullable|integer|min:0|max:9999',
             'img' => 'nullable|string|max:250',
+            'description' => 'nullable|string|max:500',
         ];
     }
 }

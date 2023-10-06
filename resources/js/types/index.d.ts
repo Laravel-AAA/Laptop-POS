@@ -23,6 +23,7 @@ export interface ICreateProduct {
   barcode?: string;
   price?: number;
   stock?: number;
+  description?:string;
 }
 
 

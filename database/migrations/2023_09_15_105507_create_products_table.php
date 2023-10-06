@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('barcode', 16)->nullable();
             $table->decimal('price')->nullable();
             $table->integer('stock')->nullable();
+            $table->string('description', 500)->nullable();
             $table->timestamps();
             $table->foreignUlid('user_id')->constrained();
         });
