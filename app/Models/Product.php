@@ -2,13 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUlids;
+
+      /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'products';
 
     /**
      * The attributes that are mass assignable.
