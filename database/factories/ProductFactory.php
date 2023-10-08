@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,6 +26,9 @@ class ProductFactory extends Factory
             'price' => $this->fakePrice(),
             'stock' => fake()->biasedNumberBetween(0, 50, 'sqrt'),
             'description' => fake()->sentence(substr(fake()->numberBetween(0, 30), 0, 500)),
+            // 'transactions' => function () {
+            //     return Transaction::factory()->count(1)->create();
+            // },
         ];
     }
 

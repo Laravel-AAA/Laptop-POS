@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('businessLongName', 64)->nullable();
             $table->string('businessShortName', 16);
             $table->string('businessLogo')->nullable();
-            $table->string('businessPhone',16)->nullable();
+            $table->string('businessPhone',18)->nullable();
             $table->decimal('taxPercent');
             $table->string('businessAddress')->nullable();
             $table->string('taxIdentificationNumber')->nullable();

@@ -2,21 +2,26 @@
 
 namespace App\Models;
 
+use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /*       This is a Bill
 _________________________________________
 |                                       |
-|              Point of Sale            |
+|              Point of Sale            | <-- Business name
 |                                       |
 |---------------------------------------|
-|        Order Number: 123456           |
-|        Cashier: John Doe              |
+|        Order Number: 123456           | <-- Bill number
+|        Cashier: John Doe              | <-- User name
 |                                       |
 |---------------------------------------|
 |                                       |
-| Item            Qty    Price   Amount |
+| Product         Qty    Price   Amount |
 |---------------------------------------|
 |                                       |
 | Pizza           2      $10     $20    | <-- This is a single Transaction
@@ -50,5 +55,24 @@ class Bill extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'cashReceived'
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'cashReceived' => 'float',
+    ];
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

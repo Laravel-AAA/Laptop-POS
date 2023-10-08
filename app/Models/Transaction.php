@@ -2,22 +2,25 @@
 
 namespace App\Models;
 
+use App\Models\Bill;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /*       This is a Bill
 _________________________________________
 |                                       |
-|              Point of Sale            |
+|              Point of Sale            | <-- Business name
 |                                       |
 |---------------------------------------|
-|        Order Number: 123456           |
-|        Cashier: John Doe              |
+|        Order Number: 123456           | <-- Bill number
+|        Cashier: John Doe              | <-- User name
 |                                       |
 |---------------------------------------|
 |                                       |
-| Item            Qty    Price   Amount |
+| Product         Qty    Price   Amount |
 |---------------------------------------|
 |                                       |
 | Pizza           2      $10     $20    | <-- This is a single Transaction
@@ -62,4 +65,14 @@ class Transaction extends Model
     protected $fillable = [
         'quantity',
     ];
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function bill(): BelongsTo
+    {
+        return $this->belongsTo(Bill::class);
+    }
 }

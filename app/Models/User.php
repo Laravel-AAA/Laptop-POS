@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Bill;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,7 +16,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasUlids;
 
-  /**
+    /**
      * The table associated with the model.
      *
      * @var string
@@ -31,6 +32,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'businessLongName',
+        'businessShortName',
+        'businessLogo',
+        'businessPhone',
+        'taxPercent',
+        'businessAddress',
+        'taxIdentificationNumber',
     ];
 
     /**
@@ -57,5 +65,10 @@ class User extends Authenticatable
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function bills(): HasMany
+    {
+        return $this->hasMany(Bill::class);
     }
 }

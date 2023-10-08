@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->decimal('cashReceived')->nullable();
             $table->timestamps();
             $table->foreignUlid('user_id')->constrained();
         });
