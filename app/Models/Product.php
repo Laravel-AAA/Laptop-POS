@@ -44,6 +44,7 @@ class Product extends Model
         'stock' => 'integer',
         'price' => 'float',
     ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

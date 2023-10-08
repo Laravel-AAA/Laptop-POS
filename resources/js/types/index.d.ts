@@ -12,7 +12,9 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
 };
 
 export interface IProduct extends ICreateProduct {
-  id: number;
+  id: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface ICreateProduct {
@@ -23,8 +25,17 @@ export interface ICreateProduct {
   barcode?: string;
   price?: number;
   stock?: number;
-  description?:string;
+  description?: string;
 }
+
+export interface IBill extends ICreateBill {
+  id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ICreateBill { cashReceived: number }
+
 
 
 export interface ILaravelPaginate<T extends object> {
@@ -65,5 +76,9 @@ interface IFilter {
 }
 
 export interface IFilterProduct extends IFilter {
+
+}
+
+export interface IFilterBill extends IFilter {
 
 }

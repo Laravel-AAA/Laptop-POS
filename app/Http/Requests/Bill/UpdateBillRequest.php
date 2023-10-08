@@ -22,7 +22,7 @@ class UpdateBillRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'cashReceived' => 'nullable|decimal:0,8|min:0|max:999999999',
         ];
     }
 }

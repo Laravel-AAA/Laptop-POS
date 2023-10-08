@@ -66,6 +66,7 @@ class Bill extends Model
     protected $casts = [
         'cashReceived' => 'float',
     ];
+
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
@@ -74,5 +75,12 @@ class Bill extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where('cashReceived', 'like', '%' . $search . '%');
+        });
     }
 }
