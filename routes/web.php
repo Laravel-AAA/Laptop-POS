@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
@@ -40,6 +41,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::Resource('bill', BillController::class)->only(['index', 'store', 'update', 'destroy']);
     Route::Resource('transaction', TransactionController::class)->only(['index', 'store', 'update', 'destroy']);
+
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 });
 
 Route::middleware('auth')->group(function () {

@@ -14,9 +14,10 @@ export default function Authenticated({
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false);
   const routes: { link: string; name: string }[] = [
-    { name: "Dashboard", link: "dashboard" },
+    { name: "Checkout", link: "checkout.index" },
     { name: "Inventory", link: "product.index" },
     { name: "Bills", link: "bill.index" },
+    { name: "Dashboard", link: "dashboard" },
   ];
   return (
     <div className="min-h-screen bg-gray-100">
