@@ -15,6 +15,7 @@ export interface IProduct extends ICreateProduct {
   id: string;
   created_at: string;
   updated_at: string;
+  user_id: string;
 }
 
 export interface ICreateProduct {
@@ -32,10 +33,20 @@ export interface IBill extends ICreateBill {
   id: string;
   created_at: string;
   updated_at: string;
+  transactions: ITransaction[];
 }
 
 export interface ICreateBill { cashReceived: number }
 
+export interface ITransaction {
+  id: string;
+  quantity: number;
+  created_at: string;
+  updated_at: string;
+  product_id: string;
+  bill_id: string;
+  product:IProduct;
+}
 
 
 export interface ILaravelPaginate<T extends object> {

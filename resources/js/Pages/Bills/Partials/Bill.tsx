@@ -1,29 +1,58 @@
 import { IBill } from "@/types";
 import BillOptions from "./BillOptions";
 import FromDate from "@/Utilities/FromDate";
+import Number from "@/Utilities/Number";
+import ID from "@/Utilities/ID";
 type PropsProduct = {
   bill: IBill;
   requestEdit: () => void;
-  requestShow: () => void;
+  // requestShow: () => void;
 };
 export default function Product({
   bill,
-  requestEdit,
-  requestShow,
+  requestEdit, // requestShow,
 }: PropsProduct) {
   return (
-    <div
-      onClick={() => requestShow()}
-      className="group relative m-4 flex cursor-pointer flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:w-52"
-    >
-      <BillOptions
-        bill={bill}
-        requestEdit={requestEdit}
-        requestShow={requestShow}
-      />
-      <p>
-        hi <FromDate date={bill.created_at} />
-      </p>
-    </div>
+    <tr className="even:bg-blue-gray-50/50">
+      <td className="p-3">
+        <p className="text-sm font-normal text-blue-gray-800">
+          <ID id={bill.id} />
+        </p>
+      </td>
+      <td className="p-3">
+        <p className="text-sm font-normal text-blue-gray-800">
+          <FromDate date={bill.created_at} />
+        </p>
+      </td>
+      <td className="p-3">
+        <p className="text-sm font-normal text-blue-gray-800">
+          <Number
+            amount={bill.transactions.reduce(
+              (v, t) => v + (t.product.price ?? 0),
+              0,
+            )}
+          />
+        </p>
+      </td>
+      <td className="p-3">
+        <p className="text-sm font-normal text-blue-gray-800">
+          <Number amount={bill.cashReceived}/>
+        </p>
+      </td>
+      <td className="p-3">
+        <p className="text-sm font-normal text-blue-gray-800">
+          <Number
+            amount={bill.transactions.reduce((v, t) => v + t.quantity, 0)}
+          />
+        </p>
+      </td>
+      <td className="p-3">
+        <BillOptions
+          bill={bill}
+          requestEdit={requestEdit}
+          requestShow={() => {}}
+        />
+      </td>
+    </tr>
   );
 }

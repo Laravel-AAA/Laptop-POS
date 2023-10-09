@@ -1,8 +1,12 @@
-import moment from 'moment'
-import React from 'react'
+import moment from "moment";
+import React from "react";
 
-export default function FromDate({date}:{date:string}) {
-  return (
-    <strong>{moment(date).fromNow()}</strong>
-  )
+export default function FromDate({
+  date,
+  className = "",
+}: {
+  date: string;
+  className?: string;
+}) {
+  return <span className={className}>{moment(date).fromNow()}</span>;
 }

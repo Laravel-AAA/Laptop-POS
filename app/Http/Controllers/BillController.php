@@ -6,6 +6,7 @@ use App\Models\Bill;
 use App\Http\Requests\StoreBillRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateBillRequest;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
 class BillController extends Controller
@@ -16,7 +17,9 @@ class BillController extends Controller
     public function index(Request $request)
     {
 
-        $bills = $request->user()->bills()->latest()->filter($request->only('search'))
+        $bills = $request->user()->bills()->latest()
+            ->with('transactions')->with('transactions.product')
+            ->filter($request->only('search', 'product'))
             ->paginate(15)->appends($request->all());
 
         return Inertia::render('Bills/index', [
@@ -46,6 +49,8 @@ class BillController extends Controller
      */
     public function destroy(Bill $bill)
     {
-        //
+        Gate::authorize('delete', $bill);
+
+        $bill->delete();
     }
 }

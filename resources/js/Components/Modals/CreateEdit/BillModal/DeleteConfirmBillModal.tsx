@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AlertModal from "../../AlertModal";
 import { IBill, IProduct } from "@/types";
 import { Inertia } from "@inertiajs/inertia";
+import ID from "@/Utilities/ID";
 
 export default function DeleteConfirmBillModal({
   bill,
@@ -19,7 +20,7 @@ export default function DeleteConfirmBillModal({
       title="Are you sure?"
       paragraph={
         <span>
-          You are about to delete the bill <strong>{bill.name}</strong>
+          You are about to delete the bill <ID id={bill.id}/>
         </span>
       }
       buttons={{

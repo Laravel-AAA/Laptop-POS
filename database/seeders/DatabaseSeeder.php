@@ -16,28 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // try { //catch duplicate email error if ran twice
-            $user = User::factory()
-                ->create(['name' => 'asdf', 'email' => 'asdf@asdf.asdf']);
+        //Run `php artisan migrate:fresh --seed`
+        $user = User::factory()
+            ->create(['name' => 'asdf', 'email' => 'asdf@asdf.asdf']);
+        $products = Product::factory()->count(100)->recycle($user)->create();
+        $bills = Bill::factory()->count(100)->recycle($user)->create();
+        Transaction::factory()->count(500)->recycle($products)->recycle($bills)->create();
+        for ($i = 0; $i < 10; $i++) {
+            $user = User::factory()->create();
             $products = Product::factory()->count(100)->recycle($user)->create();
-            $bills    = Bill::factory()->count(100)->recycle($user)->create();
-            Transaction::factory()->count(1000)->recycle($products)->recycle($bills)->create();
-
-        // } catch (Exception) {
-        // }
-        // $users = User::factory()->count(10);
-        // $users->has($products)->create();
-        // $products->for($users)->create();
-        // $bills->has($users)->create();
-        // $transactions->has($bills)->create();
-        // $transactions->has($products)->create();
-// create users:
-//
-        // Transaction::factory()
-        // ->recycle(Bill::factory()
-        //     ->recycle(User::factory()->create())->create())
-        // ->recycle(Product::factory()->create()
-        //     ->recycle(User::factory()->create()))
-        // ->count(100)->create();
+            $bills = Bill::factory()->count(100)->recycle($user)->create();
+            Transaction::factory()->count(500)->recycle($products)->recycle($bills)->create();
+        }
     }
 }
