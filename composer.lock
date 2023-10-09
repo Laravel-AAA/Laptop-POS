@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f7325686a8df2fbfcc5618d65064fcdb",
+    "content-hash": "0d610cf129d15ee02897482d16cf35d2",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -154,75 +154,6 @@
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.282.0"
             },
             "time": "2023-09-28T18:09:20+00:00"
-        },
-        {
-            "name": "based/laravel-typescript",
-            "version": "v0.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lepikhinb/laravel-typescript.git",
-                "reference": "accfcd53cd45da9a2c56a7507d9e8cd8b3ea789f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lepikhinb/laravel-typescript/zipball/accfcd53cd45da9a2c56a7507d9e8cd8b3ea789f",
-                "reference": "accfcd53cd45da9a2c56a7507d9e8cd8b3ea789f",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/dbal": "^3.1",
-                "illuminate/contracts": "^8.37|^9.0|^10.0",
-                "php": "^8.0",
-                "spatie/laravel-package-tools": "^1.11.0"
-            },
-            "require-dev": {
-                "brianium/paratest": "^6.2",
-                "nunomaduro/collision": "^5.3|^6.1.0",
-                "nunomaduro/larastan": "^0.7.11|^2.0.1",
-                "orchestra/testbench": "^6.15|^7.0.1|^8.0",
-                "phpunit/phpunit": "^9.3"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Based\\TypeScript\\TypeScriptServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Based\\TypeScript\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Boris Lepikhin",
-                    "email": "boris@lepikhin.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Transform Laravel models into TypeScript interfaces",
-            "homepage": "https://github.com/lepikhinb/laravel-typescript",
-            "keywords": [
-                "laravel",
-                "typescript"
-            ],
-            "support": {
-                "issues": "https://github.com/lepikhinb/laravel-typescript/issues",
-                "source": "https://github.com/lepikhinb/laravel-typescript/tree/v0.0.4"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/lepikhinb",
-                    "type": "github"
-                }
-            ],
-            "time": "2023-07-06T21:24:22+00:00"
         },
         {
             "name": "brick/math",
@@ -3915,66 +3846,6 @@
                 }
             ],
             "time": "2023-04-15T23:01:58+00:00"
-        },
-        {
-            "name": "spatie/laravel-package-tools",
-            "version": "1.16.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "cc7c991555a37f9fa6b814aa03af73f88026a83d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/cc7c991555a37f9fa6b814aa03af73f88026a83d",
-                "reference": "cc7c991555a37f9fa6b814aa03af73f88026a83d",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^9.28|^10.0",
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.5",
-                "orchestra/testbench": "^7.7|^8.0",
-                "pestphp/pest": "^1.22",
-                "phpunit/phpunit": "^9.5.24",
-                "spatie/pest-plugin-test-time": "^1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\LaravelPackageTools\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Tools for creating Laravel packages",
-            "homepage": "https://github.com/spatie/laravel-package-tools",
-            "keywords": [
-                "laravel-package-tools",
-                "spatie"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2023-08-23T09:04:39+00:00"
         },
         {
             "name": "symfony/console",
@@ -9072,5 +8943,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
