@@ -19,14 +19,14 @@ return new class extends Migration {
             $table->rememberToken();
             $table->timestamps();
 
-            //TODO: make these on Business table which will have many users.
-            $table->string('businessLongName', 64)->nullable();
-            $table->string('businessShortName', 16);
-            $table->string('businessLogo')->nullable();
-            $table->string('businessPhone',18)->nullable();
-            $table->decimal('taxPercent');
-            $table->string('businessAddress')->nullable();
-            $table->string('taxIdentificationNumber')->nullable();
+            //TODO: make these on Business table which will have many users with Admin user.
+            // $table->string('businessLongName', 64)->nullable();
+            // $table->string('businessShortName', 16)->nullable();
+            // $table->string('businessLogo')->nullable();
+            // $table->string('businessPhone',18)->nullable();
+            // $table->decimal('taxPercent')->nullable();
+            // $table->string('businessAddress')->nullable();
+            // $table->string('taxIdentificationNumber')->nullable();
         });
     }
 

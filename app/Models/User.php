@@ -32,13 +32,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'businessLongName',
-        'businessShortName',
-        'businessLogo',
-        'businessPhone',
-        'taxPercent',
-        'businessAddress',
-        'taxIdentificationNumber',
+        // 'businessLongName',
+        // 'businessShortName',
+        // 'businessLogo',
+        // 'businessPhone',
+        // 'taxPercent',
+        // 'businessAddress',
+        // 'taxIdentificationNumber',
     ];
 
     /**

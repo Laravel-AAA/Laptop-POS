@@ -23,25 +23,17 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$eq9cyRecAlRJ6Ot0VquiNOEJrpZqk9whpqapa2bC1vlqFY13.SRdy',
             // password: asdfasdf
+            'password' => '$2y$10$eq9cyRecAlRJ6Ot0VquiNOEJrpZqk9whpqapa2bC1vlqFY13.SRdy',
             'remember_token' => Str::random(10),
-            'businessLongName' => fake()->name(),
-            'businessShortName' => substr(fake()->name(),0,8),
-            'businessLogo' => optional(fake()->imageUrl(320, 240, 'Logo'))->nullable(),
-            'businessPhone'=> substr(fake()->phoneNumber(),0,18),
-            'taxPercent'=>round(0,30),
-            'businessAddress'=>fake()->address(),
-            'taxIdentificationNumber'=>fake()->numberBetween(999999999,1),
-            // Define a relationship with Products
-            // 'products' => function () {
-            //     return Product::factory()->count(1)->create();
-            // },
-
-            // Define a relationship with Bills
-            // 'bills' => function () {
-            //     return Bill::factory()->count(1)->create();
-            // },
+            
+            // 'businessLongName' => fake()->name(),
+            // 'businessShortName' => substr(fake()->name(),0,8),
+            // 'businessLogo' => fake()->imageUrl(320, 240, 'Logo'),
+            // 'businessPhone'=> substr(fake()->phoneNumber(),0,18),
+            // 'taxPercent'=>round(0,30),
+            // 'businessAddress'=>fake()->address(),
+            // 'taxIdentificationNumber'=>fake()->numberBetween(999999999),
         ];
     }
 
