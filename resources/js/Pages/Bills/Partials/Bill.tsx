@@ -1,7 +1,7 @@
 import { IBill } from "@/types";
 import BillOptions from "./BillOptions";
 import FromDate from "@/Utilities/FromDate";
-import Number from "@/Utilities/Number";
+import Num from "@/Utilities/Num";
 import ID from "@/Utilities/ID";
 type PropsProduct = {
   bill: IBill;
@@ -26,7 +26,7 @@ export default function Product({
       </td>
       <td className="p-3">
         <p className="text-sm font-normal text-blue-gray-800">
-          <Number
+          <Num
             amount={bill.transactions.reduce(
               (v, t) => v + (t.product.price ?? 0),
               0,
@@ -36,12 +36,12 @@ export default function Product({
       </td>
       <td className="p-3">
         <p className="text-sm font-normal text-blue-gray-800">
-          <Number amount={bill.cashReceived}/>
+          <Num amount={bill.cashReceived}/>
         </p>
       </td>
       <td className="p-3">
         <p className="text-sm font-normal text-blue-gray-800">
-          <Number
+          <Num
             amount={bill.transactions.reduce((v, t) => v + t.quantity, 0)}
           />
         </p>

@@ -37,14 +37,14 @@ export default function Welcome({
           secondary: { text: "Noo😭" },
         }}
         isOpen={openEverything}
-        requestClose={()=>setOpenEverything(false)}
+        requestClose={() => setOpenEverything(false)}
       />
       <AlertModal
         icon="danger"
         paragraph="Lorem aksdf adsf lskf ldkf s today is the day so i think we can mdade it as soon as possible"
         title="Are you sure?"
         isOpen={openNoButtons}
-        requestClose={()=>setOpenNoButtons(false)}
+        requestClose={() => setOpenNoButtons(false)}
       />
       <AlertModal
         paragraph="Lorem  soon as possible"
@@ -55,13 +55,13 @@ export default function Welcome({
           secondary: { text: "Noo😭" },
         }}
         isOpen={openNoIcon}
-        requestClose={()=>setOpenNoIcon(false)}
+        requestClose={() => setOpenNoIcon(false)}
       />
       <AlertModal
         paragraph="Lorem aksdf adsf lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as lskf ldkf s today is the day so i think we can mdade it as soon as possible"
         title="Are you sure?"
         isOpen={openNoIconButtons}
-        requestClose={()=>setOpenNoIconButtons(false)}
+        requestClose={() => setOpenNoIconButtons(false)}
       />
       <CreateEditProductModal
         modalAction={modalAction}
@@ -106,12 +106,15 @@ export default function Welcome({
               open: true,
               state: "edit",
               data: {
-                id: 1,
+                id: "sadfkl24l234234",
                 img: "blah/blah",
                 name: "Milk",
                 barcode: "21214214",
                 price: 111,
                 stock: 2,
+                created_at: new Date().toISOString(),
+                updated_at: new Date().toISOString(),
+                user_id: "slakslfkj2l432423",
               },
             })
           }
@@ -125,12 +128,15 @@ export default function Welcome({
               open: true,
               state: "show",
               data: {
-                id: 3,
+                id: "ldkf2323kf23lf",
                 img: "blah/blah/3",
                 name: "Milk3",
                 barcode: "23234233",
                 price: 113,
                 stock: 3,
+                created_at: new Date().toISOString(),
+                updated_at: new Date().toISOString(),
+                user_id: "slakslfkj2l432423",
               },
             })
           }
