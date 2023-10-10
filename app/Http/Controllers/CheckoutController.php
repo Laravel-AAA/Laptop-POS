@@ -16,7 +16,7 @@ class CheckoutController extends Controller
             // ->filter($request->only('search'))
             ->paginate(15)->appends($request->all());
 
-        return Inertia::render('Checkout/index', [
+        return Inertia::render('Authenticated/Checkout/index', [
             'products' => $products,
             // 'filter' => $request->only('search'),
         ]);

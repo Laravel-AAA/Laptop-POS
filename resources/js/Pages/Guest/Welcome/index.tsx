@@ -5,11 +5,11 @@ import { useState } from "react";
  * check out [react-icons](https://react-icons.github.io/react-icons/) for more info...
  */
 import { FaLaravel, FaReact } from "react-icons/fa";
-import HeaderFooter from "@/Layouts/HeaderFooterLayout";
 import AlertModal from "@/Components/Modals/AlertModal";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import CreateEditProductModal from "@/Components/Modals/CreateEdit/ProductModal/CreateEditProductModal";
+import GuestLayout from "@/Layouts/GuestLayout";
 
 export default function Welcome({
   auth,
@@ -26,7 +26,7 @@ export default function Welcome({
     state: "create",
   });
   return (
-    <HeaderFooter auth={auth}>
+    <GuestLayout auth={auth}>
       <AlertModal
         icon="danger"
         paragraph="Lorem aksdf adsf lskf ldkf s today is the day so i think we can mdade it as soon as possible"
@@ -421,6 +421,6 @@ export default function Welcome({
           <p>PHP version: {phpVersion}</p>
         </div>
       </div>
-    </HeaderFooter>
+    </GuestLayout>
   );
 }

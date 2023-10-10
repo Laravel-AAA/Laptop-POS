@@ -19,7 +19,7 @@ class ProductController extends Controller
         $products = $request->user()->products()->latest()->filter($request->only('search'))
             ->paginate(15)->appends($request->all());
 
-        return Inertia::render('Inventory/index', [
+        return Inertia::render('Authenticated/Inventory/index', [
             'products' => $products,
             'filter' => $request->only('search'),
         ]);

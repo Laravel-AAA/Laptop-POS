@@ -1,5 +1,5 @@
 import { useEffect, FormEventHandler } from "react";
-import GuestLayout from "@/Layouts/GuestLayout";
+import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import InputError from "@/Components/Inputs/InputError";
 import InputLabel from "@/Components/Inputs/InputLabel";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
@@ -25,7 +25,7 @@ export default function ConfirmPassword({auth}:PageProps) {
   };
 
   return (
-    <GuestLayout auth={auth}>
+    <GuestFormLayout auth={auth}>
       <Head title="Confirm Password" />
 
       <div className="mb-4 text-sm text-gray-600">
@@ -56,6 +56,6 @@ export default function ConfirmPassword({auth}:PageProps) {
           </PrimaryButton>
         </div>
       </form>
-    </GuestLayout>
+    </GuestFormLayout>
   );
 }

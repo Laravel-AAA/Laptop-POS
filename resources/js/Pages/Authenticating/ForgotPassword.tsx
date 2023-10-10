@@ -1,4 +1,4 @@
-import GuestLayout from "@/Layouts/GuestLayout";
+import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import InputError from "@/Components/Inputs/InputError";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
@@ -18,7 +18,7 @@ export default function ForgotPassword({ status,auth }: PageProps<{ status?: str
   };
 
   return (
-    <GuestLayout auth={auth}>
+    <GuestFormLayout auth={auth}>
       <Head title="Forgot Password" />
 
       <div className="mb-4 text-sm text-gray-600">
@@ -50,6 +50,6 @@ export default function ForgotPassword({ status,auth }: PageProps<{ status?: str
           </PrimaryButton>
         </div>
       </form>
-    </GuestLayout>
+    </GuestFormLayout>
   );
 }

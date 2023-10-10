@@ -22,7 +22,7 @@ class BillController extends Controller
             ->filter($request->only('search', 'product'))
             ->paginate(15)->appends($request->all());
 
-        return Inertia::render('Bills/index', [
+        return Inertia::render('Authenticated/Bills/index', [
             'bills' => $bills,
             'filter' => $request->only('search'),
         ]);

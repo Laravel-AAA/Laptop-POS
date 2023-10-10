@@ -1,46 +1,42 @@
 import { useEffect, FormEventHandler } from "react";
-import Checkbox from "@/Components/Checkbox";
-import GuestLayout from "@/Layouts/GuestLayout";
+import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import InputError from "@/Components/Inputs/InputError";
 import InputLabel from "@/Components/Inputs/InputLabel";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { PageProps } from "@/types";
 
-export default function Login({
-  status,
-  canResetPassword,
-  auth,
+export default function ResetPassword({
+  token,
+  email,
+  auth
 }: PageProps<{
-  status?: string;
-  canResetPassword: boolean;
+  token: string;
+  email: string;
 }>) {
   const { data, setData, post, processing, errors, reset } = useForm({
-    email: "",
+    token: token,
+    email: email,
     password: "",
-    remember: false,
+    password_confirmation: "",
   });
 
   useEffect(() => {
     return () => {
-      reset("password");
+      reset("password", "password_confirmation");
     };
   }, []);
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    post(route("login"));
+    post(route("password.store"));
   };
 
   return (
-    <GuestLayout auth={auth}>
-      <Head title="Log in" />
-
-      {status && (
-        <div className="mb-4 text-sm font-medium text-green-600">{status}</div>
-      )}
+    <GuestFormLayout auth={auth}>
+      <Head title="Reset Password" />
 
       <form onSubmit={submit}>
         <div>
@@ -53,7 +49,6 @@ export default function Login({
             value={data.email}
             className="mt-1 block w-full"
             autoComplete="username"
-            isFocused={true}
             onChange={(e) => setData("email", e.target.value)}
           />
 
@@ -69,39 +64,38 @@ export default function Login({
             name="password"
             value={data.password}
             className="mt-1 block w-full"
-            autoComplete="current-password"
+            autoComplete="new-password"
+            isFocused={true}
             onChange={(e) => setData("password", e.target.value)}
           />
 
           <InputError message={errors.password} className="mt-2" />
         </div>
 
-        <div className="mt-4 block">
-          <label className="flex items-center">
-            <Checkbox
-              name="remember"
-              checked={data.remember}
-              onChange={(e) => setData("remember", e.target.checked)}
-            />
-            <span className="ml-2 text-sm text-gray-600">Remember me</span>
-          </label>
+        <div className="mt-4">
+          <InputLabel
+            htmlFor="password_confirmation"
+            value="Confirm Password"
+          />
+
+          <TextInput
+            type="password"
+            name="password_confirmation"
+            value={data.password_confirmation}
+            className="mt-1 block w-full"
+            autoComplete="new-password"
+            onChange={(e) => setData("password_confirmation", e.target.value)}
+          />
+
+          <InputError message={errors.password_confirmation} className="mt-2" />
         </div>
 
-        <div className="mt-4 flex items-center justify-end">
-          {canResetPassword && (
-            <Link
-              href={route("password.request")}
-              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-            >
-              Forgot your password?
-            </Link>
-          )}
-
+        <div className="flex items-center justify-end mt-4">
           <PrimaryButton type="submit" className="ml-4" disabled={processing}>
-            Log in
+            Reset Password
           </PrimaryButton>
         </div>
       </form>
-    </GuestLayout>
+    </GuestFormLayout>
   );
 }

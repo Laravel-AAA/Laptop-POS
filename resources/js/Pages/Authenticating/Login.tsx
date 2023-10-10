@@ -1,55 +1,49 @@
 import { useEffect, FormEventHandler } from "react";
-import GuestLayout from "@/Layouts/GuestLayout";
+import Checkbox from "@/Components/Checkbox";
 import InputError from "@/Components/Inputs/InputError";
 import InputLabel from "@/Components/Inputs/InputLabel";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { PageProps } from "@/types";
+import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 
-export default function Register({ auth }: PageProps) {
+export default function Login({
+  status,
+  canResetPassword,
+  auth,
+}: PageProps<{
+  status?: string;
+  canResetPassword: boolean;
+}>) {
   const { data, setData, post, processing, errors, reset } = useForm({
-    name: "",
     email: "",
     password: "",
-    password_confirmation: "",
+    remember: false,
   });
 
   useEffect(() => {
     return () => {
-      reset("password", "password_confirmation");
+      reset("password");
     };
   }, []);
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    post(route("register"));
+    post(route("login"));
   };
 
   return (
-    <GuestLayout auth={auth}>
-      <Head title="Register" />
+    <GuestFormLayout auth={auth}>
+      <Head title="Log in" />
+
+      {status && (
+        <div className="mb-4 text-sm font-medium text-green-600">{status}</div>
+      )}
 
       <form onSubmit={submit}>
         <div>
-          <InputLabel htmlFor="name" value="Name" />
-
-          <TextInput
-            id="name"
-            name="name"
-            value={data.name}
-            className="mt-1 block w-full"
-            autoComplete="name"
-            isFocused={true}
-            onChange={(e) => setData("name", e.target.value)}
-            required
-          />
-
-          <InputError message={errors.name} className="mt-2" />
-        </div>
-
-        <div className="mt-4">
           <InputLabel htmlFor="email" value="Email" />
 
           <TextInput
@@ -59,8 +53,8 @@ export default function Register({ auth }: PageProps) {
             value={data.email}
             className="mt-1 block w-full"
             autoComplete="username"
+            isFocused={true}
             onChange={(e) => setData("email", e.target.value)}
-            required
           />
 
           <InputError message={errors.email} className="mt-2" />
@@ -75,47 +69,39 @@ export default function Register({ auth }: PageProps) {
             name="password"
             value={data.password}
             className="mt-1 block w-full"
-            autoComplete="new-password"
+            autoComplete="current-password"
             onChange={(e) => setData("password", e.target.value)}
-            required
           />
 
           <InputError message={errors.password} className="mt-2" />
         </div>
 
-        <div className="mt-4">
-          <InputLabel
-            htmlFor="password_confirmation"
-            value="Confirm Password"
-          />
-
-          <TextInput
-            id="password_confirmation"
-            type="password"
-            name="password_confirmation"
-            value={data.password_confirmation}
-            className="mt-1 block w-full"
-            autoComplete="new-password"
-            onChange={(e) => setData("password_confirmation", e.target.value)}
-            required
-          />
-
-          <InputError message={errors.password_confirmation} className="mt-2" />
+        <div className="mt-4 block">
+          <label className="flex items-center">
+            <Checkbox
+              name="remember"
+              checked={data.remember}
+              onChange={(e) => setData("remember", e.target.checked)}
+            />
+            <span className="ml-2 text-sm text-gray-600">Remember me</span>
+          </label>
         </div>
 
         <div className="mt-4 flex items-center justify-end">
-          <Link
-            href={route("login")}
-            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-          >
-            Already registered?
-          </Link>
+          {canResetPassword && (
+            <Link
+              href={route("password.request")}
+              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+            >
+              Forgot your password?
+            </Link>
+          )}
 
           <PrimaryButton type="submit" className="ml-4" disabled={processing}>
-            Register
+            Log in
           </PrimaryButton>
         </div>
       </form>
-    </GuestLayout>
+    </GuestFormLayout>
   );
 }
