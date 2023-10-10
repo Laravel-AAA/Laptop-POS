@@ -10,7 +10,7 @@ export default function GuestLayout({
 }: PropsWithChildren<PageProps>) {
   return (
     <AppLayout>
-      <div className=" p-6 selection:bg-red-500 selection:text-white lg:p-8">
+      <div className="selection:bg-red-500 selection:text-white">
         <Header auth={auth} />
         <main>{children}</main>
         <Footer />

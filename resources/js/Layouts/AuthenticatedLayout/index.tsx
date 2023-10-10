@@ -7,6 +7,12 @@ import { IUser } from "@/types";
 import NavLink from "./Partials/NavLink";
 import AppLayout from "../AppLayout";
 
+export const ROUTES: { link: string; name: string }[] = [
+  { name: "Checkout", link: "checkout.index" },
+  { name: "Inventory", link: "product.index" },
+  { name: "Bills", link: "bill.index" },
+  { name: "Dashboard", link: "dashboard" },
+];
 export default function Authenticated({
   user,
   header,
@@ -14,12 +20,6 @@ export default function Authenticated({
 }: PropsWithChildren<{ user: IUser; header?: ReactElement }>) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false);
-  const routes: { link: string; name: string }[] = [
-    { name: "Checkout", link: "checkout.index" },
-    { name: "Inventory", link: "product.index" },
-    { name: "Bills", link: "bill.index" },
-    { name: "Dashboard", link: "dashboard" },
-  ];
   return (
     <AppLayout>
       <div className="min-h-screen">
@@ -34,7 +34,7 @@ export default function Authenticated({
                 </div>
 
                 <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                  {routes.map((r) => (
+                  {ROUTES.map((r) => (
                     <NavLink
                       key={r.link}
                       href={route(r.link)}
@@ -134,7 +134,7 @@ export default function Authenticated({
             }
           >
             <div className="space-y-1 pb-3 pt-2">
-              {routes.map((r) => (
+              {ROUTES.map((r) => (
                 <ResponsiveNavLink
                   key={r.link}
                   href={route(r.link)}
@@ -143,12 +143,6 @@ export default function Authenticated({
                   {r.name}
                 </ResponsiveNavLink>
               ))}
-              {/* <ResponsiveNavLink
-              href={route("inventory")}
-              active={route().current("inventory")}
-            >
-              Inventory
-            </ResponsiveNavLink> */}
             </div>
 
             <div className="border-t border-gray-200 pb-1 pt-4">
@@ -181,7 +175,7 @@ export default function Authenticated({
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             {header || (
               <h2 className="py-5 text-xl font-semibold leading-tight text-gray-800">
-                {routes.find((r) => r.link == route().current())?.name ??
+                {ROUTES.find((r) => r.link == route().current())?.name ??
                   route().current()?.toString()[0].toUpperCase() +
                     (route()
                       .current()

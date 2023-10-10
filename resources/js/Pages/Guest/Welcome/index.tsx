@@ -10,6 +10,7 @@ import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import CreateEditProductModal from "@/Components/Modals/CreateEdit/ProductModal/CreateEditProductModal";
 import GuestLayout from "@/Layouts/GuestLayout";
+import Hero from "./Partials/Hero";
 
 export default function Welcome({
   auth,
@@ -27,6 +28,8 @@ export default function Welcome({
   });
   return (
     <GuestLayout auth={auth}>
+      <Hero />
+
       <AlertModal
         icon="danger"
         paragraph="Lorem aksdf adsf lskf ldkf s today is the day so i think we can mdade it as soon as possible"
@@ -77,29 +80,29 @@ export default function Welcome({
         <PrimaryButton onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </PrimaryButton>
-        &nbsp;&nbsp;
+        {" "}
         <SecondaryButton onClick={() => setOpenEverything(true)}>
           Every thing
         </SecondaryButton>
-        &nbsp;&nbsp;
+        {" "}
         <SecondaryButton onClick={() => setOpenNoButtons(true)}>
           No buttons
         </SecondaryButton>
-        &nbsp;&nbsp;
+        {" "}
         <SecondaryButton onClick={() => setOpenNoIcon(true)}>
           no icon
         </SecondaryButton>
-        &nbsp;&nbsp;
+        {" "}
         <SecondaryButton onClick={() => setOpenNoIconButtons(true)}>
           no icon & buttons
         </SecondaryButton>
-        &nbsp;&nbsp;
+        {" "}
         <SecondaryButton
           onClick={() => setModalAction({ open: true, state: "create" })}
         >
           Create Product
         </SecondaryButton>
-        &nbsp;&nbsp;
+        {" "}
         <SecondaryButton
           onClick={() =>
             setModalAction({
@@ -121,7 +124,7 @@ export default function Welcome({
         >
           Edit Product
         </SecondaryButton>
-        &nbsp;&nbsp;
+        {" "}
         <SecondaryButton
           onClick={() =>
             setModalAction({
