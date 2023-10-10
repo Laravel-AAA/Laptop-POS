@@ -23,7 +23,7 @@ export default function Authenticated({
     <div className="min-h-screen bg-gray-100">
       <nav className="border-b border-gray-100 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 justify-between">
+          <div className="flex h-12 justify-between">
             <div className="flex">
               <div className="flex shrink-0 items-center">
                 <Link href="/">
@@ -190,7 +190,7 @@ export default function Authenticated({
       <header className="my-0 bg-white shadow">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {header || (
-            <h2 className="py-6 text-xl font-semibold leading-tight text-gray-800">
+            <h2 className="py-5 text-xl font-semibold leading-tight text-gray-800">
               {routes.find((r) => r.link == route().current())?.name ??
                 route().current()?.toString()[0].toUpperCase() +
                   (route()

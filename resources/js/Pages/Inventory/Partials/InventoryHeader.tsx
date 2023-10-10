@@ -41,7 +41,7 @@ export default function InventoryHeader({
   }, [filter]);
 
   return (
-    <div className="block justify-between py-5 sm:flex">
+    <div className="block justify-between py-4 sm:flex">
       <div className="flex items-center gap-3">
         <h2 className="text-xl font-semibold mr-6 leading-tight text-gray-800">
           Inventory
