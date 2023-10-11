@@ -5,6 +5,7 @@ import { PageProps } from "@/types";
  */
 import GuestLayout from "@/Layouts/GuestLayout";
 import Hero from "./Partials/Hero";
+import Features from "./Partials/Features";
 
 export default function Welcome({
   auth,
@@ -15,6 +16,7 @@ export default function Welcome({
     <GuestLayout auth={auth}>
       <Head title="Welcome" />
       <Hero />
+      <Features />
     </GuestLayout>
   );
 }
