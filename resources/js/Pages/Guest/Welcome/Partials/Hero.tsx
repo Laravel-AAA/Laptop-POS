@@ -1,6 +1,5 @@
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
-import { Link } from "@inertiajs/react";
-import React from "react";
+import TextLink from "@/Components/TextLink";
 
 export default function Hero() {
   return (
@@ -64,24 +63,19 @@ export default function Hero() {
                 of Sale app
               </p>
               <div
-                className="mx-auto max-w-xs flex justify-center"
+                className="mx-auto flex max-w-xs justify-center"
                 data-aos="zoom-y-out"
                 data-aos-delay="300"
               >
-                  <SecondaryButton
-                    onClick={() => alert("Work in progress...")}
-                    className="normal-case shadow-lg"
-                  >
-                    <span className="text-sm tracking-wide">
-                      Start free trial
-                    </span>
-                  </SecondaryButton>
-                  <Link
-                    href="./#"
-                    className="flex items-center px-5 py-3 pt-2 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900"
-                  >
-                    Learn more
-                  </Link>
+                <SecondaryButton
+                  onClick={() => alert("Work in progress...")}
+                  className="normal-case shadow-lg"
+                >
+                  <span className="text-sm tracking-wide">
+                    Start free trial
+                  </span>
+                </SecondaryButton>
+                <TextLink href="./#">Learn more</TextLink>
               </div>
             </div>
           </div>

@@ -15,7 +15,7 @@ export default function TextLink({
       href={href}
       {...props}
       className={
-        "flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900 " +
+        "flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-primary-900 " +
         className
       }
     >

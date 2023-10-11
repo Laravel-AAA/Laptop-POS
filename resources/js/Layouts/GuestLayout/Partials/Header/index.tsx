@@ -28,7 +28,7 @@ export default function Header({ auth }: PageProps | { auth: null }) {
         <div className="mx-auto max-w-6xl px-5 sm:px-6">
           <div className="flex h-16 items-center justify-between md:h-20">
             {/* Site branding */}
-<FullLogo/>
+            <FullLogo />
             <DesktopMenu auth={auth} />
             <MobileMenu auth={auth} />
           </div>
