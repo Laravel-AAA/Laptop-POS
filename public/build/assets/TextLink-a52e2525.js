@@ -1,0 +1,1 @@
+import{j as n,d as s}from"./app-22ddf477.js";function o({href:t,className:e="",children:r,...i}){return n.jsx(s,{href:t,...i,className:"flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-primary-900 "+e,children:r})}export{o as T};
