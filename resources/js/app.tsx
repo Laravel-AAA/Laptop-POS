@@ -5,10 +5,10 @@ import { createRoot } from "react-dom/client";
 import { createInertiaApp } from "@inertiajs/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 
-const appName = import.meta.env.VITE_APP_NAME || "Laravel";
+const appName = import.meta.env.VITE_APP_NAME || "Laptop POS";
 
 createInertiaApp({
-  title: (title) => (title ? `${title} - ${appName}` : appName),
+  title: (title) => (title ? `${title} - ${appName}` : appName),
   resolve: (name) =>
     resolvePageComponent(
       `./Pages/${name}.tsx`,
@@ -20,6 +20,6 @@ createInertiaApp({
     root.render(<App {...props} />);
   },
   progress: {
-    color: "#57534e",
+    color: "#115e59",//primary-800
   },
 });

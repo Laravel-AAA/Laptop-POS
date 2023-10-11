@@ -1,8 +1,9 @@
-import ApplicationLogo from "@/Components/ApplicationLogo";
+import Logo from "@/Components/Logo/Logo";
 import { Link } from "@inertiajs/react";
 import { PropsWithChildren } from "react";
 import { PageProps } from "@/types";
 import GuestLayout from ".";
+import FullLogo from "@/Components/Logo/FullLogo";
 
 export default function GuestFormLayout({
   children,
@@ -12,9 +13,7 @@ export default function GuestFormLayout({
     <GuestLayout auth={auth}>
       <div className="flex min-h-screen flex-col items-center pt-6 sm:justify-center sm:pt-0">
         <div>
-          <Link href="/">
-            <ApplicationLogo className="w-20" />
-          </Link>
+          <FullLogo size="xl"/>
         </div>
         <div className="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
           {children}

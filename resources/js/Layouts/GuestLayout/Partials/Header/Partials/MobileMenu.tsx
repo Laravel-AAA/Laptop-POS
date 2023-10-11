@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { Transition } from "@headlessui/react";
-import { Link } from "@inertiajs/react";
 import PrimaryLink from "@/Components/Buttons/PrimaryLink";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaSignOutAlt } from "react-icons/fa";
 import { PageProps } from "@/types";
 import { ROUTES } from "@/Layouts/AuthenticatedLayout";
+import TextLink from "@/Components/TextLink";
 
 export default function MobileMenu({ auth }: PageProps | { auth: null }) {
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false);
@@ -66,7 +66,7 @@ export default function MobileMenu({ auth }: PageProps | { auth: null }) {
           show={mobileNavOpen}
           as="nav"
           id="mobile-nav"
-          className="absolute left-0 top-full z-20 h-screen bg-gray-50 w-full overflow-auto pb-16 backdrop-blur-sm"
+          className="absolute left-0 top-full z-20 h-screen w-full overflow-auto bg-gray-50 pb-16 backdrop-blur-sm"
           enter="transition ease-out duration-200 transform"
           enterFrom="opacity-0 -translate-y-2"
           enterTo="opacity-100 translate-y-0"
@@ -76,32 +76,53 @@ export default function MobileMenu({ auth }: PageProps | { auth: null }) {
         >
           <ul className="px-5 py-2">
             {auth?.user ? (
-              ROUTES.map((r, i) => (
+              <>
+                {ROUTES.map((r, i) => (
+                  <li>
+                    <TextLink
+                      href={route(r.link)}
+                      className="justify-center"
+                      onClick={() => setMobileNavOpen(false)}
+                    >
+                      {r.name}
+                    </TextLink>
+                  </li>
+                ))}
+                <hr />
                 <li>
-                  <Link
-                    href={route(r.link)}
-                    className="flex w-full justify-center py-2 font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                  <TextLink
+                    href={route("profile.edit")}
+                    className="justify-center"
                     onClick={() => setMobileNavOpen(false)}
                   >
-                    {r.name}
-                  </Link>
+                    Profile
+                  </TextLink>
                 </li>
-              ))
+                <li>
+                  <TextLink
+                    href={route("logout")}
+                    className="justify-center"
+                    onClick={() => setMobileNavOpen(false)}
+                  >
+                    <span className="font-bold">Log Out</span>
+                  </TextLink>
+                </li>
+              </>
             ) : (
               <>
                 <li>
-                  <Link
+                  <TextLink
                     href={route("login")}
-                    className="flex w-full justify-center py-2 font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                    className="justify-center"
                     onClick={() => setMobileNavOpen(false)}
                   >
                     Login
-                  </Link>
+                  </TextLink>
                 </li>
                 <li>
                   <PrimaryLink
                     href={route("register")}
-                    className="flex w-full justify-center py-2 font-medium normal-case"
+                    className="flex justify-center normal-case"
                     onClick={() => setMobileNavOpen(false)}
                   >
                     <span>Register&nbsp;</span>

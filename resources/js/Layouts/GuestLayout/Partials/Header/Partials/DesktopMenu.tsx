@@ -1,8 +1,8 @@
 import PrimaryLink from "@/Components/Buttons/PrimaryLink";
 import Dropdown from "@/Components/Dropdown";
+import TextLink from "@/Components/TextLink";
 import { ROUTES } from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
-import { Link } from "@inertiajs/react";
 import { FaArrowRight } from "react-icons/fa";
 
 export default function DesktopMenu({ auth }: PageProps | { auth: null }) {
@@ -13,12 +13,7 @@ export default function DesktopMenu({ auth }: PageProps | { auth: null }) {
           <>
             {ROUTES.map((r, i) => (
               <li key={i}>
-                <Link
-                  href={route(r.link)}
-                  className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900"
-                >
-                  {r.name}
-                </Link>
+                <TextLink href={route(r.link)}>{r.name}</TextLink>
               </li>
             ))}
             <li>
@@ -57,6 +52,7 @@ export default function DesktopMenu({ auth }: PageProps | { auth: null }) {
                         href={route("logout")}
                         method="post"
                         as="button"
+                        className="font-bold"
                       >
                         Log Out
                       </Dropdown.Link>
@@ -69,16 +65,15 @@ export default function DesktopMenu({ auth }: PageProps | { auth: null }) {
         ) : (
           <>
             <li>
-              <Link
+              <TextLink
                 href={route("login")}
-                className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900"
               >
                 Login
-              </Link>
+              </TextLink>
             </li>
             <li>
               <PrimaryLink
-                className="flex ml-5 normal-case"
+                className="ml-5 flex normal-case"
                 href={route("register")}
               >
                 <span>Register&nbsp;</span>

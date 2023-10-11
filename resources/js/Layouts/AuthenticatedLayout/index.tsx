@@ -1,5 +1,5 @@
 import { useState, PropsWithChildren, ReactNode, ReactElement } from "react";
-import ApplicationLogo from "@/Components/ApplicationLogo";
+import Logo from "@/Components/Logo/Logo";
 import Dropdown from "@/Components/Dropdown";
 import ResponsiveNavLink from "@/Layouts/AuthenticatedLayout/Partials/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
@@ -29,7 +29,7 @@ export default function Authenticated({
               <div className="flex">
                 <div className="flex shrink-0 items-center">
                   <Link href="/">
-                    <ApplicationLogo className="h-9" />
+                    <Logo className="h-9" />
                   </Link>
                 </div>
 
