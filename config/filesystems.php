@@ -93,7 +93,6 @@ return [
     'links' => [
         //this is used only for local files. On the cloud we don't use such an approach.
         public_path('products-images') => storage_path('app/public/products-images'),
-        public_path('assets') => storage_path('app/public/assets'),
     ],
 
 ];
