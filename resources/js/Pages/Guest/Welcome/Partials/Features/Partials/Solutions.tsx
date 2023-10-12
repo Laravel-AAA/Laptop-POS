@@ -56,7 +56,7 @@ export default function Solutions() {
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 -translate-y-12"
                 unmount={false}
-                className="absolute inline min-w-full text-left text-secondary-600 "
+                className="absolute inline text-left text-secondary-600 "
               >
                 {b}
               </Transition>
