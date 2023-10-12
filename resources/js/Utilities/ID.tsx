@@ -6,6 +6,6 @@ import React from 'react'
  */
 export default function ID({id}:{id:string}) {
   return (
-    <span className="tracking-wide italic font-bold">#{id?.substring(20)??'NULL'}</span>
+    <span className="tracking-wide italic font-semibold">#{id?.substring(20)??'NULL'}</span>
   )
 }

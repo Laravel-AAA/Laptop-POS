@@ -18,7 +18,7 @@ import {
   PageProps,
 } from "@/types";
 import { Head } from "@inertiajs/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import Bill from "./Partials/Bill";
 import Pagination from "@/Components/Pagination";
@@ -56,7 +56,7 @@ export default function Bills({
                       : "")
                   }
                 >
-                  <p className="text-sm font-normal leading-none tracking-wide text-primary-700 opacity-70">
+                  <p className="text-sm font-semibold leading-none tracking-wide text-primary-900 opacity-70">
                     {head}
                   </p>
                 </th>
