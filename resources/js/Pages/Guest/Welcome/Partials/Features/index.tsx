@@ -30,7 +30,7 @@ export default function Features() {
         <div className="pt-12 xl:pt-20">
           {/* Section header */}
           <div className="mx-auto max-w-3xl pb-12 text-center xl:pb-16">
-            <h1 className="mb-4 text-lg font-light uppercase tracking-wide text-primary-600">
+            <h1 className="mb-5 text-4xl font-light uppercase tracking-wide text-primary-600">
               Explore the solutions
             </h1>
             <Solutions />
@@ -44,12 +44,7 @@ export default function Features() {
               data-aos="fade-right"
             >
               <div className="mb-8 xl:pr-16">
-                <h3 className="h3 mb-3">Simple yet powerful suite of tools</h3>
-                <p className="text-xl text-gray-600">
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore pariatur. Excepteur sint occaecat cupidatat non
-                  proident, sunt in culpa.
-                </p>
+                <h3 className="text-2xl font-bold mb-2 xl:text-left text-center">Simple yet powerful suite of tools</h3>
               </div>
               {/* Tabs buttons */}
               <div className="mb-8 xl:mb-0">
@@ -153,8 +148,8 @@ export default function Features() {
             </div>
 
             {/* Tabs items */}
-            <div className="w-x mx-auto mb-8 justify-items-center align-bottom xl:order-1 xl:col-span-5 xl:mb-0">
-              <div className="self-end align-bottom transition-all">
+            <div className="mx-auto mb-16 justify-items-center align-bottom xl:order-1 xl:col-span-5 xl:mb-0">
+              <div className="self-end md:mb-52 align-bottom transition-all">
                 <div
                   className="relative flex flex-col text-center xl:mt-48 xl:text-right"
                   data-aos="zoom-y-out"
@@ -176,12 +171,12 @@ export default function Features() {
                   >
                     <div className="relative inline-flex flex-col">
                       <img
-                        className="w-[300px] min-w-[300px] md:w-[500px] md:min-w-[500px]"
+                        className="w-[280px]  min-w-[280px] md:w-[500px] md:min-w-[500px]"
                         src="/assets/screen-tv-mockup/index.png"
                         alt="Mockup laptop to show pages on screen"
                       />
                       <img
-                        className="absolute w-[222px] md:w-[372px]"
+                        className="absolute w-[209px] md:w-[372px]"
                         src="/assets/screenshots/inventory-with-food-products(fullscreen).png"
                         alt="Inventory page with food products"
                         style={{ top: "7%", left: "13.8%" }}

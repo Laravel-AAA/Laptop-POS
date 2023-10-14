@@ -35,15 +35,11 @@ export default function Solutions() {
       {/*The reason for the complexity is when using class 'text-center' with a changing width sentence (hence: dynamic list of businesses) will make the whole sentence re-align to center every time which is a bad thing */}
       <span>Whatever your use case,&nbsp;</span>
       <div className="block md:inline ">
-        <div className="-ml-20 inline md:ml-0">
+        <div className="-ml-28 inline md:ml-0">
           <span className="font-semibold text-gray-800">Laptop</span>
           &thinsp;
-          <span className="font-semibold text-primary-700">POS</span> built
+          <span className="font-semibold text-primary-700">POS</span> is built
           for&nbsp;
-          {/* <div
-            ref={solutionsContainer}
-            className="absolute inline min-w-full text-left text-secondary-500 "
-          > */}
             {businesses.map((b, i) => (
               <Transition
                 key={i}
@@ -61,7 +57,6 @@ export default function Solutions() {
                 {b}
               </Transition>
             ))}
-          {/* </div> */}
         </div>
       </div>
     </div>
