@@ -4,6 +4,8 @@ import { IFilterBill, ILaravelPaginate, IProduct, PageProps } from "@/types";
 import { Head } from "@inertiajs/react";
 import Pagination from "@/Components/Pagination";
 import CheckoutHeader from "./Partials/CheckoutHeader";
+import Items from "./Partials/Items";
+import RightSide from "./Partials/RightSide";
 
 export default function Checkout({
   auth,
@@ -20,7 +22,10 @@ export default function Checkout({
     <AuthenticatedLayout user={auth.user} header={<CheckoutHeader />}>
       <Head title="Checkout" />
 
-      <p>Hello world!</p>
+<div>
+  <Items/>
+  <RightSide/>
+</div>
     </AuthenticatedLayout>
   );
 }
