@@ -2,51 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
+/*Checkout width resizable handler style*/
+.react-resizable {
+  position: relative;
+}
+@media (min-width: 768px) {
+  .react-resizable-handle {
+    position: absolute;
+  }
+}
+.react-resizable-handle {
+  /* display: none; */
+  width: 10px;
+  height: 100%;
+  /* background-repeat: no-repeat; */
+  /* background-color: #ccc; */
+  background-origin: content-box;
+  box-sizing: border-box;
+  /* background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2IDYiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiNmZmZmZmYwMCIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2cHgiIGhlaWdodD0iNnB4Ij48ZyBvcGFjaXR5PSIwLjMwMiI+PHBhdGggZD0iTSA2IDYgTCAwIDYgTCAwIDQuMiBMIDQgNC4yIEwgNC4yIDQuMiBMIDQuMiAwIEwgNiAwIEwgNiA2IEwgNiA2IFoiIGZpbGw9IiMwMDAwMDAiLz48L2c+PC9zdmc+'); */
+  background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png) center center no-repeat #7c7c7c50;
+}
+.react-resizable-handle:active {
+  background-color: #14b8a6ff;
+}
+.react-resizable-handle-w {
+  cursor: e-resize;
+  left: 0;
+  transition: background-color 100ms ease-in-out;
+}
+
+
 /* Remove arrow from Input element of type number by using remove-arrow class*/
 .remove-arrow::-webkit-inner-spin-button,
 .remove-arrow::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 .remove-arrow {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 /* Hamburger button is shown on the <MobileMenu /> component*/
 /* Hamburger button */
-.hamburger svg>*:nth-child(1),
-.hamburger svg>*:nth-child(2),
-.hamburger svg>*:nth-child(3) {
-    transform-origin: center;
-    transform: rotate(0deg);
+.hamburger svg > *:nth-child(1),
+.hamburger svg > *:nth-child(2),
+.hamburger svg > *:nth-child(3) {
+  transform-origin: center;
+  transform: rotate(0deg);
 }
 
-.hamburger svg>*:nth-child(1) {
-    transition: y 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19), opacity 0.1s ease-in;
+.hamburger svg > *:nth-child(1) {
+  transition:
+    y 0.1s 0.25s ease-in,
+    transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19),
+    opacity 0.1s ease-in;
 }
 
-.hamburger svg>*:nth-child(2) {
-    transition: transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+.hamburger svg > *:nth-child(2) {
+  transition: transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 
-.hamburger svg>*:nth-child(3) {
-    transition: y 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19), width 0.1s 0.25s ease-in;
+.hamburger svg > *:nth-child(3) {
+  transition:
+    y 0.1s 0.25s ease-in,
+    transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19),
+    width 0.1s 0.25s ease-in;
 }
 
-.hamburger.active svg>*:nth-child(1) {
-    opacity: 0;
-    y: 11;
-    transform: rotate(225deg);
-    transition: y 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.1s 0.12s ease-out;
+.hamburger.active svg > *:nth-child(1) {
+  opacity: 0;
+  y: 11;
+  transform: rotate(225deg);
+  transition:
+    y 0.1s ease-out,
+    transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1),
+    opacity 0.1s 0.12s ease-out;
 }
 
-.hamburger.active svg>*:nth-child(2) {
-    transform: rotate(225deg);
-    transition: transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+.hamburger.active svg > *:nth-child(2) {
+  transform: rotate(225deg);
+  transition: transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-.hamburger.active svg>*:nth-child(3) {
-    y: 11;
-    transform: rotate(135deg);
-    transition: y 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1), width 0.1s ease-out;
+.hamburger.active svg > *:nth-child(3) {
+  y: 11;
+  transform: rotate(135deg);
+  transition:
+    y 0.1s ease-out,
+    transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1),
+    width 0.1s ease-out;
 }
