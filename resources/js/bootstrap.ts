@@ -9,6 +9,13 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+//prevent increasing/decreasing an input element of type number by mouse wheel
+document.addEventListener("wheel", function (event) {
+  if ((document.activeElement as HTMLInputElement)?.type &&
+    (document.activeElement as HTMLInputElement).type === "number") {
+    (document.activeElement as HTMLInputElement).blur();
+  }
+});
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
