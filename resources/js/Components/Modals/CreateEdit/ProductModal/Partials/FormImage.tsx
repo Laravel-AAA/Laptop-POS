@@ -1,6 +1,7 @@
 import DangerButton from "@/Components/Buttons/DangerButton";
 import TertiaryButton from "@/Components/Buttons/TertiaryButton";
 import InputError from "@/Components/Inputs/InputError";
+import InputHint from "@/Components/Inputs/InputHint";
 import InputLabel from "@/Components/Inputs/InputLabel";
 import TextInput from "@/Components/Inputs/TextInput";
 import { IModalAction, IProduct } from "@/types";
@@ -57,6 +58,10 @@ export default function FormImage({
       )}
       <InputError
         message={form.errors.img || form.errors.imageFile}
+        className="mt-2"
+      />
+      <InputHint
+        message="We recommend an image with white background"
         className="mt-2"
       />
     </>

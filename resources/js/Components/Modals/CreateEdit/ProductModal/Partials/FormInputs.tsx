@@ -8,7 +8,7 @@ export default function FormInputs({
   formProps: form,
   modalAction,
 }: {
-  formProps;//InertiaFormProps<ICreateProduct> //typescript complain while this is clearly what useForm return type :|
+  formProps; //InertiaFormProps<ICreateProduct> //typescript complain while this is clearly what useForm return type :|
   modalAction: IModalAction<IProduct>;
 }) {
   return (
@@ -36,6 +36,7 @@ export default function FormInputs({
         <TextInput
           id="price"
           type="number"
+          inputMode="decimal"
           name="price"
           value={form.data.price}
           className="mt-1 block w-full"
@@ -51,6 +52,7 @@ export default function FormInputs({
         <TextInput
           id="stock"
           type="number"
+          inputMode="numeric"
           name="stock"
           value={form.data.stock}
           className="mt-1 block w-full"
@@ -66,16 +68,16 @@ export default function FormInputs({
         <TextInput
           id="barcode"
           type="number"
+          inputMode="numeric"
           name="barcode"
           value={form.data.barcode}
-          className="mt-1 block w-full"
+          className="mt-1 block w-full remove-arrow"
           disabled={modalAction.state == "show"}
           onChange={(e) => form.setData("barcode", e.target.value)}
         />
 
         <InputError message={form.errors.barcode} className="mt-2" />
       </div>
-
 
       <div className="mt-4">
         <FormImage formProps={form} modalAction={modalAction} />

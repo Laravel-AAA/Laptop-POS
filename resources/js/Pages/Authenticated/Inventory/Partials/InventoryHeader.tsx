@@ -55,6 +55,7 @@ export default function InventoryHeader({
           <TextInput
             id="search"
             type="search"
+            inputMode="search"
             name="search"
             autoComplete="off"
             value={filter.search}
