@@ -21,19 +21,22 @@ export default function Checkout({
     <AuthenticatedLayout user={auth.user} header={<CheckoutHeader />}>
       <Head title="Checkout" />
 
-      <div className="flex-row-reverse md:flex">
+      <div className="flex-row-reverse w-full md:flex">
         <ResizableBox
-          width={Number(localStorage.getItem('resizable-width'))||580}
+          width={Number(localStorage.getItem("resizable-width")) || 420}
           resizeHandles={["w"]}
-          minConstraints={[400, Infinity]}
+          minConstraints={[320, Infinity]}
+          maxConstraints={[1080,Infinity]}
           height={Infinity}
-          className="flex w-full"
-          onResizeStop={(e,{size:{width}})=>localStorage.setItem('resizable-width',width+'')}
-          draggableOpts={{ axis: "x", grid: [1, 0]}}
+          className="flex md:min-w-0  min-w-full top-0 md:sticky h-screen"
+          onResizeStop={(e, { size }) =>
+            localStorage.setItem("resizable-width", size.width + "")
+          }
+          draggableOpts={{ axis: "x", grid: [1, 0] }}
         >
-          <RightSide className="ml-0 w-full md:ml-[10px]" />
+          <RightSide className="ml-0 grow md:ml-[10px] min-w-full" />
         </ResizableBox>
-        <Items className="w-full" products={products} />
+        <Items className="w-full md:w-0 grow" products={products} />
       </div>
     </AuthenticatedLayout>
   );

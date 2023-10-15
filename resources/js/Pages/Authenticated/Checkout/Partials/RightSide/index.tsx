@@ -4,7 +4,7 @@ import CartInfo from "./Partials/CartInfo";
 
 export default function RightSide({ className = "" }: { className?: string }) {
   return (
-    <div className={`bg-red-500 sticky ${className}`}>
+    <div className={`bg-red-500 ${className}`}>
       <TotalInfo />
       <CartInfo />
       <NumPad />

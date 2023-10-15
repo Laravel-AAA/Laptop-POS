@@ -21,7 +21,7 @@ export default function ItemOptions({
         <input
           type="number"
           name="quantity"
-          className="remove-arrow mx-5 block min-w-0 rounded-md border border-transparent bg-white bg-opacity-80 p-2 px-4 text-center font-semibold text-black shadow focus:border-gray-700 focus:ring-gray-700"
+          className="remove-arrow mx-5 block min-w-0 rounded-md border border-transparent bg-white bg-opacity-90 p-2 px-4 text-center font-semibold text-black shadow focus:border-gray-700 focus:ring-gray-700"
           inputMode="numeric"
           value={4}
           // onChange={...}
