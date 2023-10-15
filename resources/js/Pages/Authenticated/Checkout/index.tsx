@@ -23,16 +23,17 @@ export default function Checkout({
 
       <div className="flex-row-reverse md:flex">
         <ResizableBox
-          width={580}
+          width={Number(localStorage.getItem('resizable-width'))||580}
           resizeHandles={["w"]}
           minConstraints={[400, Infinity]}
           height={Infinity}
           className="flex w-full"
+          onResizeStop={(e,{size:{width}})=>localStorage.setItem('resizable-width',width+'')}
           draggableOpts={{ axis: "x", grid: [1, 0]}}
         >
-          <RightSide className="ml-0 w-full bg-green-400 md:ml-[10px]" />
+          <RightSide className="ml-0 w-full md:ml-[10px]" />
         </ResizableBox>
-        <Items className="w-full bg-red-500" products={products} />
+        <Items className="w-full" products={products} />
       </div>
     </AuthenticatedLayout>
   );
