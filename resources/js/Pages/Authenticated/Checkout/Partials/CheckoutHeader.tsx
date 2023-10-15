@@ -1,5 +1,4 @@
 import TextInput from "@/Components/Inputs/TextInput";
-import React from "react";
 import { FaBarcode } from "react-icons/fa";
 
 export default function CheckoutHeader() {

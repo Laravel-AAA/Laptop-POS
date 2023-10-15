@@ -1,7 +1,13 @@
-import React from 'react'
+import TotalInfo from "./Partials/TotalInfo";
+import NumPad from "./Partials/NumPad";
+import CartInfo from "./Partials/CartInfo";
 
-export default function RightSide() {
+export default function RightSide({ className = "" }: { className?: string }) {
   return (
-    <div>RightSide</div>
-  )
+    <div className={className}>
+      <TotalInfo />
+      <CartInfo />
+      <NumPad />
+    </div>
+  );
 }

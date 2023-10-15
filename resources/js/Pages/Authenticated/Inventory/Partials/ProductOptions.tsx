@@ -23,9 +23,12 @@ export default function ProductOptions({
           <span className="inline-flex">
             <button
               type="button"
-              className="inline-flex items-center rounded-full border border-transparent bg-white bg-opacity-50 p-2 leading-4  text-gray-700 shadow transition duration-200 ease-in-out hover:text-gray-900 focus:outline-none"
+              className="over:text-black inline-flex items-center rounded-full border
+              border-transparent bg-white bg-opacity-60 p-2  leading-4 text-gray-700 shadow
+              transition duration-200 ease-in-out hover:bg-opacity-70 hover:text-gray-900  hover:shadow-md
+              active:scale-95"
             >
-              <BsThreeDotsVertical className="text-lg" />
+              <BsThreeDotsVertical className="text-xl" />
             </button>
           </span>
         </Dropdown.Trigger>
@@ -61,7 +64,7 @@ export default function ProductOptions({
       <DeleteConfirmProductModal
         product={product}
         isOpen={openConfirmDeleteModal}
-        requestClose={()=>setOpenConfirmDeleteModal(false)}
+        requestClose={() => setOpenConfirmDeleteModal(false)}
       />
     </div>
   );

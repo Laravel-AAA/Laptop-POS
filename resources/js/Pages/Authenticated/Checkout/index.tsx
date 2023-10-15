@@ -22,10 +22,13 @@ export default function Checkout({
     <AuthenticatedLayout user={auth.user} header={<CheckoutHeader />}>
       <Head title="Checkout" />
 
-<div>
-  <Items/>
-  <RightSide/>
-</div>
+      <div className="flex-row-reverse md:flex">
+        <RightSide className="w-full shrink" />
+        <Items
+          className="w-full shrink-0 md:w-[27rem] lg:w-[41rem] xl:w-[54rem] 2xl:w-[68rem]"
+          products={products}
+        />
+      </div>
     </AuthenticatedLayout>
   );
 }
