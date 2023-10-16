@@ -1,33 +1,48 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode, useState } from "react";
 import { BsDashLg, BsPlusLg } from "react-icons/bs";
-import { IProduct } from "@/types";
+import { IBill, ICreateBill, ICreateTransaction, IProduct } from "@/types";
+import InputError from "@/Components/Inputs/InputError";
 
 export default function ItemOptions({
-  requestAddToCart,
-  requestSubFromCart,
   product,
+  requestChanged,
+  requestIncrease,
+  requestDecrease,
+  transaction,
 }: {
   product: IProduct;
-  requestAddToCart: () => void;
-  requestSubFromCart: () => void;
+  requestChanged: (qty: number) => any;
+  requestIncrease: () => any;
+  requestDecrease: () => any;
+  transaction: ICreateTransaction;
 }) {
+
+
   return (
     <div className="absolute left-0 top-2 hidden w-full group-hover:block">
       <div className="mx-2 flex justify-between">
         <ItemBtn
-          onClick={() => requestSubFromCart()}
+          onClick={() => requestDecrease()}
+          disabled={transaction.quantity <= 0}
           icon={<BsDashLg className="text-2xl" />}
         />
         <input
           type="number"
           name="quantity"
-          className="remove-arrow mx-5 block min-w-0 rounded-md border border-transparent bg-white bg-opacity-90 p-2 px-4 text-center font-semibold text-black shadow focus:border-gray-700 focus:ring-gray-700"
+          className={ `remove-arrow mx-5 block min-w-0 rounded-md border border-transparent bg-white bg-opacity-90 p-2 px-4 text-center font-semibold shadow  ${transaction.quantity>(product.stock??Infinity)?'focus:border-danger-500 focus:ring-danger-500 text-danger-600':' text-black focus:border-gray-700 focus:ring-gray-700'}` }
           inputMode="numeric"
-          value={4}
-          // onChange={...}
+          value={transaction.quantity}
+          onFocus={e=>e.target.select()}
+          onChange={(e) => {
+            const n = Number(e.target.value);
+            if (n) requestChanged(n);
+          }}
         />
         <ItemBtn
-          onClick={() => requestAddToCart()}
+          onClick={() => requestIncrease()}
+          disabled={
+            product.stock != null && transaction.quantity >= product.stock
+          }
           icon={<BsPlusLg className="text-2xl" />}
         />
       </div>
@@ -49,7 +64,10 @@ function ItemBtn({
       hover:text-black hover:shadow-md focus:outline-none focus:ring-2
       focus:ring-gray-700 focus:ring-offset-2 focus-visible:outline-none focus-visible:ring-2
       focus-visible:ring-gray-700 focus-visible:ring-offset-2
-      active:scale-95 disabled:opacity-25 ${disabled && "opacity-25"} `}
+      active:scale-95 disabled:opacity-25 disabled:active:scale-100 ${
+        disabled && "opacity-25"
+      } `}
+      disabled={disabled}
       {...props}
     >
       {icon}

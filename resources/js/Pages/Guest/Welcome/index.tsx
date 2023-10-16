@@ -17,6 +17,7 @@ export default function Welcome({
       <Head title="Welcome" />
       <Hero />
       <Features />
+      {/* todo segment about the flexibility */}
     </GuestLayout>
   );
 }

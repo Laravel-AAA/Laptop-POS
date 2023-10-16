@@ -1,13 +1,27 @@
-import { IProduct } from "@/types";
+import { IBill, ICreateBill, ICreateTransaction, IProduct } from "@/types";
 import ItemOptions from "./ItemOptions";
 
-export default function ProductItem({ product }: { product: IProduct }) {
+export default function ProductItem({
+  product,
+  requestChanged,
+  requestIncrease,
+  requestDecrease,
+  transaction,
+}: {
+  product: IProduct;
+  requestChanged: (qty: number) => any;
+  requestIncrease: () => any;
+  requestDecrease: () => any;
+  transaction: ICreateTransaction;
+}) {
   return (
     <div className="group relative m-1 my-4 flex w-3/4 cursor-pointer flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 ease-in-out hover:shadow-lg sm:my-1 sm:w-52">
       <ItemOptions
         product={product}
-        requestAddToCart={() => {}}
-        requestSubFromCart={() => {}}
+        requestChanged={requestChanged}
+        requestDecrease={requestDecrease}
+        requestIncrease={requestIncrease}
+        transaction={transaction}
       />
       <div>
         {product.img ? (
@@ -35,6 +49,8 @@ export default function ProductItem({ product }: { product: IProduct }) {
           <div className="flex flex-col justify-center">
             {product.stock == 0 ? (
               <p className="text-red-500">Out of Stock</p>
+            ) : transaction.quantity > (product.stock || Infinity) ? (
+              <p className="text-red-500">Qty {product.stock ?? "N/A"}</p>
             ) : (
               <p className="text-gray-200">Qty {product.stock ?? "N/A"}</p>
             )}
