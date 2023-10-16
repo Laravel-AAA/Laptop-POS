@@ -1,1 +1,0 @@
-import{j as t}from"./app-0e43bd6c.js";import n from"./RowItem-d8a73427.js";function m({billOperation:{changeQty:s,increaseQty:o,decreaseQty:i,bill:e}}){return t.jsxs("section",{className:"bg-yellow-500",children:["CartInfo",t.jsx("table",{children:t.jsx("tbody",{children:e.transactions.map((r,a)=>t.jsx(n,{transaction:r},a))})})]})}export{m as default};

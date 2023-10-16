@@ -1,1 +1,0 @@
-import{j as t}from"./app-0e43bd6c.js";function r(){return t.jsx("div",{className:"-z-1 pointer-events-none absolute bottom-0 left-1/2 hidden -translate-x-1/2 transform lg:block","aria-hidden":"true"})}export{r as default};
