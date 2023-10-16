@@ -37,7 +37,7 @@ export interface IBill extends ICreateBill {
 
 export interface ICreateBill {
   cashReceived?: number;
-  transactions: ( ITransaction|ICreateTransaction )[];
+  transactions: ( ICreateTransaction )[];
 }
 
 export interface ITransaction extends ICreateTransaction {
@@ -45,11 +45,11 @@ export interface ITransaction extends ICreateTransaction {
   created_at: string;
   updated_at: string;
   bill_id: string;
-  product: IProduct;
 }
 export interface ICreateTransaction {
   quantity: number;
   product_id: string;
+  product: IProduct;
 }
 
 

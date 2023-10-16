@@ -9,7 +9,7 @@ export default function RowItem({
   return (
     <tr className="bg-amber-500">
       <div>RowItem</div>
-      <td>{transaction.product_id}</td>
+      <td>{transaction.product.name}</td>
       <td>{transaction.quantity}</td>
       {/* <td>{transaction.product.name}</td> */}
     </tr>

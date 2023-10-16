@@ -18,6 +18,7 @@ export default function Items({
           <ProductItem
             transaction={
               bill.transactions.find((t) => t.product_id == v.id) ?? {
+                product: v,
                 product_id: v.id,
                 quantity: 0,
               }
