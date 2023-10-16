@@ -15,9 +15,9 @@ import { useState } from "react";
 
 export interface BillOperation {
   bill: ICreateBill;
-  changeQty: (productId: string, qty: number) => any;
-  increaseQty: (productId: string) => any;
-  decreaseQty: (productId: string) => any;
+  changeQty: (product: IProduct, qty: number) => any;
+  increaseQty: (product: IProduct) => any;
+  decreaseQty: (product: IProduct) => any;
 }
 
 export default function Checkout({
@@ -34,32 +34,34 @@ export default function Checkout({
     cashReceived: undefined,
   });
 
-  function changeQty(productId: string, qty: number) {
+  /** @param product is used to change the qty of the correspond Transaction */
+  function changeQty(product: IProduct, qty: number) {
     setBill((b) => {
       const updatedBill = { ...b };
       const transaction = updatedBill.transactions.find(
-        (t) => t.product_id == productId,
+        (t) => t.product_id == product.id,
       );
       if (qty != 0) {
         if (transaction) transaction.quantity = qty;
         else
           updatedBill.transactions = [
             ...updatedBill.transactions,
-            { product_id: productId, quantity: qty },
+            { product,product_id: product.id, quantity: qty },
           ];
       } else if (transaction)
         updatedBill.transactions = updatedBill.transactions.filter(
-          (t) => t.product_id != productId,
+          (t) => t.product_id != product.id,
         );
       return updatedBill;
     });
   }
 
-  function decreaseQty(productId: string) {
+  /** @param product is used to change the qty of the correspond Transaction */
+  function decreaseQty(product: IProduct) {
     setBill((b) => {
       const updatedBill = { ...b };
       const transaction = updatedBill.transactions.find(
-        (t) => t.product_id == productId,
+        (t) => t.product_id == product.id,
       );
       if (transaction) transaction.quantity--;
       else
@@ -72,17 +74,18 @@ export default function Checkout({
     });
   }
 
-  function increaseQty(productId: string) {
+  /** @param product is used to change the qty of the correspond Transaction */
+  function increaseQty(product: IProduct) {
     setBill((b) => {
       const updatedBill = { ...b };
       const transaction = updatedBill.transactions.find(
-        (t) => t.product_id == productId,
+        (t) => t.product_id == product.id,
       );
       if (transaction) transaction.quantity++;
       else
         updatedBill.transactions = [
           ...updatedBill.transactions,
-          { product_id: productId, quantity: 1 },
+          { product, product_id: product.id, quantity: 1 },
         ];
       return updatedBill;
     });

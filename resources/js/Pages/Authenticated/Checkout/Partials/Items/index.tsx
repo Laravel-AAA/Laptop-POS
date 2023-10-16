@@ -23,9 +23,9 @@ export default function Items({
                 quantity: 0,
               }
             }
-            requestChanged={(qty) => changeQty(v.id, qty)}
-            requestDecrease={() => decreaseQty(v.id)}
-            requestIncrease={() => increaseQty(v.id)}
+            requestChanged={(qty) => changeQty(v, qty)}
+            requestDecrease={() => decreaseQty(v)}
+            requestIncrease={() => increaseQty(v)}
             key={i}
             product={v}
           />

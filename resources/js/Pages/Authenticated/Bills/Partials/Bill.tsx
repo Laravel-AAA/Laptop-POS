@@ -36,14 +36,12 @@ export default function Product({
       </td>
       <td className="p-3">
         <p className="text-sm font-normal text-blue-gray-800">
-          <Num amount={bill.cashReceived}/>
+          {bill.cashReceived ? <Num amount={bill.cashReceived} />:<span>N/A</span>}
         </p>
       </td>
       <td className="p-3">
         <p className="text-sm font-normal text-blue-gray-800">
-          <Num
-            amount={bill.transactions.reduce((v, t) => v + t.quantity, 0)}
-          />
+          <Num amount={bill.transactions.reduce((v, t) => v + t.quantity, 0)} />
         </p>
       </td>
       <td className="p-3">
