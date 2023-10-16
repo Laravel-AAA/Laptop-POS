@@ -24,7 +24,7 @@ export default function ProductItem({
         transaction={transaction}
       />
       <div>
-        {product.img ? (
+        {product.img && (
           <img
             src={
               product.img.startsWith("http")
@@ -33,12 +33,18 @@ export default function ProductItem({
             }
             alt={"Image of product: " + product.name}
           />
-        ) : (
-          <p>{product.name}</p>
         )}
       </div>
-      <div className="absolute bottom-0 flex w-full  flex-grow flex-col bg-black bg-opacity-50 px-2 pb-1">
-        <h3 className="flex-grow text-center text-lg font-semibold text-white">
+      <div
+        className={` bottom-0 flex w-full  flex-grow flex-col bg-black px-2 pb-1 ${
+          product.img ? "absolute bg-opacity-50" : "h-full bg-opacity-80"
+        }`}
+      >
+        <h3
+          className={`flex-grow text-center text-lg font-semibold text-white ${
+            product.img ? "" : "mt-10"
+          }`}
+        >
           {product.name}
         </h3>
 
@@ -48,9 +54,9 @@ export default function ProductItem({
           </p>
           <div className="flex flex-col justify-center">
             {product.stock == 0 ? (
-              <p className="text-red-500">Out of Stock</p>
+              <p className="text-danger-400">Out of Stock</p>
             ) : transaction.quantity > (product.stock || Infinity) ? (
-              <p className="text-red-500">Qty {product.stock ?? "N/A"}</p>
+              <p className="text-danger-400">Qty {product.stock ?? "N/A"}</p>
             ) : (
               <p className="text-gray-200">Qty {product.stock ?? "N/A"}</p>
             )}
