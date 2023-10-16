@@ -23,9 +23,11 @@ export interface BillOperation {
 export default function Checkout({
   auth,
   products: paginateProducts,
+  business,
 }: PageProps<{
   products: ILaravelPaginate<IProduct>;
   filter: IFilterBill;
+  business:{taxPercent:number}//todo business model with taxPercent field
 }>) {
   const products: IProduct[] = paginateProducts.data;
   console.log({ products });
@@ -111,6 +113,7 @@ export default function Checkout({
           {/* left padding/margin pixels is for the size of the resize handler */}
           <RightSide
             billOperation={{ decreaseQty, increaseQty, bill, changeQty }}
+            taxPercent={business.taxPercent}
             className="min-w-full grow pl-0 md:pl-[10px]"
           />
         </ResizableBox>
@@ -118,6 +121,7 @@ export default function Checkout({
           billOperation={{ decreaseQty, increaseQty, bill, changeQty }}
           className="w-full grow md:w-0"
           products={products}
+          taxPercent={business.taxPercent}
         />
       </div>
     </AuthenticatedLayout>

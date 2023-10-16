@@ -14,10 +14,11 @@ class CheckoutController extends Controller
     {
         $products = $request->user()->products()->latest()
             // ->filter($request->only('search'))
-            ->paginate(15)->appends($request->all());
+            ->paginate(100)->appends($request->all());
 
         return Inertia::render('Authenticated/Checkout/index', [
             'products' => $products,
+            'business' => ['taxPercent' => 0.15] //$request->user()->business(),
             // 'filter' => $request->only('search'),
         ]);
     }

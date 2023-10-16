@@ -1,19 +1,21 @@
 import { IBill, ICreateBill, ICreateTransaction, IProduct } from "@/types";
 import ItemOptions from "./ItemOptions";
+import Num from "@/Utilities/Num";
 
 export default function ProductItem({
-  product,
   requestChanged,
   requestIncrease,
   requestDecrease,
   transaction,
+  taxPercent,
 }: {
-  product: IProduct;
   requestChanged: (qty: number) => any;
   requestIncrease: () => any;
   requestDecrease: () => any;
   transaction: ICreateTransaction;
+  taxPercent: number;
 }) {
+  const product = transaction.product;
   return (
     <div className="group relative m-1 my-4 flex w-3/4 cursor-pointer flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 ease-in-out hover:shadow-lg sm:my-1 sm:w-52">
       <ItemOptions
@@ -48,17 +50,28 @@ export default function ProductItem({
           {product.name}
         </h3>
 
-        <div className="flex justify-between font-thin">
+        <div className="flex justify-between font-light">
           <p className="text-lg text-gray-100">
-            ${/* &#xFDFC; */}&#8239;{product.price ?? "N/A"}
+            <span className="font-normal">
+              {product.price == null ? (
+                "N/A"
+              ) : (
+                <Num currency="$" amount={product.price * (1 + taxPercent)} />
+              )}
+            </span>
           </p>
           <div className="flex flex-col justify-center">
             {product.stock == 0 ? (
-              <p className="text-danger-400">Out of Stock</p>
+              <p className="font-normal text-danger-400">Out of Stock</p>
             ) : transaction.quantity > (product.stock || Infinity) ? (
-              <p className="text-danger-400">Qty {product.stock ?? "N/A"}</p>
+              <p className="font-normal text-danger-400">
+                Stock {product.stock ?? "N/A"}
+              </p>
             ) : (
-              <p className="text-gray-200">Qty {product.stock ?? "N/A"}</p>
+              <p className="text-gray-200">
+                Stock&nbsp;
+                <span className="font-normal">{product.stock ?? "N/A"}</span>
+              </p>
             )}
           </div>
         </div>

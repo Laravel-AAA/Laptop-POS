@@ -47,7 +47,7 @@ export default function Product({
               <p className="font-thin text-red-500">Out of Stock</p>
             ) : (
               <p className="font-thin text-gray-500">
-                Qty {product.stock ?? "N/A"}
+                Stock {product.stock ?? "N/A"}
               </p>
             )}
           </div>
