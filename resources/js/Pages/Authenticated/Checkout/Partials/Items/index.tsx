@@ -1,16 +1,16 @@
 import { ICreateBill, IProduct } from "@/types";
 import ProductItem from "./Partials/ProductItem";
-import { BillOperation } from "../..";
+import { BillOperations } from "../..";
 
 export default function Items({
   products,
   className = "",
-  billOperation: { changeQty, increaseQty, decreaseQty, bill },
+  billOperations: { changeQty, increaseQty, decreaseQty, bill },
   taxPercent,
 }: {
   products: IProduct[];
   className?: string;
-  billOperation: BillOperation;
+  billOperations: BillOperations;
   taxPercent: number;
 }) {
   return (

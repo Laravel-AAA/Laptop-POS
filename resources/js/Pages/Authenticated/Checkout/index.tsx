@@ -13,11 +13,12 @@ import RightSide from "./Partials/RightSide";
 import { ResizableBox } from "react-resizable";
 import { useState } from "react";
 
-export interface BillOperation {
+export interface BillOperations {
   bill: ICreateBill;
-  changeQty: (product: IProduct, qty: number) => any;
-  increaseQty: (product: IProduct) => any;
-  decreaseQty: (product: IProduct) => any;
+  changeQty: (product: IProduct, qty: number) => void;
+  increaseQty: (product: IProduct) => void;
+  decreaseQty: (product: IProduct) => void;
+  removeTransaction: (productId: string) => void;
 }
 
 export default function Checkout({
@@ -27,7 +28,7 @@ export default function Checkout({
 }: PageProps<{
   products: ILaravelPaginate<IProduct>;
   filter: IFilterBill;
-  business:{taxPercent:number}//todo business model with taxPercent field
+  business: { taxPercent: number }; //todo business model with taxPercent field
 }>) {
   const products: IProduct[] = paginateProducts.data;
   console.log({ products });
@@ -48,7 +49,7 @@ export default function Checkout({
         else
           updatedBill.transactions = [
             ...updatedBill.transactions,
-            { product,product_id: product.id, quantity: qty },
+            { product, product_id: product.id, quantity: qty },
           ];
       } else if (transaction)
         updatedBill.transactions = updatedBill.transactions.filter(
@@ -93,6 +94,24 @@ export default function Checkout({
     });
   }
 
+  function removeTransaction(productId: string) {
+    setBill((b) => {
+      const updatedBill = { ...b };
+      updatedBill.transactions = [
+        ...updatedBill.transactions.filter((t) => t.product_id != productId),
+      ];
+      return updatedBill;
+    });
+  }
+
+  const billOperations: BillOperations = {
+    decreaseQty,
+    increaseQty,
+    bill,
+    changeQty,
+    removeTransaction,
+  };
+
   return (
     <AuthenticatedLayout user={auth.user} header={<CheckoutHeader />}>
       <Head title="Checkout" />
@@ -112,13 +131,13 @@ export default function Checkout({
         >
           {/* left padding/margin pixels is for the size of the resize handler */}
           <RightSide
-            billOperation={{ decreaseQty, increaseQty, bill, changeQty }}
+            billOperations={billOperations}
             taxPercent={business.taxPercent}
             className="min-w-full grow pl-0 md:pl-[10px]"
           />
         </ResizableBox>
         <Items
-          billOperation={{ decreaseQty, increaseQty, bill, changeQty }}
+          billOperations={billOperations}
           className="w-full grow md:w-0"
           products={products}
           taxPercent={business.taxPercent}

@@ -1,32 +1,31 @@
 import React from "react";
 import RowItem from "./Partials/RowItem";
-import { BillOperation } from "@/Pages/Authenticated/Checkout";
+import { BillOperations } from "@/Pages/Authenticated/Checkout";
 import { FaCartShopping } from "react-icons/fa6";
 
 export default function CartInfo({
-  billOperation: { changeQty, increaseQty, decreaseQty, bill },
+  billOperations,
   taxPercent,
 }: {
-  billOperation: BillOperation;
-  taxPercent:number
+  billOperations: BillOperations;
+  taxPercent: number;
 }) {
   return (
     <section className="mt-1 rounded-lg bg-white shadow-sm">
-      <table className="w-full table-auto text-left">
+      <table className="table-auto text-left w-full">
         <thead>
           <tr className="bg-blue-gray-50 text-gray-800">
             <th></th>
-            <th>Items</th>
-            <th title="Quantity">Qty</th>
-            <th title="Tax included">Price</th>
+            <th className="px-1">Items</th>
+            <th className="px-1" title="Quantity">Qty</th>
+            <th className="px-1" title="Tax included">Price</th>
           </tr>
         </thead>
         <tbody>
-          {bill.transactions.map((t, i) => (
+          {billOperations.bill.transactions.map((t, i) => (
             <RowItem
               key={i}
-              increaseQty={increaseQty}
-              decreaseQty={decreaseQty}
+              billOperations={billOperations}
               transaction={t}
               taxPercent={taxPercent}
             />
@@ -45,8 +44,8 @@ export default function CartInfo({
           )}
         </tfoot> */}
       </table>
-      {bill.transactions.length == 0 && (
-        <div className="py-6 flex justify-center gap-4 opacity-50">
+      {billOperations.bill.transactions.length == 0 && (
+        <div className="flex justify-center gap-4 py-6 opacity-50">
           <FaCartShopping className="mt-1" />
           <p>Empty cart!</p>
         </div>

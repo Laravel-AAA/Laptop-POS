@@ -1,11 +1,11 @@
 import Num from "@/Utilities/Num";
-import { BillOperation } from "../../..";
+import { BillOperations } from "../../..";
 
 export default function TotalInfo({
-  billOperation: { changeQty, increaseQty, decreaseQty, bill },
+  billOperations: { bill },
   taxPercent,
 }: {
-  billOperation: BillOperation;
+  billOperations: BillOperations;
   taxPercent: number;
 }) {
   /**Total without Taxes */
@@ -17,7 +17,7 @@ export default function TotalInfo({
   }
 
   return (
-    <section className="rounded-lg shadow-sm border-y-2 border-gray-200 bg-gray-50 px-2 py-3 font-body">
+    <section className="rounded-lg border-y-2 border-gray-200 bg-gray-50 px-2 py-3 font-body shadow-sm">
       <div className="flex justify-between">
         <div>
           Sub total:{" "}

@@ -1,25 +1,24 @@
-import { BillOperation } from "@/Pages/Authenticated/Checkout";
+import { BillOperations } from "@/Pages/Authenticated/Checkout";
 import Num from "@/Utilities/Num";
 import { ICreateTransaction } from "@/types";
-import React from "react";
+import React, { ButtonHTMLAttributes, ReactNode } from "react";
+import { FaTrash } from "react-icons/fa";
 
 export default function RowItem({
   transaction,
-  increaseQty,
-  decreaseQty,
+  billOperations: { increaseQty, decreaseQty, removeTransaction },
   taxPercent,
 }: {
   transaction: ICreateTransaction;
-  increaseQty: BillOperation["increaseQty"];
-  decreaseQty: BillOperation["decreaseQty"];
+  billOperations: BillOperations;
   taxPercent: number;
 }) {
   return (
-    <tr className="h-10  border-y">
-      <td>
+    <tr className="group h-10 max-h-10 border-y">
+      <td className="flex h-10 w-14 items-center">
         {transaction.product.img && (
           <img
-            className="max-w-20 max-h-10"
+            className="max-w-14 max-h-10 group-hover:hidden"
             src={
               transaction.product.img.startsWith("http")
                 ? transaction.product.img
@@ -27,16 +26,27 @@ export default function RowItem({
             }
           />
         )}
+        <RemoveBtn
+          className="max-w-14 hidden h-10 max-h-14 text-right group-hover:block "
+          onClick={() => removeTransaction(transaction.product_id)}
+        />
       </td>
-      <td className="truncate" title={transaction.product.name}>
-        <div className="truncate max-w-full">
+      <td className="px-1" title={transaction.product.name}>
+        <span
+          style={{
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 1,
+          }}
+          className="overflow-hidden"
+        >
           {transaction.product.name}
-        </div>
+        </span>
       </td>
-      <td className="w-10">
+      <td className="px-1">
         <Num amount={transaction.quantity} />
       </td>
-      <td title="Tax included">
+      <td className="px-1" title="Tax included">
         {transaction.product.price == null ? (
           "N/A"
         ) : (
@@ -48,5 +58,29 @@ export default function RowItem({
         )}
       </td>
     </tr>
+  );
+}
+
+function RemoveBtn({
+  disabled,
+  className = "",
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <button
+      title="Remove item"
+      type="button"
+      className={`flex-inline w-full items-center bg-white
+      bg-opacity-80 text-danger-600 transition
+      duration-200 ease-in-out  hover:bg-opacity-90
+      hover:text-danger-700 focus:outline-none
+      active:scale-95 disabled:opacity-25 disabled:active:scale-100 ${className} ${
+        disabled && "opacity-25"
+      } `}
+      disabled={disabled}
+      {...props}
+    >
+      <FaTrash className="mx-auto shadow hover:shadow-md" />
+    </button>
   );
 }
