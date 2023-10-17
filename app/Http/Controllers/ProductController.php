@@ -22,6 +22,7 @@ class ProductController extends Controller
         return Inertia::render('Authenticated/Inventory/index', [
             'products' => $products,
             'filter' => $request->only('search'),
+            'business' => ['taxPercent' => 0.15] //$request->user()->business(),
         ]);
     }
 

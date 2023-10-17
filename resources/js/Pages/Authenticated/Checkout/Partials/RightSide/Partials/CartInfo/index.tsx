@@ -31,18 +31,6 @@ export default function CartInfo({
             />
           ))}
         </tbody>
-        {/* <tfoot>
-          {bill.transactions.length > 0 && (
-            <tr className="border-t-2 border-gray-500 bg-blue-gray-50 font-bold text-gray-800">
-              <td></td>
-              <td>Total</td>
-              <td>
-                {bill.transactions.reduce((sum, t) => sum + t.quantity, 0)}
-              </td>
-              <td></td>
-            </tr>
-          )}
-        </tfoot> */}
       </table>
       {billOperations.bill.transactions.length == 0 && (
         <div className="flex justify-center gap-4 py-6 opacity-50">

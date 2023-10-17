@@ -22,9 +22,11 @@ import InventoryHeader from "./Partials/InventoryHeader";
 export default function Inventory({
   auth,
   products: paginateProducts,
+  business: { taxPercent },
 }: PageProps<{
   products: ILaravelPaginate<IProduct>;
   filter: IFilterProduct;
+  business: { taxPercent: number }; //todo business model with taxPercent field
 }>) {
   const products: IProduct[] = paginateProducts.data;
   const [modalAction, setModalAction] = useState<IModalAction<IProduct>>({
@@ -44,12 +46,14 @@ export default function Inventory({
         user={auth.user}
         header={
           <InventoryHeader
-          totalResult={paginateProducts.total}
-            requestCreateProduct={()=>setModalAction({
-              state: "create",
-              open: true,
-              data: null,
-            })}
+            totalResult={paginateProducts.total}
+            requestCreateProduct={() =>
+              setModalAction({
+                state: "create",
+                open: true,
+                data: null,
+              })
+            }
           />
         }
       >
@@ -65,6 +69,7 @@ export default function Inventory({
             <Product
               key={p.id}
               product={p}
+              taxPercent={taxPercent}
               requestShow={() =>
                 setModalAction({ state: "show", open: true, data: p })
               }
