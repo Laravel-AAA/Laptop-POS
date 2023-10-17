@@ -51,7 +51,12 @@ export default function ProductItem({
         </h3>
 
         <div className="flex justify-between font-light">
-          <p className="text-lg text-gray-100">
+          <p
+            title={
+              product.price == null ? "" : "$" + product.price + " without tax"
+            }
+            className="text-lg text-gray-100"
+          >
             <span className="font-normal">
               {product.price == null ? (
                 "N/A"

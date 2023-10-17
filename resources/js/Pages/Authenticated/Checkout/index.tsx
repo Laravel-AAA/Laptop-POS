@@ -120,7 +120,7 @@ export default function Checkout({
         <ResizableBox
           width={Number(localStorage.getItem("resizable-width")) || 420}
           resizeHandles={["w"]}
-          minConstraints={[320, Infinity]}
+          minConstraints={[350, Infinity]}
           maxConstraints={[1080, Infinity]}
           height={Infinity}
           className="top-0 flex  h-screen min-w-full md:sticky md:min-w-0"

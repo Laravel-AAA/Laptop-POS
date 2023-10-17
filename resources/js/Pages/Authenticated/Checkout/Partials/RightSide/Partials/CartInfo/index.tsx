@@ -17,7 +17,7 @@ export default function CartInfo({
           <tr className="bg-blue-gray-50 text-gray-800">
             <th></th>
             <th className="px-1">Items</th>
-            <th className="px-1" title="Quantity">Qty</th>
+            <th className="px-1 text-center" title="Quantity">Qty</th>
             <th className="px-1" title="Tax included">Price</th>
           </tr>
         </thead>

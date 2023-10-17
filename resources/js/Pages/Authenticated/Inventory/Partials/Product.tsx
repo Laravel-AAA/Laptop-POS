@@ -60,8 +60,8 @@ export default function Product({
             {product.stock == 0 ? (
               <p className="font-thin text-red-500">Out of Stock</p>
             ) : (
-              <p className="font-thin text-secondary-600">
-                Stock {product.stock ?? "N/A"}
+              <p className="font-thin text-gray-500">
+                Stock <span className="text-secondary-600 font-normal">{product.stock ?? "N/A"}</span>
               </p>
             )}
           </div>
