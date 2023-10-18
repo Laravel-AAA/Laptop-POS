@@ -19,7 +19,7 @@
   background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png) center center no-repeat #5e5e5e25;
 }
 .react-resizable-handle:active {
-  background-color: #0d9488;
+  background-color: #9e9e9eb6;
 }
 .react-resizable-handle-w {
   cursor: e-resize;

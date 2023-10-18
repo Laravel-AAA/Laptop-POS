@@ -13,7 +13,7 @@ export default function RightSide({
   taxPercent:number;
 }) {
   return (
-    <div className={`bg-gray-200 ${className}`}>
+    <div className={`bg-gray-200 flex flex-col h-full ${className}`}>
       <TotalInfo taxPercent={taxPercent} billOperations={billOperations} />
       <CartInfo taxPercent={taxPercent} billOperations={billOperations} />
       <CheckoutBtn />

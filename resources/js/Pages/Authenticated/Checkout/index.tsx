@@ -113,7 +113,7 @@ export default function Checkout({
   };
 
   return (
-    <AuthenticatedLayout user={auth.user} header={<CheckoutHeader />}>
+    <AuthenticatedLayout user={auth.user} header={" "}>
       <Head title="Checkout" />
 
       <div className="w-full flex-row-reverse md:flex">
@@ -136,12 +136,15 @@ export default function Checkout({
             className="min-w-full grow pl-0 md:pl-[10px]"
           />
         </ResizableBox>
-        <Items
-          billOperations={billOperations}
-          className="w-full grow md:w-0"
-          products={products}
-          taxPercent={business.taxPercent}
-        />
+        <div className="flex flex-col">
+          {/* <CheckoutHeader /> */}
+          <Items
+            className="w-full grow md:w-0"
+            billOperations={billOperations}
+            products={products}
+            taxPercent={business.taxPercent}
+          />
+        </div>
       </div>
     </AuthenticatedLayout>
   );

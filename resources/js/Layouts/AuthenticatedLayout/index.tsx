@@ -19,7 +19,11 @@ export default function Authenticated({
   user,
   header,
   children,
-}: PropsWithChildren<{ user: IUser; header?: ReactElement }>) {
+}: PropsWithChildren<{
+  user: IUser;
+  //empty string is for NO header, because null/undefined means default header.
+  header?: ReactElement | " ";
+}>) {
   return (
     <AppLayout>
       <div className="min-h-screen">
