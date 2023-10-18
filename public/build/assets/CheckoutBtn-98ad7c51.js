@@ -1,0 +1,1 @@
+import{j as t}from"./app-a134fab9.js";import{S as e}from"./SecondaryButton-79aaf657.js";function r(){return t.jsx("div",{className:" mt-auto ",children:t.jsx(e,{style:{fontSize:"1.2rem"},className:"px-10  py-4 shadow",children:"Checkout"})})}export{r as default};

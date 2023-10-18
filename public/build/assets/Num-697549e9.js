@@ -1,1 +1,0 @@
-import{j as t}from"./app-f8210ef9.js";function i({amount:n,className:o="",fixed:r=2,currency:s}){return t.jsxs("span",{className:o,children:[s&&t.jsxs("span",{children:[s," "]}),Number(n.toFixed(r)).toLocaleString()]})}export{i as N};
