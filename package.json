@@ -5,7 +5,8 @@
         "dev": "vite",
         "start": "npm run dev",
         "serve": "npm run dev",
-        "build": "tsc && vite build"
+        "build": "tsc && vite build",
+        "format":"npx prettier --write resources/js"
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
@@ -21,7 +22,11 @@
         "@vitejs/plugin-react": "^4.1.0",
         "autoprefixer": "^10.4.12",
         "axios": "^1.5.1",
+        "eslint-config-prettier": "^9.0.0",
         "eslint-config-react-app": "^7.0.1",
+        "eslint-plugin-prettier": "^5.0.1",
+        "eslint-plugin-react": "^7.33.2",
+        "eslint-plugin-react-hooks": "^4.6.0",
         "laravel-vite-plugin": "^0.8.0",
         "postcss": "^8.4.31",
         "prettier": "^3.0.3",

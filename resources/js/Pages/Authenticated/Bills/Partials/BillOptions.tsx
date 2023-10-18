@@ -1,9 +1,8 @@
-
 import Dropdown from "@/Components/Dropdown";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaBars, FaEdit, FaTrashAlt } from "react-icons/fa";
-import { IBill,  } from "@/types";
+import { FaTrashAlt } from "react-icons/fa";
+import { IBill } from "@/types";
 import DeleteConfirmBillModal from "@/Components/Modals/CreateEdit/BillModal/DeleteConfirmBillModal";
 
 export default function BillOptions({
@@ -21,12 +20,12 @@ export default function BillOptions({
     <div className="text-center">
       <Dropdown>
         <Dropdown.Trigger>
-            <button
-              type="button"
-              className="text-gray-700 align-middle transition duration-200 ease-in-out hover:text-gray-900 focus:outline-none"
-            >
-              <BsThreeDotsVertical className="text-lg" />
-            </button>
+          <button
+            type="button"
+            className="align-middle text-gray-700 transition duration-200 ease-in-out hover:text-gray-900 focus:outline-none"
+          >
+            <BsThreeDotsVertical className="text-lg" />
+          </button>
         </Dropdown.Trigger>
 
         <Dropdown.Content>
@@ -60,7 +59,7 @@ export default function BillOptions({
       <DeleteConfirmBillModal
         bill={bill}
         isOpen={openConfirmDeleteModal}
-        requestClose={()=>setOpenConfirmDeleteModal(false)}
+        requestClose={() => setOpenConfirmDeleteModal(false)}
       />
     </div>
   );

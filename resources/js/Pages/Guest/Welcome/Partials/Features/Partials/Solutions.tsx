@@ -1,5 +1,5 @@
 import { Transition } from "@headlessui/react";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Solutions() {
   const businesses = [
@@ -40,23 +40,23 @@ export default function Solutions() {
           &thinsp;
           <span className="font-semibold text-primary-700">POS</span> is built
           for&nbsp;
-            {businesses.map((b, i) => (
-              <Transition
-                key={i}
-                appear={true}
-                show={b == business}
-                enter="transition ease-in-out duration-700 transform order-first"
-                enterFrom="opacity-0 translate-y-12"
-                enterTo="opacity-100 translate-y-0"
-                leave="transition ease-in-out duration-300 transform absolute"
-                leaveFrom="opacity-100 translate-y-0"
-                leaveTo="opacity-0 -translate-y-12"
-                unmount={false}
-                className="absolute inline text-left text-secondary-600 "
-              >
-                {b}
-              </Transition>
-            ))}
+          {businesses.map((b, i) => (
+            <Transition
+              appear={true}
+              key={i}
+              show={b === business}
+              enter="transition ease-in-out duration-700 transform order-first"
+              enterFrom="opacity-0 translate-y-12"
+              enterTo="opacity-100 translate-y-0"
+              leave="transition ease-in-out duration-300 transform absolute"
+              leaveFrom="opacity-100 translate-y-0"
+              leaveTo="opacity-0 -translate-y-12"
+              unmount={false}
+              className="absolute inline text-left text-secondary-600 "
+            >
+              {b}
+            </Transition>
+          ))}
         </div>
       </div>
     </div>

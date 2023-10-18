@@ -65,11 +65,7 @@ export default function DesktopMenu({ auth }: PageProps | { auth: null }) {
         ) : (
           <>
             <li>
-              <TextLink
-                href={route("login")}
-              >
-                Login
-              </TextLink>
+              <TextLink href={route("login")}>Login</TextLink>
             </li>
             <li>
               <PrimaryLink

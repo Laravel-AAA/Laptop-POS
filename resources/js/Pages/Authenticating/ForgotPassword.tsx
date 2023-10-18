@@ -6,7 +6,10 @@ import { Head, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import { PageProps } from "@/types";
 
-export default function ForgotPassword({ status,auth }: PageProps<{ status?: string }>) {
+export default function ForgotPassword({
+  status,
+  auth,
+}: PageProps<{ status?: string }>) {
   const { data, setData, post, processing, errors } = useForm({
     email: "",
   });
@@ -28,7 +31,7 @@ export default function ForgotPassword({ status,auth }: PageProps<{ status?: str
       </div>
 
       {status && (
-        <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
+        <div className="mb-4 text-sm font-medium text-green-600">{status}</div>
       )}
 
       <form onSubmit={submit}>
@@ -44,7 +47,7 @@ export default function ForgotPassword({ status,auth }: PageProps<{ status?: str
 
         <InputError message={errors.email} className="mt-2" />
 
-        <div className="flex items-center justify-end mt-4">
+        <div className="mt-4 flex items-center justify-end">
           <PrimaryButton type="submit" className="ml-4" disabled={processing}>
             Email Password Reset Link
           </PrimaryButton>

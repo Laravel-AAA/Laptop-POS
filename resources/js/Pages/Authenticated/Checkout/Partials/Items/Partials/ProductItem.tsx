@@ -1,4 +1,4 @@
-import { IBill, ICreateBill, ICreateTransaction, IProduct } from "@/types";
+import { ICreateTransaction } from "@/types";
 import ItemOptions from "./ItemOptions";
 import Num from "@/Utilities/Num";
 
@@ -53,12 +53,12 @@ export default function ProductItem({
         <div className="flex justify-between font-light">
           <p
             title={
-              product.price == null ? "" : "$" + product.price + " without tax"
+              product.price === null ? "" : "$" + product.price + " without tax"
             }
             className="text-lg text-gray-100"
           >
             <span className="font-normal">
-              {product.price == null ? (
+              {product.price === null ? (
                 "N/A"
               ) : (
                 <Num currency="$" amount={product.price * (1 + taxPercent)} />
@@ -66,7 +66,7 @@ export default function ProductItem({
             </span>
           </p>
           <div className="flex flex-col justify-center">
-            {product.stock == 0 ? (
+            {product.stock === 0 ? (
               <p className="font-normal text-danger-400">Out of Stock</p>
             ) : transaction.quantity > (product.stock || Infinity) ? (
               <p className="font-normal text-danger-400">

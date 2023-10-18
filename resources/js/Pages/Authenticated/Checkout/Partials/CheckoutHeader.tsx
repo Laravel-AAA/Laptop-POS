@@ -19,7 +19,8 @@ export default function CheckoutHeader() {
             isFocused={true}
             className="w-full p-1 pl-9 sm:w-72 "
             placeholder="Barcode..."
-            onChange={(v) =>{}
+            onChange={
+              (v) => {}
               // setFilter((p) => ({ ...p, search: v.target.value }))
             }
           />

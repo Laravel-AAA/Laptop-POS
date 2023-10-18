@@ -32,6 +32,7 @@ export default function Inventory({
   const [modalAction, setModalAction] = useState<IModalAction<IProduct>>({
     state: "create",
     open: false,
+    data: null,
   });
 
   console.log(products);
@@ -59,7 +60,7 @@ export default function Inventory({
       >
         <Head title="Inventory" />
         <div className="flex flex-wrap  justify-center py-6">
-          {products.length == 0 && (
+          {products.length === 0 && (
             <div className="my-20 flex gap-4 opacity-50">
               <BsSearch className="mt-1" />
               <p>No products found!</p>

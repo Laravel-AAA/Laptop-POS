@@ -1,4 +1,4 @@
-import { ICreateBill, IProduct } from "@/types";
+import { IProduct } from "@/types";
 import ProductItem from "./Partials/ProductItem";
 import { BillOperations } from "../..";
 
@@ -20,7 +20,7 @@ export default function Items({
           <ProductItem
             key={i}
             transaction={
-              bill.transactions.find((t) => t.product_id == v.id) ?? {
+              bill.transactions.find((t) => t.product_id === v.id) ?? {
                 product: v,
                 product_id: v.id,
                 quantity: 0,

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import PrimaryLink from "@/Components/Buttons/PrimaryLink";
-import { FaArrowRight, FaSignOutAlt } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import { PageProps } from "@/types";
 import { ROUTES } from "@/Layouts/AuthenticatedLayout";
 import TextLink from "@/Components/TextLink";

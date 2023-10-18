@@ -49,13 +49,13 @@ const Trigger = ({ children }: PropsWithChildren) => {
       </div>
 
       {open && (
-          <div
-            className="fixed inset-0 z-40 h-[100vh] w-full"
-            onClick={(e) => {
-              setOpen(false);
-              e.stopPropagation();
-            }}
-          ></div>
+        <div
+          className="fixed inset-0 z-40 h-[100vh] w-full"
+          onClick={(e) => {
+            setOpen(false);
+            e.stopPropagation();
+          }}
+        ></div>
       )}
     </>
   );

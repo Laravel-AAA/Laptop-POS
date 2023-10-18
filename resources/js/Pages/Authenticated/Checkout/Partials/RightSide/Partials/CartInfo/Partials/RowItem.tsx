@@ -1,7 +1,7 @@
 import { BillOperations } from "@/Pages/Authenticated/Checkout";
 import Num from "@/Utilities/Num";
-import { ICreateTransaction, ITransaction } from "@/types";
-import React, { ButtonHTMLAttributes, ReactNode } from "react";
+import { ICreateTransaction } from "@/types";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { BsDash, BsPlusLg } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
 
@@ -25,6 +25,7 @@ export default function RowItem({
                 ? transaction.product.img
                 : "products-images/" + transaction.product.img
             }
+            alt={"Image of Product " + transaction.product.name}
           />
         )}
         <RemoveBtn

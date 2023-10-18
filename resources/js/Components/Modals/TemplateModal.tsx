@@ -1,10 +1,9 @@
-import React, {
+import {
   ButtonHTMLAttributes,
   Fragment,
   PropsWithChildren,
   ReactNode,
   useRef,
-  useState,
 } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import DangerButton from "../Buttons/DangerButton";
@@ -25,7 +24,7 @@ export default function TemplateModal({
   icon,
 }: PropsWithChildren<{
   open: boolean;
-  closeModal:(clickedButtonText?:string)=>any;
+  closeModal: (clickedButtonText?: string) => any;
   buttons?: IModalButtons;
   title: string;
   icon?: ReactNode;
@@ -37,7 +36,7 @@ export default function TemplateModal({
         as="div"
         className="relative z-10"
         initialFocus={cancelButtonRef}
-        onClose={()=>closeModal()}
+        onClose={() => closeModal()}
       >
         <Transition.Child
           as={Fragment}
@@ -48,11 +47,14 @@ export default function TemplateModal({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div id="templateModal" className="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity" />
+          <div
+            id="templateModal"
+            className="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity"
+          />
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div  className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"

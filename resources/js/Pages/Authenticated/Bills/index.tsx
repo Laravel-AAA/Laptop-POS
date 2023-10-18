@@ -1,14 +1,4 @@
 import { Card } from "@material-tailwind/react";
-
-const TABLE_HEAD = [
-  "#",
-  "Date",
-  "Total price",
-  "Received",
-  "Total Quantity",
-  "",
-];
-
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {
   IBill,
@@ -23,6 +13,15 @@ import { BsSearch } from "react-icons/bs";
 import Bill from "./Partials/Bill";
 import Pagination from "@/Components/Pagination";
 
+const TABLE_HEAD = [
+  "#",
+  "Date",
+  "Total price",
+  "Received",
+  "Total Quantity",
+  "",
+];
+
 export default function Bills({
   auth,
   bills: paginateBills,
@@ -34,6 +33,7 @@ export default function Bills({
   const [modalAction, setModalAction] = useState<IModalAction<IBill>>({
     state: "create",
     open: false,
+    data: null,
   });
   console.log({ bills });
 
@@ -49,9 +49,9 @@ export default function Bills({
                   key={head}
                   className={
                     "border-b border-blue-gray-100 bg-blue-gray-50 p-4 " +
-                    (index == 0
+                    (index === 0
                       ? "rounded-tl-md"
-                      : index + 1 == TABLE_HEAD.length
+                      : index + 1 === TABLE_HEAD.length
                       ? "rounded-tr-md"
                       : "")
                   }
@@ -69,7 +69,7 @@ export default function Bills({
             ))}
           </tbody>
         </table>
-        {bills.length == 0 && (
+        {bills.length === 0 && (
           <div className="my-24 flex justify-center gap-4 opacity-50">
             <BsSearch className="mt-1" />
             <p>No bills found!</p>

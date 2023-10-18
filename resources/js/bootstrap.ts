@@ -4,15 +4,17 @@
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-import axios from 'axios';
+import axios from "axios";
 window.axios = axios;
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 //prevent increasing/decreasing an input element of type number by mouse wheel
 document.addEventListener("wheel", function (event) {
-  if ((document.activeElement as HTMLInputElement)?.type &&
-    (document.activeElement as HTMLInputElement).type === "number") {
+  if (
+    (document.activeElement as HTMLInputElement)?.type &&
+    (document.activeElement as HTMLInputElement).type === "number"
+  ) {
     (document.activeElement as HTMLInputElement).blur();
   }
 });

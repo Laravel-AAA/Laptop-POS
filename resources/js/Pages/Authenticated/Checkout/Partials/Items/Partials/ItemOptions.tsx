@@ -1,7 +1,6 @@
-import { ButtonHTMLAttributes, ReactNode, useState } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { BsDashLg, BsPlusLg } from "react-icons/bs";
-import { IBill, ICreateBill, ICreateTransaction, IProduct } from "@/types";
-import InputError from "@/Components/Inputs/InputError";
+import { ICreateTransaction, IProduct } from "@/types";
 
 export default function ItemOptions({
   product,

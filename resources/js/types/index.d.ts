@@ -1,3 +1,9 @@
+// Laravel will give you `null` value for nullable fields in the database;
+// So, optional fields should never treated as `undefined`.
+// ❌ `name?:string`
+// ✅ `name:string|null`
+// This way we can easily use triple equal `===`/`!==` with null values
+// and be confident we don't treat falsy values (e.g., "false", 0, "",...etc) as `null`.
 export interface IUser {
   id: number;
   name: string;
@@ -5,7 +11,9 @@ export interface IUser {
   email_verified_at: string;
 }
 
-export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
+export type PageProps<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> = T & {
   auth: {
     user: IUser;
   };
@@ -20,13 +28,13 @@ export interface IProduct extends ICreateProduct {
 
 export interface ICreateProduct {
   name: string;
-  imageFile?: File;
-  img?: string;
+  imageFile: File | null;
+  img: string | null;
   /**barcode numbers */
-  barcode?: string;
-  price?: number;
-  stock?: number;
-  description?: string;
+  barcode: string | null;
+  price: number | null;
+  stock: number | null;
+  description: string | null;
 }
 
 export interface IBill extends ICreateBill {
@@ -36,8 +44,8 @@ export interface IBill extends ICreateBill {
 }
 
 export interface ICreateBill {
-  cashReceived?: number;
-  transactions: ( ICreateTransaction )[];
+  cashReceived: number | null;
+  transactions: ICreateTransaction[];
 }
 
 export interface ITransaction extends ICreateTransaction {
@@ -51,7 +59,6 @@ export interface ICreateTransaction {
   product_id: string;
   product: IProduct;
 }
-
 
 export interface ILaravelPaginate<T extends object> {
   current_page: number;
@@ -68,7 +75,7 @@ export interface ILaravelPaginate<T extends object> {
   next_page_url: string | null;
   path: string;
   per_page: number;
-  prev_page_url: string | null
+  prev_page_url: string | null;
   to: number;
   total: number;
 }
@@ -77,23 +84,22 @@ export interface ILaravelPaginate<T extends object> {
  */
 export type IModalAction<T extends object> = {
   open: boolean;
-} & ({
-  state: 'create';
-  data?: null;
-} | {
-  state: 'edit' | 'show';
-  data: T
-});
+} & (
+  | {
+      state: "create";
+      data: null;
+    }
+  | {
+      state: "edit" | "show";
+      data: T;
+    }
+);
 
 //shared filter between resources
 interface IFilter {
   search: string;
 }
 
-export interface IFilterProduct extends IFilter {
+export interface IFilterProduct extends IFilter {}
 
-}
-
-export interface IFilterBill extends IFilter {
-
-}
+export interface IFilterBill extends IFilter {}

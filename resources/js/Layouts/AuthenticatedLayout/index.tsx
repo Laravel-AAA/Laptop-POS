@@ -1,10 +1,5 @@
-import { useState, PropsWithChildren, ReactNode, ReactElement } from "react";
-import Logo from "@/Components/Logo/Logo";
-import Dropdown from "@/Components/Dropdown";
-import ResponsiveNavLink from "@/Layouts/AuthenticatedLayout/Partials/HeaderNav/Partials/ResponsiveNavLink";
-import { Link } from "@inertiajs/react";
+import { PropsWithChildren, ReactElement } from "react";
 import { IUser } from "@/types";
-import NavLink from "./Partials/HeaderNav/Partials/NavLink";
 import AppLayout from "../AppLayout";
 import HeaderNav from "./Partials/HeaderNav";
 import HeaderAction from "./Partials/HeaderAction";

@@ -43,7 +43,7 @@ export default function FormImage({
         name="img"
         className="mt-1 block w-full"
         hidden={img}
-        disabled={state == "show"}
+        disabled={state === "show"}
         onChange={(e) => {
           form.setData("imageFile", e.target.files?.[0]);
         }}
@@ -72,15 +72,15 @@ export default function FormImage({
   );
 
   function render() {
-    if (state == "create") return inputImage;
-    if (state == "show") {
-      if (img == null) return defaultImg;
+    if (state === "create") return inputImage;
+    if (state === "show") {
+      if (img === null) return defaultImg;
       else return imageElement;
     }
     //if edit
-    if (img == null) return inputImage;
+    if (img === null) return inputImage;
 
-    if (editImageState == "default")
+    if (editImageState === "default")
       return (
         <>
           {imageElement}
@@ -111,11 +111,11 @@ export default function FormImage({
       <InputLabel
         htmlFor="img"
         value={
-          ((img == null && state == "edit") ||
-          editImageState == "removed" ||
-          state == "create"
+          ((img === null && state === "edit") ||
+          editImageState === "removed" ||
+          state === "create"
             ? "Choose "
-            : editImageState == "change"
+            : editImageState === "change"
             ? "Change "
             : "") + "Image"
         }

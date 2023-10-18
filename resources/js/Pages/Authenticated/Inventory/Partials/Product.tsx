@@ -45,8 +45,13 @@ export default function Product({
         </h3>
 
         <div className="mt-2 flex justify-between">
-          <p title={product.price ==null?'':'$'+product.price+' without tax'} className="text-lg font-thin text-primary-700">
-            {product.price == null ? (
+          <p
+            title={
+              product.price === null ? "" : "$" + product.price + " without tax"
+            }
+            className="text-lg font-thin text-primary-700"
+          >
+            {product.price === null ? (
               "N/A"
             ) : (
               <Num
@@ -57,11 +62,14 @@ export default function Product({
             )}
           </p>
           <div className="flex flex-col justify-center">
-            {product.stock == 0 ? (
+            {product.stock === 0 ? (
               <p className="font-thin text-red-500">Out of Stock</p>
             ) : (
               <p className="font-thin text-gray-500">
-                Stock <span className="text-secondary-600 font-normal">{product.stock ?? "N/A"}</span>
+                Stock{" "}
+                <span className="font-normal text-secondary-600">
+                  {product.stock ?? "N/A"}
+                </span>
               </p>
             )}
           </div>

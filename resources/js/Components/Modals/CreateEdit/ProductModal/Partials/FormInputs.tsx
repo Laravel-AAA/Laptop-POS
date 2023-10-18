@@ -23,7 +23,7 @@ export default function FormInputs({
           className="mt-1 block w-full"
           autoComplete="name"
           isFocused={true}
-          disabled={modalAction.state == "show"}
+          disabled={modalAction.state === "show"}
           onChange={(e) => form.setData("name", e.target.value)}
           required
         />
@@ -40,7 +40,7 @@ export default function FormInputs({
           name="price"
           value={form.data.price}
           className="mt-1 block w-full"
-          disabled={modalAction.state == "show"}
+          disabled={modalAction.state === "show"}
           onChange={(e) => form.setData("price", Number(e.target.value))}
         />
 
@@ -56,7 +56,7 @@ export default function FormInputs({
           name="stock"
           value={form.data.stock}
           className="mt-1 block w-full"
-          disabled={modalAction.state == "show"}
+          disabled={modalAction.state === "show"}
           onChange={(e) => form.setData("stock", Number(e.target.value))}
         />
 
@@ -71,8 +71,8 @@ export default function FormInputs({
           inputMode="numeric"
           name="barcode"
           value={form.data.barcode}
-          className="mt-1 block w-full remove-arrow"
-          disabled={modalAction.state == "show"}
+          className="remove-arrow mt-1 block w-full"
+          disabled={modalAction.state === "show"}
           onChange={(e) => form.setData("barcode", e.target.value)}
         />
 

@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AlertModal from "../../AlertModal";
-import { IBill, IProduct } from "@/types";
+import { IBill } from "@/types";
 import { Inertia } from "@inertiajs/inertia";
 import ID from "@/Utilities/ID";
 
 export default function DeleteConfirmBillModal({
   bill,
   isOpen,
-  requestClose
+  requestClose,
 }: {
   bill: IBill;
   isOpen: boolean;
-  requestClose:(clickedButtonText?:string)=>any;
+  requestClose: (clickedButtonText?: string) => any;
 }) {
-  const [deleteProgress,setDeleteProgress] = useState<boolean>(false);
+  const [deleteProgress, setDeleteProgress] = useState<boolean>(false);
   return (
     <AlertModal
       icon="danger"
       title="Are you sure?"
       paragraph={
         <span>
-          You are about to delete the bill <ID id={bill.id}/>
+          You are about to delete the bill <ID id={bill.id} />
         </span>
       }
       buttons={{
@@ -37,7 +37,7 @@ export default function DeleteConfirmBillModal({
         secondary: { text: "Cancel" },
       }}
       isOpen={isOpen}
-      requestClose={(clickedButtonText)=>requestClose(clickedButtonText)}
+      requestClose={(clickedButtonText) => requestClose(clickedButtonText)}
     />
   );
 }

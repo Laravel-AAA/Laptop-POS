@@ -10,7 +10,7 @@ import { PageProps } from "@/types";
 export default function ResetPassword({
   token,
   email,
-  auth
+  auth,
 }: PageProps<{
   token: string;
   email: string;
@@ -90,7 +90,7 @@ export default function ResetPassword({
           <InputError message={errors.password_confirmation} className="mt-2" />
         </div>
 
-        <div className="flex items-center justify-end mt-4">
+        <div className="mt-4 flex items-center justify-end">
           <PrimaryButton type="submit" className="ml-4" disabled={processing}>
             Reset Password
           </PrimaryButton>

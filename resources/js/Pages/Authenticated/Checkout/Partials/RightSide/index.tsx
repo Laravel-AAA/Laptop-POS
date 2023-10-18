@@ -10,10 +10,10 @@ export default function RightSide({
 }: {
   className?: string;
   billOperations: BillOperations;
-  taxPercent:number;
+  taxPercent: number;
 }) {
   return (
-    <div className={`bg-gray-200 flex flex-col h-full ${className}`}>
+    <div className={`flex h-full flex-col bg-gray-200 ${className}`}>
       <TotalInfo taxPercent={taxPercent} billOperations={billOperations} />
       <CartInfo taxPercent={taxPercent} billOperations={billOperations} />
       <CheckoutBtn />

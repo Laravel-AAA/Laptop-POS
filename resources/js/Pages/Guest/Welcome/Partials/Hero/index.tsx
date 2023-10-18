@@ -1,5 +1,3 @@
-import SecondaryButton from "@/Components/Buttons/SecondaryButton";
-import TextLink from "@/Components/TextLink";
 import Circles from "./Partials/Circles";
 import MainTitle from "./Partials/MainTitle";
 import ParagraphAndControllers from "./Partials/ParagraphAndControllers";

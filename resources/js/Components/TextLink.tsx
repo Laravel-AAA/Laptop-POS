@@ -6,10 +6,12 @@ export default function TextLink({
   className = "",
   children,
   ...props
-}: PropsWithChildren<{
-  href: string;
-  className?: string;
-} & InertiaLinkProps>) {
+}: PropsWithChildren<
+  {
+    href: string;
+    className?: string;
+  } & InertiaLinkProps
+>) {
   return (
     <Link
       href={href}

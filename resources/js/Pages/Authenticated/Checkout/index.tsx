@@ -7,7 +7,6 @@ import {
   PageProps,
 } from "@/types";
 import { Head } from "@inertiajs/react";
-import CheckoutHeader from "./Partials/CheckoutHeader";
 import Items from "./Partials/Items";
 import RightSide from "./Partials/RightSide";
 import { ResizableBox } from "react-resizable";
@@ -34,7 +33,7 @@ export default function Checkout({
   console.log({ products });
   const [bill, setBill] = useState<ICreateBill>({
     transactions: [],
-    cashReceived: undefined,
+    cashReceived: null,
   });
 
   /** @param product is used to change the qty of the correspond Transaction */
@@ -42,9 +41,9 @@ export default function Checkout({
     setBill((b) => {
       const updatedBill = { ...b };
       const transaction = updatedBill.transactions.find(
-        (t) => t.product_id == product.id,
+        (t) => t.product_id === product.id,
       );
-      if (qty != 0) {
+      if (qty !== 0) {
         if (transaction) transaction.quantity = qty;
         else
           updatedBill.transactions = [
@@ -53,7 +52,7 @@ export default function Checkout({
           ];
       } else if (transaction)
         updatedBill.transactions = updatedBill.transactions.filter(
-          (t) => t.product_id != product.id,
+          (t) => t.product_id !== product.id,
         );
       return updatedBill;
     });
@@ -64,14 +63,17 @@ export default function Checkout({
     setBill((b) => {
       const updatedBill = { ...b };
       const transaction = updatedBill.transactions.find(
-        (t) => t.product_id == product.id,
+        (t) => t.product_id === product.id,
       );
       if (transaction) transaction.quantity--;
       else
-        throw "Transaction not found in the bill but there is a decreaseQty request!";
-      if (transaction.quantity == 0)
+        throw new Error(
+          "Transaction not found in the bill but there is a decreaseQty request!",
+          { cause: transaction },
+        );
+      if (transaction.quantity === 0)
         updatedBill.transactions = updatedBill.transactions.filter(
-          (t) => t.product_id != transaction.product_id,
+          (t) => t.product_id !== transaction.product_id,
         );
       return updatedBill;
     });
@@ -82,7 +84,7 @@ export default function Checkout({
     setBill((b) => {
       const updatedBill = { ...b };
       const transaction = updatedBill.transactions.find(
-        (t) => t.product_id == product.id,
+        (t) => t.product_id === product.id,
       );
       if (transaction) transaction.quantity++;
       else
@@ -98,7 +100,7 @@ export default function Checkout({
     setBill((b) => {
       const updatedBill = { ...b };
       updatedBill.transactions = [
-        ...updatedBill.transactions.filter((t) => t.product_id != productId),
+        ...updatedBill.transactions.filter((t) => t.product_id !== productId),
       ];
       return updatedBill;
     });

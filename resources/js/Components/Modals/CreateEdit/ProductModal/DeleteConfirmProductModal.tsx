@@ -6,13 +6,13 @@ import { Inertia } from "@inertiajs/inertia";
 export default function DeleteConfirmProductModal({
   product,
   isOpen,
-  requestClose
+  requestClose,
 }: {
   product: IProduct;
   isOpen: boolean;
-  requestClose:(clickedButtonText?:string)=>any;
+  requestClose: (clickedButtonText?: string) => any;
 }) {
-  const [deleteProgress,setDeleteProgress] = useState<boolean>(false);
+  const [deleteProgress, setDeleteProgress] = useState<boolean>(false);
   return (
     <AlertModal
       icon="danger"
@@ -36,7 +36,7 @@ export default function DeleteConfirmProductModal({
         secondary: { text: "Cancel" },
       }}
       isOpen={isOpen}
-      requestClose={(clickedButtonText)=>requestClose(clickedButtonText)}
+      requestClose={(clickedButtonText) => requestClose(clickedButtonText)}
     />
   );
 }

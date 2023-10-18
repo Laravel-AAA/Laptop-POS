@@ -17,8 +17,8 @@ export default function ParagraphAndControllers() {
         data-aos-delay="300"
       >
         <SecondaryLink
-        href={route('register')}
-          className="normal-case shadow-lg px-7 py-4"
+          href={route("register")}
+          className="px-7 py-4 normal-case shadow-lg"
         >
           <span className="text-sm tracking-wide">Create FREE Account</span>
         </SecondaryLink>

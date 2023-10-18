@@ -36,7 +36,11 @@ export default function Product({
       </td>
       <td className="p-3">
         <p className="text-sm font-normal text-blue-gray-800">
-          {bill.cashReceived ? <Num amount={bill.cashReceived} />:<span>N/A</span>}
+          {bill.cashReceived ? (
+            <Num amount={bill.cashReceived} />
+          ) : (
+            <span>N/A</span>
+          )}
         </p>
       </td>
       <td className="p-3">

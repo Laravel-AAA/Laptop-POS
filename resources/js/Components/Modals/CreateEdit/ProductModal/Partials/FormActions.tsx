@@ -1,10 +1,9 @@
 import DangerButton from "@/Components/Buttons/DangerButton";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
-import { ICreateProduct, IModalAction, IProduct } from "@/types";
+import { IModalAction, IProduct } from "@/types";
 import React, { useState } from "react";
 import DeleteConfirmProductModal from "../DeleteConfirmProductModal";
-import { InertiaFormProps } from "@inertiajs/inertia-react";
 import TertiaryButton from "@/Components/Buttons/TertiaryButton";
 
 export default function FormActions({
@@ -71,13 +70,13 @@ export default function FormActions({
   );
 
   function getButtons() {
-    if (modalAction.state == "create")
+    if (modalAction.state === "create")
       return (
         <>
           {createButton} {cancelButton}
         </>
       );
-    if (modalAction.state == "edit")
+    if (modalAction.state === "edit")
       return (
         <>
           {saveButton} {cancelButton}
@@ -98,7 +97,7 @@ export default function FormActions({
         isOpen={openConfirmDelete}
         requestClose={(clickedButton) => {
           setOpenConfirmDelete(false);
-          if (clickedButton && clickedButton.toLowerCase().trim() == "delete")
+          if (clickedButton?.toLowerCase().trim() === "delete")
             setModalAction((p) => ({ ...p, open: false }));
         }}
         product={form.data}

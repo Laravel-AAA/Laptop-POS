@@ -19,11 +19,7 @@ export default function FullLogo({
   return (
     <Link href="/" className="flex shrink-0 items-center self-stretch">
       <Logo className={logoSize} />
-      <h1
-        className={
-          "px-1 font-extrabold text-primary-950 " + textSize
-        }
-      >
+      <h1 className={"px-1 font-extrabold text-primary-950 " + textSize}>
         Laptop&nbsp;
         <span className="-ml-1 font-black text-primary-600">POS</span>
       </h1>

@@ -15,9 +15,15 @@ export default function Form({
     modalAction.data
       ? modalAction.data.id.toString() + modalAction.data.img //if img changed the the form needs to update the FormImage
       : modalAction.state,
-    modalAction.state == "create"
+    modalAction.state === "create"
       ? {
           name: "", //name is required
+          barcode: null,
+          description: null,
+          imageFile: null,
+          img: null,
+          price: null,
+          stock: null,
         }
       : ({ ...modalAction.data, _method: "patch" } as ICreateProduct), //`method spoofing` is a workaround because image can only be submitted on `post` method so we send a hint to laravel that it should consider it `patch`
   );
@@ -26,8 +32,8 @@ export default function Form({
 
     form.post(
       route(
-        `product.${modalAction.state == "edit" ? "update" : "store"}`,
-        modalAction.state == "edit" ? modalAction.data.id : undefined,
+        `product.${modalAction.state === "edit" ? "update" : "store"}`,
+        modalAction.state === "edit" ? modalAction.data.id : undefined,
       ),
       {
         onSuccess: () => {
@@ -35,7 +41,7 @@ export default function Form({
           form.reset();
           setModalAction(() => ({
             state: "create",
-            data: undefined,
+            data: null,
             open: false,
           }));
         },

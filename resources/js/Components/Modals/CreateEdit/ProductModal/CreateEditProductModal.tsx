@@ -15,8 +15,8 @@ export default function CreateEditProductModal({
   console.log(modalAction.data);
 
   function getTitle(): string {
-    if (modalAction.state == "create") return "Add New Product";
-    if (modalAction.state == "edit") return "Edit Product";
+    if (modalAction.state === "create") return "Add New Product";
+    if (modalAction.state === "edit") return "Edit Product";
     return "View Product";
   }
   // document.getElementById("templateModal")?.scrollTo({ top: 0 });//not working

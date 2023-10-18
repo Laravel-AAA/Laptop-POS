@@ -43,7 +43,7 @@ export default function InventoryHeader({
   return (
     <div className="block justify-between py-4 sm:flex">
       <div className="flex items-center gap-3">
-        <h2 className="text-xl font-semibold mr-6 leading-tight text-gray-800">
+        <h2 className="mr-6 text-xl font-semibold leading-tight text-gray-800">
           Inventory
         </h2>
         <label className="relative block flex-grow">

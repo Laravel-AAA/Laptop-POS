@@ -12,13 +12,17 @@ export default function CartInfo({
 }) {
   return (
     <section className="mt-1 rounded-lg bg-white shadow-sm">
-      <table className="table-auto text-left w-full">
+      <table className="w-full table-auto text-left">
         <thead>
           <tr className="bg-blue-gray-50 text-gray-800">
             <th></th>
             <th className="px-1">Items</th>
-            <th className="px-1 text-center" title="Quantity">Qty</th>
-            <th className="px-1" title="Tax included">Price</th>
+            <th className="px-1 text-center" title="Quantity">
+              Qty
+            </th>
+            <th className="px-1" title="Tax included">
+              Price
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -32,7 +36,7 @@ export default function CartInfo({
           ))}
         </tbody>
       </table>
-      {billOperations.bill.transactions.length == 0 && (
+      {billOperations.bill.transactions.length === 0 && (
         <div className="flex justify-center gap-4 py-6 opacity-50">
           <FaCartShopping className="mt-1" />
           <p>Empty cart!</p>

@@ -44,7 +44,9 @@ export default function Features() {
               data-aos="fade-right"
             >
               <div className="mb-8 xl:pr-16">
-                <h3 className="text-2xl font-bold mb-2 xl:text-left text-center">Simple yet powerful suite of tools</h3>
+                <h3 className="mb-2 text-center text-2xl font-bold xl:text-left">
+                  Simple yet powerful suite of tools
+                </h3>
               </div>
               {/* Tabs buttons */}
               <div className="mb-8 xl:mb-0">
@@ -149,7 +151,7 @@ export default function Features() {
 
             {/* Tabs items */}
             <div className="mx-auto mb-16 justify-items-center align-bottom xl:order-1 xl:col-span-5 xl:mb-0">
-              <div className="self-end md:mb-52 align-bottom transition-all">
+              <div className="self-end align-bottom transition-all md:mb-52">
                 <div
                   className="relative flex flex-col text-center xl:mt-48 xl:text-right"
                   data-aos="zoom-y-out"

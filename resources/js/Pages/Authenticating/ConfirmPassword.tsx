@@ -7,7 +7,7 @@ import TextInput from "@/Components/Inputs/TextInput";
 import { Head, useForm } from "@inertiajs/react";
 import { PageProps } from "@/types";
 
-export default function ConfirmPassword({auth}:PageProps) {
+export default function ConfirmPassword({ auth }: PageProps) {
   const { data, setData, post, processing, errors, reset } = useForm({
     password: "",
   });
@@ -50,7 +50,7 @@ export default function ConfirmPassword({auth}:PageProps) {
           <InputError message={errors.password} className="mt-2" />
         </div>
 
-        <div className="flex items-center justify-end mt-4">
+        <div className="mt-4 flex items-center justify-end">
           <PrimaryButton type="submit" className="ml-4" disabled={processing}>
             Confirm
           </PrimaryButton>
