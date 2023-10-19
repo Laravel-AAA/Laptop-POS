@@ -17,7 +17,7 @@ export default function TotalInfo({
   }
 
   return (
-    <section className="rounded-lg border-y-2 border-gray-200 bg-gray-50 px-2 py-3 font-body shadow-sm">
+    <section className="rounded-lg text-gray-700 border-y-2 border-gray-200 bg-gray-50 px-2 py-3 font-body shadow-sm">
       <div className="flex justify-between">
         <div>
           Sub total:{" "}

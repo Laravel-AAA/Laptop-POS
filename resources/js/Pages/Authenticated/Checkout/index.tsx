@@ -11,6 +11,7 @@ import Items from "./Partials/Items";
 import RightSide from "./Partials/RightSide";
 import { ResizableBox } from "react-resizable";
 import { useState } from "react";
+import CheckoutHeader from "./Partials/CheckoutHeader";
 
 export interface BillOperations {
   bill: ICreateBill;
@@ -132,16 +133,17 @@ export default function Checkout({
           draggableOpts={{ axis: "x", grid: [1, 0] }}
         >
           {/* left padding/margin pixels is for the size of the resize handler */}
-          <RightSide
-            billOperations={billOperations}
-            taxPercent={business.taxPercent}
-            className="min-w-full grow pl-0 md:pl-[10px]"
-          />
+          <div className="grow md:ml-[10px]">
+            <RightSide
+              billOperations={billOperations}
+              taxPercent={business.taxPercent}
+              className="ml-0 min-w-full"
+            />
+          </div>
         </ResizableBox>
-        <div className="flex flex-col">
-          {/* <CheckoutHeader /> */}
+        <div className="w-full grow md:w-0">
+          <CheckoutHeader />
           <Items
-            className="w-full grow md:w-0"
             billOperations={billOperations}
             products={products}
             taxPercent={business.taxPercent}

@@ -2,6 +2,7 @@ import React from "react";
 import RowItem from "./Partials/RowItem";
 import { BillOperations } from "@/Pages/Authenticated/Checkout";
 import { FaCartShopping } from "react-icons/fa6";
+import EmptyCart from "./Partials/EmptyCart";
 
 export default function CartInfo({
   billOperations,
@@ -11,17 +12,20 @@ export default function CartInfo({
   taxPercent: number;
 }) {
   return (
-    <section className="mt-1 rounded-lg bg-white shadow-sm">
-      <table className="w-full table-auto text-left">
-        <thead>
+    // margin bottom is the checkout button height
+    <section className="relative mb-[50px] mt-1 h-full overflow-y-auto rounded-t-lg bg-white shadow-sm">
+      <table className="mb-3 w-full table-auto text-left">
+        <thead className="sticky">
           <tr className="bg-blue-gray-50 text-gray-800">
-            <th></th>
-            <th className="px-1">Items</th>
-            <th className="px-1 text-center" title="Quantity">
-              Qty
+            <th className="w-14"></th>
+            <th>
+              <span className="sticky top-0 mx-1">Items</span>
             </th>
-            <th className="px-1" title="Tax included">
-              Price
+            <th className="w-24 text-center" title="Quantity">
+              <span className="mx-1">Qty</span>
+            </th>
+            <th title="Tax included" className="w-[6ch]">
+              <span className="mx-1">Price</span>
             </th>
           </tr>
         </thead>
@@ -36,12 +40,7 @@ export default function CartInfo({
           ))}
         </tbody>
       </table>
-      {billOperations.bill.transactions.length === 0 && (
-        <div className="flex justify-center gap-4 py-6 opacity-50">
-          <FaCartShopping className="mt-1" />
-          <p>Empty cart!</p>
-        </div>
-      )}
+      <EmptyCart length={billOperations.bill.transactions.length} />
     </section>
   );
 }

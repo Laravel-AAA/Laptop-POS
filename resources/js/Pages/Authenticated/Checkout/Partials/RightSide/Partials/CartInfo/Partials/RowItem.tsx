@@ -33,19 +33,19 @@ export default function RowItem({
           onClick={() => removeTransaction(transaction.product_id)}
         />
       </td>
-      <td className="px-1" title={transaction.product.name}>
+      <td title={transaction.product.name}>
         <span
           style={{
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
             WebkitLineClamp: 1,
           }}
-          className="overflow-hidden"
+          className="overflow-hidden inline-block mx-1"
         >
           {transaction.product.name}
         </span>
       </td>
-      <td className="h-10 ">
+      <td className="h-10">
         <Quantity
           decreaseQty={decreaseQty}
           increaseQty={increaseQty}
@@ -53,7 +53,8 @@ export default function RowItem({
         />
       </td>
       <td title="Tax included">
-        <span className="px-1">
+        {/* `ch` is a unit to measure the character `0` width relative to font family and size (e.g., `6ch` means width of `000000` (six zeros) ) */}
+        <span className="mx-1 w-[6ch] inline-block">
           {transaction.product.price == null ? (
             "N/A"
           ) : (
@@ -79,7 +80,7 @@ function Quantity({
   transaction: ICreateTransaction;
 }) {
   return (
-    <div className="mx-auto flex h-10 w-24 justify-between">
+    <div className="mx-1 flex h-10 w-24 justify-between">
       <IncDecQtyBtn
         className="rounded-s-md"
         title="Decrease quantity"
@@ -140,10 +141,10 @@ function RemoveBtn({
     <button
       title="Remove item"
       type="button"
-      className={`flex-inline w-full items-center bg-white
-      bg-opacity-80 text-danger-600 transition
+      className={`flex-inline w-full items-center text-white
+      bg-opacity-80 bg-danger-600 transition rounded 
       duration-200 ease-in-out  hover:bg-opacity-90
-      hover:text-danger-700 focus:outline-none
+      hover:bg-danger-700 focus:outline-none
       active:scale-95 disabled:opacity-25 disabled:active:scale-100 ${className} ${
         disabled && "opacity-25"
       } `}
