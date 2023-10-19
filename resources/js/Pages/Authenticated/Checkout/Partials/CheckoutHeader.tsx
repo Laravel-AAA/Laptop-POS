@@ -3,7 +3,7 @@ import { FaBarcode } from "react-icons/fa";
 
 export default function CheckoutHeader() {
   return (
-    <header className="my-0 bg-white shadow">
+    <header className="my-0 sticky top-0 z-20 bg-white shadow">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="block justify-between py-3 sm:flex">
           <div className="flex items-center gap-3">
