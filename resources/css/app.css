@@ -12,8 +12,15 @@
   width: 10px;
   height: 100%;
   box-sizing: border-box;
-  background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png)
-    center center no-repeat #5e5e5e25;
+  /* background: url(/assets/grip-lines-vertical_10506574.svg)
+     center no-repeat #5e5e5e25; */
+  background-color: #5e5e5e25;
+  background-image: url(/assets/grip-lines-vertical_10506574.png) ;
+  background-position-x: center;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-size: 19px 50px;
+
 }
 @media (min-width: 720px) {
   .react-resizable-handle {
