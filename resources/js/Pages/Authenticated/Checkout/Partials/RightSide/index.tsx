@@ -25,14 +25,13 @@ export default function RightSide({
    */
   useEffect(() => {
     function handleSetScroll() {
-      console.log("scroll", window.scrollY);
-      console.log(scrolled);
       setScrolled(window.scrollY);
     }
     handleSetScroll();
     window.addEventListener("scroll", handleSetScroll);
     return () => window.removeEventListener("scroll", handleSetScroll);
   }, [scrolled]);
+
   return (
     <div
       style={{
@@ -42,7 +41,7 @@ export default function RightSide({
     >
       <TotalInfo taxPercent={taxPercent} billOperations={billOperations} />
       <CartInfo taxPercent={taxPercent} billOperations={billOperations} />
-      <CheckoutBtn />
+      <CheckoutBtn bill={billOperations.bill} />
     </div>
   );
 }

@@ -1,7 +1,5 @@
-import React from "react";
 import RowItem from "./Partials/RowItem";
 import { BillOperations } from "@/Pages/Authenticated/Checkout";
-import { FaCartShopping } from "react-icons/fa6";
 import EmptyCart from "./Partials/EmptyCart";
 
 export default function CartInfo({

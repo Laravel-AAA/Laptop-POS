@@ -3,6 +3,7 @@ import { useForm } from "@inertiajs/react";
 import React, { FormEvent } from "react";
 import FormInputs from "./FormInputs";
 import FormActions from "./FormActions";
+import { InertiaFormProps } from "@/types/global";
 
 export default function Form({
   modalAction,
@@ -11,7 +12,7 @@ export default function Form({
   modalAction: IModalAction<IProduct>;
   setModalAction: React.Dispatch<React.SetStateAction<IModalAction<IProduct>>>;
 }) {
-  const form = useForm<ICreateProduct>(
+  const form: InertiaFormProps<ICreateProduct> = useForm<ICreateProduct>(
     modalAction.data
       ? modalAction.data.id.toString() + modalAction.data.img //if img changed the the form needs to update the FormImage
       : modalAction.state,
@@ -27,6 +28,7 @@ export default function Form({
         }
       : ({ ...modalAction.data, _method: "patch" } as ICreateProduct), //`method spoofing` is a workaround because image can only be submitted on `post` method so we send a hint to laravel that it should consider it `patch`
   );
+
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
 

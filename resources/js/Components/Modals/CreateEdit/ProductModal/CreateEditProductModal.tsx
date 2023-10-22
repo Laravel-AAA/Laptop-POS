@@ -10,8 +10,6 @@ export default function CreateEditProductModal({
   modalAction: IModalAction<IProduct>;
   setModalAction: React.Dispatch<React.SetStateAction<IModalAction<IProduct>>>;
 }) {
-  // if (modalAction != "create" && !previewProduct)//typescript will prevent such case
-  //   throw `Error: AddEditProductModal expected to have previewProduct when modalAction=${modalAction}`;
   console.log(modalAction.data);
 
   function getTitle(): string {
@@ -19,7 +17,7 @@ export default function CreateEditProductModal({
     if (modalAction.state === "edit") return "Edit Product";
     return "View Product";
   }
-  // document.getElementById("templateModal")?.scrollTo({ top: 0 });//not working
+
   return (
     <TemplateModal
       title={getTitle()}
