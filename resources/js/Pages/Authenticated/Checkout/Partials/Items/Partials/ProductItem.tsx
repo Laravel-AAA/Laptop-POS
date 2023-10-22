@@ -39,7 +39,7 @@ export default function ProductItem({
       </div>
       <div
         className={` bottom-0 flex w-full  flex-grow flex-col bg-black px-2 pb-1 ${
-          product.img ? "absolute bg-opacity-50" : "h-full bg-opacity-80"
+          product.img ? "absolute bg-opacity-50" : "h-full pt-2 bg-opacity-80"
         }`}
       >
         <h3

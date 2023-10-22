@@ -52,11 +52,11 @@ export default function RowItem({
           transaction={transaction}
         />
       </td>
-      <td title="Tax included">
+      <td title={ transaction.product.price?"Tax included":'' }>
         {/* `ch` is a unit to measure the character `0` width relative to font family and size (e.g., `6ch` means width of `000000` (six zeros) ) */}
         <span className="mx-1 w-[6ch] inline-block">
           {transaction.product.price == null ? (
-            "N/A"
+            <span className="text-danger-600">N/A</span>
           ) : (
             <Num
               currency="$"
@@ -142,7 +142,7 @@ function RemoveBtn({
       title="Remove item"
       type="button"
       className={`flex-inline w-full items-center text-white
-      bg-opacity-80 bg-danger-600 transition rounded 
+      bg-opacity-80 bg-danger-600 transition rounded
       duration-200 ease-in-out  hover:bg-opacity-90
       hover:bg-danger-700 focus:outline-none
       active:scale-95 disabled:opacity-25 disabled:active:scale-100 ${className} ${

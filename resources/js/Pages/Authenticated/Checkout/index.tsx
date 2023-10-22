@@ -131,7 +131,7 @@ export default function Checkout({
           minConstraints={[350, Infinity]}
           maxConstraints={[1080, Infinity]}
           height={Infinity}
-          className="top-0 flex  h-screen min-w-full md:sticky md:min-w-0"
+          className="top-0 flex  h-screen max-w-full md:sticky md:w-0"
           onResizeStop={(e, { size }) =>
             localStorage.setItem("resizable-width", size.width + "")
           }

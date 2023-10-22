@@ -57,7 +57,7 @@ export default function InventoryHeader({
             type="search"
             inputMode="search"
             name="search"
-            autoComplete="off"
+            autoComplete="on"
             value={filter.search}
             isFocused={true}
             className="w-full p-1 pl-9 md:w-72 "
