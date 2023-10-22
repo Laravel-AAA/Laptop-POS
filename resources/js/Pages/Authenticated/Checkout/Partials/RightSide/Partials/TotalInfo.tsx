@@ -1,11 +1,11 @@
 import Num from "@/Utilities/Num";
-import { BillOperations } from "../../..";
+import { ICreateBill } from "@/types";
 
 export default function TotalInfo({
-  billOperations: { form:{data:bill} },
+  bill,
   taxPercent,
 }: {
-  billOperations: BillOperations;
+  bill: ICreateBill;
   taxPercent: number;
 }) {
   /**Total without Taxes */

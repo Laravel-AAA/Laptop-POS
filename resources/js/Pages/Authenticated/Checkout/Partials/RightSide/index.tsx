@@ -39,9 +39,9 @@ export default function RightSide({
       }}
       className={`relative flex flex-col bg-gray-200 mx-4 transition-all duration-300 ease-in-out md:px-0 ${className}`}
     >
-      <TotalInfo taxPercent={taxPercent} billOperations={billOperations} />
+      <TotalInfo taxPercent={taxPercent} bill={billOperations.form.data} />
       <CartInfo taxPercent={taxPercent} billOperations={billOperations} />
-      <CheckoutBtn form={billOperations.form} />
+      <CheckoutBtn form={billOperations.form} taxPercent={taxPercent} />
     </div>
   );
 }

@@ -34,11 +34,12 @@ export default function CheckoutHeader() {
 
               <TextInput
                 id="barcode"
-                type="text"
+                type="number"
                 name="barcode"
                 autoComplete="off"
+                inputMode="numeric"
                 isFocused={true}
-                className="p-1 md:w-44 w-full pl-9"
+                className="p-1 md:w-44 w-full pl-9 remove-arrow"
                 placeholder="Barcode..."
                 onChange={
                   (v) => {}

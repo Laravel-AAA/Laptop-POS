@@ -78,7 +78,7 @@ export default function MobileMenu({ auth }: PageProps | { auth: null }) {
             {auth?.user ? (
               <>
                 {ROUTES.map((r, i) => (
-                  <li>
+                  <li key={i}>
                     <TextLink
                       href={route(r.link)}
                       className="justify-center"

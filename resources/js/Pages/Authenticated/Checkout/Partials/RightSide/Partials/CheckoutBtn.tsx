@@ -1,5 +1,5 @@
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
-import CheckoutModal from "@/Components/Modals/CheckoutModal";
+import CheckoutModal from "@/Components/Modals/Checkout/CheckoutModal";
 import { ICreateBill } from "@/types";
 import { InertiaFormProps } from "@/types/global";
 import { useForm } from "@inertiajs/react";
@@ -7,8 +7,10 @@ import { useState } from "react";
 
 export default function CheckoutBtn({
   form,
+  taxPercent,
 }: {
   form: InertiaFormProps<ICreateBill>;
+  taxPercent:number;
 }) {
   const [isCheckoutModal, setCheckoutModal] = useState<boolean>(false);
 
@@ -36,6 +38,7 @@ export default function CheckoutBtn({
         isShow={isCheckoutModal}
         requestClose={() => setCheckoutModal(false)}
         form={form}
+        taxPercent={taxPercent}
       />
     </>
   );
