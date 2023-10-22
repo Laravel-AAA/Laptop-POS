@@ -42,6 +42,7 @@ export default function Inventory({
       <CreateEditProductModal
         modalAction={modalAction}
         setModalAction={setModalAction}
+        taxPercent={taxPercent}
       />
       <AuthenticatedLayout
         user={auth.user}
