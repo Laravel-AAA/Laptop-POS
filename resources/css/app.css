@@ -2,31 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-/*Checkout width resizable handler style*/
+/*Checkout rightSide resizable handler style*/
 .react-resizable {
   position: relative;
 }
-@media (min-width: 768px) {
-  .react-resizable-handle {
-    position: absolute;
-  }
-}
 .react-resizable-handle {
-  /* display: none; */
+  position: absolute;
+  display: none;
   width: 10px;
   height: 100%;
   box-sizing: border-box;
-  background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png) center center no-repeat #5e5e5e25;
+  /* background: url(/assets/grip-lines-vertical_10506574.svg)
+     center no-repeat #5e5e5e25; */
+  background-color: #5e5e5e25;
+  background-image: url(/assets/grip-lines-vertical_10506574.png) ;
+  background-position-x: center;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-size: 19px 50px;
+
+}
+@media (min-width: 720px) {
+  .react-resizable-handle {
+    display: block;
+  }
 }
 .react-resizable-handle:active {
   background-color: #9e9e9eb6;
 }
 .react-resizable-handle-w {
-  cursor: e-resize;
+  cursor: col-resize;
   left: 0;
   transition: background-color 100ms ease-in-out;
 }
-
 
 /* Remove arrow from Input element of type number by using remove-arrow class*/
 .remove-arrow::-webkit-inner-spin-button,

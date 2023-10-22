@@ -17,7 +17,7 @@ export default function ProductItem({
 }) {
   const product = transaction.product;
   return (
-    <div className="group relative m-1 my-4 flex w-3/4 cursor-pointer flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 ease-in-out hover:shadow-lg sm:my-1 sm:w-52">
+    <div className="group relative m-1 my-4 flex w-3/4 flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 ease-in-out hover:shadow-lg sm:my-1 sm:w-52">
       <ItemOptions
         product={product}
         requestChanged={requestChanged}
