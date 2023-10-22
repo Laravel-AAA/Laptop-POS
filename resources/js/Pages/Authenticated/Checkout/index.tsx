@@ -6,15 +6,16 @@ import {
   IProduct,
   PageProps,
 } from "@/types";
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import Items from "./Partials/Items";
 import RightSide from "./Partials/RightSide";
 import { ResizableBox } from "react-resizable";
 import { useState } from "react";
 import CheckoutHeader from "./Partials/CheckoutHeader";
+import { InertiaFormProps } from "@/types/global";
 
 export interface BillOperations {
-  bill: ICreateBill;
+  form: InertiaFormProps<ICreateBill>;
   changeQty: (product: IProduct, qty: number) => void;
   increaseQty: (product: IProduct) => void;
   decreaseQty: (product: IProduct) => void;
@@ -32,10 +33,14 @@ export default function Checkout({
 }>) {
   const products: IProduct[] = paginateProducts.data;
   console.log({ products });
-  const [bill, setBill] = useState<ICreateBill>({
+  const form = useForm<ICreateBill>({
     transactions: [],
     cashReceived: null,
   });
+
+  const bill = form.data;
+  const setBill = (data: (previousData: ICreateBill) => ICreateBill) =>
+    form.setData(data);
 
   /** @param product is used to change the qty of the correspond Transaction */
   function changeQty(product: IProduct, qty: number) {
@@ -110,7 +115,7 @@ export default function Checkout({
   const billOperations: BillOperations = {
     decreaseQty,
     increaseQty,
-    bill,
+    form,
     changeQty,
     removeTransaction,
   };

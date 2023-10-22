@@ -41,7 +41,7 @@ export default function RightSide({
     >
       <TotalInfo taxPercent={taxPercent} billOperations={billOperations} />
       <CartInfo taxPercent={taxPercent} billOperations={billOperations} />
-      <CheckoutBtn bill={billOperations.bill} />
+      <CheckoutBtn form={billOperations.form} />
     </div>
   );
 }

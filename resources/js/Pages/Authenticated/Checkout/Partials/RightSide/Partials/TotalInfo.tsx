@@ -2,7 +2,7 @@ import Num from "@/Utilities/Num";
 import { BillOperations } from "../../..";
 
 export default function TotalInfo({
-  billOperations: { bill },
+  billOperations: { form:{data:bill} },
   taxPercent,
 }: {
   billOperations: BillOperations;

@@ -5,7 +5,12 @@ import { BillOperations } from "../..";
 export default function Items({
   products,
   className = "",
-  billOperations: { changeQty, increaseQty, decreaseQty, bill },
+  billOperations: {
+    changeQty,
+    increaseQty,
+    decreaseQty,
+    form: { data: bill },
+  },
   taxPercent,
 }: {
   products: IProduct[];

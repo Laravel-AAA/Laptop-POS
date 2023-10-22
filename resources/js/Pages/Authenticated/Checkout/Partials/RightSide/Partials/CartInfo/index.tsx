@@ -28,7 +28,7 @@ export default function CartInfo({
           </tr>
         </thead>
         <tbody>
-          {billOperations.bill.transactions.map((t, i) => (
+          {billOperations.form.data.transactions.map((t, i) => (
             <RowItem
               key={i}
               billOperations={billOperations}
@@ -38,7 +38,7 @@ export default function CartInfo({
           ))}
         </tbody>
       </table>
-      <EmptyCart length={billOperations.bill.transactions.length} />
+      <EmptyCart length={billOperations.form.data.transactions.length} />
     </section>
   );
 }

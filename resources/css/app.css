@@ -14,8 +14,9 @@
   box-sizing: border-box;
   /* background: url(/assets/grip-lines-vertical_10506574.svg)
      center no-repeat #5e5e5e25; */
-  background-color: #5e5e5e25;
+  background-color: #5e5e5e35;
   background-image: url(/assets/grip-lines-vertical_10506574.png) ;
+  opacity: 0.8;
   background-position-x: center;
   background-position-y: center;
   background-repeat: no-repeat;

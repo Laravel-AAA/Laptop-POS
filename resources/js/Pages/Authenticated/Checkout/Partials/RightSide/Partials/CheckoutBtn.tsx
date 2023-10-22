@@ -1,11 +1,15 @@
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import CheckoutModal from "@/Components/Modals/CheckoutModal";
 import { ICreateBill } from "@/types";
+import { InertiaFormProps } from "@/types/global";
 import { useForm } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function CheckoutBtn({ bill }: { bill: ICreateBill }) {
-  const form = useForm<ICreateBill>(bill);
+export default function CheckoutBtn({
+  form,
+}: {
+  form: InertiaFormProps<ICreateBill>;
+}) {
   const [isCheckoutModal, setCheckoutModal] = useState<boolean>(false);
 
   return (
