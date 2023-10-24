@@ -1,0 +1,1 @@
+import{j as s}from"./app-dd313135.js";function x({amount:n,className:e="",fixed:t=2,currency:r,noAmount:i}){return s.jsx("span",{className:e,children:n==null?i:s.jsxs(s.Fragment,{children:[r&&s.jsxs("span",{children:[r," "]}),Number(n.toFixed(t)).toLocaleString()]})})}export{x as N};
