@@ -1,23 +1,24 @@
-import { IProduct } from "@/types";
+import { ILaravelPaginate, IProduct } from "@/types";
 import ProductItem from "./Partials/ProductItem";
 import { BillOperations } from "../..";
+import Pagination from "@/Components/Pagination";
+import { BsSearch } from "react-icons/bs";
 
 export default function Items({
-  products,
   className = "",
+  paginateProducts,
   billOperations: {
     changeQty,
     increaseQty,
     decreaseQty,
     form: { data: bill },
   },
-  taxPercent,
 }: {
-  products: IProduct[];
+  paginateProducts: ILaravelPaginate<IProduct>;
   className?: string;
   billOperations: BillOperations;
-  taxPercent: number;
 }) {
+  const products = paginateProducts.data;
   return (
     <section className={className}>
       <div className="flex flex-wrap justify-center md:justify-start">
@@ -34,10 +35,20 @@ export default function Items({
             requestChanged={(qty) => changeQty(v, qty)}
             requestDecrease={() => decreaseQty(v)}
             requestIncrease={() => increaseQty(v)}
-            taxPercent={taxPercent}
           />
         ))}
+        {products.length === 0 && (
+          <div className="my-20 mx-auto flex gap-4 opacity-50">
+            <BsSearch className="mt-1" />
+            <p>No products found!</p>
+          </div>
+        )}
       </div>
+      <Pagination
+        style={{ paddingBottom: "2rem" }}
+        className="mt-4"
+        paginateItems={paginateProducts}
+      />
     </section>
   );
 }

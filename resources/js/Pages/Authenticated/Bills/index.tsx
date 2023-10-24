@@ -16,11 +16,9 @@ import Pagination from "@/Components/Pagination";
 export default function Bills({
   auth,
   bills: paginateBills,
-  business: { taxPercent },
 }: PageProps<{
   bills: ILaravelPaginate<IBill>;
   filter: IFilterBill;
-  business: { taxPercent: number }; //todo business model with taxPercent field
 }>) {
   const bills: IBill[] = paginateBills.data;
   const [modalAction, setModalAction] = useState<IModalAction<IBill>>({
@@ -32,9 +30,13 @@ export default function Bills({
   return (
     <AuthenticatedLayout user={auth.user}>
       <Head title="Bills" />
-        <Card className="mx-auto pb-12 overflow-x-auto overflow-y-hidden block my-6 h-full w-11/12 rounded-md">
-
-          <table className="w-full table-auto text-left">
+      {/* Overflow classes will set the position to relative, and this cause a problem
+      when rendering the dropdown content, it will render inside the table so
+      last item will not be shown because dropdown content is display below the
+      item and that is outside the table */}
+      <div className="mx-auto my-6 w-full overflow-x-auto overflow-y-hidden pb-16 md:w-11/12 ">
+        <Card className="w-full min-w-fit rounded-md">
+          <table className="table-auto text-left">
             <thead>
               <tr>
                 <TH className="w-[11ch] rounded-tl-md">#</TH>
@@ -53,7 +55,6 @@ export default function Bills({
               {bills.map((bill) => (
                 <Bill
                   key={bill.id}
-                  taxPercent={taxPercent}
                   bill={bill}
                   requestEdit={() => {}}
                 />
@@ -61,13 +62,13 @@ export default function Bills({
             </tbody>
           </table>
           {bills.length === 0 && (
-            <div className="mt-10 flex justify-center gap-4 opacity-50">
+            <div className="my-12 flex justify-center gap-4 opacity-50">
               <BsSearch className="mt-1" />
               <p>No bills found!</p>
             </div>
           )}
-
         </Card>
+      </div>
       <Pagination paginateItems={paginateBills} />
     </AuthenticatedLayout>
   );

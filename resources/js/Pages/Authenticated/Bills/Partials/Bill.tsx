@@ -1,22 +1,23 @@
-import { IBill } from "@/types";
+import { IBill, PageProps } from "@/types";
 import BillOptions from "./BillOptions";
 import FromDate from "@/Utilities/FromDate";
 import Num from "@/Utilities/Num";
 import ID from "@/Utilities/ID";
 import { PropsWithChildren } from "react";
+import { usePage } from "@inertiajs/react";
 type PropsProduct = {
   bill: IBill;
   requestEdit: () => void;
-  taxPercent: number;
   // requestShow: () => void;
 };
 export default function Product({
   bill,
   requestEdit, // requestShow,
-  taxPercent,
 }: PropsProduct) {
+  const taxPercent = usePage<PageProps>().props.business.taxPercent;
+
   const subTotalPrice = bill.transactions.reduce(
-    (v, t) => v + (t.product.price ?? 0)*t.quantity,
+    (v, t) => v + (t.product.price ?? 0) * t.quantity,
     0,
   );
   const totalPrice = subTotalPrice * (1 + taxPercent);
@@ -24,40 +25,38 @@ export default function Product({
   return (
     <tr className="even:bg-blue-gray-50/50">
       <TD>
-          <ID id={bill.id} />
+        <ID id={bill.id} />
       </TD>
       <TD>
-          <FromDate date={bill.created_at} />
+        <FromDate date={bill.created_at} />
       </TD>
       <TD>
-          <Num
-            className="text-secondary-700"
-            currency="$"
-            amount={subTotalPrice}
-          />
+        <Num
+          className="text-secondary-700"
+          currency="$"
+          amount={subTotalPrice}
+        />
       </TD>
       <TD>
-          <Num className="text-primary-700" currency="$" amount={totalPrice} />
+        <Num className="text-primary-700" currency="$" amount={totalPrice} />
       </TD>
       <TD>
-          <Num
-            className={bill.cashReceived === null ? "text-primary-700" : ""}
-            currency="$"
-            amount={bill.cashReceived}
-            noAmount="Digital Payment"
-          />
+        <Num
+          className={bill.cashReceived === null ? "text-primary-700" : ""}
+          currency="$"
+          amount={bill.cashReceived}
+          noAmount="Digital Payment"
+        />
       </TD>
       <TD>
-          <Num
-            currency="$"
-            amount={
-              bill.cashReceived ? bill.cashReceived - subTotalPrice : null
-            }
-            noAmount=""
-          />
+        <Num
+          currency="$"
+          amount={bill.cashReceived ? bill.cashReceived - subTotalPrice : null}
+          noAmount=""
+        />
       </TD>
       <TD>
-          <Num amount={bill.transactions.reduce((v, t) => v + t.quantity, 0)} />
+        <Num amount={bill.transactions.reduce((v, t) => v + t.quantity, 0)} />
       </TD>
       <td>
         <BillOptions
@@ -72,7 +71,7 @@ export default function Product({
 
 function TD({
   children,
-  className = "",//You ain't gonna need it
+  className = "", //You ain't gonna need it
 }: PropsWithChildren<{ className?: string }>) {
   return (
     <td className="p-3">

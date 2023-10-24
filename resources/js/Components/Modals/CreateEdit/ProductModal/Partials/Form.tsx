@@ -8,11 +8,9 @@ import { InertiaFormProps } from "@/types/global";
 export default function Form({
   modalAction,
   setModalAction,
-  taxPercent,
 }: {
   modalAction: IModalAction<IProduct>;
   setModalAction: React.Dispatch<React.SetStateAction<IModalAction<IProduct>>>;
-  taxPercent: number;
 }) {
   const form: InertiaFormProps<ICreateProduct> = useForm<ICreateProduct>(
     modalAction.data
@@ -56,7 +54,6 @@ export default function Form({
   return (
     <form className="mt-3" onSubmit={handleSubmit}>
       <FormInputs
-        taxPercent={taxPercent}
         formProps={form}
         modalAction={modalAction}
       />

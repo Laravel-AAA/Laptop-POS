@@ -1,13 +1,10 @@
 import Num from "@/Utilities/Num";
-import { ICreateBill } from "@/types";
+import { ICreateBill, PageProps } from "@/types";
+import { usePage } from "@inertiajs/react";
 
-export default function TotalInfo({
-  bill,
-  taxPercent,
-}: {
-  bill: ICreateBill;
-  taxPercent: number;
-}) {
+export default function TotalInfo({ bill }: { bill: ICreateBill }) {
+  const taxPercent = usePage<PageProps>().props.business.taxPercent;
+
   /**Total without Taxes */
   function subTotal() {
     return bill.transactions.reduce(
@@ -17,7 +14,7 @@ export default function TotalInfo({
   }
 
   return (
-    <section className="rounded-lg text-gray-700 border-y-2 border-gray-200 bg-gray-50 px-2 py-3 font-body shadow-sm">
+    <section className="rounded-lg border-y-2 border-gray-200 bg-gray-50 px-2 py-3 font-body text-gray-700 shadow-sm">
       <div className="flex justify-between">
         <div>
           Sub total:{" "}

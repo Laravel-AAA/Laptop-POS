@@ -1,6 +1,7 @@
 import { BillOperations } from "@/Pages/Authenticated/Checkout";
 import Num from "@/Utilities/Num";
-import { ICreateTransaction } from "@/types";
+import { ICreateTransaction, PageProps } from "@/types";
+import { usePage } from "@inertiajs/react";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { BsDash, BsPlusLg } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
@@ -8,12 +9,12 @@ import { FaTrash } from "react-icons/fa";
 export default function RowItem({
   transaction,
   billOperations: { increaseQty, decreaseQty, removeTransaction },
-  taxPercent,
 }: {
   transaction: ICreateTransaction;
   billOperations: BillOperations;
-  taxPercent: number;
 }) {
+  const taxPercent = usePage<PageProps>().props.business.taxPercent;
+
   return (
     <tr className="group h-10 max-h-10 border-y">
       <td className="flex h-10 w-14 items-center justify-center">
@@ -40,7 +41,7 @@ export default function RowItem({
             WebkitBoxOrient: "vertical",
             WebkitLineClamp: 1,
           }}
-          className="overflow-hidden inline-block mx-1"
+          className="mx-1 inline-block overflow-hidden"
         >
           {transaction.product.name}
         </span>
@@ -52,9 +53,9 @@ export default function RowItem({
           transaction={transaction}
         />
       </td>
-      <td title={ transaction.product.price?"Tax included":'' }>
+      <td title={transaction.product.price ? "Tax included" : ""}>
         {/* `ch` is a unit to measure the character `0` width relative to font family and size (e.g., `6ch` means width of `000000` (six zeros) ) */}
-        <span className="mx-1 w-[6ch] inline-block">
+        <span className="mx-1 inline-block w-[6ch]">
           {transaction.product.price == null ? (
             <span className="text-danger-600">N/A</span>
           ) : (
@@ -95,7 +96,12 @@ function Quantity({
       </div>
       <IncDecQtyBtn
         className="rounded-e-md"
-        title="Increase quantity"
+        title={
+          transaction.product.stock != null &&
+          transaction.quantity >= transaction.product.stock
+            ? "Stock is empty!"
+            : "Increase quantity"
+        }
         onClick={() => increaseQty(transaction.product)}
         disabled={
           transaction.product.stock != null &&
@@ -141,10 +147,10 @@ function RemoveBtn({
     <button
       title="Remove item"
       type="button"
-      className={`flex-inline w-full items-center text-white
-      bg-opacity-80 bg-danger-600 transition rounded
-      duration-200 ease-in-out  hover:bg-opacity-90
-      hover:bg-danger-700 focus:outline-none
+      className={`flex-inline w-full items-center rounded
+      bg-danger-600 bg-opacity-80 text-white transition
+      duration-200 ease-in-out  hover:bg-danger-700
+      hover:bg-opacity-90 focus:outline-none
       active:scale-95 disabled:opacity-25 disabled:active:scale-100 ${className} ${
         disabled && "opacity-25"
       } `}

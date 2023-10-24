@@ -7,10 +7,8 @@ import { useState } from "react";
 
 export default function CheckoutBtn({
   form,
-  taxPercent,
 }: {
   form: InertiaFormProps<ICreateBill>;
-  taxPercent:number;
 }) {
   const [isCheckoutModal, setCheckoutModal] = useState<boolean>(false);
 
@@ -28,7 +26,12 @@ export default function CheckoutBtn({
           //  Some classes can not be overridden here so we use style attribute
           style={{ fontSize: "1.2rem", fontWeight: 800 }}
           className="bottom-0  h-[50px] w-full min-w-full rounded-none"
-          disabled={form.processing}
+          disabled={form.processing || form.data.transactions.length == 0}
+          title={
+            form.processing || form.data.transactions.length == 0
+              ? "You can't checkout with an empty cart!"
+              : ""
+          }
           onClick={() => setCheckoutModal(true)}
         >
           Checkout
@@ -38,7 +41,6 @@ export default function CheckoutBtn({
         isShow={isCheckoutModal}
         requestClose={() => setCheckoutModal(false)}
         form={form}
-        taxPercent={taxPercent}
       />
     </>
   );

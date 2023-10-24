@@ -1,6 +1,6 @@
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
-import { IFilterProduct } from "@/types";
+import { IFilterProduct, PageProps, PagePropsWithFilter } from "@/types";
 import { router, usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
@@ -14,9 +14,7 @@ export default function InventoryHeader({
   totalResult: number;
   requestCreateProduct: () => void;
 }) {
-  const { filter: filterProps } = usePage().props as unknown as {
-    filter: IFilterProduct;
-  };
+  const {filter:filterProps} = usePage<PagePropsWithFilter<IFilterProduct>>().props;
 
   const [filter, setFilter] = useState<IFilterProduct>({
     search: filterProps.search ?? "",
@@ -77,11 +75,15 @@ export default function InventoryHeader({
       </div>
       <div className="mt-3 flex justify-end md:mt-0 md:block">
         {!filter.search && prevFilter?.search === filter.search && (
-          <TotalResult className="md:mt-0 mt-1" text="Total" number={totalResult} />
+          <TotalResult
+            className="mt-1 md:mt-0"
+            text="Total"
+            number={totalResult}
+          />
         )}
         {filter.search && prevFilter?.search === filter.search && (
           <TotalResult
-            className="block md:hidden md:mt-0 mt-1"
+            className="mt-1 block md:mt-0 md:hidden"
             text="Result"
             number={totalResult}
           />

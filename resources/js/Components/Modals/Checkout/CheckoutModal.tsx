@@ -14,12 +14,10 @@ export default function CheckoutModal({
   form,
   isShow,
   requestClose,
-  taxPercent,
 }: {
   form: InertiaFormProps<ICreateBill>;
   isShow: boolean;
   requestClose: () => void;
-  taxPercent: number;
 }) {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -40,7 +38,7 @@ export default function CheckoutModal({
       closeModal={() => requestClose()}
     >
       <form className="mt-3" onSubmit={handleSubmit}>
-      <FormFields form={form} taxPercent={taxPercent}/>
+      <FormFields form={form}/>
 
     <div className="mt-4 flex flex-col gap-4 sm:flex-row-reverse">
           <PrimaryButton type="submit" disabled={form.processing}>

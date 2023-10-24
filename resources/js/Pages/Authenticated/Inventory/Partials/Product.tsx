@@ -1,19 +1,20 @@
-import { IProduct } from "@/types";
+import { IBusiness, IProduct, PageProps } from "@/types";
 import { BsImage } from "react-icons/bs";
 import ProductOptions from "./ProductOptions";
 import Num from "@/Utilities/Num";
+import { usePage } from "@inertiajs/react";
 type PropsProduct = {
   product: IProduct;
   requestEdit: () => void;
   requestShow: () => void;
-  taxPercent: number;
 };
 export default function Product({
   product,
   requestEdit,
   requestShow,
-  taxPercent,
 }: PropsProduct) {
+
+  const taxPercent = usePage<PageProps>().props.business.taxPercent;
   return (
     <div
       onClick={() => requestShow()}

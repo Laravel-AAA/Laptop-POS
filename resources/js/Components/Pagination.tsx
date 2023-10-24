@@ -2,16 +2,22 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { IconButton } from "@material-tailwind/react/components/IconButton";
 import { Link } from "@inertiajs/react";
 import { ILaravelPaginate } from "@/types";
+import { HTMLAttributes, StyleHTMLAttributes } from "react";
 
 export default function Pagination({
   paginateItems,
-}: {
+  className = "",
+  ...props
+}: HTMLAttributes<HTMLDivElement> & {
   paginateItems: ILaravelPaginate<any>;
 }) {
   return (
     <>
       {paginateItems.links.length > 3 && (
-        <div className="flex justify-center pb-10">
+        <div
+          {...props}
+          className={"flex justify-center pb-10 " + className}
+        >
           <Link
             href={paginateItems.prev_page_url ?? ""}
             as={paginateItems.prev_page_url ? "a" : "span"}

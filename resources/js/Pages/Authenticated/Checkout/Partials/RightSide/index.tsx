@@ -7,11 +7,9 @@ import { useEffect, useState } from "react";
 export default function RightSide({
   className = "",
   billOperations,
-  taxPercent,
 }: {
   className?: string;
   billOperations: BillOperations;
-  taxPercent: number;
 }) {
   const [scrolled, setScrolled] = useState<number>(0);
 
@@ -39,9 +37,9 @@ export default function RightSide({
       }}
       className={`relative flex flex-col bg-gray-200 mx-4 transition-all duration-300 ease-in-out md:px-0 ${className}`}
     >
-      <TotalInfo taxPercent={taxPercent} bill={billOperations.form.data} />
-      <CartInfo taxPercent={taxPercent} billOperations={billOperations} />
-      <CheckoutBtn form={billOperations.form} taxPercent={taxPercent} />
+      <TotalInfo bill={billOperations.form.data} />
+      <CartInfo billOperations={billOperations} />
+      <CheckoutBtn form={billOperations.form} />
     </div>
   );
 }

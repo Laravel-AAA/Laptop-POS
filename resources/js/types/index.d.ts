@@ -17,6 +17,7 @@ export type PageProps<
   auth: {
     user: IUser;
   };
+  business: IBusiness;
 };
 
 export interface IProduct extends ICreateProduct {
@@ -60,6 +61,11 @@ export interface ICreateTransaction {
   product: IProduct;
 }
 
+export interface IBusiness {
+  taxPercent: number;
+  //todo...
+}
+
 export interface ILaravelPaginate<T extends object> {
   current_page: number;
   data: T[];
@@ -85,21 +91,33 @@ export interface ILaravelPaginate<T extends object> {
 export type IModalAction<T extends object> = {
   open: boolean;
 } & (
-  | {
+    | {
       state: "create";
       data: null;
     }
-  | {
+    | {
       state: "edit" | "show";
       data: T;
     }
-);
+  );
 
 //shared filter between resources
-interface IFilter {
+type IFilter<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> = T & {
   search: string;
+};
+
+type PagePropsWithFilter<T extends IFilter >
+  = PageProps & {
+    filter: T
+  }
+
+
+export interface IFilterProduct extends IFilter { }
+
+export interface IFilterBill extends IFilter { }
+
+export interface IFilterCheckout extends IFilter {
+  barcode: string;
 }
-
-export interface IFilterProduct extends IFilter {}
-
-export interface IFilterBill extends IFilter {}

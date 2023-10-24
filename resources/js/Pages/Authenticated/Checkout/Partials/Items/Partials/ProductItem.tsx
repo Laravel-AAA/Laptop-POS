@@ -1,21 +1,22 @@
-import { ICreateTransaction } from "@/types";
+import { ICreateTransaction, PageProps } from "@/types";
 import ItemOptions from "./ItemOptions";
 import Num from "@/Utilities/Num";
+import { usePage } from "@inertiajs/react";
 
 export default function ProductItem({
   requestChanged,
   requestIncrease,
   requestDecrease,
   transaction,
-  taxPercent,
 }: {
   requestChanged: (qty: number) => any;
   requestIncrease: () => any;
   requestDecrease: () => any;
   transaction: ICreateTransaction;
-  taxPercent: number;
 }) {
+  const taxPercent = usePage<PageProps>().props.business.taxPercent;
   const product = transaction.product;
+
   return (
     <div className="group relative m-1 my-4 flex w-3/4 flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 ease-in-out hover:shadow-lg sm:my-1 sm:w-52">
       <ItemOptions
@@ -39,7 +40,7 @@ export default function ProductItem({
       </div>
       <div
         className={` bottom-0 flex w-full  flex-grow flex-col bg-black px-2 pb-1 ${
-          product.img ? "absolute bg-opacity-50" : "h-full pt-2 bg-opacity-80"
+          product.img ? "absolute bg-opacity-50" : "h-full bg-opacity-80 pt-2"
         }`}
       >
         <h3

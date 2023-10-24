@@ -56,12 +56,16 @@ class Product extends Model
         return $this->hasMany(Transaction::class);
     }
 
-    
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where('name', 'like', '%' . $search . '%')
                 ->orWhere('price', 'like', '%' . $search . '%');
+        });
+        $query->when($filters['barcode'] ?? null, function ($query, $barcode) {
+            $query->where('barcode', 'like', $barcode . '%')
+                ->orWhere('price', 'like', '%' . $barcode . '%');
         });
     }
 }

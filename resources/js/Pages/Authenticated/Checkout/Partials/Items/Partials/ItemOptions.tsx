@@ -16,7 +16,7 @@ export default function ItemOptions({
   transaction: ICreateTransaction;
 }) {
   return (
-    <div className="absolute left-0 top-2 z-10 hidden w-full group-hover:block">
+    <div style={{zIndex:1}} className="absolute left-0 top-2 hidden w-full group-hover:block">
       <div className="mx-2 flex justify-between">
         <ItemBtn
           onClick={() => requestDecrease()}

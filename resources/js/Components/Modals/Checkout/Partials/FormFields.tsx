@@ -5,19 +5,19 @@ import InputLabel from "@/Components/Inputs/InputLabel";
 import TextInput from "@/Components/Inputs/TextInput";
 import TotalInfo from "@/Pages/Authenticated/Checkout/Partials/RightSide/Partials/TotalInfo";
 import Num from "@/Utilities/Num";
-import { ICreateBill } from "@/types";
+import { ICreateBill, PageProps } from "@/types";
 import { InertiaFormProps } from "@/types/global";
-import { useEffect, useRef, useState } from "react";
+import { usePage } from "@inertiajs/react";
+import { useEffect, useState } from "react";
 
 export default function FormFields({
   form,
-  taxPercent,
 }: {
   form: InertiaFormProps<ICreateBill>;
-  taxPercent: number;
 }) {
   const [isDigitalPayment, setDigitalPayment] = useState<boolean>(false);
   const [remaining, setRemaining] = useState<number>(0);
+  const taxPercent = usePage<PageProps>().props.business.taxPercent;
 
   function subTotal() {
     return form.data.transactions.reduce(
@@ -36,7 +36,7 @@ export default function FormFields({
 
   return (
     <>
-      <TotalInfo bill={form.data} taxPercent={taxPercent} />
+      <TotalInfo bill={form.data} />
       <div className="mt-3 w-full">
         <InputLabel htmlFor="cashReceived" value="Cash Received" />
 

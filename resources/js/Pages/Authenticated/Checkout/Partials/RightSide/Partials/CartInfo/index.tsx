@@ -4,10 +4,8 @@ import EmptyCart from "./Partials/EmptyCart";
 
 export default function CartInfo({
   billOperations,
-  taxPercent,
 }: {
   billOperations: BillOperations;
-  taxPercent: number;
 }) {
   return (
     // margin bottom is the checkout button height
@@ -33,7 +31,6 @@ export default function CartInfo({
               key={i}
               billOperations={billOperations}
               transaction={t}
-              taxPercent={taxPercent}
             />
           ))}
         </tbody>

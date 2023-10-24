@@ -6,11 +6,9 @@ import TemplateModal from "../../TemplateModal";
 export default function CreateEditProductModal({
   modalAction, //modal action used to determine the behavior of the modal
   setModalAction,
-  taxPercent,
 }: {
   modalAction: IModalAction<IProduct>;
   setModalAction: React.Dispatch<React.SetStateAction<IModalAction<IProduct>>>;
-  taxPercent:number;
 }) {
   console.log(modalAction.data);
 
@@ -26,7 +24,7 @@ export default function CreateEditProductModal({
       open={modalAction.open}
       closeModal={() => setModalAction((prev) => ({ ...prev, open: false }))}
     >
-      <Form taxPercent={taxPercent} modalAction={modalAction} setModalAction={setModalAction} />
+      <Form modalAction={modalAction} setModalAction={setModalAction} />
     </TemplateModal>
   );
 }

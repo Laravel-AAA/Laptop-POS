@@ -12,6 +12,7 @@ import RightSide from "./Partials/RightSide";
 import { ResizableBox } from "react-resizable";
 import CheckoutHeader from "./Partials/CheckoutHeader";
 import { InertiaFormProps } from "@/types/global";
+import Pagination from "@/Components/Pagination";
 
 export interface BillOperations {
   form: InertiaFormProps<ICreateBill>;
@@ -24,11 +25,9 @@ export interface BillOperations {
 export default function Checkout({
   auth,
   products: paginateProducts,
-  business,
 }: PageProps<{
   products: ILaravelPaginate<IProduct>;
   filter: IFilterBill;
-  business: { taxPercent: number }; //todo business model with taxPercent field
 }>) {
   const products: IProduct[] = paginateProducts.data;
   console.log({ products });
@@ -37,7 +36,6 @@ export default function Checkout({
     cashReceived: null,
   });
 
-  const bill = form.data;
   const setBill = (data: (previousData: ICreateBill) => ICreateBill) =>
     form.setData(data);
 
@@ -140,18 +138,13 @@ export default function Checkout({
           <div className="grow md:ml-[10px]">
             <RightSide
               billOperations={billOperations}
-              taxPercent={business.taxPercent}
               className="ml-0 min-w-full"
             />
           </div>
         </ResizableBox>
         <div className="w-full grow md:w-0">
-          <CheckoutHeader />
-          <Items
-            billOperations={billOperations}
-            products={products}
-            taxPercent={business.taxPercent}
-          />
+          <CheckoutHeader products={products} billOperations={billOperations} />
+          <Items paginateProducts={paginateProducts} billOperations={billOperations} />
         </div>
       </div>
     </AuthenticatedLayout>
