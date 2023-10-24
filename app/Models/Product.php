@@ -45,6 +45,7 @@ class Product extends Model
         'price' => 'float',
     ];
 
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -55,6 +56,7 @@ class Product extends Model
         return $this->hasMany(Transaction::class);
     }
 
+    
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {

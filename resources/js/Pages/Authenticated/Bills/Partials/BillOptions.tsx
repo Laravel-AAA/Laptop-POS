@@ -17,12 +17,12 @@ export default function BillOptions({
   const [openConfirmDeleteModal, setOpenConfirmDeleteModal] =
     useState<boolean>(false);
   return (
-    <div className="text-center">
+    <div className="text-center  ">
       <Dropdown>
         <Dropdown.Trigger>
           <button
             type="button"
-            className="align-middle text-gray-700 transition duration-200 ease-in-out hover:text-gray-900 focus:outline-none"
+            className="rounded-[50%] p-2  align-middle text-gray-700 transition duration-200 ease-in-out hover:bg-black hover:bg-opacity-10 hover:text-gray-900 focus:outline-none"
           >
             <BsThreeDotsVertical className="text-lg" />
           </button>

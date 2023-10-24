@@ -3,6 +3,7 @@ import AlertModal from "../../AlertModal";
 import { IBill } from "@/types";
 import { Inertia } from "@inertiajs/inertia";
 import ID from "@/Utilities/ID";
+import { router } from "@inertiajs/react";
 
 export default function DeleteConfirmBillModal({
   bill,
@@ -29,7 +30,10 @@ export default function DeleteConfirmBillModal({
           props: {
             onClick: () => {
               setDeleteProgress(true);
-              Inertia.delete(route("bill.destroy", bill.id));
+              router.delete(route("bill.destroy", bill.id), {
+                preserveScroll: true,
+                preserveState: true,
+              });
             },
             disabled: deleteProgress,
           },

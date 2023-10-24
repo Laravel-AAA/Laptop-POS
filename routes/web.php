@@ -4,7 +4,6 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,7 +24,9 @@ Route::get('/', function () {
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
+        //10.25.2
         'phpVersion' => PHP_VERSION,
+        //8.1.10
     ]);
 });
 
@@ -38,9 +39,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/inventory', [ProductController::class, 'store'])->name('product.store');
     Route::patch('/inventory/{product}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/inventory/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+    Route::get('/inventory/{product}', [ProductController::class, 'show'])->name('product.show');
 
-    Route::Resource('bill', BillController::class)->only(['index', 'store', 'update', 'destroy']);
-    Route::Resource('transaction', TransactionController::class)->only(['index', 'store', 'update', 'destroy']);
+    Route::Resource('bill', BillController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
 
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 });

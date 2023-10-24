@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Bill;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +24,9 @@ class StoreBillRequest extends FormRequest
     {
         return [
             'cashReceived' => 'nullable|decimal:0,8|min:0|max:999999999',
+            'transactions' => 'required|array',
+            'transactions.*.quantity' => 'required|integer|min:0|max:9999',
+            'transactions.*.product_id'=> 'required|exists:products,id',
         ];
     }
 }

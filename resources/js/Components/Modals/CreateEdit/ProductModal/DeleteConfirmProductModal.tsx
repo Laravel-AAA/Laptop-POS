@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import AlertModal from "../../AlertModal";
 import { IProduct } from "@/types";
-import { Inertia } from "@inertiajs/inertia";
+import { Inertia, Method } from "@inertiajs/inertia";
+import { router } from "@inertiajs/react";
 
 export default function DeleteConfirmProductModal({
   product,
@@ -28,7 +29,10 @@ export default function DeleteConfirmProductModal({
           props: {
             onClick: () => {
               setDeleteProgress(true);
-              Inertia.delete(route("product.destroy", product.id));
+              router.delete(route("product.destroy", product.id), {
+                preserveScroll: true,
+                preserveState: true,
+              });
             },
             disabled: deleteProgress,
           },

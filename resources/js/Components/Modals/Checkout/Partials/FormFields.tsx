@@ -7,7 +7,7 @@ import TotalInfo from "@/Pages/Authenticated/Checkout/Partials/RightSide/Partial
 import Num from "@/Utilities/Num";
 import { ICreateBill } from "@/types";
 import { InertiaFormProps } from "@/types/global";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function FormFields({
   form,
@@ -45,38 +45,40 @@ export default function FormFields({
           name="cashReceived"
           type="number"
           value={form.data.cashReceived ?? 0}
-          className="mt-1 block w-full"
-          isFocused={true}
+          className="mt-1 block w-full text-xl"
           inputMode="numeric"
-          onFocus={(e) => e.target.select()}
-          // onFocusCapture={(e) => e.target.select()}
+          isFocused={true}
+          isSelect={true}
+          onClick={(e) => e.currentTarget.select()}
           disabled={form.processing || isDigitalPayment}
           onChange={(e) => {
             const v = Number(e.target.value);
             form.setData("cashReceived", v);
-            setRemaining(Number(Number(-total() + (v ?? 0)).toFixed(2)));
+            setRemaining(Number(Number((v ?? 0) - total()).toFixed(2)));
           }}
         />
 
         <InputError message={form.errors.cashReceived} className="mt-2" />
         <InputHint
           message={
-            !isDigitalPayment && (
-              <p className="ml-2 mt-1 text-gray-800">
-                Remaining:&nbsp;
-                <Num
-                  currency="$"
-                  className="text-primary-800"
-                  amount={remaining}
-                />
-              </p>
-            )
+            <p
+              style={{ visibility: !isDigitalPayment ? "visible" : "hidden" }}
+              className="ml-2 mt-1 text-lg text-gray-800"
+            >
+              Remaining:&nbsp;
+              <Num
+                currency="$"
+                className="text-primary-800"
+                amount={remaining}
+              />
+            </p>
           }
         />
 
-        <label className="ml-2 mt-1 flex items-center">
+        <label className="ml-2 mt-2 flex items-center">
           <Checkbox
             name="isDigitalPayment"
+            className="h-5 w-5"
             checked={isDigitalPayment}
             disabled={form.processing}
             onChange={(e) => {
@@ -91,14 +93,14 @@ export default function FormFields({
                     ),
                   );
                 } else {
-                  form.setData("cashReceived", total());
+                  form.setData("cashReceived", Number(total().toFixed(2)));
                   setRemaining(0);
                 }
                 return !v;
               });
             }}
           />
-          <span className="ml-2 text-sm text-gray-600">Digital payment</span>
+          <span className="ml-2 text-lg text-gray-600">Digital payment</span>
         </label>
       </div>
     </>

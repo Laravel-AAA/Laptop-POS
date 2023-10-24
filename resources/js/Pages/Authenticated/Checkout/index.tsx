@@ -10,7 +10,6 @@ import { Head, useForm } from "@inertiajs/react";
 import Items from "./Partials/Items";
 import RightSide from "./Partials/RightSide";
 import { ResizableBox } from "react-resizable";
-import { useState } from "react";
 import CheckoutHeader from "./Partials/CheckoutHeader";
 import { InertiaFormProps } from "@/types/global";
 

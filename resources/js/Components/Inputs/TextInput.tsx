@@ -11,19 +11,27 @@ export default forwardRef(function TextInput(
     type = "text",
     className = "",
     isFocused = false,
+    isSelect = false,
     ...props
-  }: InputHTMLAttributes<HTMLInputElement> & { isFocused?: boolean },
+  }: InputHTMLAttributes<HTMLInputElement> & {
+    isFocused?: boolean;
+    isSelect?: boolean;
+  },
   ref,
 ) {
   const localRef = useRef<HTMLInputElement>(null);
 
   useImperativeHandle(ref, () => ({
     focus: () => localRef.current?.focus(),
+    select:()=>localRef.current?.select(),
   }));
 
   useEffect(() => {
     if (isFocused) {
       localRef.current?.focus();
+    }
+    if (isSelect) {
+      localRef.current?.select();
     }
   }, []);
 

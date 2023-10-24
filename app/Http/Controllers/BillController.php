@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
-use App\Http\Requests\StoreBillRequest;
+use App\Http\Requests\Bill\StoreBillRequest;
+use App\Http\Requests\Bill\UpdateBillRequest;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateBillRequest;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
@@ -25,15 +26,40 @@ class BillController extends Controller
         return Inertia::render('Authenticated/Bills/index', [
             'bills' => $bills,
             'filter' => $request->only('search'),
+            'business' => ['taxPercent' => 0.15] //$request->user()->business(),
         ]);
     }
+
+    protected function show(Request $request, Bill $bill)
+    {
+        Gate::authorize('view', $bill);
+
+        return response()->json($bill);
+    }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreBillRequest $request)
     {
-        dd($request);
+        $bill = $request->validated();
+        $createdBill = new Bill($bill);
+        $createdBill->user_id = $request->user()->id;
+        unset($createdBill->transactions);//We remove this attribute because there is no column called transactions 😑
+        $createdBill->save();
+
+        $tras = [];
+        foreach($bill['transactions'] as $tra)
+            $tras[] = new Transaction($tra);
+        $createdBill->transactions()->saveMany($tras);
+        // $tras = [];
+        // foreach($bill['transactions'] as $tra)
+        //     $tras[] = new Transaction($tra);
+
+        // $createdBill->transactions()->saveMany($tras);
+
+        // $createdBill->save();
     }
 
     /**

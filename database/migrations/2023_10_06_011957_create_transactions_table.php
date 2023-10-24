@@ -16,7 +16,6 @@ return new class extends Migration {
             $table->timestamps();
             $table->foreignUlid('product_id')->constrained();
             $table->foreignUlid('bill_id')->constrained()->cascadeOnDelete();
-
         });
     }
 

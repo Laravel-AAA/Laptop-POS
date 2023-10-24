@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Product\ProductStoreRequest;
-use App\Http\Requests\Product\ProductUpdateRequest;
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Response;
 
 class ProductController extends Controller
 {
@@ -26,7 +27,14 @@ class ProductController extends Controller
         ]);
     }
 
-    protected function store(ProductStoreRequest $request)
+    protected function show(Request $request, Product $product)
+    {
+        Gate::authorize('view', $product);
+
+        return response()->json($product);
+    }
+
+    protected function store(StoreProductRequest $request)
     {
         $product = $request->validated();
 
@@ -45,10 +53,10 @@ class ProductController extends Controller
         if ($product->img)
             $this->deleteImg($product->img);
         $product->delete();
-        return to_route('product.index');
+        // return redirect()->back()->with('success','The product was deleted successfully');
     }
 
-    protected function update(ProductUpdateRequest $request, Product $product)
+    protected function update(UpdateProductRequest $request, Product $product)
     {
         $newProduct = $request->validated();
         //1- if img is null OR there is new image THEN delete the old image.

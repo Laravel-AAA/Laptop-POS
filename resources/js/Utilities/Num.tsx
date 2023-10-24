@@ -3,16 +3,25 @@ export default function Num({
   className = "",
   fixed = 2,
   currency,
+  noAmount,
 }: {
-  amount: number;
   className?: string;
   fixed?: number;
   currency?: string;
-}) {
+} & (//if amount is possibly null then you should declare what shows when it is null.
+  | { amount: number; noAmount?: string }
+  | { amount: number | null; noAmount: string }
+)) {
   return (
     <span className={className}>
-      {currency && <span>{currency}&#8239;</span>}
-      {Number(amount.toFixed(fixed)).toLocaleString()}
+      {amount == null ? (
+        noAmount
+      ) : (
+        <>
+          {currency && <span>{currency}&#8239;</span>}
+          {Number(amount.toFixed(fixed)).toLocaleString()}
+        </>
+      )}
     </span>
   );
 }

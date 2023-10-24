@@ -26,6 +26,7 @@ export default function CheckoutModal({
 
     form.post(route(`bill.store`), {
       onSuccess: () => {
+        requestClose();
         form.clearErrors();
         form.reset();
       },

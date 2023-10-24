@@ -64,6 +64,7 @@ class Transaction extends Model
      */
     protected $fillable = [
         'quantity',
+        'product_id',
     ];
 
     public function product(): BelongsTo

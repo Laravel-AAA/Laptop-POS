@@ -55,7 +55,8 @@ class Bill extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'cashReceived'
+        'cashReceived',
+        'transactions',
     ];
 
     /**
@@ -67,15 +68,17 @@ class Bill extends Model
         'cashReceived' => 'float',
     ];
 
-    public function transactions(): HasMany
-    {
-        return $this->hasMany(Transaction::class);
-    }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
 
     public function scopeFilter($query, array $filters)
     {
