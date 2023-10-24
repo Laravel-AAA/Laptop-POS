@@ -86,7 +86,7 @@ function TH({
         "border-b border-blue-gray-100 bg-blue-gray-50 p-4 " + className
       }
     >
-      <p className="text-sm font-semibold leading-none tracking-wide text-primary-900 opacity-80">
+      <p className="text-sm font-semibold leading-none tracking-wide text-black opacity-90">
         {children}
       </p>
     </th>

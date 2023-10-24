@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export default function Num({
   amount,
   className = "",
@@ -8,20 +10,27 @@ export default function Num({
   className?: string;
   fixed?: number;
   currency?: string;
-} & (//if amount is possibly null then you should declare what shows when it is null.
+} & ( //if amount is possibly null then you should declare what shows when it is null.
   | { amount: number; noAmount?: string }
   | { amount: number | null; noAmount: string }
 )) {
-  return (
-    <span className={className}>
-      {amount == null ? (
-        noAmount
-      ) : (
+  let display: string | ReactNode;
+  if (amount === null) display = noAmount;
+  else {
+    amount = Number(amount.toFixed(fixed));
+    //Welcome to javascript where (0 * -1 = -0) 😑
+    //also (-0 === 0 is true)
+    if (Object.is(amount, -0)) display = 0;
+    else display = amount.toLocaleString();
+
+    if (currency)
+      display = (
         <>
-          {currency && <span>{currency}&#8239;</span>}
-          {Number(amount.toFixed(fixed)).toLocaleString()}
+          <span>{currency}&#8239;</span>
+          {display}
         </>
-      )}
-    </span>
-  );
+      );
+  }
+
+  return <span className={className}>{display}</span>;
 }

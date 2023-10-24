@@ -68,7 +68,7 @@ export default function FormFields({
               Remaining:&nbsp;
               <Num
                 currency="$"
-                className="text-primary-800"
+                className="text-indigo-700"
                 amount={remaining}
               />
             </p>

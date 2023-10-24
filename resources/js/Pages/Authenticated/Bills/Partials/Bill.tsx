@@ -50,8 +50,9 @@ export default function Product({
       </TD>
       <TD>
         <Num
+        className="text-indigo-700"
           currency="$"
-          amount={bill.cashReceived ? bill.cashReceived - subTotalPrice : null}
+          amount={bill.cashReceived ? bill.cashReceived - totalPrice : null}
           noAmount=""
         />
       </TD>
