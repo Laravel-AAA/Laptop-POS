@@ -1,5 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {
+  IBill,
   ICreateBill,
   IFilterBill,
   ILaravelPaginate,
@@ -12,32 +13,38 @@ import RightSide from "./Partials/RightSide";
 import { ResizableBox } from "react-resizable";
 import CheckoutHeader from "./Partials/CheckoutHeader";
 import { InertiaFormProps } from "@/types/global";
-import Pagination from "@/Components/Pagination";
+import { useEffect } from "react";
 
 export interface BillOperations {
-  form: InertiaFormProps<ICreateBill>;
+  form: InertiaFormProps<ICreateBill | IBill>;
   changeQty: (product: IProduct, qty: number) => void;
   increaseQty: (product: IProduct) => void;
   decreaseQty: (product: IProduct) => void;
   removeTransaction: (productId: string) => void;
 }
-
+/**If bill.id exist then checkout page is Editing an existed bill */
 export default function Checkout({
   auth,
   products: paginateProducts,
+  bill,
 }: PageProps<{
   products: ILaravelPaginate<IProduct>;
   filter: IFilterBill;
+  bill?: IBill;
 }>) {
   const products: IProduct[] = paginateProducts.data;
-  console.log({ products });
-  const form = useForm<ICreateBill>({
+  const form = useForm<ICreateBill | IBill>({
     transactions: [],
     cashReceived: null,
   });
 
-  const setBill = (data: (previousData: ICreateBill) => ICreateBill) =>
-    form.setData(data);
+  useEffect(() => {
+    if (bill) form.setData(bill);
+  }, []);
+
+  const setBill = (
+    data: (previousData: ICreateBill | IBill) => ICreateBill | IBill,
+  ) => form.setData(data);
 
   /** @param product is used to change the qty of the correspond Transaction */
   function changeQty(product: IProduct, qty: number) {
@@ -144,7 +151,10 @@ export default function Checkout({
         </ResizableBox>
         <div className="w-full grow md:w-0">
           <CheckoutHeader products={products} billOperations={billOperations} />
-          <Items paginateProducts={paginateProducts} billOperations={billOperations} />
+          <Items
+            paginateProducts={paginateProducts}
+            billOperations={billOperations}
+          />
         </div>
       </div>
     </AuthenticatedLayout>

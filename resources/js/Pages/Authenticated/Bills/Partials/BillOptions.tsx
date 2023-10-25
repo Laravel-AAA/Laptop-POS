@@ -1,19 +1,12 @@
 import Dropdown from "@/Components/Dropdown";
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaList, FaTrashAlt } from "react-icons/fa";
 import { IBill } from "@/types";
 import DeleteConfirmBillModal from "@/Components/Modals/CreateEdit/BillModal/DeleteConfirmBillModal";
+import { Link } from "@inertiajs/react";
 
-export default function BillOptions({
-  requestEdit,
-  requestShow,
-  bill,
-}: {
-  bill: IBill;
-  requestEdit: () => void;
-  requestShow: () => void;
-}) {
+export default function BillOptions({ bill }: { bill: IBill }) {
   const [openConfirmDeleteModal, setOpenConfirmDeleteModal] =
     useState<boolean>(false);
   return (
@@ -45,6 +38,15 @@ export default function BillOptions({
               <FaEdit className="text-base" /> Edit
             </div>
           </button> */}
+          <Link
+            className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+            href={"/checkout/" + bill.id}
+          >
+            <div className="flex items-center gap-3">
+              <FaList className="text-base" /> Details
+            </div>
+          </Link>
+
           <button
             onClick={() => setOpenConfirmDeleteModal(true)}
             className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"

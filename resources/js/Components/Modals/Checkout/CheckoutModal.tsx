@@ -1,4 +1,4 @@
-import { ICreateBill } from "@/types";
+import { IBill, ICreateBill } from "@/types";
 import { FormEvent } from "react";
 import InputLabel from "../../Inputs/InputLabel";
 import TextInput from "../../Inputs/TextInput";
@@ -15,7 +15,7 @@ export default function CheckoutModal({
   isShow,
   requestClose,
 }: {
-  form: InertiaFormProps<ICreateBill>;
+  form: InertiaFormProps<ICreateBill | IBill>;
   isShow: boolean;
   requestClose: () => void;
 }) {
@@ -38,11 +38,11 @@ export default function CheckoutModal({
       closeModal={() => requestClose()}
     >
       <form className="mt-3" onSubmit={handleSubmit}>
-      <FormFields form={form}/>
+        <FormFields form={form} />
 
-    <div className="mt-4 flex flex-col gap-4 sm:flex-row-reverse">
+        <div className="mt-4 flex flex-col gap-4 sm:flex-row-reverse">
           <PrimaryButton type="submit" disabled={form.processing}>
-            Checkout
+            {(form.data as IBill).id === undefined ? "Checkout" : "Update"}
           </PrimaryButton>
 
           <SecondaryButton

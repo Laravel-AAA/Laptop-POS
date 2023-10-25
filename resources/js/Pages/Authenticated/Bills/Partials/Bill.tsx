@@ -7,12 +7,9 @@ import { PropsWithChildren } from "react";
 import { usePage } from "@inertiajs/react";
 type PropsProduct = {
   bill: IBill;
-  requestEdit: () => void;
-  // requestShow: () => void;
 };
 export default function Product({
   bill,
-  requestEdit, // requestShow,
 }: PropsProduct) {
   const taxPercent = usePage<PageProps>().props.business.taxPercent;
 
@@ -62,8 +59,6 @@ export default function Product({
       <td>
         <BillOptions
           bill={bill}
-          requestEdit={requestEdit}
-          requestShow={() => {}}
         />
       </td>
     </tr>

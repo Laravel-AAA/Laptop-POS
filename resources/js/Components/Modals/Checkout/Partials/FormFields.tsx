@@ -5,7 +5,7 @@ import InputLabel from "@/Components/Inputs/InputLabel";
 import TextInput from "@/Components/Inputs/TextInput";
 import TotalInfo from "@/Pages/Authenticated/Checkout/Partials/RightSide/Partials/TotalInfo";
 import Num from "@/Utilities/Num";
-import { ICreateBill, PageProps } from "@/types";
+import { IBill, ICreateBill, PageProps } from "@/types";
 import { InertiaFormProps } from "@/types/global";
 import { usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
@@ -13,25 +13,31 @@ import { useEffect, useState } from "react";
 export default function FormFields({
   form,
 }: {
-  form: InertiaFormProps<ICreateBill>;
+  form: InertiaFormProps<ICreateBill | IBill>;
 }) {
   const [isDigitalPayment, setDigitalPayment] = useState<boolean>(false);
   const [remaining, setRemaining] = useState<number>(0);
   const taxPercent = usePage<PageProps>().props.business.taxPercent;
 
-  function subTotal() {
+  function subTotal(): number {
     return form.data.transactions.reduce(
       (sum, t) => (t.product.price ?? 0) * t.quantity + sum,
       0,
     );
   }
 
-  function total() {
+  function total(): number {
     return subTotal() * (1 + taxPercent);
   }
 
   useEffect(() => {
-    form.setData("cashReceived", Number(total().toFixed(2)));
+    if (
+      //do not auto update remaining when bill is updating and has cashReceived
+      form.data.cashReceived !== null &&
+      typeof (form.data as IBill).id === "string"
+    )
+      setRemaining((form.data.cashReceived ?? 0) - total());
+    else form.setData("cashReceived", Number(total().toFixed(2)));
   }, []);
 
   return (
@@ -44,7 +50,11 @@ export default function FormFields({
           id="cashReceived"
           name="cashReceived"
           type="number"
-          value={form.data.cashReceived ?? 0}
+          value={
+            form.data.cashReceived === null
+              ? ""
+              : Number(form.data.cashReceived.toFixed(2))
+          }
           className="mt-1 block w-full text-xl"
           inputMode="numeric"
           isFocused={true}
@@ -84,16 +94,13 @@ export default function FormFields({
             onChange={(e) => {
               setDigitalPayment((v) => {
                 if (!isDigitalPayment) {
-                  form.setData("cashReceived", "");
-                  setRemaining(
-                    Number(
-                      Number(-total() + (form.data.cashReceived ?? 0)).toFixed(
-                        2,
-                      ),
-                    ),
-                  );
+                  if ((form.data as IBill).id === undefined)
+                    form.setData("cashReceived", null);
+
+                  setRemaining((form.data.cashReceived ?? 0) - total());
                 } else {
-                  form.setData("cashReceived", Number(total().toFixed(2)));
+                  if ((form.data as IBill).id === undefined)
+                    form.setData("cashReceived", total());
                   setRemaining(0);
                 }
                 return !v;

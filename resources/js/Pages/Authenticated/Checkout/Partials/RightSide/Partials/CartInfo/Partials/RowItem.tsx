@@ -24,7 +24,7 @@ export default function RowItem({
             src={
               transaction.product.img.startsWith("http")
                 ? transaction.product.img
-                : "products-images/" + transaction.product.img
+                : "/products-images/" + transaction.product.img
             }
             alt={"Image of Product " + transaction.product.name}
           />

@@ -41,9 +41,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/inventory/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/inventory/{product}', [ProductController::class, 'show'])->name('product.show');
 
-    Route::Resource('bill', BillController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+    Route::Resource('bill', BillController::class)->only(['index', 'store','create','show', 'update', 'destroy']);
 
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::get('/checkout/{bill}', [BillController::class, 'show'])->name('bill.show');
+    Route::get('/checkout', [BillController::class, 'create'])->name('bill.create');
 });
 
 Route::middleware('auth')->group(function () {

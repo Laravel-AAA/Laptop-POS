@@ -32,7 +32,7 @@ export default function ProductItem({
             src={
               product.img.startsWith("http")
                 ? product.img
-                : "products-images/" + product.img
+                : "/products-images/" + product.img
             }
             alt={"Image of product: " + product.name}
           />

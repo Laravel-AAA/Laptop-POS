@@ -5,7 +5,7 @@ import HeaderNav from "./Partials/HeaderNav";
 import HeaderAction from "./Partials/HeaderAction";
 
 export const ROUTES: { link: string; name: string }[] = [
-  { name: "Checkout", link: "checkout.index" },
+  { name: "Checkout", link: "bill.create" },
   { name: "Inventory", link: "product.index" },
   { name: "Bills", link: "bill.index" },
   { name: "Dashboard", link: "dashboard" },

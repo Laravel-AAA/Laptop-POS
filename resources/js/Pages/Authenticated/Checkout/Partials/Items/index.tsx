@@ -3,6 +3,7 @@ import ProductItem from "./Partials/ProductItem";
 import { BillOperations } from "../..";
 import Pagination from "@/Components/Pagination";
 import { BsSearch } from "react-icons/bs";
+import Footer from "@/Layouts/GuestLayout/Partials/Footer";
 
 export default function Items({
   className = "",
@@ -45,10 +46,11 @@ export default function Items({
         )}
       </div>
       <Pagination
-        style={{ paddingBottom: "2rem" }}
+        style={{ paddingBottom: "0" }}
         className="mt-4"
         paginateItems={paginateProducts}
       />
+      <Footer/>
     </section>
   );
 }

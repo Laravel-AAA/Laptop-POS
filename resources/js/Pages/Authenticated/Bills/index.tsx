@@ -21,11 +21,7 @@ export default function Bills({
   filter: IFilterBill;
 }>) {
   const bills: IBill[] = paginateBills.data;
-  const [modalAction, setModalAction] = useState<IModalAction<IBill>>({
-    state: "create",
-    open: false,
-    data: null,
-  });
+
   console.log({ bills });
   return (
     <AuthenticatedLayout user={auth.user}>
@@ -34,7 +30,7 @@ export default function Bills({
       when rendering the dropdown content, it will render inside the table so
       last item will not be shown because dropdown content is display below the
       item and that is outside the table */}
-      <div className="mx-auto my-6 w-full overflow-x-auto overflow-y-hidden pb-16 md:w-11/12 ">
+      <div className="mx-auto my-6 w-full overflow-x-auto overflow-y-hidden pb-28 md:w-11/12 ">
         <Card className="w-full min-w-fit rounded-md">
           <table className="table-auto text-left">
             <thead>
@@ -56,7 +52,6 @@ export default function Bills({
                 <Bill
                   key={bill.id}
                   bill={bill}
-                  requestEdit={() => {}}
                 />
               ))}
             </tbody>
