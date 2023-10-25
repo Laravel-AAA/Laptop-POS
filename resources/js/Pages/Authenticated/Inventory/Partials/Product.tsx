@@ -1,4 +1,4 @@
-import { IBusiness, IProduct, PageProps } from "@/types";
+import { AuthPageProps, IBusiness, IProduct,  } from "@/types";
 import { BsImage } from "react-icons/bs";
 import ProductOptions from "./ProductOptions";
 import Num from "@/Utilities/Num";
@@ -14,7 +14,7 @@ export default function Product({
   requestShow,
 }: PropsProduct) {
 
-  const taxPercent = usePage<PageProps>().props.business.taxPercent;
+  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
   return (
     <div
       onClick={() => requestShow()}

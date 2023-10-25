@@ -1,4 +1,4 @@
-import { ICreateTransaction, PageProps } from "@/types";
+import { AuthPageProps, ICreateTransaction } from "@/types";
 import ItemOptions from "./ItemOptions";
 import Num from "@/Utilities/Num";
 import { usePage } from "@inertiajs/react";
@@ -14,7 +14,7 @@ export default function ProductItem({
   requestDecrease: () => any;
   transaction: ICreateTransaction;
 }) {
-  const taxPercent = usePage<PageProps>().props.business.taxPercent;
+  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
   const product = transaction.product;
 
   return (

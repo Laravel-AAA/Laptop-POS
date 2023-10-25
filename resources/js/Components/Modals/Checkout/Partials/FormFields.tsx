@@ -5,7 +5,7 @@ import InputLabel from "@/Components/Inputs/InputLabel";
 import TextInput from "@/Components/Inputs/TextInput";
 import TotalInfo from "@/Pages/Authenticated/Checkout/Partials/RightSide/Partials/TotalInfo";
 import Num from "@/Utilities/Num";
-import { IBill, ICreateBill, PageProps } from "@/types";
+import { AuthPageProps, IBill, ICreateBill } from "@/types";
 import { InertiaFormProps } from "@/types/global";
 import { usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
@@ -17,7 +17,7 @@ export default function FormFields({
 }) {
   const [isDigitalPayment, setDigitalPayment] = useState<boolean>(false);
   const [remaining, setRemaining] = useState<number>(0);
-  const taxPercent = usePage<PageProps>().props.business.taxPercent;
+  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
 
   function subTotal(): number {
     return form.data.transactions.reduce(

@@ -1,11 +1,11 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {
+  AuthPageProps,
   IBill,
   ICreateBill,
   IFilterBill,
   ILaravelPaginate,
   IProduct,
-  PageProps,
 } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
 import Items from "./Partials/Items";
@@ -27,7 +27,7 @@ export default function Checkout({
   auth,
   products: paginateProducts,
   bill,
-}: PageProps<{
+}: AuthPageProps<{
   products: ILaravelPaginate<IProduct>;
   filter: IFilterBill;
   bill?: IBill;

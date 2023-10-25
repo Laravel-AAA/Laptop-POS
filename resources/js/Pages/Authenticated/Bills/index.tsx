@@ -1,11 +1,10 @@
 import { Card } from "@material-tailwind/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {
+  AuthPageProps,
   IBill,
   IFilterBill,
   ILaravelPaginate,
-  IModalAction,
-  PageProps,
 } from "@/types";
 import { Head } from "@inertiajs/react";
 import { HTMLAttributes, PropsWithChildren, useState } from "react";
@@ -16,7 +15,7 @@ import Pagination from "@/Components/Pagination";
 export default function Bills({
   auth,
   bills: paginateBills,
-}: PageProps<{
+}: AuthPageProps<{
   bills: ILaravelPaginate<IBill>;
   filter: IFilterBill;
 }>) {

@@ -1,6 +1,6 @@
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
-import { IFilterProduct, PageProps, PagePropsWithFilter } from "@/types";
+import { IFilterProduct, PagePropsWithFilter } from "@/types";
 import { router, usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
@@ -14,7 +14,8 @@ export default function InventoryHeader({
   totalResult: number;
   requestCreateProduct: () => void;
 }) {
-  const {filter:filterProps} = usePage<PagePropsWithFilter<IFilterProduct>>().props;
+  const { filter: filterProps } =
+    usePage<PagePropsWithFilter<IFilterProduct>>().props;
 
   const [filter, setFilter] = useState<IFilterProduct>({
     search: filterProps.search ?? "",

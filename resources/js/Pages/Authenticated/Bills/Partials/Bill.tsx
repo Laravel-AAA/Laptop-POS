@@ -1,4 +1,4 @@
-import { IBill, PageProps } from "@/types";
+import { AuthPageProps, IBill,  } from "@/types";
 import BillOptions from "./BillOptions";
 import FromDate from "@/Utilities/FromDate";
 import Num from "@/Utilities/Num";
@@ -11,7 +11,7 @@ type PropsProduct = {
 export default function Product({
   bill,
 }: PropsProduct) {
-  const taxPercent = usePage<PageProps>().props.business.taxPercent;
+  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
 
   const subTotalPrice = bill.transactions.reduce(
     (v, t) => v + (t.product.price ?? 0) * t.quantity,

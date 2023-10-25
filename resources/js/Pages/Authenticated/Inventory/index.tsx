@@ -5,11 +5,11 @@
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {
+  AuthPageProps,
   IFilterProduct,
   ILaravelPaginate,
   IModalAction,
   IProduct,
-  PageProps,
 } from "@/types";
 import { Head } from "@inertiajs/react";
 import Product from "./Partials/Product";
@@ -22,7 +22,7 @@ import InventoryHeader from "./Partials/InventoryHeader";
 export default function Inventory({
   auth,
   products: paginateProducts,
-}: PageProps<{
+}: AuthPageProps<{
   products: ILaravelPaginate<IProduct>;
   filter: IFilterProduct;
 }>) {

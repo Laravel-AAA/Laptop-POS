@@ -1,7 +1,7 @@
 import InputError from "@/Components/Inputs/InputError";
 import InputLabel from "@/Components/Inputs/InputLabel";
 import TextInput from "@/Components/Inputs/TextInput";
-import { ICreateProduct, IModalAction, IProduct, PageProps } from "@/types";
+import { AuthPageProps, ICreateProduct, IModalAction, IProduct,  } from "@/types";
 import FormImage from "./FormImage";
 import Checkbox from "@/Components/Checkbox";
 import { InertiaFormProps } from "@/types/global";
@@ -18,7 +18,7 @@ export default function FormInputs({
 }) {
   const [priceIncludeTax, setPriceIncludeTax] = useState<boolean>(false);
   const [inputPrice, setInputPrice] = useState<number | null>(form.data.price);
-  const taxPercent = usePage<PageProps>().props.business.taxPercent;
+  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
 
   function numbering(n: number | string | null) {
     return n == null ? n : Number(Number(n).toFixed(8)); //database decimal type accept at most 8 fraction digits

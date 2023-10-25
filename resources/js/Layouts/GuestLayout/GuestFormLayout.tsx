@@ -1,12 +1,12 @@
 import { PropsWithChildren } from "react";
-import { PageProps } from "@/types";
+import { GuestPageProps } from "@/types";
 import GuestLayout from ".";
 import FullLogo from "@/Components/Logo/FullLogo";
 
 export default function GuestFormLayout({
   children,
   auth,
-}: PropsWithChildren<PageProps>) {
+}: PropsWithChildren<GuestPageProps>) {
   return (
     <GuestLayout auth={auth}>
       <div className="flex min-h-screen flex-col items-center pt-6 sm:justify-center sm:pt-0">

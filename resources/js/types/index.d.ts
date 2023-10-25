@@ -11,14 +11,19 @@ export interface IUser {
   email_verified_at: string;
 }
 
-export type PageProps<
+export type AuthPageProps<
   T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {
-  auth: {
-    user: IUser;
-  };
+  auth: { user: IUser; };
   business: IBusiness;
 };
+
+
+export type GuestPageProps<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> = T & {
+  auth: { user: IUser } | null;
+}
 
 export interface IProduct extends ICreateProduct {
   id: string;
@@ -108,7 +113,7 @@ type IFilter<
   search: string;
 };
 
-type PagePropsWithFilter<T extends IFilter >
+type PagePropsWithFilter<T extends IFilter>
   = PageProps & {
     filter: T
   }

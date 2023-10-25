@@ -4,12 +4,12 @@ import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
 import { Head, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
-import { PageProps } from "@/types";
+import { AuthPageProps } from "@/types";
 
 export default function ForgotPassword({
   status,
   auth,
-}: PageProps<{ status?: string }>) {
+}: AuthPageProps<{ status?: string }>) {
   const { data, setData, post, processing, errors } = useForm({
     email: "",
   });

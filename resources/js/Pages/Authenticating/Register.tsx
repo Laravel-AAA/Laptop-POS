@@ -5,9 +5,9 @@ import InputLabel from "@/Components/Inputs/InputLabel";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
-import { PageProps } from "@/types";
+import { AuthPageProps } from "@/types";
 
-export default function Register({ auth }: PageProps) {
+export default function Register({ auth }: AuthPageProps) {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: "",
     email: "",

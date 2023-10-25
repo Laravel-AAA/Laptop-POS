@@ -1,6 +1,6 @@
 import { BillOperations } from "@/Pages/Authenticated/Checkout";
 import Num from "@/Utilities/Num";
-import { ICreateTransaction, PageProps } from "@/types";
+import { AuthPageProps, ICreateTransaction,  } from "@/types";
 import { usePage } from "@inertiajs/react";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { BsDash, BsPlusLg } from "react-icons/bs";
@@ -13,7 +13,7 @@ export default function RowItem({
   transaction: ICreateTransaction;
   billOperations: BillOperations;
 }) {
-  const taxPercent = usePage<PageProps>().props.business.taxPercent;
+  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
 
   return (
     <tr className="group h-10 max-h-10 border-y">

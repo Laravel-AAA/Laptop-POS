@@ -1,9 +1,9 @@
 import Num from "@/Utilities/Num";
-import { ICreateBill, PageProps } from "@/types";
+import { AuthPageProps, ICreateBill,  } from "@/types";
 import { usePage } from "@inertiajs/react";
 
 export default function TotalInfo({ bill }: { bill: ICreateBill }) {
-  const taxPercent = usePage<PageProps>().props.business.taxPercent;
+  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
 
   /**Total without Taxes */
   function subTotal() {

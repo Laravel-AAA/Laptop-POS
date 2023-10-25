@@ -5,14 +5,14 @@ import InputLabel from "@/Components/Inputs/InputLabel";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
-import { PageProps } from "@/types";
 import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
+import { AuthPageProps } from "@/types";
 
 export default function Login({
   status,
   canResetPassword,
   auth,
-}: PageProps<{
+}: AuthPageProps<{
   status?: string;
   canResetPassword: boolean;
 }>) {

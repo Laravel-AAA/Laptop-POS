@@ -1,10 +1,10 @@
-import { PageProps } from "@/types";
 import { useEffect, useState } from "react";
 import MobileMenu from "./Partials/MobileMenu";
 import DesktopMenu from "./Partials/DesktopMenu";
 import FullLogo from "@/Components/Logo/FullLogo";
+import { GuestPageProps } from "@/types";
 
-export default function Header({ auth }: PageProps | { auth: null }) {
+export default function Header({ auth }:  GuestPageProps) {
   const [top, setTop] = useState<boolean>(true);
 
   // detect whether user has scrolled the page down by 10px

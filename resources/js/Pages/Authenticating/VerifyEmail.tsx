@@ -2,12 +2,12 @@ import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
-import { PageProps } from "@/types";
+import { AuthPageProps } from "@/types";
 
 export default function VerifyEmail({
   status,
   auth,
-}: PageProps<{ status?: string }>) {
+}: AuthPageProps<{ status?: string }>) {
   const { post, processing } = useForm({});
 
   const submit: FormEventHandler = (e) => {
