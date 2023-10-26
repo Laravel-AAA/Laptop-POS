@@ -10,7 +10,7 @@
         $title = 'Laptop POS';
         $description = 'Simplify your sales process and boost your productivity. Organize and manage your product inventory, Efficiently organize product information like names, descriptions, SKUs (Stock Keeping Units), and prices. Stay on top of your inventory with accurate and easily updated product details.';
         $url = env('APP_URL', 'http://localhost:8000');
-        $mediumLogo = '/assets/logo/laptop-pos-logo-medium.png';
+        $mediumLogo = '/assets/logo/laptop-pos-logo.svg';
 
     @endphp
 
