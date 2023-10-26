@@ -30,12 +30,12 @@ export default function InventoryHeader({
       let query = {};
       for (const k of truthyKeys) query[k] = filter[k];
 
-      console.log(filter);
       router.get(route(route().current() ?? ""), query as any, {
         replace: true,
         preserveState: true,
         preserveScroll: true,
       });
+      return () => router.cancel();
     }
   }, [filter]);
 

@@ -1,6 +1,6 @@
 import TextInput from "@/Components/Inputs/TextInput";
 import { IFilterCheckout, IProduct, PagePropsWithFilter } from "@/types";
-import { router, useForm, usePage } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 import { FormEvent, useEffect, useState } from "react";
 import { FaBarcode, FaSearch } from "react-icons/fa";
 import { usePrevious } from "react-use";
@@ -35,6 +35,7 @@ export default function CheckoutHeader({
         preserveState: true,
         preserveScroll: true,
       });
+      return () => router.cancel();
     }
   }, [filter]);
 
