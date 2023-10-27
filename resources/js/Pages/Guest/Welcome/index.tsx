@@ -11,7 +11,9 @@ export default function Welcome({
   auth,
   laravelVersion,
   phpVersion,
+  ...others
 }: GuestPageProps<{ laravelVersion: string; phpVersion: string }>) {
+console.log('others',others);
   return (
     <GuestLayout auth={auth}>
       <Head title="Welcome" />

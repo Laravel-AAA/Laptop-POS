@@ -28,7 +28,7 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
         //8.1.10
     ]);
-});
+})->middleware(['guest']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Authenticated/Dashboard/index'); //tsx component location on resources/js/Pages folder
