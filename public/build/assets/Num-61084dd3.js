@@ -1,1 +1,0 @@
-import{j as i}from"./app-f149ad97.js";function j({amount:s,className:r="",fixed:t=2,currency:l,noAmount:n}){let e;return s===null?e=n:(s=Number(s.toFixed(t)),Object.is(s,-0)?e=0:e=s.toLocaleString(),l&&(e=i.jsxs(i.Fragment,{children:[i.jsxs("span",{children:[l," "]}),e]}))),i.jsx("span",{className:r,children:e})}export{j as N};
