@@ -2,7 +2,7 @@
 <tr>
     <td class="header">
         <a href="{{ $url }}" style="display: inline-block;">
-            <img src="https://laptop-pos.test/assets/logo/laptop-pos-logo-text.png" class="logo" alt="Laptop POS Logo">
+            <img src="{{env('APP_URL')}}/assets/logo/laptop-pos-logo-text.png" class="logo" alt="Laptop POS Logo">
         </a>
     </td>
 </tr>
