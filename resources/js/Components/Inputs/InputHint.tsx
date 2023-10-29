@@ -10,7 +10,7 @@ export default function InputHint({
   else if (typeof message === "object") return message;
   else
     return (
-      <p {...props} className={"text-sm text-gray-600 " + className}>
+      <p {...props} className={"text-sm text-gray-500 " + className}>
         {message ? message : children}
       </p>
     );

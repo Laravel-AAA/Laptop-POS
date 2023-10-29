@@ -40,6 +40,7 @@ const Trigger = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div
+        role="button"
         onClick={(e) => {
           e.stopPropagation();
           toggleOpen();
@@ -51,6 +52,7 @@ const Trigger = ({ children }: PropsWithChildren) => {
       {open && (
         <div
           className="fixed inset-0 z-40 h-[100vh] w-full"
+          role="button"
           onClick={(e) => {
             setOpen(false);
             e.stopPropagation();
@@ -101,6 +103,7 @@ const Content = ({
       >
         <div
           className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
+          role="button"
           onClick={(e) => {
             e.stopPropagation();
             setOpen(false);

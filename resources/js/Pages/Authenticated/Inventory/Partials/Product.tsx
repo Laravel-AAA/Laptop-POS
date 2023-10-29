@@ -1,4 +1,4 @@
-import { AuthPageProps, IBusiness, IProduct,  } from "@/types";
+import { AuthPageProps, IBusiness, IProduct } from "@/types";
 import { BsImage } from "react-icons/bs";
 import ProductOptions from "./ProductOptions";
 import Num from "@/Utilities/Num";
@@ -13,10 +13,10 @@ export default function Product({
   requestEdit,
   requestShow,
 }: PropsProduct) {
-
   const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
   return (
     <div
+      role="button"
       onClick={() => requestShow()}
       className="group relative m-4 flex cursor-pointer flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:w-52"
     >

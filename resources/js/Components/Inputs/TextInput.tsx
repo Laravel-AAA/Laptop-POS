@@ -22,16 +22,22 @@ export default forwardRef(function TextInput(
   const localRef = useRef<HTMLInputElement>(null);
 
   useImperativeHandle(ref, () => ({
-    focus: () => localRef.current?.focus(),
-    select: () => localRef.current?.select(),
+    focus: () => {
+      localRef.current?.focus();
+    },
+    select: () => {
+      localRef.current?.select();
+    },
   }));
 
   useEffect(() => {
-    if (isFocused === true) {
-      localRef.current?.focus();
-    }
-    if (isSelect === true) {
-      localRef.current?.select();
+    if (localRef.current) {
+      if (isFocused === true) {
+        localRef.current.focus();
+      }
+      if (isSelect === true) {
+        localRef.current.select();
+      }
     }
   }, []);
 
