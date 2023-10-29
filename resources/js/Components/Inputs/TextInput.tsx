@@ -23,14 +23,14 @@ export default forwardRef(function TextInput(
 
   useImperativeHandle(ref, () => ({
     focus: () => localRef.current?.focus(),
-    select:()=>localRef.current?.select(),
+    select: () => localRef.current?.select(),
   }));
 
   useEffect(() => {
-    if (isFocused) {
+    if (isFocused === true) {
       localRef.current?.focus();
     }
-    if (isSelect) {
+    if (isSelect === true) {
       localRef.current?.select();
     }
   }, []);
@@ -48,7 +48,7 @@ export default forwardRef(function TextInput(
         file:transition file:duration-200 file:ease-in-out
         placeholder:italic file:hover:bg-primary-600
         focus:border-primary-600 focus:ring-primary-600 file:active:scale-95
-         disabled:opacity-60  ` + className
+          disabled:opacity-60 ` + className
       }
       ref={localRef}
     />

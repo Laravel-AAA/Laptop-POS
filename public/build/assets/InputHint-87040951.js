@@ -1,0 +1,1 @@
+import{j as i}from"./app-93f448e9.js";function u({message:t,children:r,className:n="",...e}){return t?typeof t=="object"?t:i.jsx("p",{...e,className:"text-sm text-gray-600 "+n,children:t||r}):null}export{u as I};

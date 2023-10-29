@@ -69,21 +69,15 @@ export default function FormFields({
         />
 
         <InputError message={form.errors.cashReceived} className="mt-2" />
-        <InputHint
-          message={
-            <p
-              style={{ visibility: !isDigitalPayment ? "visible" : "hidden" }}
-              className="ml-2 mt-1 text-lg text-gray-800"
-            >
-              Remaining:&nbsp;
-              <Num
-                currency="$"
-                className="text-indigo-700"
-                amount={remaining}
-              />
-            </p>
-          }
-        />
+        <InputHint>
+          <p
+            style={{ visibility: !isDigitalPayment ? "visible" : "hidden" }}
+            className="ml-2 mt-1 text-lg text-gray-800"
+          >
+            Remaining:&nbsp;
+            <Num currency="$" className="text-indigo-700" amount={remaining} />
+          </p>
+        </InputHint>
 
         <label className="ml-2 mt-2 flex items-center">
           <Checkbox
