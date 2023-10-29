@@ -1,3 +1,16 @@
+/*<div> with onClick should be <button> with this class for accessibility.
+It changes the button element to look like a div.
+Written first to be overwrite by tailwind or any other classes*/
+.div-style {
+  display: block;
+  width: 100%;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  font: inherit;
+  text-align: inherit;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,13 +28,12 @@
   /* background: url(/assets/grip-lines-vertical_10506574.svg)
      center no-repeat #5e5e5e25; */
   background-color: #5e5e5e35;
-  background-image: url(/assets/grip-lines-vertical_10506574.png) ;
+  background-image: url(/assets/grip-lines-vertical_10506574.png);
   opacity: 0.8;
   background-position-x: center;
   background-position-y: center;
   background-repeat: no-repeat;
   background-size: 19px 50px;
-
 }
 @media (min-width: 720px) {
   .react-resizable-handle {
