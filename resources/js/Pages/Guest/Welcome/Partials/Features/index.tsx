@@ -2,6 +2,7 @@ import { Transition } from "@headlessui/react";
 import { useEffect, useRef, useState } from "react";
 import { FaShop } from "react-icons/fa6";
 import Solutions from "./Partials/Solutions";
+import GradientCircle from "./Partials/GradientCircle";
 
 export default function Features() {
   const [tab, setTab] = useState<number>(1);
@@ -18,13 +19,10 @@ export default function Features() {
   }, []);
 
   return (
-    <section className="relative">
+    <section className="relative overflow-hidden">
       {/* Section background (needs .relative class on parent and next sibling elements) */}
-      <div
-        className="pointer-events-none absolute inset-0 mb-16"
-        aria-hidden="true"
-      ></div>
-      <div className="absolute left-0 right-0 m-auto h-20 w-px -translate-y-1/2 transform bg-gray-300 p-px"></div>
+      <GradientCircle />
+      <div className="absolute left-0 right-0 m-auto h-24 w-px -translate-y-1/2 transform bg-gray-300 p-px"></div>
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="pt-12 xl:pt-20">
@@ -157,7 +155,7 @@ export default function Features() {
                   data-aos="zoom-y-out"
                   ref={tabs}
                 >
-                  {/* Item 1 */}
+                  {/* Item 1  16:9*/}
                   <Transition
                     show={tab === 1}
                     appear={true}
@@ -185,7 +183,7 @@ export default function Features() {
                       />
                     </div>
                   </Transition>
-                  {/* Item 2 */}
+                  {/* Item 2   16:9 */}
                   <Transition
                     show={tab === 2}
                     appear={true}
@@ -216,7 +214,7 @@ export default function Features() {
                       />
                     </div>
                   </Transition>
-                  {/* Item 3 */}
+                  {/* Item 3  16:9*/}
                   <Transition
                     show={tab === 3}
                     appear={true}

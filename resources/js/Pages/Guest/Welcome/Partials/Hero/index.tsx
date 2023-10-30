@@ -4,7 +4,7 @@ import ParagraphAndControllers from "./Partials/ParagraphAndControllers";
 
 export default function Hero() {
   return (
-    <section className="relative" id="hero">
+    <section className="relative overflow-hidden" id="hero">
       {/* Illustration behind hero content */}
       <Circles />
 

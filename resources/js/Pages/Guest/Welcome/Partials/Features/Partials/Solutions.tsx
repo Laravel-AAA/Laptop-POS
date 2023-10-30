@@ -26,7 +26,7 @@ export default function Solutions() {
       setBusiness(
         (b) => businesses[(businesses.indexOf(b) + 1) % businesses.length],
       );
-    }, 1800);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
@@ -46,12 +46,12 @@ export default function Solutions() {
               key={i}
               show={b === business}
               enter="transition ease-in-out duration-700 transform order-first"
-              enterFrom="opacity-0 translate-y-12"
+              enterFrom="opacity-0 translate-y-8"
               enterTo="opacity-100 translate-y-0"
               leave="transition ease-in-out duration-300 transform absolute"
               leaveFrom="opacity-100 translate-y-0"
-              leaveTo="opacity-0 -translate-y-12"
-              unmount={false}
+              leaveTo="opacity-0 -translate-y-8"
+              unmount={true}
               className="absolute inline text-left text-secondary-600 "
             >
               {b}

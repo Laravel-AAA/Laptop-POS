@@ -6,7 +6,7 @@ export default function Circles() {
       className="-z-1 pointer-events-none absolute bottom-0 left-1/2 hidden -translate-x-1/2 transform lg:block"
       aria-hidden="true"
     >
-      {/* <svg
+      <svg
         width="1360"
         height="578"
         viewBox="0 0 1360 578"
@@ -29,7 +29,7 @@ export default function Circles() {
           <circle cx="1048" cy="28" r="128" />
           <circle cx="155" cy="443" r="64" />
         </g>
-      </svg> */}
+      </svg>
     </div>
   );
 }
