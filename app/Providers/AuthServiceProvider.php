@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\Models\Bill;
 use App\Models\Product;
 use App\Models\Transaction;
+use App\Models\User;
 use App\Policies\BillPolicy;
 use App\Policies\ProductPolicy;
 use App\Policies\TransactionPolicy;
@@ -33,10 +34,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
+        VerifyEmail::toMailUsing(function (User $user, string $url) {
             return (new MailMessage)
                 ->subject('Verify Email Address')
-                ->line('Click the button below to verify your email address.')
+                ->greeting('Hello **' . $user->name . '** 👋')
+                ->line('Please verify that your email address is **' . $user->email . '**, and that you entered it when signing up for **Laptop POS**.')
                 ->action('Verify Email Address', $url)
                 ->line(Lang::get('If you did not create an account, no further action is required.'));
         });
