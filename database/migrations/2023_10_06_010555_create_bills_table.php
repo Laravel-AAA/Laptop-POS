@@ -15,7 +15,8 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->decimal('cashReceived')->nullable();
             $table->timestamps();
-            $table->foreignUlid('user_id')->constrained();
+            $table->foreignUlid('createdBy_id')->constrained('users','id');//created by
+            $table->foreignUlid('business_id')->constrained();
         });
     }
 

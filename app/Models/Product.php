@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Business;
 use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -46,9 +47,14 @@ class Product extends Model
     ];
 
 
-    public function user(): BelongsTo
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function business(): BelongsTo
+    {
+        return $this->belongsTo(Business::class);
     }
 
     public function transactions(): HasMany

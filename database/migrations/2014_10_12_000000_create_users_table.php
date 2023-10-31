@@ -17,16 +17,9 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string('role',10);//Cashier, Admin, Owner
             $table->timestamps();
-
-            //TODO: make these on Business table which will have many users with Admin user.
-            // $table->string('businessLongName', 64)->nullable();
-            // $table->string('businessShortName', 16)->nullable();
-            // $table->string('businessLogo')->nullable();
-            // $table->string('businessPhone',18)->nullable();
-            // $table->decimal('taxPercent')->nullable();
-            // $table->string('businessAddress')->nullable();
-            // $table->string('taxIdentificationNumber')->nullable();
+            $table->foreignUlid('business_id')->constrained();
         });
     }
 

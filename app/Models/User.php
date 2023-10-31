@@ -5,10 +5,12 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Bill;
+use App\Models\Product;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -34,14 +36,6 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         'name',
         'email',
         'password',
-        // 'businessLongName',
-        // 'businessShortName',
-        // 'businessLogo',
-        // 'businessPhone',
-        // 'taxPercent',
-        // 'businessAddress',
-        // 'taxIdentificationNumber',
-        // 'currency'
     ];
 
     /**
@@ -62,16 +56,21 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'taxPercent' => 'float'
+        'taxPercent' => 'float',
     ];
 
-    public function products(): HasMany
+    public function business(): BelongsTo
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Business::class);
     }
 
     public function bills(): HasMany
     {
         return $this->hasMany(Bill::class);
+    }
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
     }
 }

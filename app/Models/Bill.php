@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Business;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -69,9 +70,14 @@ class Bill extends Model
     ];
 
 
-    public function user(): BelongsTo
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function business(): BelongsTo
+    {
+        return $this->belongsTo(Business::class);
     }
 
     public function transactions(): HasMany
@@ -86,8 +92,8 @@ class Bill extends Model
             $query->where('cashReceived', 'like', '%' . $search . '%');
         });
         $query->when($filters['product'] ?? null, function ($query, $product_id) {
-            $query->whereHas('transactions',function($query) use($product_id){
-                $query->where('product_id',$product_id);
+            $query->whereHas('transactions', function ($query) use ($product_id) {
+                $query->where('product_id', $product_id);
             });
         });
     }

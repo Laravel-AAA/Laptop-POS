@@ -4,10 +4,16 @@
 // ✅ `name:string|null`
 // This way we can easily use triple equal `===`/`!==` with null values
 // and be confident we don't treat falsy values (e.g., "false", 0, "",...etc) as `null`.
-export interface IUser {
-  id: number;
+
+export interface ICreateUser {
   name: string;
   email: string;
+  password:string;
+  password_confirmation:string;
+}
+
+export interface IUser {
+  id: number;
   email_verified_at: string;
 }
 
@@ -25,11 +31,15 @@ export type GuestPageProps<
   auth: { user: IUser } | null;
 }
 
-export interface IProduct extends ICreateProduct {
+interface BasicModel {
   id: string;
   created_at: string;
   updated_at: string;
-  user_id: string;
+}
+
+export interface IProduct extends ICreateProduct, BasicModel {
+  business_id: string;
+  createdBy_id: string;
 }
 
 export interface ICreateProduct {
@@ -43,10 +53,9 @@ export interface ICreateProduct {
   description: string | null;
 }
 
-export interface IBill extends ICreateBill {
-  id: string;
-  created_at: string;
-  updated_at: string;
+export interface IBill extends ICreateBill, BasicModel {
+  business_id: string;
+  createdBy_id: string;
 }
 
 export interface ICreateBill {
@@ -54,10 +63,7 @@ export interface ICreateBill {
   transactions: ICreateTransaction[];
 }
 
-export interface ITransaction extends ICreateTransaction {
-  id: string;
-  created_at: string;
-  updated_at: string;
+export interface ITransaction extends ICreateTransaction, BasicModel {
   bill_id: string;
 }
 export interface ICreateTransaction {
@@ -66,9 +72,23 @@ export interface ICreateTransaction {
   product: IProduct;
 }
 
-export interface IBusiness {
+export interface ICreateBusiness {
+  name: string;
+  logo: string | null;
+  logoFile: File | null;
+  phone: string;
+  taxPercent: number | null;
+  currency: string | null;
+  country: string;
+  city: string;
+  address: string;
+  taxIdentificationNumber: string | null;
+}
+
+export interface IBusiness extends ICreateBusiness, BasicModel {
+  //these have a default value in the database so when creating they maybe null but when created they are defined.
   taxPercent: number;
-  //todo...
+  currency: string;
 }
 
 export interface ILaravelPaginate<T extends object> {
