@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,16 @@ use Inertia\Inertia;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
+|
+|    Method	   |  URI	               | Action  | Route Name
+|    ----------|-----------------------|---------|----------------
+|    GET	   |  /photos	           | index   | photos.index
+|    GET	   |  /photos/create	   | create  | photos.create
+|    POST	   |  /photos	           | store   | photos.store
+|    GET	   |  /photos/{photo}      | show    | photos.show
+|    GET	   |  /photos/{photo}/edit | edit    | photos.edit
+|    PUT/PATCH |  /photos/{photo}      | update  | photos.update
+|    DELETE	   |  /photos/{photo}      | destroy | photos.destroy
 */
 
 Route::get('/', function () {
@@ -41,6 +52,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/checkout/{bill}', [BillController::class, 'show'])->name('bill.show');
     Route::get('/checkout', [BillController::class, 'create'])->name('bill.create');
+
+    Route::get('/business', [BusinessController::class, 'edit'])->name('business.edit');
 });
 
 Route::middleware('auth')->group(function () {

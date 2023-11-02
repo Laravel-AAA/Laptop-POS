@@ -12,7 +12,7 @@ export interface ICreateUser {
   password_confirmation:string;
 }
 
-export interface IUser {
+export interface IUser extends ICreateUser {
   id: number;
   email_verified_at: string;
 }
