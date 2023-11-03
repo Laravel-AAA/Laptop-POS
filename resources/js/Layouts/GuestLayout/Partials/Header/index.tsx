@@ -4,7 +4,7 @@ import DesktopMenu from "./Partials/DesktopMenu";
 import FullLogo from "@/Components/Logo/FullLogo";
 import { GuestPageProps } from "@/types";
 
-export default function Header({ auth }:  GuestPageProps) {
+export default function Header({ auth }: GuestPageProps) {
   const [top, setTop] = useState<boolean>(true);
 
   // detect whether user has scrolled the page down by 10px
@@ -21,7 +21,8 @@ export default function Header({ auth }:  GuestPageProps) {
   return (
     <>
       <header
-        className={`fixed z-30 w-full backdrop-blur-sm transition duration-300 ease-in-out md:bg-opacity-80 ${
+        style={{ zIndex: 100 }}
+        className={`fixed w-full backdrop-blur-sm transition duration-300 ease-in-out md:bg-opacity-80 ${
           !top ? "bg-gray-50 shadow-lg" : ""
         }`}
       >

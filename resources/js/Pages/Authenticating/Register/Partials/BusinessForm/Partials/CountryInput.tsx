@@ -3,23 +3,28 @@ import React from "react";
 import COUNTRIES from "./COUNTRIES";
 import { InertiaFormProps } from "@/types/global";
 import { ICreateBusiness } from "@/types";
+import SelectInput from "@/Components/Inputs/SelectInput";
+import { UseBetterForm } from "@/Utilities/useBetterForm";
 
 export default function CountryInput({
   form,
 }: {
-  form: InertiaFormProps<ICreateBusiness>;
+  form: UseBetterForm<ICreateBusiness>;
 }) {
   const countries = COUNTRIES.filter(
     (c) => c.currencies?.[0]?.name && c.currencies?.[0]?.symbol,
   );
   return (
-    <Select
+    <SelectInput
       label="Country"
       size="lg"
       className="text-md"
       color="teal"
       value={form.data.country}
-      onChange={(v) => form.setData("country", v)}
+      errorMsg={form.errors.country}
+      hideError={ form.isDirty("country")}
+      onChange={(v) => form.setData("country", v ?? "")}
+      required
       selected={(element) =>
         element &&
         React.cloneElement(element, {
@@ -41,6 +46,6 @@ export default function CountryInput({
             {c.name}
           </Option>
         ))}
-    </Select>
+    </SelectInput>
   );
 }

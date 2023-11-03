@@ -1,16 +1,16 @@
 import { useEffect, FormEventHandler } from "react";
 import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
-import InputError from "@/Components/Inputs/InputError";
-import InputLabel from "@/Components/Inputs/InputLabel";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
-import { Head, useForm } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import { AuthPageProps } from "@/types";
+import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function ConfirmPassword({ auth }: AuthPageProps) {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    password: "",
-  });
+  const { data, setData, post, processing, errors, reset, isDirty } =
+    useBetterForm({
+      password: "",
+    });
 
   useEffect(() => {
     return () => {
@@ -35,19 +35,19 @@ export default function ConfirmPassword({ auth }: AuthPageProps) {
 
       <form onSubmit={submit}>
         <div className="mt-4">
-          <InputLabel htmlFor="password" value="Password" />
-
           <TextInput
+            label="Password"
             id="password"
             type="password"
             name="password"
             value={data.password}
             className="mt-1 block w-full"
-            isFocused={true}
+            autoFocus
             onChange={(e) => setData("password", e.target.value)}
+            required
+            errorMsg={errors.password}
+            hideError={isDirty('password')}
           />
-
-          <InputError message={errors.password} className="mt-2" />
         </div>
 
         <div className="mt-4 flex items-center justify-end">

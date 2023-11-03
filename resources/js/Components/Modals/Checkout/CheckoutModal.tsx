@@ -1,13 +1,9 @@
 import { IBill, ICreateBill } from "@/types";
 import { FormEvent } from "react";
-import InputLabel from "../../Inputs/InputLabel";
-import TextInput from "../../Inputs/TextInput";
-import InputError from "../../Inputs/InputError";
 import TemplateModal from "../TemplateModal";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import SecondaryButton from "../../Buttons/SecondaryButton";
 import { InertiaFormProps } from "@/types/global";
-import TotalInfo from "@/Pages/Authenticated/Checkout/Partials/RightSide/Partials/TotalInfo";
 import FormFields from "./Partials/FormFields";
 
 export default function CheckoutModal({
