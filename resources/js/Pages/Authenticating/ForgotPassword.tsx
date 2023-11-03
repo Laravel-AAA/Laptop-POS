@@ -1,16 +1,16 @@
 import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
-import InputError from "@/Components/Inputs/InputError";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
 import { Head, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import { AuthPageProps } from "@/types";
+import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function ForgotPassword({
   status,
   auth,
 }: AuthPageProps<{ status?: string }>) {
-  const { data, setData, post, processing, errors } = useForm({
+  const { data, setData, post, processing, errors, isDirty } = useBetterForm({
     email: "",
   });
 
@@ -41,11 +41,13 @@ export default function ForgotPassword({
           name="email"
           value={data.email}
           className="mt-1 block w-full"
-          isFocused={true}
+          autoFocus
           onChange={(e) => setData("email", e.target.value)}
+          label="Email"
+          required
+          errorMsg={errors.email}
+          hideError={isDirty("email")}
         />
-
-        <InputError message={errors.email} className="mt-2" />
 
         <div className="mt-4 flex items-center justify-end">
           <PrimaryButton type="submit" className="ml-4" disabled={processing}>

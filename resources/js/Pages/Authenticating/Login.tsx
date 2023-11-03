@@ -1,12 +1,11 @@
 import { useEffect, FormEventHandler } from "react";
 import Checkbox from "@/Components/Checkbox";
-import InputError from "@/Components/Inputs/InputError";
-import InputLabel from "@/Components/Inputs/InputLabel";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import { AuthPageProps } from "@/types";
+import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function Login({
   status,
@@ -16,11 +15,12 @@ export default function Login({
   status?: string;
   canResetPassword: boolean;
 }>) {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    email: "",
-    password: "",
-    remember: false,
-  });
+  const { data, setData, post, processing, errors, reset, isDirty } =
+    useBetterForm({
+      email: "",
+      password: "",
+      remember: false,
+    });
 
   useEffect(() => {
     return () => {
@@ -44,36 +44,34 @@ export default function Login({
 
       <form onSubmit={submit}>
         <div>
-          <InputLabel htmlFor="email" value="Email" />
-
           <TextInput
-            id="email"
             type="email"
             name="email"
+            label="Email"
             value={data.email}
+            errorMsg={errors.email}
+            hideError={isDirty("email")}
             className="mt-1 block w-full"
             autoComplete="email"
-            isFocused={true}
             onChange={(e) => setData("email", e.target.value)}
+            autoFocus
+            required
           />
-
-          <InputError message={errors.email} className="mt-2" />
         </div>
 
         <div className="mt-4">
-          <InputLabel htmlFor="password" value="Password" />
-
           <TextInput
-            id="password"
             type="password"
             name="password"
+            label="Password"
             value={data.password}
+            errorMsg={errors.password}
             className="mt-1 block w-full"
             autoComplete="current-password"
             onChange={(e) => setData("password", e.target.value)}
+            required
+            hideError={isDirty('password')}
           />
-
-          <InputError message={errors.password} className="mt-2" />
         </div>
 
         <div className="mt-4 block">

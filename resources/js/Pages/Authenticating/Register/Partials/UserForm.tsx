@@ -1,18 +1,15 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import InputError from "@/Components/Inputs/InputError";
-import InputLabel from "@/Components/Inputs/InputLabel";
 import TextInput from "@/Components/Inputs/TextInput";
+import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { ICreateUser } from "@/types";
-import { InertiaFormProps } from "@/types/global";
 import { Link } from "@inertiajs/react";
 import { useEffect } from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
 export default function UserForm({
   form,
   onBack,
 }: {
-  form: InertiaFormProps<ICreateUser>;
+  form: UseBetterForm<ICreateUser>;
   onBack: () => void;
 }) {
   useEffect(() => {
@@ -24,61 +21,58 @@ export default function UserForm({
   return (
     <>
       <div>
-        <InputLabel htmlFor="name" value="Name" />
-
         <TextInput
-          id="name"
+          label="Your Name"
           name="name"
           value={form.data.name}
+          errorMsg={form.errors.name}
+          hideError={form.isDirty('name')}
           className="mt-1 block w-full"
           autoComplete="name"
-          isFocused={true}
           onChange={(e) => form.setData("name", e.target.value)}
+          autoFocus
           required
         />
-
-        <InputError message={form.errors.name} className="mt-2" />
       </div>
-      <div className="mt-4">
-        <InputLabel htmlFor="email" value="Email" />
 
+      <div className="mt-4">
         <TextInput
-          id="email"
+          label="Email"
           type="email"
           name="email"
           value={form.data.email}
+          errorMsg={form.errors.email}
+          hideError={form.isDirty('email')}
           className="mt-1 block w-full"
           autoComplete="email"
           onChange={(e) => form.setData("email", e.target.value)}
           required
         />
-
-        <InputError message={form.errors.email} className="mt-2" />
       </div>
-      <div className="mt-4">
-        <InputLabel htmlFor="password" value="Password" />
 
+      <div className="mt-4">
         <TextInput
-          id="password"
+          label="Password"
           type="password"
           name="password"
           value={form.data.password}
+          errorMsg={form.errors.password}
+          hideError={form.isDirty('password')}
           className="mt-1 block w-full"
           autoComplete="new-password"
           onChange={(e) => form.setData("password", e.target.value)}
           required
         />
-
-        <InputError message={form.errors.password} className="mt-2" />
       </div>
-      <div className="mt-4">
-        <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
 
+      <div className="mt-4">
         <TextInput
-          id="password_confirmation"
+          label="Confirm Password"
           type="password"
           name="password_confirmation"
           value={form.data.password_confirmation}
+          errorMsg={form.errors.password_confirmation}
+          hideError={form.isDirty('password_confirmation')}
           className="mt-1 block w-full"
           autoComplete="new-password"
           onChange={(e) =>
@@ -86,15 +80,11 @@ export default function UserForm({
           }
           required
         />
-
-        <InputError
-          message={form.errors.password_confirmation}
-          className="mt-2"
-        />
       </div>
+
       <div className="mt-4 flex items-center justify-between">
         <div className="flex items-center justify-end">
-          <PrimaryButton
+          {/* <PrimaryButton
             type="button"
             className="flex !border-primary bg-white !text-primary hover:bg-primary hover:bg-opacity-10"
             disabled={form.processing}
@@ -102,7 +92,7 @@ export default function UserForm({
           >
             <FaArrowLeft />
             <span>&nbsp;Back</span>
-          </PrimaryButton>
+          </PrimaryButton> */}
         </div>
 
         <div className="flex items-center justify-end">

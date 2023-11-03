@@ -1,5 +1,3 @@
-import InputError from "@/Components/Inputs/InputError";
-import InputLabel from "@/Components/Inputs/InputLabel";
 import TextInput from "@/Components/Inputs/TextInput";
 import { ICreateBusiness } from "@/types";
 import { InertiaFormProps } from "@/types/global";
@@ -8,15 +6,13 @@ import CountryInput from "./Partials/CountryInput";
 import COUNTRIES, { Country } from "./Partials/COUNTRIES";
 import { useEffect, useState } from "react";
 import CurrencyInput from "./Partials/CurrencyInput";
-import { Link } from "@inertiajs/react";
-import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import { FaArrowRight } from "react-icons/fa6";
+import { UseBetterForm } from "@/Utilities/useBetterForm";
 
 export default function BusinessForm({
   form,
   onNext,
 }: {
-  form: InertiaFormProps<ICreateBusiness>;
+  form: UseBetterForm<ICreateBusiness>;
   onNext: () => void;
 }) {
   let initial: Country | null = null;
@@ -31,51 +27,34 @@ export default function BusinessForm({
     }
   }, [form.data.country]);
 
+
   return (
     <>
       <div>
-        <InputLabel htmlFor="name" value="Business Name" />
-
         <TextInput
-          id="businessName"
+          label="Business Name"
           name="businessName"
           value={form.data.name}
+          errorMsg={form.errors.name}
+          hideError={form.isDirty('name')}
           className="mt-1 block w-full"
           autoComplete="off"
-          isFocused={true}
+          autoFocus
           maxLength={50}
-          onChange={(e) => form.setData("name", e.target.value)}
+          onChange={(e) => form.setData('name', e.target.value)}
           required
         />
-
-        <InputError message={form.errors.name} className="mt-2" />
       </div>
-
-      {/* <div className="mt-4">
-        <InputLabel htmlFor="logo" value="Business Logo" />
-
-        <TextInput
-          id="logo"
-          name="logo"
-          value={form.data.name}
-          className="mt-1 block w-full"
-          autoComplete="off"
-          onChange={(e) => form.setData("name", e.target.value)}
-          required
-        />
-
-        <InputError message={form.errors.name} className="mt-2" />
-      </div> */}
 
       <div className="mt-4">
         <CountryInput form={form} />
-        <InputError message={form.errors.country} className="mt-2" />
       </div>
 
       <div className="mt-4">
-        <InputLabel htmlFor="city" value="city" />
         <TextInput
-          id="city"
+          label="City"
+          errorMsg={form.errors.city}
+          hideError={form.isDirty('city')}
           name="city"
           value={form.data.city}
           className="mt-1 block w-full"
@@ -83,34 +62,31 @@ export default function BusinessForm({
           onChange={(e) => form.setData("city", e.target.value)}
           required
         />
-        <InputError message={form.errors.city} className="mt-2" />
       </div>
 
       <div className="mt-4">
-        <InputLabel htmlFor="address" value="address" />
         <TextInput
-          id="address"
+          label="Address"
           name="address"
           value={form.data.address}
+          errorMsg={form.errors.address}
+          hideError={form.isDirty('address')}
           className="mt-1 block w-full"
           autoComplete="address"
           onChange={(e) => form.setData("address", e.target.value)}
           required
         />
-        <InputError message={form.errors.address} className="mt-2" />
       </div>
 
       <div className="mt-4">
         <CurrencyInput form={form} chosenCountry={country} />
-        <InputError message={form.errors.country} className="mt-2" />
       </div>
 
       <div className="mt-4">
         <PhoneInput chosenCountry={country} form={form} />
-        <InputError message={form.errors.country} className="mt-2" />
       </div>
 
-      <div className="mt-4 flex items-center justify-end">
+      {/* <div className="mt-4 flex items-center justify-end">
         <Link
           href={route("login")}
           className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
@@ -127,7 +103,7 @@ export default function BusinessForm({
           <span>Next&nbsp;</span>
           <FaArrowRight />
         </PrimaryButton>
-      </div>
+      </div> */}
     </>
   );
 }

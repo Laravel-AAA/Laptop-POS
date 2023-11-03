@@ -1,14 +1,15 @@
-import { Select, Option } from "@material-tailwind/react";
+import { Option } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import COUNTRIES, { Country } from "./COUNTRIES";
-import { InertiaFormProps } from "@/types/global";
 import { ICreateBusiness } from "@/types";
+import SelectInput from "@/Components/Inputs/SelectInput";
+import { UseBetterForm } from "@/Utilities/useBetterForm";
 
 export default function CurrencyInput({
   form,
   chosenCountry: country,
 }: {
-  form: InertiaFormProps<ICreateBusiness>;
+  form: UseBetterForm<ICreateBusiness>;
   chosenCountry: Country | null;
 }) {
   let countries = COUNTRIES.filter(
@@ -45,18 +46,21 @@ export default function CurrencyInput({
   const [countryIndex, setCountryIndex] = useState<number | null>(
     getCountryIndex(country),
   );
-
   return (
-    <Select
+    <SelectInput
       label="Currency"
-      size="lg"
       className="text-md"
-      color="teal"
       value={countryIndex?.toString()}
+      errorMsg={form.errors.currency}
+      hideError={form.isDirty("currency")}
       onChange={(v) => {
         setCountryIndex(Number(v));
-        form.setData("currency", countries[Number(v)].currencies[0].symbol);
+        form.setData(
+          "currency",
+          countries[Number(v)].currencies[0].symbol ?? null,
+        );
       }}
+      required
       selected={(element) =>
         element &&
         React.cloneElement(element, {
@@ -76,6 +80,6 @@ export default function CurrencyInput({
           {c.currencies[0].name}
         </Option>
       ))}
-    </Select>
+    </SelectInput>
   );
 }
