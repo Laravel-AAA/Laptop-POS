@@ -1,8 +1,3 @@
-/**
- * CRUD all items available for this user such as Keyboard, Mouse.
- * Each item has information such as Picture, Name, Price, stock available, ...etc.
- */
-
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {
   AuthPageProps,

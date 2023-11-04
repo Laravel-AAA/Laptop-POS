@@ -17,13 +17,12 @@ class ProductController extends Controller
     protected function index(Request $request)
     {
         //filter is a scope function in the Product model
-        $products = $request->user()->products()->latest()->filter($request->only('search'))
+        $products = $request->user()->business->products()->latest()->filter($request->only('search'))
             ->paginate(15)->appends($request->all());
 
         return Inertia::render('Authenticated/Inventory/index', [
             'products' => $products,
             'filter' => $request->only('search'),
-            'business' => ['taxPercent' => 0.15] //$request->user()->business(),
         ]);
     }
 

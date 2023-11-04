@@ -1,6 +1,6 @@
-import { HTMLAttributes  } from "react";
+import { HTMLAttributes } from "react";
 
-export default function InputHint({
+export default function HintMessage({
   message, //use either message or children NOT both
   children,
   className = "",
@@ -10,7 +10,7 @@ export default function InputHint({
   else if (typeof message === "object") return message;
   else
     return (
-      <p {...props} className={"text-sm text-gray-500 " + className}>
+      <p {...props} className={"ml-2 mt-2 text-xs text-gray-500 " + className}>
         {message ? message : children}
       </p>
     );

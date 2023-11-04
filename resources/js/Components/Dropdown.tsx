@@ -41,6 +41,7 @@ const Trigger = ({ children }: PropsWithChildren) => {
     <>
       <button
         className="div-style"
+        type="button"
         onClick={(e) => {
           e.stopPropagation();
           toggleOpen();
@@ -52,9 +53,10 @@ const Trigger = ({ children }: PropsWithChildren) => {
       {open && (
         <button
           className="div-style fixed inset-0 z-40 h-[100vh] w-full"
+          type="button"
           onClick={(e) => {
-            setOpen(false);
             e.stopPropagation();
+            setOpen(false);
           }}
         ></button>
       )}

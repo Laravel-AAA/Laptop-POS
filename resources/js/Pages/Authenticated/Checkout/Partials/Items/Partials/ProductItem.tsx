@@ -14,7 +14,7 @@ export default function ProductItem({
   requestDecrease: () => any;
   transaction: ICreateTransaction;
 }) {
-  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
+  const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
   const product = transaction.product;
 
   return (
@@ -62,7 +62,7 @@ export default function ProductItem({
               {product.price === null ? (
                 "N/A"
               ) : (
-                <Num currency="$" amount={product.price * (1 + taxPercent)} />
+                <Num  amount={product.price * (1 + taxPercent)} />
               )}
             </span>
           </p>

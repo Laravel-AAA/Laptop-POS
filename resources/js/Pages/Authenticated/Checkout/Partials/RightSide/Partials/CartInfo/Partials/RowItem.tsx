@@ -13,7 +13,7 @@ export default function RowItem({
   transaction: ICreateTransaction;
   billOperations: BillOperations;
 }) {
-  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
+  const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
 
   return (
     <tr className="group h-10 max-h-10 border-y">
@@ -60,7 +60,6 @@ export default function RowItem({
             <span className="text-danger-600">N/A</span>
           ) : (
             <Num
-              currency="$"
               className="font-semibold text-primary-700"
               amount={transaction.product.price * (1 + taxPercent)}
             />

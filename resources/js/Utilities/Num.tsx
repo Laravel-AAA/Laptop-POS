@@ -1,20 +1,23 @@
+import { AuthPageProps } from "@/types";
+import { usePage } from "@inertiajs/react";
 import { ReactNode } from "react";
 
 export default function Num({
   amount,
   className = "",
   fixed = 2,
-  currency,
+  showCurrency=false,
   noAmount,
 }: {
   className?: string;
   fixed?: number;
-  currency?: string;
+  showCurrency?: boolean;
 } & ( //if amount is possibly null then you should declare what shows when it is null.
   | { amount: number; noAmount?: string }
   | { amount: number | null; noAmount: string }
 )) {
   let display: string | ReactNode;
+  const currencySymbol = usePage<AuthPageProps>().props.auth.business.currency;
   if (amount === null) display = noAmount;
   else {
     amount = Number(amount.toFixed(fixed));
@@ -23,10 +26,10 @@ export default function Num({
     if (Object.is(amount, -0)) display = 0;
     else display = amount.toLocaleString();
 
-    if (currency)
+    if (showCurrency)
       display = (
         <>
-          <span>{currency}&#8239;</span>
+          <span>{currencySymbol}&#8239;</span>
           {display}
         </>
       );

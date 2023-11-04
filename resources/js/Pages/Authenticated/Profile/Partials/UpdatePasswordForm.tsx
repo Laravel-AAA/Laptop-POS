@@ -1,10 +1,8 @@
 import { useRef, FormEventHandler } from "react";
-import InputError from "@/Components/Inputs/InputError";
-import InputLabel from "@/Components/Inputs/InputLabel";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
-import { useForm } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
+import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function UpdatePasswordForm({
   className = "",
@@ -14,8 +12,8 @@ export default function UpdatePasswordForm({
   const passwordInput = useRef<HTMLInputElement>();
   const currentPasswordInput = useRef<HTMLInputElement>();
 
-  const { data, setData, errors, put, reset, processing, recentlySuccessful } =
-    useForm({
+  const { data, setData, errors, put, reset, processing, recentlySuccessful,isDirty } =
+    useBetterForm({
       current_password: "",
       password: "",
       password_confirmation: "",
@@ -53,53 +51,52 @@ export default function UpdatePasswordForm({
 
       <form onSubmit={updatePassword} className="mt-6 space-y-6">
         <div>
-          <InputLabel htmlFor="current_password" value="Current Password" />
 
           <TextInput
             id="current_password"
+            label="Current Password"
             ref={currentPasswordInput}
-            value={data.current_password}
-            onChange={(e) => setData("current_password", e.target.value)}
             type="password"
             className="mt-1 block w-full"
+            value={data.current_password}
+            onChange={(e) => setData("current_password", e.target.value)}
             autoComplete="current-password"
+            required
+            errorMsg={errors.current_password}
+            hideError={isDirty('current_password')}
           />
 
-          <InputError message={errors.current_password} className="mt-2" />
         </div>
 
         <div>
-          <InputLabel htmlFor="password" value="New Password" />
-
           <TextInput
             id="password"
+            label="New Password"
             ref={passwordInput}
             value={data.password}
             onChange={(e) => setData("password", e.target.value)}
             type="password"
+            required
             className="mt-1 block w-full"
             autoComplete="new-password"
+            errorMsg={errors.password}
+            hideError={isDirty('password')}
           />
-
-          <InputError message={errors.password} className="mt-2" />
         </div>
 
         <div>
-          <InputLabel
-            htmlFor="password_confirmation"
-            value="Confirm Password"
-          />
-
           <TextInput
             id="password_confirmation"
-            value={data.password_confirmation}
-            onChange={(e) => setData("password_confirmation", e.target.value)}
+            label="Confirm Password"
             type="password"
             className="mt-1 block w-full"
+            value={data.password_confirmation}
+            onChange={(e) => setData("password_confirmation", e.target.value)}
             autoComplete="new-password"
+            required
+            errorMsg={errors.password_confirmation}
+            hideError={isDirty('password_confirmation')}
           />
-
-          <InputError message={errors.password_confirmation} className="mt-2" />
         </div>
 
         <div className="flex items-center gap-4">

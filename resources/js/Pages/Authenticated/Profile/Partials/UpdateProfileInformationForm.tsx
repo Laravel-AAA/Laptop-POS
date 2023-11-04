@@ -1,11 +1,10 @@
-import InputError from "@/Components/Inputs/InputError";
-import InputLabel from "@/Components/Inputs/InputLabel";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 import { FormEventHandler } from "react";
 import { AuthPageProps } from "@/types";
+import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function UpdateProfileInformation({
   mustVerifyEmail,
@@ -18,8 +17,8 @@ export default function UpdateProfileInformation({
 }) {
   const user = usePage<AuthPageProps>().props.auth.user;
 
-  const { data, setData, patch, errors, processing, recentlySuccessful } =
-    useForm({
+  const { data, setData, patch, errors, processing, recentlySuccessful,isDirty } =
+    useBetterForm({
       name: user.name,
       email: user.email,
     });
@@ -44,35 +43,33 @@ export default function UpdateProfileInformation({
 
       <form onSubmit={submit} className="mt-6 space-y-6">
         <div>
-          <InputLabel htmlFor="name" value="Name" />
-
           <TextInput
             id="name"
+            label="Name"
             className="mt-1 block w-full"
             value={data.name}
             onChange={(e) => setData("name", e.target.value)}
             required
-            isFocused
+            autoFocus
             autoComplete="name"
+            errorMsg={errors.name}
+            hideError={isDirty('name')}
           />
-
-          <InputError className="mt-2" message={errors.name} />
         </div>
 
         <div>
-          <InputLabel htmlFor="email" value="Email" />
-
           <TextInput
             id="email"
+            label="Email"
             type="email"
             className="mt-1 block w-full"
             value={data.email}
             onChange={(e) => setData("email", e.target.value)}
             required
             autoComplete="username"
+            errorMsg={errors.email}
+            hideError={isDirty('email')}
           />
-
-          <InputError className="mt-2" message={errors.email} />
         </div>
 
         {mustVerifyEmail && user.email_verified_at === null && (

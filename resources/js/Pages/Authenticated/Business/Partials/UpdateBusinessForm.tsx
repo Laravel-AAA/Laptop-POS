@@ -1,20 +1,19 @@
-import InputError from "@/Components/Inputs/InputError";
-import InputLabel from "@/Components/Inputs/InputLabel";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import TextInput from "@/Components/Inputs/TextInput";
-import { Link, useForm, usePage } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 import { FormEventHandler } from "react";
 import { AuthPageProps, IBusiness } from "@/types";
+import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function UpdateBusinessInformation({
   className = "",
 }: {
   className?: string;
 }) {
-  const business = usePage<AuthPageProps>().props.business;
+  const business = usePage<AuthPageProps>().props.auth.business;
 
-  const form = useForm<IBusiness>({
+  const form = useBetterForm<IBusiness>({
     ...business,
   });
 
@@ -38,10 +37,9 @@ export default function UpdateBusinessInformation({
 
       <form onSubmit={submit} className="mt-6 space-y-6">
         <div>
-          <InputLabel htmlFor="taxPercent" value="Tax percent" />
-
           <TextInput
             id="taxPercent"
+            label="Tax Percent"
             className="mt-1 block w-full"
             type="number"
             value={form.data.taxPercent * 100}
@@ -49,30 +47,30 @@ export default function UpdateBusinessInformation({
               form.setData("taxPercent", Number(e.target.value) / 100)
             }
             required
-            isFocused
+            autoFocus
             autoComplete="off"
+            errorMsg={form.errors.taxPercent}
+            hideError={form.isDirty("taxPercent")}
           />
 
-          <InputError className="mt-2" message={form.errors.taxPercent} />
         </div>
 
         <div>
-          <InputLabel htmlFor="currency" value="Currency" />
 
           <TextInput
             id="currency"
+            label="Currency"
             type="text"
             className="mt-1 block w-full"
             value={form.data.currency}
             onChange={(e) => form.setData("currency", e.target.value)}
             required
             autoComplete="off"
+            errorMsg={form.errors.currency}
+            hideError={form.isDirty('currency')}
           />
 
-          <InputError className="mt-2" message={form.errors.currency} />
         </div>
-
-
 
         <div className="flex items-center gap-4">
           <PrimaryButton type="submit" disabled={form.processing}>

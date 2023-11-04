@@ -1,11 +1,9 @@
 import { useRef, useState, FormEventHandler } from "react";
-import InputError from "@/Components/Inputs/InputError";
-import InputLabel from "@/Components/Inputs/InputLabel";
 import Modal from "@/Components/Modal";
 import TextInput from "@/Components/Inputs/TextInput";
-import { useForm } from "@inertiajs/react";
 import DangerButton from "@/Components/Buttons/DangerButton";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
+import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function DeleteUserForm({
   className = "",
@@ -22,7 +20,8 @@ export default function DeleteUserForm({
     processing,
     reset,
     errors,
-  } = useForm({
+    isDirty,
+  } = useBetterForm({
     password: "",
   });
 
@@ -74,29 +73,28 @@ export default function DeleteUserForm({
           </p>
 
           <div className="mt-6">
-            <InputLabel
+            {/* <InputLabel
               htmlFor="password"
               value="Password"
               className="sr-only"
-            />
+            /> */}
 
             <TextInput
               id="password"
+              label="Password"
               type="password"
               name="password"
               ref={passwordInput}
               value={data.password}
               onChange={(e) => setData("password", e.target.value)}
               className="mt-1 block w-3/4"
-              isFocused
+              autoFocus
+              required
               placeholder="Password"
+              errorMsg={errors.password||(errors as any).hasProducts}
+              hideError={isDirty('password')}
             />
 
-            <InputError message={errors.password} className="mt-2" />
-            <InputError
-              message={(errors as any).hasProducts}
-              className="mt-2"
-            />
           </div>
 
           <div className="mt-6 flex justify-end">

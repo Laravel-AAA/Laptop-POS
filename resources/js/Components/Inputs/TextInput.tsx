@@ -1,12 +1,14 @@
 import { Input, InputProps } from "@material-tailwind/react";
 import {
   HTMLAttributes,
+  ReactNode,
   forwardRef,
   useEffect,
   useImperativeHandle,
   useRef,
 } from "react";
 import ErrorMessage from "./ErrorMessage";
+import HintMessage from "./HintMessage";
 
 export default forwardRef(function TextInput(
   {
@@ -20,6 +22,8 @@ export default forwardRef(function TextInput(
     errorMsgProps,
     hideError,
     error,
+    hint,
+    hintProps,
     ...props
   }: InputProps & {
     isSelect?: boolean;
@@ -27,7 +31,9 @@ export default forwardRef(function TextInput(
     required: boolean;
     errorMsg: string | undefined;
     errorMsgProps?: HTMLAttributes<HTMLParagraphElement>;
-    hideError:boolean | undefined;
+    hideError: boolean | undefined;
+    hint?: string | ReactNode;
+    hintProps?: HTMLAttributes<HTMLParagraphElement>;
   },
   ref,
 ) {
@@ -81,6 +87,11 @@ export default forwardRef(function TextInput(
       //   focus:border-primary-600 focus:ring-primary-600 file:active:scale-95
       //     disabled:opacity-60 ` + */}
       <ErrorMessage message={errorMsg} {...errorMsgProps} />
+      {typeof hint === "string" ? (
+        <HintMessage message={hint} {...hintProps} />
+      ) : (
+        <HintMessage>{hint}</HintMessage>
+      )}
     </>
   );
 });

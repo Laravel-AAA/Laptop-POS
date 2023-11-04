@@ -16,9 +16,7 @@ class BusinessController extends Controller
      */
     public function edit(Request $request): Response
     {
-        return Inertia::render('Authenticated/Business/Edit', [
-            'business' => $request->user()->business(),
-        ]);
+        return Inertia::render('Authenticated/Business/Edit');
     }
 
     /**

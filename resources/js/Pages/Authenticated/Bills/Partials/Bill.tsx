@@ -1,4 +1,4 @@
-import { AuthPageProps, IBill,  } from "@/types";
+import { AuthPageProps, IBill } from "@/types";
 import BillOptions from "./BillOptions";
 import FromDate from "@/Utilities/FromDate";
 import Num from "@/Utilities/Num";
@@ -8,10 +8,8 @@ import { usePage } from "@inertiajs/react";
 type PropsProduct = {
   bill: IBill;
 };
-export default function Product({
-  bill,
-}: PropsProduct) {
-  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
+export default function Product({ bill }: PropsProduct) {
+  const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
 
   const subTotalPrice = bill.transactions.reduce(
     (v, t) => v + (t.product.price ?? 0) * t.quantity,
@@ -30,25 +28,29 @@ export default function Product({
       <TD>
         <Num
           className="text-secondary-700"
-          currency="$"
+          showCurrency
           amount={subTotalPrice}
         />
       </TD>
       <TD>
-        <Num className="text-primary-700" currency="$" amount={totalPrice} />
+        <Num
+          className="text-primary-700"
+          showCurrency
+          amount={totalPrice}
+        />
       </TD>
       <TD>
         <Num
           className={bill.cashReceived === null ? "text-primary-700" : ""}
-          currency="$"
+          showCurrency
           amount={bill.cashReceived}
           noAmount="Digital Payment"
         />
       </TD>
       <TD>
         <Num
-        className="text-indigo-700"
-          currency="$"
+          className="text-indigo-700"
+          showCurrency
           amount={bill.cashReceived ? bill.cashReceived - totalPrice : null}
           noAmount=""
         />
@@ -57,9 +59,7 @@ export default function Product({
         <Num amount={bill.transactions.reduce((v, t) => v + t.quantity, 0)} />
       </TD>
       <td>
-        <BillOptions
-          bill={bill}
-        />
+        <BillOptions bill={bill} />
       </td>
     </tr>
   );

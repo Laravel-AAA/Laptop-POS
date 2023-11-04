@@ -21,8 +21,7 @@ export interface IUser extends ICreateUser {
 export type AuthPageProps<
   T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {
-  auth: { user: IUser; };
-  business: IBusiness;
+  auth: { user: IUser; business:IBusiness };
 };
 
 

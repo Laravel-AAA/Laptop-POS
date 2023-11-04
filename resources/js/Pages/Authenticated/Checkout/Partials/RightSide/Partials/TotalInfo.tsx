@@ -3,7 +3,7 @@ import { AuthPageProps, ICreateBill,  } from "@/types";
 import { usePage } from "@inertiajs/react";
 
 export default function TotalInfo({ bill }: { bill: ICreateBill }) {
-  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
+  const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
 
   /**Total without Taxes */
   function subTotal() {

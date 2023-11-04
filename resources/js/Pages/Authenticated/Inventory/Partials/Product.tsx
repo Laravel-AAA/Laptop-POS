@@ -13,7 +13,7 @@ export default function Product({
   requestEdit,
   requestShow,
 }: PropsProduct) {
-  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
+  const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
   return (
     <button
       onClick={() => requestShow()}
@@ -55,7 +55,7 @@ export default function Product({
               "N/A"
             ) : (
               <Num
-                currency="$"
+                showCurrency
                 className="font-semibold"
                 amount={product.price * (1 + taxPercent)}
               />

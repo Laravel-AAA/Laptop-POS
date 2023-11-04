@@ -25,7 +25,6 @@ class BillController extends Controller
         return Inertia::render('Authenticated/Bills/index', [
             'bills' => $bills,
             'filter' => $request->only('search'),
-            'business' => ['taxPercent' => 0.15] //$request->user()->business(),
         ]);
     }
 
@@ -55,7 +54,6 @@ class BillController extends Controller
             'products' => $products,
             'filter' => $request->only('search', 'barcode'),
             //$request->user()->business(),
-            'business' => ['taxPercent' => 0.15],
             'bill' => $bill,
         ]);
     }

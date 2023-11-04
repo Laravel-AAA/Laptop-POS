@@ -1,23 +1,20 @@
 import Checkbox from "@/Components/Checkbox";
-import InputError from "@/Components/Inputs/InputError";
-import InputHint from "@/Components/Inputs/InputHint";
-import InputLabel from "@/Components/Inputs/InputLabel";
 import TextInput from "@/Components/Inputs/TextInput";
 import TotalInfo from "@/Pages/Authenticated/Checkout/Partials/RightSide/Partials/TotalInfo";
 import Num from "@/Utilities/Num";
+import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { AuthPageProps, IBill, ICreateBill } from "@/types";
-import { InertiaFormProps } from "@/types/global";
 import { usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 
 export default function FormFields({
   form,
 }: {
-  form: InertiaFormProps<ICreateBill | IBill>;
+  form: UseBetterForm<ICreateBill | IBill>;
 }) {
   const [isDigitalPayment, setDigitalPayment] = useState<boolean>(false);
   const [remaining, setRemaining] = useState<number>(0);
-  const taxPercent = usePage<AuthPageProps>().props.business.taxPercent;
+  const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
 
   function subTotal(): number {
     return form.data.transactions.reduce(
@@ -44,10 +41,9 @@ export default function FormFields({
     <>
       <TotalInfo bill={form.data} />
       <div className="mt-3 w-full">
-        <InputLabel htmlFor="cashReceived" value="Cash Received" />
-
         <TextInput
           id="cashReceived"
+          label="Cash Received"
           name="cashReceived"
           type="number"
           value={
@@ -57,7 +53,7 @@ export default function FormFields({
           }
           className="mt-1 block w-full text-xl"
           inputMode="numeric"
-          isFocused={true}
+          autoFocus
           isSelect={true}
           onClick={(e) => e.currentTarget.select()}
           disabled={form.processing || isDigitalPayment}
@@ -66,18 +62,24 @@ export default function FormFields({
             form.setData("cashReceived", v);
             setRemaining(Number(Number((v ?? 0) - total()).toFixed(2)));
           }}
+          required={false}
+          errorMsg={form.errors.cashReceived}
+          hideError={form.isDirty("cashReceived")}
+          hint={
+            <p
+              style={{ visibility: !isDigitalPayment ? "visible" : "hidden" }}
+              className="ml-2 mt-1 text-lg text-gray-800"
+            >
+              Remaining:&nbsp;
+              <Num
+                className="text-indigo-700"
+                amount={remaining}
+              />
+            </p>
+          }
         />
 
-        <InputError message={form.errors.cashReceived} className="mt-2" />
-        <InputHint>
-          <p
-            style={{ visibility: !isDigitalPayment ? "visible" : "hidden" }}
-            className="ml-2 mt-1 text-lg text-gray-800"
-          >
-            Remaining:&nbsp;
-            <Num currency="$" className="text-indigo-700" amount={remaining} />
-          </p>
-        </InputHint>
+
 
         <label className="ml-2 mt-2 flex items-center">
           <Checkbox
