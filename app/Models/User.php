@@ -20,6 +20,8 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 {
     use HasApiTokens, HasFactory, Notifiable, HasUlids, \Illuminate\Auth\Passwords\CanResetPassword;
 
+    public static $ROLES = ['Admin','Cashier'];
+
     /**
      * The table associated with the model.
      *
@@ -36,6 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**

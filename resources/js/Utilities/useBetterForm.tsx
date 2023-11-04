@@ -1,8 +1,9 @@
 import { InertiaFormProps } from "@/types/global";
 import { useForm } from "@inertiajs/react";
+import { useEffect, useState } from "react";
 /**
- * `useBetterForm` is a plugin on `useForm` which adds more functionality such as `set` with type hint.
- * And `dirty` which tells if a field have been changed, which typically will be used for hiding an error, when user type aka change the input.
+ * `useBetterForm` is a add-on on `useForm` which adds more functionality such as `setData` with type hint.
+ * And `dirty` which tells if a field have been changed, which typically will be used for hiding an error, after user change the field
  */
 export type UseBetterForm<T extends object> = Omit<
   InertiaFormProps<T>,
@@ -18,8 +19,14 @@ export default function useBetterForm<T extends object>(
   initialValue: T,
 ): UseBetterForm<T> {
   const form = useForm<T>(initialValue);
-  // const [oldValues] = useState<T>(JSON.parse(JSON.stringify(initialValue)));
-  const oldValues = JSON.parse(JSON.stringify(initialValue));
+
+  const [oldValues, setOldValues] = useState<T>(
+    JSON.parse(JSON.stringify(initialValue)),
+  );
+  useEffect(() => {
+    setOldValues(form.data);
+  }, [form.hasErrors]);
+
   const better: UseBetterForm<T> = {
     ...form,
     setData: (key, value) => {

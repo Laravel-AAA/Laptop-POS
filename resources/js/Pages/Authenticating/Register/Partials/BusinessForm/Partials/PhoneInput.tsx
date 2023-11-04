@@ -26,7 +26,7 @@ export function PhoneInput({
   );
 
   useEffect(() => {
-    if (!form.data.phone) setCallCodeCountry(country ?? countries[0]);
+    if (country) setCallCodeCountry(country);
   }, [country]);
 
   return (
@@ -71,13 +71,13 @@ export function PhoneInput({
           </MenuList>
         </Menu>
         <Input
-          label="Mobile Number"
+          label="Phone Number"
           color="teal"
           size="lg"
-          type="tel"
-          className="w-full rounded-l-none focus:rounded-l-none focus:ring-0"
+          type="number"
+          className="remove-arrow w-full rounded-l-none focus:rounded-l-none focus:ring-0"
           value={form.data.phone}
-          error={!!form.errors.phone && !form.isDirty('phone')}
+          error={!!form.errors.phone && !form.isDirty("phone")}
           onChange={(v) => form.setData("phone", v.target.value)}
           required
           crossOrigin={undefined}

@@ -20,8 +20,8 @@ return new class extends Migration {
             $table->integer('stock')->nullable();
             $table->string('description', 500)->nullable();
             $table->timestamps();
-            $table->foreignUlid('createdBy_id')->constrained('users','id');//created by
-            $table->foreignUlid('business_id')->constrained();
+            $table->foreignUlid('createdBy_id')->constrained('users'); //created by
+            $table->foreignUlid('business_id')->constrained('business');
         });
     }
 

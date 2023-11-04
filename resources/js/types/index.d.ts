@@ -8,8 +8,9 @@
 export interface ICreateUser {
   name: string;
   email: string;
-  password:string;
-  password_confirmation:string;
+  password: string;
+  password_confirmation: string;
+  role: 'Admin' | 'Cashier';
 }
 
 export interface IUser extends ICreateUser {
@@ -76,12 +77,12 @@ export interface ICreateBusiness {
   name: string;
   logo: string | null;
   logoFile: File | null;
-  phone: string;
-  taxPercent: number | null;
-  currency: string | null;
   country: string;
   city: string;
   address: string;
+  currency: string | null;
+  phone: string;
+  taxPercent: number | null;
   taxIdentificationNumber: string | null;
 }
 

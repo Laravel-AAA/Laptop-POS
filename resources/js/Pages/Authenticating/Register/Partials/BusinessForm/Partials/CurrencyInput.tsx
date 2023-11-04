@@ -37,9 +37,10 @@ export default function CurrencyInput({
   }
 
   useEffect(() => {
-    if (!form.data.currency) {
-      let index = getCountryIndex(country);
-      if (index) setCountryIndex(index);
+    let index = getCountryIndex(country);
+    if (index) {
+      setCountryIndex(index);
+      form.setData("currency", countries[index].currencies[0].symbol ?? null);
     }
   }, [country]);
 

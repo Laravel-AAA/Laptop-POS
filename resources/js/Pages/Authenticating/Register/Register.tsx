@@ -12,6 +12,7 @@ export default function Register({ auth }: AuthPageProps) {
     email: "",
     password: "",
     password_confirmation: "",
+    role: "Admin",
   });
 
   const businessForm = useBetterForm<ICreateBusiness>({
@@ -30,20 +31,29 @@ export default function Register({ auth }: AuthPageProps) {
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    //! hooks can only be used in the body function
-    // const allForms = useForm<ICreateUser & { business: ICreateBusiness }>({
-    //   ...userForm.data,
-    //   business: businessForm.data,
-    // });
-
-    router.post(route("register"), { ...userForm.data, ...businessForm.data });
-
-    // allForms.post(route("register"), {
-    //   onError: (errors) => console.log("allForms errors", errors),
-    // });
+    router.post(
+      route("register"),
+      {
+        ...userForm.data,
+        business: businessForm.data,
+      } as any,
+      {
+        onStart: () => {
+          businessForm.clearErrors();
+          userForm.clearErrors();
+        },
+        onError: (e) => {
+          for (let k in e) {
+            if (k.startsWith("business."))
+              businessForm.setError(k.substring(9) as any, e[k]);
+            else userForm.setError(k as any, e[k]);
+          }
+        },
+      },
+    );
   };
 
-  const [tabIndex, setTabIndex] = useState<number>(0);
+  // const [tabIndex, setTabIndex] = useState<number>(0);
   return (
     <GuestFormLayout auth={auth}>
       <Head title="Register" />
@@ -65,8 +75,12 @@ export default function Register({ auth }: AuthPageProps) {
         <p className="text-center text-lg text-blue-gray-500">
           Business Information
         </p>
-
-        <BusinessForm onNext={() => setTabIndex(1)} form={businessForm} />
+        <BusinessForm
+          onNext={() => {
+            // setTabIndex(1)
+          }}
+          form={businessForm}
+        />
         {/* </Transition>
             </Tab.Panel>
             <Tab.Panel>
@@ -83,7 +97,12 @@ export default function Register({ auth }: AuthPageProps) {
         <p className="mt-4 text-center text-lg text-blue-gray-500">
           Account Information
         </p>
-        <UserForm onBack={() => setTabIndex(0)} form={userForm} />
+        <UserForm
+          onBack={() => {
+            // setTabIndex(0)
+          }}
+          form={userForm}
+        />
         {/* </Transition>
             </Tab.Panel>
           </Tab.Panels> */}

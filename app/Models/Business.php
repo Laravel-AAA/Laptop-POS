@@ -18,7 +18,7 @@ class Business extends Model
      *
      * @var string
      */
-    protected $table = 'businesses';
+    protected $table = 'business';
 
     /**
      * The attributes that are mass assignable.
