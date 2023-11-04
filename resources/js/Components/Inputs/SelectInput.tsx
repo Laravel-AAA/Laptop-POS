@@ -8,11 +8,12 @@ export default function SelectInput({
   color = "red",
   size = "lg",
   variant = "outlined",
-  className = "",
   errorMsg,
   errorMsgProps,
   error,
   hideError,
+  //There is no such required on Select :|
+  required,
   ...props
 }: SelectProps & {
   label: string;
@@ -28,7 +29,15 @@ export default function SelectInput({
   }
   return (
     <>
-      <Select variant={variant} color={color} size={size} error={error} {...props}>
+      <Select
+        {...props}
+        //This is because of a bug when using tab it dose not focus on Select element.
+        onFocus={(e) => e.nativeEvent.relatedTarget && e.target.click()}
+        variant={variant}
+        color={color}
+        size={size}
+        error={error}
+      >
         {children}
       </Select>
       <ErrorMessage message={errorMsg} {...errorMsgProps} />
