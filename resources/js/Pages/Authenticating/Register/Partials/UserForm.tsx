@@ -30,7 +30,6 @@ export default function UserForm({
           className="mt-1 block w-full"
           autoComplete="name"
           onChange={(e) => form.setData("name", e.target.value)}
-          autoFocus
           required
         />
       </div>
