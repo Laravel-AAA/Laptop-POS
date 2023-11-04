@@ -16,9 +16,6 @@ export default function CountryInput({
   return (
     <SelectInput
       label="Country"
-      size="lg"
-      className="text-md"
-      color="teal"
       value={form.data.country}
       errorMsg={form.errors.country}
       hideError={form.isDirty("country")}

@@ -26,7 +26,10 @@ export default function useBetterForm<T extends object>(
       form.setData(key, value);
     },
     isDirty: (key) => {
-      return key ? form.data[key] !== oldValues[key] : form.isDirty;
+      if (key) {
+        return form.data[key] !== oldValues[key];
+      }
+      return form.isDirty;
     },
   };
   return better;

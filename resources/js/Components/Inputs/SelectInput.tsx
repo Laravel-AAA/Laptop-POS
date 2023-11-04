@@ -5,7 +5,7 @@ import ErrorMessage from "./ErrorMessage";
 export default function SelectInput({
   children,
   ref, //typescript shit. ref will be ignored if passed to SelectInput
-  color = "red",
+  color = "teal",
   size = "lg",
   variant = "outlined",
   errorMsg,
@@ -14,6 +14,7 @@ export default function SelectInput({
   hideError,
   //There is no such required on Select :|
   required,
+  onFocus,
   ...props
 }: SelectProps & {
   label: string;
@@ -27,12 +28,16 @@ export default function SelectInput({
     else if (errorMsg) error = true;
     else error = false;
   }
+  console.log("error", error);
   return (
     <>
       <Select
         {...props}
-        //This is because of a bug when using tab it dose not focus on Select element.
-        onFocus={(e) => e.nativeEvent.relatedTarget && e.target.click()}
+        onFocus={(e) => {
+          //This is because of a bug when using tab it dose not focus on Select element.
+          if (e.nativeEvent.relatedTarget) e.target.click();
+          if (onFocus) onFocus(e);
+        }}
         variant={variant}
         color={color}
         size={size}
