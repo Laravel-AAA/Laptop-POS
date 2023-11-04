@@ -49,7 +49,6 @@ export default function CurrencyInput({
   return (
     <SelectInput
       label="Currency"
-      className="text-md"
       value={countryIndex?.toString()}
       errorMsg={form.errors.currency}
       hideError={form.isDirty("currency")}
