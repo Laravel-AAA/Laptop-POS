@@ -1,7 +1,6 @@
-import { Select, Option } from "@material-tailwind/react";
+import { Option } from "@material-tailwind/react";
 import React from "react";
 import COUNTRIES from "./COUNTRIES";
-import { InertiaFormProps } from "@/types/global";
 import { ICreateBusiness } from "@/types";
 import SelectInput from "@/Components/Inputs/SelectInput";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
@@ -22,7 +21,7 @@ export default function CountryInput({
       color="teal"
       value={form.data.country}
       errorMsg={form.errors.country}
-      hideError={ form.isDirty("country")}
+      hideError={form.isDirty("country")}
       onChange={(v) => form.setData("country", v ?? "")}
       required
       selected={(element) =>

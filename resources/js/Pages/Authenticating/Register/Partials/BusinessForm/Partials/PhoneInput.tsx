@@ -29,7 +29,6 @@ export function PhoneInput({
     if (!form.data.phone) setCallCodeCountry(country ?? countries[0]);
   }, [country]);
 
-  form.errors.phone = "Phone is invalid";
   return (
     <>
       <div className="relative flex w-full">
