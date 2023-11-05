@@ -17,7 +17,8 @@ class ProductController extends Controller
     protected function index(Request $request)
     {
         //filter is a scope function in the Product model
-        $products = $request->user()->business->products()->latest()->filter($request->only('search'))
+        $products = $request->user()->business->products()->latest()
+            ->filter($request->only('search'))
             ->paginate(15)->appends($request->all());
 
         return Inertia::render('Authenticated/Inventory/index', [
@@ -42,7 +43,7 @@ class ProductController extends Controller
         }
         $request->user()->products()->create($product);
 
-        return redirect()->back()->with('success','The product was created successfully');
+        return redirect()->back()->with('success', 'The product was created successfully');
     }
 
     protected function destroy(Product $product)
@@ -52,7 +53,7 @@ class ProductController extends Controller
         if ($product->img)
             $this->deleteImg($product->img);
         $product->delete();
-        return redirect()->back()->with('success','The product was deleted successfully');
+        return redirect()->back()->with('success', 'The product was deleted successfully');
     }
 
     protected function update(UpdateProductRequest $request, Product $product)
@@ -68,7 +69,7 @@ class ProductController extends Controller
         }
         $product->update($newProduct);
 
-        return redirect()->back()->with('success','The product was updated successfully');
+        return redirect()->back()->with('success', 'The product was updated successfully');
     }
 
 

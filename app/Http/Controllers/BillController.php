@@ -17,7 +17,7 @@ class BillController extends Controller
      */
     public function index(Request $request)
     {
-        $bills = $request->user()->bills()->latest()
+        $bills = $request->user()->business->bills()->latest()
             ->with('transactions')->with('transactions.product')
             ->filter($request->only('search', 'product'))
             ->paginate(15)->appends($request->all());
@@ -46,7 +46,7 @@ class BillController extends Controller
     private function checkoutPage(Request $request, Bill $bill = null)
     {
 
-        $products = $request->user()->products()->latest()
+        $products = $request->user()->business->products()->latest()
             ->filter($request->only('search', 'barcode'))
             ->paginate(20)->appends($request->all());
 
