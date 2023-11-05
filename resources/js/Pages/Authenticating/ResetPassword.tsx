@@ -1,7 +1,7 @@
 import { useEffect, FormEventHandler } from "react";
 import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import TextInput from "@/Components/Inputs/TextInput";
+import Input from "@/Components/Inputs/Input";
 import { Head } from "@inertiajs/react";
 import { AuthPageProps } from "@/types";
 import useBetterForm from "@/Utilities/useBetterForm";
@@ -40,7 +40,7 @@ export default function ResetPassword({
 
       <form onSubmit={submit}>
         <div>
-          <TextInput
+          <Input
             id="email"
             label="Email"
             type="email"
@@ -51,11 +51,13 @@ export default function ResetPassword({
             onChange={(e) => setData("email", e.target.value)}
             errorMsg={errors.email}
             hideError={isDirty("email")}
+            disabled={processing}
+            required
           />
         </div>
 
         <div className="mt-4">
-          <TextInput
+          <Input
             id="password"
             label="Password"
             type="password"
@@ -64,14 +66,16 @@ export default function ResetPassword({
             className="mt-1 block w-full"
             autoComplete="new-password"
             autoFocus
+            required
             onChange={(e) => setData("password", e.target.value)}
             errorMsg={errors.password}
             hideError={isDirty("password")}
+            disabled={processing}
           />
         </div>
 
         <div className="mt-4">
-          <TextInput
+          <Input
             label="Confirm Password"
             type="password"
             name="password_confirmation"
@@ -81,7 +85,8 @@ export default function ResetPassword({
             required
             onChange={(e) => setData("password_confirmation", e.target.value)}
             errorMsg={errors.password_confirmation}
-            hideError={isDirty('password_confirmation')}
+            hideError={isDirty("password_confirmation")}
+            disabled={processing}
           />
         </div>
 

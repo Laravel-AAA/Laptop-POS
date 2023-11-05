@@ -50,7 +50,6 @@ export default function Items({
         className="mt-4"
         paginateItems={paginateProducts}
       />
-      <Footer/>
     </section>
   );
 }

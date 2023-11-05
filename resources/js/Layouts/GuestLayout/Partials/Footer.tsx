@@ -2,24 +2,26 @@ export default function Footer({ className = "" }: { className?: string }) {
   return (
     // {/* <hr className="mt-24 border-gray-300" /> */}
 
-    <div className="">
-      <div className="">
+    <>
+       {/* <hr className="mt-24 border-gray-300" /> */}
+      <div className="pb-24"></div>
+      <div className="absolute bottom-4 w-full">
         <footer
           className={
-            "flex min-h-full w-full flex-wrap-reverse justify-center p-6 px-6 sm:items-center sm:justify-between " +
+            "flex min-h-full w-full flex-wrap-reverse justify-center px-6 py-4 sm:items-center sm:justify-between " +
             className
           }
         >
           <div className="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
-            <div className="flex items-center gap-4">
+
+              Contact us&nbsp;
               <a
                 href="mailto:support@laptop-pos.com"
-                className="group inline-flex items-center leading-10 transition duration-200 hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-primary-500 dark:hover:text-white"
+                className="group inline-flex items-center leading-10 transition duration-200 hover:text-gray-700 dark:hover:text-white"
               >
-                Contact us&nbsp;
-                <span className="font-bold"> support@laptop-pos.com</span>
+                <span className="font-bold">support@laptop-pos.com</span>
               </a>
-            </div>
+
           </div>
 
           <div className="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:ml-0 sm:text-right">
@@ -27,6 +29,6 @@ export default function Footer({ className = "" }: { className?: string }) {
           </div>
         </footer>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 import { useRef, useState, FormEventHandler } from "react";
 import Modal from "@/Components/Modal";
-import TextInput from "@/Components/Inputs/TextInput";
+import Input from "@/Components/Inputs/Input";
 import DangerButton from "@/Components/Buttons/DangerButton";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import useBetterForm from "@/Utilities/useBetterForm";
@@ -79,7 +79,7 @@ export default function DeleteUserForm({
               className="sr-only"
             /> */}
 
-            <TextInput
+            <Input
               id="password"
               label="Password"
               type="password"
@@ -91,10 +91,10 @@ export default function DeleteUserForm({
               autoFocus
               required
               placeholder="Password"
-              errorMsg={errors.password||(errors as any).hasProducts}
-              hideError={isDirty('password')}
+              errorMsg={errors.password || (errors as any).hasProducts}
+              hideError={isDirty("password")}
+              disabled={processing}
             />
-
           </div>
 
           <div className="mt-6 flex justify-end">

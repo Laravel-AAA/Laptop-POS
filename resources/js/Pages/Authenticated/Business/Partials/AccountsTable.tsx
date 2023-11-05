@@ -1,5 +1,5 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import TextInput from "@/Components/Inputs/TextInput";
+import Input from "@/Components/Inputs/Input";
 import { usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 import { FormEventHandler } from "react";
@@ -50,12 +50,13 @@ export default function AccountsTable({
 
       <form onSubmit={submit} className="mt-6 space-y-6">
         <div>
-          <TextInput
+          <Input
             id="name"
             label="Name"
             className="mt-1 block w-full"
             value={data.name}
             onChange={(e) => setData("name", e.target.value)}
+            disabled={processing}
             required
             autoFocus
             autoComplete="name"
@@ -66,13 +67,14 @@ export default function AccountsTable({
 
         <div>
 
-          <TextInput
+          <Input
             id="email"
             label="Email"
             type="email"
             className="mt-1 block w-full"
             value={data.email}
             onChange={(e) => setData("email", e.target.value)}
+            disabled={processing}
             required
             autoComplete="username"
             errorMsg={errors.email}

@@ -1,4 +1,4 @@
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler } from "react";
 import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import { Head, router } from "@inertiajs/react";
 import { AuthPageProps, ICreateBusiness, ICreateUser } from "@/types";
@@ -7,13 +7,16 @@ import UserForm from "./Partials/UserForm";
 import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function Register({ auth }: AuthPageProps) {
-  const userForm = useBetterForm<ICreateUser>({
-    name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
-    role: "Admin",
-  });
+  const userForm = useBetterForm<ICreateUser & { termsAndConditions: boolean }>(
+    {
+      name: "",
+      email: "",
+      password: "",
+      password_confirmation: "",
+      role: "Admin",
+      termsAndConditions: false,
+    },
+  );
 
   const businessForm = useBetterForm<ICreateBusiness>({
     address: "",
@@ -31,6 +34,13 @@ export default function Register({ auth }: AuthPageProps) {
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
 
+    if (userForm.data.termsAndConditions !== true) {
+      userForm.setError(
+        "termsAndConditions",
+        "You should agree to our Terms & Conditions.",
+      );
+      return;
+    }
     router.post(
       route("register"),
       {
@@ -41,6 +51,12 @@ export default function Register({ auth }: AuthPageProps) {
         onStart: () => {
           businessForm.clearErrors();
           userForm.clearErrors();
+          userForm.setProcessing(true);
+          businessForm.setProcessing(true);
+        },
+        onFinish: () => {
+          userForm.setProcessing(false);
+          businessForm.setProcessing(false);
         },
         onError: (e) => {
           for (let k in e) {
@@ -57,7 +73,9 @@ export default function Register({ auth }: AuthPageProps) {
   return (
     <GuestFormLayout auth={auth}>
       <Head title="Register" />
-
+      <h1 className="mx-3 mb-4 text-center text-3xl font-extrabold">
+        Register
+      </h1>
       <form onSubmit={submit}>
         {/* <Tab.Group selectedIndex={tabIndex} onChange={setTabIndex}>
           <Tab.Panels>
@@ -103,6 +121,7 @@ export default function Register({ auth }: AuthPageProps) {
           }}
           form={userForm}
         />
+
         {/* </Transition>
             </Tab.Panel>
           </Tab.Panels> */}

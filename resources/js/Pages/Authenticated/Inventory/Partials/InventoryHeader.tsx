@@ -1,9 +1,8 @@
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
-import TextInput from "@/Components/Inputs/TextInput";
+import Input from "@/Components/Inputs/Input";
 import { IFilterProduct, PagePropsWithFilter } from "@/types";
 import { router, usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
-import { BsSearch } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import { usePrevious } from "react-use";
 
@@ -45,27 +44,30 @@ export default function InventoryHeader({
         <h2 className="mr-6 text-xl font-semibold leading-tight text-gray-800">
           Inventory
         </h2>
-        <label className="relative block flex-grow">
+        {/* <label className="relative block flex-grow">
           <span className="sr-only">Search</span>
           <span className="absolute inset-y-0 left-0 flex items-center pl-2">
             <BsSearch />
-          </span>
+          </span> */}
 
-          <TextInput
-            id="search"
-            type="search"
-            inputMode="search"
-            name="search"
-            autoComplete="on"
-            value={filter.search}
-            isFocused={true}
-            className="w-full p-1 pl-9 md:w-72 "
-            placeholder="Search for products..."
-            onChange={(v) =>
-              setFilter((p) => ({ ...p, search: v.target.value }))
-            }
-          />
-        </label>
+        <Input
+          id="search"
+          label="Search"
+          type="search"
+          inputMode="search"
+          name="search"
+          autoComplete="on"
+          value={filter.search}
+          autoFocus
+          className=" md:w-72 "
+          placeholder="Search for products..."
+          onChange={(v) => setFilter((p) => ({ ...p, search: v.target.value }))}
+          errorMsg={undefined}
+          hideError={undefined}
+          required={false}
+          disabled={false}
+        />
+        {/* </label> */}
         {filter.search && prevFilter?.search === filter.search && (
           <TotalResult
             className="hidden md:block"

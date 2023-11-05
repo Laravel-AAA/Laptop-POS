@@ -1,7 +1,6 @@
 import DangerButton from "@/Components/Buttons/DangerButton";
 import TertiaryButton from "@/Components/Buttons/TertiaryButton";
-import HintMessage from "@/Components/Inputs/HintMessage";
-import TextInput from "@/Components/Inputs/TextInput";
+import Input from "@/Components/Inputs/Input";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { ICreateProduct, IModalAction, IProduct } from "@/types";
 import { useState } from "react";
@@ -36,7 +35,7 @@ export default function FormImage({
 
   const inputImage = (
     <>
-      <TextInput
+      <Input
         id="img"
         label={
           ((img === null && state === "edit") ||
@@ -51,7 +50,7 @@ export default function FormImage({
         name="img"
         className="mt-1 block w-full"
         hidden={!!img}
-        disabled={state === "show"}
+        disabled={state === "show" || form.processing}
         required={false}
         onChange={(e) => {
           form.setData("imageFile", e.target.files?.[0] ?? null);
@@ -89,6 +88,7 @@ export default function FormImage({
         {imageElement}
         <div className="mb-4 mt-1 flex justify-center gap-8">
           <TertiaryButton
+            disabled={form.processing}
             onClick={() => {
               setEditImageState("change");
             }}
@@ -96,6 +96,7 @@ export default function FormImage({
             Change&nbsp;Image
           </TertiaryButton>
           <DangerButton
+            disabled={form.processing}
             onClick={() => {
               setEditImageState("removed");
               form.setData("img", null);

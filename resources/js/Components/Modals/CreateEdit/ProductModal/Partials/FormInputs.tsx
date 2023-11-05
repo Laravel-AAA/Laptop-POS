@@ -1,5 +1,5 @@
-import TextInput from "@/Components/Inputs/TextInput";
-import { AuthPageProps, ICreateProduct, IModalAction, IProduct,  } from "@/types";
+import Input from "@/Components/Inputs/Input";
+import { AuthPageProps, ICreateProduct, IModalAction, IProduct } from "@/types";
 import FormImage from "./FormImage";
 import Checkbox from "@/Components/Checkbox";
 import { useState } from "react";
@@ -24,8 +24,7 @@ export default function FormInputs({
   return (
     <div className="">
       <div className="w-full">
-
-        <TextInput
+        <Input
           id="name"
           label="Product Name"
           name="name"
@@ -33,16 +32,15 @@ export default function FormInputs({
           className="mt-1 block w-full"
           autoComplete="off"
           autoFocus
-          disabled={modalAction.state === "show"}
+          disabled={modalAction.state === "show" || form.processing}
           onChange={(e) => form.setData("name", e.target.value)}
           required
           errorMsg={form.errors.name}
-          hideError={form.isDirty('name')}
+          hideError={form.isDirty("name")}
         />
       </div>
       <div className="mt-4">
-
-        <TextInput
+        <Input
           id="price"
           label="Price"
           type="number"
@@ -51,7 +49,7 @@ export default function FormInputs({
           name="price"
           value={inputPrice ?? undefined}
           className="mt-1 block w-full"
-          disabled={modalAction.state === "show"}
+          disabled={modalAction.state === "show" || form.processing}
           onChange={(e) => {
             const v = numbering(e.target.value);
             setInputPrice(v);
@@ -61,14 +59,23 @@ export default function FormInputs({
             );
           }}
           errorMsg={form.errors.price}
-          hideError={form.isDirty('price')}
+          hideError={form.isDirty("price")}
           required={false}
         />
 
         <label className="mt-2 flex items-center">
           <Checkbox
             name="remember"
+            label={
+              <span className="ml-2 text-sm text-gray-600">
+                Price includes tax (
+                {<Num showCurrency amount={form.data.price ?? 0} />} without
+                tax)
+              </span>
+            }
             checked={priceIncludeTax}
+            errorMsg={undefined}
+            disabled={form.processing}
             onChange={(e) => {
               setPriceIncludeTax((v) => {
                 form.setData(
@@ -83,15 +90,10 @@ export default function FormInputs({
               });
             }}
           />
-          <span className="ml-2 text-sm text-gray-600">
-            Price includes tax (
-            {<Num showCurrency amount={form.data.price ?? 0} />} without tax)
-          </span>
         </label>
       </div>
       <div className="mt-4">
-
-        <TextInput
+        <Input
           id="stock"
           label="Stock"
           type="number"
@@ -100,17 +102,15 @@ export default function FormInputs({
           name="stock"
           value={form.data.stock ?? undefined}
           className="mt-1 block w-full"
-          disabled={modalAction.state === "show"}
+          disabled={modalAction.state === "show" || form.processing}
           onChange={(e) => form.setData("stock", Number(e.target.value))}
           errorMsg={form.errors.stock}
-          hideError={form.isDirty('stock')}
+          hideError={form.isDirty("stock")}
           required={false}
         />
-
       </div>
       <div className="mt-4">
-
-        <TextInput
+        <Input
           id="barcode"
           label="Barcode"
           type="number"
@@ -119,13 +119,12 @@ export default function FormInputs({
           name="barcode"
           value={form.data.barcode ?? undefined}
           className="remove-arrow mt-1 block w-full"
-          disabled={modalAction.state === "show"}
+          disabled={modalAction.state === "show" || form.processing}
           onChange={(e) => form.setData("barcode", e.target.value)}
           errorMsg={form.errors.barcode}
-          hideError={form.isDirty('barcode')}
+          hideError={form.isDirty("barcode")}
           required={false}
         />
-
       </div>
 
       <div className="mt-4">

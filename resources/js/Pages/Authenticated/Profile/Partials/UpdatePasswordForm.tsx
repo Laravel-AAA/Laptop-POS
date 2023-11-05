@@ -1,6 +1,6 @@
 import { useRef, FormEventHandler } from "react";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import TextInput from "@/Components/Inputs/TextInput";
+import Input from "@/Components/Inputs/Input";
 import { Transition } from "@headlessui/react";
 import useBetterForm from "@/Utilities/useBetterForm";
 
@@ -12,12 +12,20 @@ export default function UpdatePasswordForm({
   const passwordInput = useRef<HTMLInputElement>();
   const currentPasswordInput = useRef<HTMLInputElement>();
 
-  const { data, setData, errors, put, reset, processing, recentlySuccessful,isDirty } =
-    useBetterForm({
-      current_password: "",
-      password: "",
-      password_confirmation: "",
-    });
+  const {
+    data,
+    setData,
+    errors,
+    put,
+    reset,
+    processing,
+    recentlySuccessful,
+    isDirty,
+  } = useBetterForm({
+    current_password: "",
+    password: "",
+    password_confirmation: "",
+  });
 
   const updatePassword: FormEventHandler = (e) => {
     e.preventDefault();
@@ -51,8 +59,7 @@ export default function UpdatePasswordForm({
 
       <form onSubmit={updatePassword} className="mt-6 space-y-6">
         <div>
-
-          <TextInput
+          <Input
             id="current_password"
             label="Current Password"
             ref={currentPasswordInput}
@@ -63,13 +70,13 @@ export default function UpdatePasswordForm({
             autoComplete="current-password"
             required
             errorMsg={errors.current_password}
-            hideError={isDirty('current_password')}
+            hideError={isDirty("current_password")}
+            disabled={processing}
           />
-
         </div>
 
         <div>
-          <TextInput
+          <Input
             id="password"
             label="New Password"
             ref={passwordInput}
@@ -80,12 +87,13 @@ export default function UpdatePasswordForm({
             className="mt-1 block w-full"
             autoComplete="new-password"
             errorMsg={errors.password}
-            hideError={isDirty('password')}
+            hideError={isDirty("password")}
+            disabled={processing}
           />
         </div>
 
         <div>
-          <TextInput
+          <Input
             id="password_confirmation"
             label="Confirm Password"
             type="password"
@@ -95,7 +103,8 @@ export default function UpdatePasswordForm({
             autoComplete="new-password"
             required
             errorMsg={errors.password_confirmation}
-            hideError={isDirty('password_confirmation')}
+            hideError={isDirty("password_confirmation")}
+            disabled={processing}
           />
         </div>
 

@@ -1,6 +1,5 @@
-import TextInput from "@/Components/Inputs/TextInput";
+import Input from "@/Components/Inputs/Input";
 import { ICreateBusiness } from "@/types";
-import { InertiaFormProps } from "@/types/global";
 import { PhoneInput } from "./Partials/PhoneInput";
 import CountryInput from "./Partials/CountryInput";
 import COUNTRIES, { Country } from "./Partials/COUNTRIES";
@@ -31,7 +30,7 @@ export default function BusinessForm({
   return (
     <>
       <div>
-        <TextInput
+        <Input
           label="Business Name"
           name="businessName"
           value={form.data.name}
@@ -51,7 +50,7 @@ export default function BusinessForm({
       </div>
 
       <div className="mt-4">
-        <TextInput
+        <Input
           label="City"
           errorMsg={form.errors.city}
           hideError={form.isDirty('city')}
@@ -65,7 +64,7 @@ export default function BusinessForm({
       </div>
 
       <div className="mt-4">
-        <TextInput
+        <Input
           label="Address"
           name="address"
           value={form.data.address}

@@ -1,5 +1,6 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import TextInput from "@/Components/Inputs/TextInput";
+import Checkbox from "@/Components/Checkbox";
+import Input from "@/Components/Inputs/Input";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { ICreateUser } from "@/types";
 import { Link } from "@inertiajs/react";
@@ -9,7 +10,7 @@ export default function UserForm({
   form,
   onBack,
 }: {
-  form: UseBetterForm<ICreateUser>;
+  form: UseBetterForm<ICreateUser & { termsAndConditions: boolean }>;
   onBack: () => void;
 }) {
   useEffect(() => {
@@ -21,12 +22,13 @@ export default function UserForm({
   return (
     <>
       <div>
-        <TextInput
+        <Input
           label="Your Name"
           name="name"
           value={form.data.name}
           errorMsg={form.errors.name}
-          hideError={form.isDirty('name')}
+          hideError={form.isDirty("name")}
+          disabled={form.processing}
           className="mt-1 block w-full"
           autoComplete="name"
           onChange={(e) => form.setData("name", e.target.value)}
@@ -35,13 +37,14 @@ export default function UserForm({
       </div>
 
       <div className="mt-4">
-        <TextInput
+        <Input
           label="Email"
           type="email"
           name="email"
           value={form.data.email}
           errorMsg={form.errors.email}
-          hideError={form.isDirty('email')}
+          hideError={form.isDirty("email")}
+          disabled={form.processing}
           className="mt-1 block w-full"
           autoComplete="email"
           onChange={(e) => form.setData("email", e.target.value)}
@@ -50,13 +53,14 @@ export default function UserForm({
       </div>
 
       <div className="mt-4">
-        <TextInput
+        <Input
           label="Password"
           type="password"
           name="password"
           value={form.data.password}
           errorMsg={form.errors.password}
-          hideError={form.isDirty('password')}
+          hideError={form.isDirty("password")}
+          disabled={form.processing}
           className="mt-1 block w-full"
           autoComplete="new-password"
           onChange={(e) => form.setData("password", e.target.value)}
@@ -65,13 +69,14 @@ export default function UserForm({
       </div>
 
       <div className="mt-4">
-        <TextInput
+        <Input
           label="Confirm Password"
           type="password"
           name="password_confirmation"
           value={form.data.password_confirmation}
           errorMsg={form.errors.password_confirmation}
-          hideError={form.isDirty('password_confirmation')}
+          hideError={form.isDirty("password_confirmation")}
+          disabled={form.processing}
           className="mt-1 block w-full"
           autoComplete="new-password"
           onChange={(e) =>
@@ -81,9 +86,32 @@ export default function UserForm({
         />
       </div>
 
-      <div className="mt-4 flex items-center justify-between">
-        <div className="flex items-center justify-end">
-          {/* <PrimaryButton
+      <div className="mt-2">
+        <Checkbox
+          checked={form.data.termsAndConditions}
+          onChange={(e) => {
+            form.setData("termsAndConditions", e.target.checked);
+          }}
+          label={
+            <p>
+              I agree to the{" "}
+              <Link
+                className="font-semibold text-blue-600 hover:text-blue-400"
+                href="/terms"
+              >
+                Terms & Conditions
+              </Link>
+              .
+            </p>
+          }
+          disabled={form.processing}
+          errorMsg={form.errors.termsAndConditions}
+        />
+      </div>
+
+      <div className="mt-3 flex items-center justify-end">
+        {/* <div className="flex items-center justify-end">
+          <PrimaryButton
             type="button"
             className="flex !border-primary bg-white !text-primary hover:bg-primary hover:bg-opacity-10"
             disabled={form.processing}
@@ -91,8 +119,8 @@ export default function UserForm({
           >
             <FaArrowLeft />
             <span>&nbsp;Back</span>
-          </PrimaryButton> */}
-        </div>
+          </PrimaryButton>
+        </div> */}
 
         <div className="flex items-center justify-end">
           <Link

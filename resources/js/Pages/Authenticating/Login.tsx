@@ -1,7 +1,7 @@
 import { useEffect, FormEventHandler } from "react";
 import Checkbox from "@/Components/Checkbox";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import TextInput from "@/Components/Inputs/TextInput";
+import Input from "@/Components/Inputs/Input";
 import { Head, Link } from "@inertiajs/react";
 import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import { AuthPageProps } from "@/types";
@@ -44,13 +44,14 @@ export default function Login({
 
       <form onSubmit={submit}>
         <div>
-          <TextInput
+          <Input
             type="email"
             name="email"
             label="Email"
             value={data.email}
             errorMsg={errors.email}
             hideError={isDirty("email")}
+            disabled={processing}
             className="mt-1 block w-full"
             autoComplete="email"
             onChange={(e) => setData("email", e.target.value)}
@@ -60,29 +61,30 @@ export default function Login({
         </div>
 
         <div className="mt-4">
-          <TextInput
+          <Input
             type="password"
             name="password"
             label="Password"
             value={data.password}
             errorMsg={errors.password}
+            disabled={processing}
             className="mt-1 block w-full"
             autoComplete="current-password"
             onChange={(e) => setData("password", e.target.value)}
             required
-            hideError={isDirty('password')}
+            hideError={isDirty("password")}
           />
         </div>
 
         <div className="mt-4 block">
-          <label className="flex items-center">
-            <Checkbox
-              name="remember"
-              checked={data.remember}
-              onChange={(e) => setData("remember", e.target.checked)}
-            />
-            <span className="ml-2 text-sm text-gray-600">Remember me</span>
-          </label>
+          <Checkbox
+            label={<p className="text-sm text-gray-600">Remember me</p>}
+            errorMsg=""
+            disabled={processing}
+            name="remember"
+            checked={data.remember}
+            onChange={(e) => setData("remember", e.target.checked)}
+          />
         </div>
 
         <div className="mt-4 flex items-center justify-end">

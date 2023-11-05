@@ -1,6 +1,6 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import TextInput from "@/Components/Inputs/TextInput";
-import { Link, useForm, usePage } from "@inertiajs/react";
+import Input from "@/Components/Inputs/Input";
+import { Link, usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 import { FormEventHandler } from "react";
 import { AuthPageProps } from "@/types";
@@ -17,11 +17,18 @@ export default function UpdateProfileInformation({
 }) {
   const user = usePage<AuthPageProps>().props.auth.user;
 
-  const { data, setData, patch, errors, processing, recentlySuccessful,isDirty } =
-    useBetterForm({
-      name: user.name,
-      email: user.email,
-    });
+  const {
+    data,
+    setData,
+    patch,
+    errors,
+    processing,
+    recentlySuccessful,
+    isDirty,
+  } = useBetterForm({
+    name: user.name,
+    email: user.email,
+  });
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
@@ -43,7 +50,7 @@ export default function UpdateProfileInformation({
 
       <form onSubmit={submit} className="mt-6 space-y-6">
         <div>
-          <TextInput
+          <Input
             id="name"
             label="Name"
             className="mt-1 block w-full"
@@ -53,12 +60,13 @@ export default function UpdateProfileInformation({
             autoFocus
             autoComplete="name"
             errorMsg={errors.name}
-            hideError={isDirty('name')}
+            hideError={isDirty("name")}
+            disabled={processing}
           />
         </div>
 
         <div>
-          <TextInput
+          <Input
             id="email"
             label="Email"
             type="email"
@@ -68,7 +76,8 @@ export default function UpdateProfileInformation({
             required
             autoComplete="username"
             errorMsg={errors.email}
-            hideError={isDirty('email')}
+            hideError={isDirty("email")}
+            disabled={processing}
           />
         </div>
 

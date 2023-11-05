@@ -1,7 +1,7 @@
 import { useEffect, FormEventHandler } from "react";
 import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import TextInput from "@/Components/Inputs/TextInput";
+import Input from "@/Components/Inputs/Input";
 import { Head } from "@inertiajs/react";
 import { AuthPageProps } from "@/types";
 import useBetterForm from "@/Utilities/useBetterForm";
@@ -35,7 +35,7 @@ export default function ConfirmPassword({ auth }: AuthPageProps) {
 
       <form onSubmit={submit}>
         <div className="mt-4">
-          <TextInput
+          <Input
             label="Password"
             id="password"
             type="password"
@@ -46,7 +46,8 @@ export default function ConfirmPassword({ auth }: AuthPageProps) {
             onChange={(e) => setData("password", e.target.value)}
             required
             errorMsg={errors.password}
-            hideError={isDirty('password')}
+            hideError={isDirty("password")}
+            disabled={processing}
           />
         </div>
 

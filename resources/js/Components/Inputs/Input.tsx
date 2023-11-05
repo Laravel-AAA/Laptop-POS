@@ -1,4 +1,4 @@
-import { Input, InputProps } from "@material-tailwind/react";
+import { Input as MaterialInput, InputProps } from "@material-tailwind/react";
 import {
   HTMLAttributes,
   ReactNode,
@@ -10,7 +10,7 @@ import {
 import ErrorMessage from "./ErrorMessage";
 import HintMessage from "./HintMessage";
 
-export default forwardRef(function TextInput(
+export default forwardRef(function Input(
   {
     type = "text",
     isSelect = false,
@@ -24,6 +24,7 @@ export default forwardRef(function TextInput(
     error,
     hint,
     hintProps,
+    disabled,
     ...props
   }: InputProps & {
     isSelect?: boolean;
@@ -34,6 +35,7 @@ export default forwardRef(function TextInput(
     hideError: boolean | undefined;
     hint?: string | ReactNode;
     hintProps?: HTMLAttributes<HTMLParagraphElement>;
+    disabled:boolean,
   },
   ref,
 ) {
@@ -60,13 +62,13 @@ export default forwardRef(function TextInput(
   }, []);
 
   if (error === undefined) {
-    if (hideError == true) error = false;
+    if (hideError === true) error = false;
     else if (errorMsg) error = true;
     else error = false;
   }
   return (
     <>
-      <Input
+      <MaterialInput
         {...props}
         ref={localRef}
         type={type}
@@ -75,6 +77,7 @@ export default forwardRef(function TextInput(
         size={size}
         error={error}
         className={className + ` focus:ring-0`}
+        disabled={disabled}
         crossOrigin={undefined}
       />
       {/* //   `placeholder:text-slate-400 rounded-md border  border-gray-300 shadow-sm

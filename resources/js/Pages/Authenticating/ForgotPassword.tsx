@@ -1,7 +1,7 @@
 import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import TextInput from "@/Components/Inputs/TextInput";
-import { Head, useForm } from "@inertiajs/react";
+import Input from "@/Components/Inputs/Input";
+import { Head } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import { AuthPageProps } from "@/types";
 import useBetterForm from "@/Utilities/useBetterForm";
@@ -35,7 +35,7 @@ export default function ForgotPassword({
       )}
 
       <form onSubmit={submit}>
-        <TextInput
+        <Input
           id="email"
           type="email"
           name="email"
@@ -47,6 +47,7 @@ export default function ForgotPassword({
           required
           errorMsg={errors.email}
           hideError={isDirty("email")}
+          disabled={processing}
         />
 
         <div className="mt-4 flex items-center justify-end">

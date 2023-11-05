@@ -1,5 +1,5 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import TextInput from "@/Components/Inputs/TextInput";
+import Input from "@/Components/Inputs/Input";
 import { usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 import { FormEventHandler } from "react";
@@ -37,7 +37,7 @@ export default function UpdateBusinessInformation({
 
       <form onSubmit={submit} className="mt-6 space-y-6">
         <div>
-          <TextInput
+          <Input
             id="taxPercent"
             label="Tax Percent"
             className="mt-1 block w-full"
@@ -46,30 +46,29 @@ export default function UpdateBusinessInformation({
             onChange={(e) =>
               form.setData("taxPercent", Number(e.target.value) / 100)
             }
+            disabled={form.processing}
             required
             autoFocus
             autoComplete="off"
             errorMsg={form.errors.taxPercent}
             hideError={form.isDirty("taxPercent")}
           />
-
         </div>
 
         <div>
-
-          <TextInput
+          <Input
             id="currency"
             label="Currency"
             type="text"
             className="mt-1 block w-full"
             value={form.data.currency}
             onChange={(e) => form.setData("currency", e.target.value)}
+            disabled={form.processing}
             required
             autoComplete="off"
             errorMsg={form.errors.currency}
-            hideError={form.isDirty('currency')}
+            hideError={form.isDirty("currency")}
           />
-
         </div>
 
         <div className="flex items-center gap-4">

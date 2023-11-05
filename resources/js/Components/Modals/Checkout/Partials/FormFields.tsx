@@ -1,5 +1,5 @@
 import Checkbox from "@/Components/Checkbox";
-import TextInput from "@/Components/Inputs/TextInput";
+import Input from "@/Components/Inputs/Input";
 import TotalInfo from "@/Pages/Authenticated/Checkout/Partials/RightSide/Partials/TotalInfo";
 import Num from "@/Utilities/Num";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
@@ -41,7 +41,7 @@ export default function FormFields({
     <>
       <TotalInfo bill={form.data} />
       <div className="mt-3 w-full">
-        <TextInput
+        <Input
           id="cashReceived"
           label="Cash Received"
           name="cashReceived"
@@ -71,18 +71,18 @@ export default function FormFields({
               className="ml-2 mt-1 text-lg text-gray-800"
             >
               Remaining:&nbsp;
-              <Num
-                className="text-indigo-700"
-                amount={remaining}
-              />
+              <Num className="text-indigo-700" amount={remaining} />
             </p>
           }
         />
 
-
-
-        <label className="ml-2 mt-2 flex items-center">
+        <div className="ml-2 mt-2 flex items-center">
           <Checkbox
+            label={
+              <span className="ml-2 text-lg text-gray-600">
+                Digital payment
+              </span>
+            }
             name="isDigitalPayment"
             className="h-5 w-5"
             checked={isDigitalPayment}
@@ -102,9 +102,9 @@ export default function FormFields({
                 return !v;
               });
             }}
+            errorMsg=""
           />
-          <span className="ml-2 text-lg text-gray-600">Digital payment</span>
-        </label>
+        </div>
       </div>
     </>
   );
