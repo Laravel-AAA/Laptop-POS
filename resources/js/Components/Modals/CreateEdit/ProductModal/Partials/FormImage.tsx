@@ -1,10 +1,10 @@
 import DangerButton from "@/Components/Buttons/DangerButton";
 import TertiaryButton from "@/Components/Buttons/TertiaryButton";
 import Input from "@/Components/Inputs/Input";
+import NoImageImage from "@/Pages/Authenticated/Inventory/Partials/NoImageImage";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { ICreateProduct, IModalAction, IProduct } from "@/types";
 import { useState } from "react";
-import { BsImage } from "react-icons/bs";
 
 export default function FormImage({
   formProps: form,
@@ -68,13 +68,9 @@ export default function FormImage({
     </>
   );
 
-  const defaultImg = (
-    <BsImage className="mx-auto mt-4 h-24 w-24 text-primary-700" />
-  );
-
   if (state === "create") return inputImage;
   if (state === "show") {
-    if (img === null) return defaultImg;
+    if (img === null) return <NoImageImage />;
     else return imageElement;
   }
   //if edit

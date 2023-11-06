@@ -38,12 +38,16 @@ class ProductController extends Controller
     protected function store(StoreProductRequest $request)
     {
         $product = $request->validated();
+        $product = new Product($product);
+        $product->business_id = $request->user()->business_id;
+        $product->createdBy_id = $request->user()->id;
+        Gate::authorize('store', $product);
 
         if ($request->hasFile('imageFile')) {
             $product['img'] = $this->storeImg($request);
         }
-        $product->createdBy_id = Auth::id();
-        $request->user()->business->products()->create($product);
+        $product->save();
+        // dd($product);
 
         return redirect()->back()->with('success', 'The product was created successfully');
     }

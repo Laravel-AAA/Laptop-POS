@@ -15,7 +15,15 @@ class ProductPolicy
      */
     public function view(User $user, Product $product): bool
     {
-        return $user->id == $product->user_id;
+        return $user->business_id == $product->business_id;
+    }
+
+
+    public function store(User $user, Product $product): bool
+    {
+        return $user->id == $product->createdBy_id
+            && $user->business_id == $product->business_id
+            && $user->role == 'Admin';
     }
 
     /**
@@ -23,7 +31,8 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return $user->id == $product->user_id;
+        return $user->business_id == $product->business_id
+            && ($user->id == $product->createdBy_id || $user->role == 'Admin');
     }
 
     /**
@@ -31,7 +40,8 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return $user->id == $product->user_id;
+        return $user->business_id == $product->business_id
+            && ($user->id == $product->createdBy_id || $user->role == 'Admin');
     }
 
     /**
@@ -39,7 +49,8 @@ class ProductPolicy
      */
     public function restore(User $user, Product $product): bool
     {
-        return $user->id == $product->user_id;
+        return $user->business_id == $product->business_id
+            && ($user->id == $product->createdBy_id || $user->role == 'Admin');
     }
 
     /**
@@ -47,6 +58,7 @@ class ProductPolicy
      */
     public function forceDelete(User $user, Product $product): bool
     {
-        return $user->id == $product->user_id;
+        return $user->business_id == $product->business_id
+            && ($user->id == $product->createdBy_id || $user->role == 'Admin');
     }
 }

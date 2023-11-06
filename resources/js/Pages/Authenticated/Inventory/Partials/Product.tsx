@@ -1,8 +1,8 @@
-import { AuthPageProps, IBusiness, IProduct } from "@/types";
-import { BsImage } from "react-icons/bs";
+import { AuthPageProps, IProduct } from "@/types";
 import ProductOptions from "./ProductOptions";
 import Num from "@/Utilities/Num";
 import { usePage } from "@inertiajs/react";
+import NoImageImage from "@/Pages/Authenticated/Inventory/Partials/NoImageImage";
 type PropsProduct = {
   product: IProduct;
   requestEdit: () => void;
@@ -25,7 +25,7 @@ export default function Product({
         requestShow={requestShow}
       />
 
-      <div>
+      <div className="w-full">
         {product.img ? (
           <img
             src={
@@ -36,10 +36,10 @@ export default function Product({
             alt={"Image " + (product.img ?? "") + " of product " + product.name}
           />
         ) : (
-          <BsImage className="mx-auto mt-4 h-24 w-24 text-primary-700" />
+          <NoImageImage />
         )}
       </div>
-      <div className="flex flex-grow flex-col px-4  py-4 ">
+      <div className="flex w-full flex-grow flex-col px-4  py-4 ">
         <h3 className="flex-grow text-lg font-semibold text-gray-600">
           {product.name}
         </h3>
