@@ -29,7 +29,6 @@ export default function Inventory({
     data: null,
   });
 
-  console.log(products);
 
   return (
     <>

@@ -5,7 +5,7 @@ import Num from "@/Utilities/Num";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { AuthPageProps, IBill, ICreateBill } from "@/types";
 import { usePage } from "@inertiajs/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function FormFields({
   form,
@@ -27,6 +27,8 @@ export default function FormFields({
     return subTotal() * (1 + taxPercent);
   }
 
+  const cashReceivedRef = useAutoSelectRef();
+
   useEffect(() => {
     if (
       //do not auto update remaining when bill is updating and has cashReceived
@@ -42,7 +44,7 @@ export default function FormFields({
       <TotalInfo bill={form.data} />
       <div className="mt-3 w-full">
         <Input
-          id="cashReceived"
+          ref={cashReceivedRef}
           label="Cash Received"
           name="cashReceived"
           type="number"
@@ -54,7 +56,6 @@ export default function FormFields({
           className="mt-1 block w-full text-xl"
           inputMode="numeric"
           autoFocus
-          isSelect={true}
           onClick={(e) => e.currentTarget.select()}
           disabled={form.processing || isDigitalPayment}
           onChange={(e) => {
@@ -68,26 +69,30 @@ export default function FormFields({
           hint={
             <p
               style={{ visibility: !isDigitalPayment ? "visible" : "hidden" }}
-              className="ml-2 mt-1 text-lg text-gray-800"
+              className="ml-1 text-lg text-gray-700"
             >
               Remaining:&nbsp;
-              <Num className="text-indigo-700" amount={remaining} />
+              <Num className="text-gray-900 font-semibold" amount={remaining} />
             </p>
           }
         />
 
-        <div className="ml-2 mt-2 flex items-center">
+        <div className="mt-1 flex items-center">
           <Checkbox
             label={
-              <span className="ml-2 text-lg text-gray-600">
-                Digital payment
-              </span>
+              <span className="text-lg text-gray-600">Digital payment</span>
             }
             name="isDigitalPayment"
             className="h-5 w-5"
             checked={isDigitalPayment}
             disabled={form.processing}
             onChange={(e) => {
+              if (isDigitalPayment) {
+                setTimeout(() => {
+                  cashReceivedRef.current?.focus();
+                  cashReceivedRef.current?.select();
+                },100);
+              }
               setDigitalPayment((v) => {
                 if (!isDigitalPayment) {
                   if ((form.data as IBill).id === undefined)
@@ -108,4 +113,12 @@ export default function FormFields({
       </div>
     </>
   );
+}
+
+function useAutoSelectRef() {
+  const ref = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    ref.current?.select();
+  }, [ref.current]);
+  return ref;
 }

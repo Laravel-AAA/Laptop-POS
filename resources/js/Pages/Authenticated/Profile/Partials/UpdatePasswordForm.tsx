@@ -9,8 +9,8 @@ export default function UpdatePasswordForm({
 }: {
   className?: string;
 }) {
-  const passwordInput = useRef<HTMLInputElement>();
-  const currentPasswordInput = useRef<HTMLInputElement>();
+  const passwordInput = useRef<HTMLInputElement>(null);
+  const currentPasswordInput = useRef<HTMLInputElement>(null);
 
   const {
     data,

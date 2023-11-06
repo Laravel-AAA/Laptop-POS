@@ -41,7 +41,6 @@ export default function CheckoutHeader({
 
   function submitBarcode(e: FormEvent) {
     e.preventDefault();
-    console.log(products);
     if (products.length === 1) {
       increaseQty(products[0]);
       setFilter((p) => ({ ...p, barcode: "" }));

@@ -14,7 +14,7 @@ class BillPolicy
      */
     public function view(User $user, Bill $bill): bool
     {
-        return $user->id == $bill->user_id;
+        return $user->business_id == $bill->business_id;
     }
 
     /**
@@ -22,7 +22,8 @@ class BillPolicy
      */
     public function update(User $user, Bill $bill): bool
     {
-        return $user->id == $bill->user_id;
+        return $user->business_id == $bill->business_id
+            && ($user->id == $bill->createdBy_id || $user->role == 'Admin');
     }
 
     /**
@@ -30,7 +31,8 @@ class BillPolicy
      */
     public function delete(User $user, Bill $bill): bool
     {
-        return $user->id == $bill->user_id;
+        return $user->business_id == $bill->business_id
+            && ($user->id == $bill->createdBy_id || $user->role == 'Admin');
     }
 
     /**
@@ -38,7 +40,8 @@ class BillPolicy
      */
     public function restore(User $user, Bill $bill): bool
     {
-        return $user->id == $bill->user_id;
+        return $user->business_id == $bill->business_id
+            && ($user->id == $bill->createdBy_id || $user->role == 'Admin');
     }
 
     /**
@@ -46,6 +49,7 @@ class BillPolicy
      */
     public function forceDelete(User $user, Bill $bill): bool
     {
-        return $user->id == $bill->user_id;
+        return $user->business_id == $bill->business_id
+            && ($user->id == $bill->createdBy_id || $user->role == 'Admin');
     }
 }

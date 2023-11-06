@@ -6,9 +6,6 @@ export default function HintMessage({
   className = "",
   ...props
 }: HTMLAttributes<HTMLParagraphElement> & { message?: string }) {
-  if (!message) return null;
-  else if (typeof message === "object") return message;
-  else
     return (
       <p {...props} className={"ml-2 mt-2 text-xs text-blue-gray-400 " + className}>
         {message ? message : children}

@@ -10,7 +10,6 @@ export default function CreateEditProductModal({
   modalAction: IModalAction<IProduct>;
   setModalAction: React.Dispatch<React.SetStateAction<IModalAction<IProduct>>>;
 }) {
-  console.log(modalAction.data);
 
   function getTitle(): string {
     if (modalAction.state === "create") return "Add New Product";

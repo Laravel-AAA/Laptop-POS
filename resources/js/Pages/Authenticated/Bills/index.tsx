@@ -17,7 +17,6 @@ export default function Bills({
 }>) {
   const bills: IBill[] = paginateBills.data;
 
-  console.log({ bills });
   return (
     <AuthenticatedLayout user={auth.user}>
       <Head title="Bills" />

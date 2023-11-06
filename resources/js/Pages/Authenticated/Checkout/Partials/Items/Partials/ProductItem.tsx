@@ -62,7 +62,11 @@ export default function ProductItem({
               {product.price === null ? (
                 "N/A"
               ) : (
-                <Num  amount={product.price * (1 + taxPercent)} />
+                <Num
+                  showCurrency
+                  className="text-primary-100"
+                  amount={product.price * (1 + taxPercent)}
+                />
               )}
             </span>
           </p>
@@ -76,7 +80,11 @@ export default function ProductItem({
             ) : (
               <p className="text-gray-200">
                 Stock&nbsp;
-                <span className="font-normal">{product.stock ?? "N/A"}</span>
+                {product.stock === null ? (
+                  <span>N/A</span>
+                ) : (
+                  <Num amount={product.stock} className="font-normal text-secondary-100" />
+                )}
               </p>
             )}
           </div>

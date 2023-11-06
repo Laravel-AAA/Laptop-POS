@@ -63,10 +63,14 @@ class BillController extends Controller
      */
     public function store(StoreBillRequest $request)
     {
+        //Store is for creating new bill and Updating which is destroy then renew because there is one to many relationship with Transactions and each transaction could be updated with the Bill.
         $billId = $request->get('id');
         $bill = $request->validated();
         $createdBill = new Bill($bill);
-        $createdBill->user_id = $request->user()->id;
+        $createdBill->business_id = $request->user()->business_id;
+        $createdBill->createdBy_id = $request->user()->id;
+        if (isset($billId))
+            Gate::authorize('update', $createdBill);
         unset($createdBill->transactions); //We remove this attribute because there is no column called transactions 😑
         $createdBill->save();
 
@@ -74,7 +78,7 @@ class BillController extends Controller
         foreach ($bill['transactions'] as $tra)
             $tras[] = new Transaction($tra);
         $createdBill->transactions()->saveMany($tras);
-        if(isset($billId)){
+        if (isset($billId)) {
             Bill::destroy($billId);
         }
 

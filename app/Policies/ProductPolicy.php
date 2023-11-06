@@ -21,9 +21,8 @@ class ProductPolicy
 
     public function store(User $user, Product $product): bool
     {
-        return $user->id == $product->createdBy_id
-            && $user->business_id == $product->business_id
-            && $user->role == 'Admin';
+        return $user->business_id == $product->business_id
+        && ($user->id == $product->createdBy_id || $user->role == 'Admin');
     }
 
     /**
