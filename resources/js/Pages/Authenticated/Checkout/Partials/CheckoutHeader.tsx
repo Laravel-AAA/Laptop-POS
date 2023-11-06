@@ -81,10 +81,9 @@ export default function CheckoutHeader({
             type="number"
             name="barcode"
             size="md"
-            autoComplete="off"
             inputMode="numeric"
             autoFocus
-            className="remove-arrow w-full"
+            className="remove-arrow w-full md:w-52 "
             value={filter.barcode}
             onChange={(v) => {
               setFilter((p) => ({ ...p, barcode: v.target.value }));

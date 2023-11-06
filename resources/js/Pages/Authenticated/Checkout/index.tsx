@@ -12,7 +12,6 @@ import Items from "./Partials/Items";
 import RightSide from "./Partials/RightSide";
 import { ResizableBox } from "react-resizable";
 import CheckoutHeader from "./Partials/CheckoutHeader";
-import { InertiaFormProps } from "@/types/global";
 import useBetterForm, { UseBetterForm } from "@/Utilities/useBetterForm";
 
 export interface BillOperations {
@@ -39,10 +38,6 @@ export default function Checkout({
       cashReceived: null,
     },
   );
-
-  // useEffect(() => {
-  //   if (bill) form.setData(bill);
-  // }, []);
 
   const setBill = (
     data: (previousData: ICreateBill | IBill) => ICreateBill | IBill,
@@ -125,7 +120,7 @@ export default function Checkout({
     changeQty,
     removeTransaction,
   };
-
+  // console.log("screen width", window.innerWidth);
   return (
     <AuthenticatedLayout user={auth.user} header={" "}>
       <Head title="Checkout" />
@@ -134,8 +129,14 @@ export default function Checkout({
         <ResizableBox
           width={Number(localStorage.getItem("resizable-width")) || 420}
           resizeHandles={["w"]}
-          minConstraints={[350, Infinity]}
-          maxConstraints={[1080, Infinity]}
+          minConstraints={[320, Infinity]}
+          maxConstraints={[
+            window.innerWidth -
+              computedElementWidthById("search") -
+              computedElementWidthById("barcode") -
+              convertRemToPixels(5),
+            Infinity,
+          ]}
           height={Infinity}
           className="top-0 flex  h-screen max-w-full md:sticky md:w-0"
           onResizeStop={(e, { size }) =>
@@ -161,4 +162,21 @@ export default function Checkout({
       </div>
     </AuthenticatedLayout>
   );
+}
+
+function computedElementWidthById(id: string): number {
+  const e = document.getElementById(id);
+  // console.log("element", e);
+  if (e == null) return 240;//default: is average width looks in my DevTools.
+  const computedStyle = getComputedStyle(e);
+  // console.log("computedStyle", computedStyle);
+  const width = computedStyle.width;//'###px' Ex: '123px'
+  // console.log("width", width);
+  const float = parseFloat(width);// '###' Ex: '123'
+  // console.log("float", float);
+  return float;
+}
+
+function convertRemToPixels(rem: number): number {
+  return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }

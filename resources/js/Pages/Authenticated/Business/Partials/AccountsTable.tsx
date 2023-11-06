@@ -53,6 +53,7 @@ export default function AccountsTable({
           <Input
             id="name"
             label="Name"
+            type="text"
             className="mt-1 block w-full"
             value={data.name}
             onChange={(e) => setData("name", e.target.value)}

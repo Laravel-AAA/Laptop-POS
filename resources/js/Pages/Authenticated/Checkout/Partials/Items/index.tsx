@@ -22,7 +22,7 @@ export default function Items({
   const products = paginateProducts.data;
   return (
     <section className={className}>
-      <div className="flex min-h-screen flex-wrap justify-center md:justify-start">
+      <div className="flex flex-wrap justify-center md:justify-start">
         {products.map((v, i) => (
           <ProductItem
             key={i}

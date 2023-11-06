@@ -25,6 +25,7 @@ export default function UserForm({
         <Input
           label="Your Name"
           name="name"
+          type="text"
           value={form.data.name}
           errorMsg={form.errors.name}
           hideError={form.isDirty("name")}

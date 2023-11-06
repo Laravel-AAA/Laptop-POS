@@ -3,15 +3,15 @@ import { FormEvent } from "react";
 import TemplateModal from "../TemplateModal";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import SecondaryButton from "../../Buttons/SecondaryButton";
-import { InertiaFormProps } from "@/types/global";
 import FormFields from "./Partials/FormFields";
+import { UseBetterForm } from "@/Utilities/useBetterForm";
 
 export default function CheckoutModal({
   form,
   isShow,
   requestClose,
 }: {
-  form: InertiaFormProps<ICreateBill | IBill>;
+  form: UseBetterForm<ICreateBill | IBill>;
   isShow: boolean;
   requestClose: () => void;
 }) {
