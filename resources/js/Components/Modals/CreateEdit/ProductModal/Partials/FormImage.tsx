@@ -36,7 +36,6 @@ export default function FormImage({
   const inputImage = (
     <>
       <Input
-        id="img"
         label={
           ((img === null && state === "edit") ||
           editImageState === "removed" ||
@@ -47,7 +46,6 @@ export default function FormImage({
             : "") + "Image"
         }
         type="file"
-        name="img"
         className="mt-1 block w-full"
         hidden={!!img}
         disabled={state === "show" || form.processing}

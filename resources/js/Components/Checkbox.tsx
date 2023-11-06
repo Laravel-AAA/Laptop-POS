@@ -6,16 +6,15 @@ import { HTMLAttributes, ReactNode } from "react";
 import ErrorMessage from "./Inputs/ErrorMessage";
 
 export default function Checkbox({
-  className = "",
   color = "teal",
-  iconProps = { color: "teal" },
+  iconProps = { color: "teal", className: "bg-teal-500" },
   ref,
   errorMsg,
   errorMsgProps,
-  disabled,
+  labelProps = { className: "text-sm text-blue-gray-400 font-normal" },
   ...props
 }: CheckboxProps & {
-  label:ReactNode;
+  label: ReactNode;
   errorMsg: string | undefined;
   errorMsgProps?: HTMLAttributes<HTMLParagraphElement>;
   disabled: boolean;
@@ -24,8 +23,8 @@ export default function Checkbox({
     <>
       <MaterialCheckbox
         iconProps={iconProps}
+        labelProps={labelProps}
         color={color}
-        disabled={disabled}
         {...props}
         crossOrigin={undefined}
       />

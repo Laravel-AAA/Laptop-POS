@@ -10,7 +10,7 @@ export default function HintMessage({
   else if (typeof message === "object") return message;
   else
     return (
-      <p {...props} className={"ml-2 mt-2 text-xs text-gray-500 " + className}>
+      <p {...props} className={"ml-2 mt-2 text-xs text-blue-gray-400 " + className}>
         {message ? message : children}
       </p>
     );

@@ -7,16 +7,16 @@ import {
   ILaravelPaginate,
   IProduct,
 } from "@/types";
-import { Head, useForm } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import Items from "./Partials/Items";
 import RightSide from "./Partials/RightSide";
 import { ResizableBox } from "react-resizable";
 import CheckoutHeader from "./Partials/CheckoutHeader";
 import { InertiaFormProps } from "@/types/global";
-import { useEffect } from "react";
+import useBetterForm, { UseBetterForm } from "@/Utilities/useBetterForm";
 
 export interface BillOperations {
-  form: InertiaFormProps<ICreateBill | IBill>;
+  form: UseBetterForm<ICreateBill | IBill>;
   changeQty: (product: IProduct, qty: number) => void;
   increaseQty: (product: IProduct) => void;
   decreaseQty: (product: IProduct) => void;
@@ -33,18 +33,20 @@ export default function Checkout({
   bill?: IBill;
 }>) {
   const products: IProduct[] = paginateProducts.data;
-  const form = useForm<ICreateBill | IBill>({
-    transactions: [],
-    cashReceived: null,
-  });
+  const form = useBetterForm<ICreateBill | IBill>(
+    bill ?? {
+      transactions: [],
+      cashReceived: null,
+    },
+  );
 
-  useEffect(() => {
-    if (bill) form.setData(bill);
-  }, []);
+  // useEffect(() => {
+  //   if (bill) form.setData(bill);
+  // }, []);
 
   const setBill = (
     data: (previousData: ICreateBill | IBill) => ICreateBill | IBill,
-  ) => form.setData(data);
+  ) => form.setAllData(data);
 
   /** @param product is used to change the qty of the correspond Transaction */
   function changeQty(product: IProduct, qty: number) {

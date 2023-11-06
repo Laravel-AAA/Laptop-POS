@@ -76,7 +76,6 @@ export default function Login({
           />
         </div>
 
-        <div className="mt-4 block">
           <Checkbox
             label={<p className="text-sm text-gray-600">Remember me</p>}
             errorMsg=""
@@ -85,9 +84,8 @@ export default function Login({
             checked={data.remember}
             onChange={(e) => setData("remember", e.target.checked)}
           />
-        </div>
 
-        <div className="mt-4 flex items-center justify-end">
+        <div className="mt-3 flex items-center justify-end">
           {canResetPassword && (
             <Link
               href={route("password.request")}

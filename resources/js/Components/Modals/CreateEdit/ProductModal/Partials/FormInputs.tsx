@@ -6,6 +6,7 @@ import { useState } from "react";
 import Num from "@/Utilities/Num";
 import { usePage } from "@inertiajs/react";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
+import TextArea from "@/Components/Inputs/TextArea";
 
 export default function FormInputs({
   formProps: form,
@@ -28,6 +29,7 @@ export default function FormInputs({
           id="name"
           label="Product Name"
           name="name"
+          type="text"
           value={form.data.name ?? undefined}
           className="mt-1 block w-full"
           autoComplete="off"
@@ -63,42 +65,37 @@ export default function FormInputs({
           required={false}
         />
 
-        <label className="mt-2 flex items-center">
-          <Checkbox
-            name="remember"
-            label={
-              <span className="ml-2 text-sm text-gray-600">
-                Price includes tax (
-                {<Num showCurrency amount={form.data.price ?? 0} />} without
-                tax)
-              </span>
-            }
-            checked={priceIncludeTax}
-            errorMsg={undefined}
-            disabled={form.processing}
-            onChange={(e) => {
-              setPriceIncludeTax((v) => {
-                form.setData(
-                  "price",
-                  numbering(
-                    inputPrice != null && !v
-                      ? inputPrice / (1 + taxPercent)
-                      : inputPrice,
-                  ),
-                );
-                return !v;
-              });
-            }}
-          />
-        </label>
+        <Checkbox
+          name="remember"
+          label={
+            <span>
+              Price includes tax (
+              {<Num showCurrency amount={form.data.price ?? 0} />} without tax)
+            </span>
+          }
+          checked={priceIncludeTax}
+          errorMsg={undefined}
+          disabled={form.processing}
+          onChange={(e) => {
+            setPriceIncludeTax((v) => {
+              form.setData(
+                "price",
+                numbering(
+                  inputPrice != null && !v
+                    ? inputPrice / (1 + taxPercent)
+                    : inputPrice,
+                ),
+              );
+              return !v;
+            });
+          }}
+        />
       </div>
-      <div className="mt-4">
+      <div className="mt-3">
         <Input
           id="stock"
           label="Stock"
           type="number"
-          inputMode="numeric"
-          autoComplete="off"
           name="stock"
           value={form.data.stock ?? undefined}
           className="mt-1 block w-full"
@@ -111,11 +108,8 @@ export default function FormInputs({
       </div>
       <div className="mt-4">
         <Input
-          id="barcode"
           label="Barcode"
           type="number"
-          inputMode="numeric"
-          autoComplete="off"
           name="barcode"
           value={form.data.barcode ?? undefined}
           className="remove-arrow mt-1 block w-full"
@@ -129,6 +123,17 @@ export default function FormInputs({
 
       <div className="mt-4">
         <FormImage formProps={form} modalAction={modalAction} />
+      </div>
+      <div className="mt-4">
+        <TextArea
+          label="Description"
+          value={form.data.description ?? undefined}
+          onChange={(e) => form.setData("description", e.target.value)}
+          disabled={modalAction.state === "show" || form.processing}
+          required={false}
+          errorMsg={form.errors.description}
+          hideError={form.isDirty("description")}
+        />
       </div>
     </div>
   );

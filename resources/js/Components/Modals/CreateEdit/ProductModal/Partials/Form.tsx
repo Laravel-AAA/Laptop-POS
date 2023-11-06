@@ -1,9 +1,8 @@
 import { ICreateProduct, IModalAction, IProduct } from "@/types";
-import { useForm } from "@inertiajs/react";
 import React, { FormEvent } from "react";
 import FormInputs from "./FormInputs";
 import FormActions from "./FormActions";
-import { InertiaFormProps } from "@/types/global";
+import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function Form({
   modalAction,
@@ -12,10 +11,7 @@ export default function Form({
   modalAction: IModalAction<IProduct>;
   setModalAction: React.Dispatch<React.SetStateAction<IModalAction<IProduct>>>;
 }) {
-  const form: InertiaFormProps<ICreateProduct> = useForm<ICreateProduct>(
-    modalAction.data
-      ? modalAction.data.id.toString() + modalAction.data.img //if img changed the the form needs to update the FormImage
-      : modalAction.state,
+  const form = useBetterForm<ICreateProduct>(
     modalAction.state === "create"
       ? {
           name: "", //name is required
@@ -27,6 +23,9 @@ export default function Form({
           stock: null,
         }
       : ({ ...modalAction.data, _method: "patch" } as ICreateProduct), //`method spoofing` is a workaround because image can only be submitted on `post` method so we send a hint to laravel that it should consider it `patch`
+    modalAction.data
+      ? modalAction.data.id.toString() + modalAction.data.img //if img changed the the form needs to update the FormImage
+      : modalAction.state,
   );
 
   function handleSubmit(e: FormEvent) {
@@ -53,10 +52,7 @@ export default function Form({
 
   return (
     <form className="mt-3" onSubmit={handleSubmit}>
-      <FormInputs
-        formProps={form}
-        modalAction={modalAction}
-      />
+      <FormInputs formProps={form} modalAction={modalAction} />
       <FormActions
         modalAction={modalAction}
         setModalAction={setModalAction}

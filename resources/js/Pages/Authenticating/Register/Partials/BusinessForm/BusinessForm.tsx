@@ -26,7 +26,6 @@ export default function BusinessForm({
     }
   }, [form.data.country]);
 
-
   return (
     <>
       <div>
@@ -35,13 +34,14 @@ export default function BusinessForm({
           name="businessName"
           value={form.data.name}
           errorMsg={form.errors.name}
-          hideError={form.isDirty('name')}
+          hideError={form.isDirty("name")}
           className="mt-1 block w-full"
           autoComplete="off"
           autoFocus
           maxLength={50}
-          onChange={(e) => form.setData('name', e.target.value)}
+          onChange={(e) => form.setData("name", e.target.value)}
           required
+          disabled={form.processing}
         />
       </div>
 
@@ -53,13 +53,14 @@ export default function BusinessForm({
         <Input
           label="City"
           errorMsg={form.errors.city}
-          hideError={form.isDirty('city')}
+          hideError={form.isDirty("city")}
           name="city"
           value={form.data.city}
           className="mt-1 block w-full"
           autoComplete="city"
           onChange={(e) => form.setData("city", e.target.value)}
           required
+          disabled={form.processing}
         />
       </div>
 
@@ -69,11 +70,12 @@ export default function BusinessForm({
           name="address"
           value={form.data.address}
           errorMsg={form.errors.address}
-          hideError={form.isDirty('address')}
+          hideError={form.isDirty("address")}
           className="mt-1 block w-full"
           autoComplete="address"
           onChange={(e) => form.setData("address", e.target.value)}
           required
+          disabled={form.processing}
         />
       </div>
 

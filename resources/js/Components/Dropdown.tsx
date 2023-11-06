@@ -103,6 +103,7 @@ const Content = ({
         leaveTo="opacity-0 scale-95"
       >
         <button
+          type="button"
           className={`div-style absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
           onClick={(e) => {
             e.stopPropagation();

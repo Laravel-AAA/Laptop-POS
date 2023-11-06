@@ -1,4 +1,5 @@
 import { InertiaFormProps } from "@/types/global";
+import { setDataByMethod, setDataByObject } from "@inertiajs/inertia-react";
 import { useForm } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 /**
@@ -12,15 +13,21 @@ export type UseBetterForm<T extends object> = Omit<
   //for type hint.
   //We remove `setData` from `InertiaFormProps` and add another `setData` with different param type.
   setData: <K extends keyof T>(key: K, value: T[K]) => void;
+  setAllData: setDataByObject<T> & setDataByMethod<T>;
   isDirty: (key?: keyof T) => boolean;
   setProcessing: (isProcessing: boolean) => void;
   readonly processing: boolean;
 };
 
+export function useBetterForm<T extends object>(initialValue: T);
 export default function useBetterForm<T extends object>(
   initialValue: T,
+  rememberKey?: string,
 ): UseBetterForm<T> {
-  const form = useForm<T>(initialValue);
+  const form =
+    rememberKey === undefined
+      ? useForm<T>(initialValue)
+      : useForm<T>(rememberKey, initialValue);
   const [processing, setProcessing] = useState<boolean>(form.processing);
 
   const [oldValues, setOldValues] = useState<T>(
@@ -38,6 +45,9 @@ export default function useBetterForm<T extends object>(
     ...form,
     setData: (key, value) => {
       form.setData(key, value);
+    },
+    setAllData: (data) => {
+      form.setData(data);
     },
     isDirty: (key) => {
       if (key) {

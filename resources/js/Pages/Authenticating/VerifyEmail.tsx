@@ -1,17 +1,17 @@
-import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import { AuthPageProps } from "@/types";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import FormLayout from "@/Layouts/GuestLayout/FormLayout";
 import Footer from "@/Layouts/GuestLayout/Partials/Footer";
+import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function VerifyEmail({
   status,
   auth,
 }: AuthPageProps<{ status?: string }>) {
-  const { post, processing } = useForm({});
+  const { post, processing } = useBetterForm({});
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();

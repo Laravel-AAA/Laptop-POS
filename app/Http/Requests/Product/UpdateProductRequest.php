@@ -28,7 +28,7 @@ class UpdateProductRequest extends FormRequest
                 'string',
                 'max:255',
                 Rule::unique('products')->where(function ($query) {
-                    return $query->where('user_id', Auth::id()); //unique only to the same user
+                    return $query->where('business_id', Auth::user()->business_id); //unique only to the same business
                 })->ignore($this->id)
             ],
             'price' => 'nullable|decimal:0,8|min:0|max:999999999',

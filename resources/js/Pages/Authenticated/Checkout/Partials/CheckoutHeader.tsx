@@ -50,58 +50,51 @@ export default function CheckoutHeader({
 
   return (
     <header className="sticky top-0 z-10 my-0 bg-white shadow">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="block justify-between py-3 sm:flex">
-          <div className="flex w-full flex-col gap-3 md:flex-row">
-            <Input
-              id="search"
-              label="Search"
-              icon={<FaSearch />}
-              type="search"
-              name="search"
-              autoComplete="on"
-              className="w-full p-1 pl-9 md:w-72"
-              placeholder="Search..."
-              disabled={false}
-              inputMode="search"
-              value={filter.search}
-              onChange={(v) => {
-                setFilter((p) => ({ ...p, search: v.target.value }));
-              }}
-              required={false}
-              errorMsg={undefined}
-              hideError={undefined}
-            />
-
-            <form onSubmit={submitBarcode}>
-              <label className="relative block">
-                <span className="sr-only">Barcode</span>
-                <span className="absolute inset-y-0 left-0 flex items-center pl-2"></span>
-
-                <Input
-                  id="barcode"
-                  label="Barcode"
-                  icon={<FaBarcode />}
-                  type="number"
-                  name="barcode"
-                  autoComplete="off"
-                  inputMode="numeric"
-                  autoFocus
-                  className="remove-arrow w-full p-1 pl-9 md:w-44"
-                  placeholder="Barcode..."
-                  value={filter.barcode}
-                  onChange={(v) => {
-                    setFilter((p) => ({ ...p, barcode: v.target.value }));
-                  }}
-                  disabled={false}
-                  required={false}
-                  errorMsg=""
-                  hideError={undefined}
-                />
-              </label>
-            </form>
-          </div>
+      <div className="flex w-full flex-col gap-4 p-2 md:flex-row">
+        <div>
+          <Input
+            id="search"
+            label="Search..."
+            icon={<FaSearch />}
+            type="search"
+            name="search"
+            size="md"
+            autoComplete="on"
+            className="w-full md:w-72"
+            disabled={false}
+            inputMode="search"
+            value={filter.search}
+            onChange={(v) => {
+              setFilter((p) => ({ ...p, search: v.target.value }));
+            }}
+            required={false}
+            errorMsg={undefined}
+            hideError={undefined}
+          />
         </div>
+        {/* <form> to allow Submit behavior such as Submit when Enter pressed */}
+        <form onSubmit={submitBarcode}>
+          <Input
+            id="barcode"
+            label="Barcode"
+            icon={<FaBarcode />}
+            type="number"
+            name="barcode"
+            size="md"
+            autoComplete="off"
+            inputMode="numeric"
+            autoFocus
+            className="remove-arrow w-full"
+            value={filter.barcode}
+            onChange={(v) => {
+              setFilter((p) => ({ ...p, barcode: v.target.value }));
+            }}
+            errorMsg=""
+            hideError={undefined}
+            disabled={false}
+            required={false}
+          />
+        </form>
       </div>
     </header>
   );

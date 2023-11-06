@@ -7,6 +7,7 @@ use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
@@ -41,7 +42,8 @@ class ProductController extends Controller
         if ($request->hasFile('imageFile')) {
             $product['img'] = $this->storeImg($request);
         }
-        $request->user()->products()->create($product);
+        $product->createdBy_id = Auth::id();
+        $request->user()->business->products()->create($product);
 
         return redirect()->back()->with('success', 'The product was created successfully');
     }
