@@ -91,7 +91,7 @@ export default function DeleteUserForm({
               autoFocus
               required
               placeholder="Password"
-              errorMsg={errors.password || (errors as any).hasProducts}
+              errorMsg={errors.password || (errors as any).hasProducts || (errors as any).isAdmin}
               hideError={isDirty("password")}
               disabled={processing}
             />

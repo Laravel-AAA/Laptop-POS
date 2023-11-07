@@ -6,6 +6,7 @@ import COUNTRIES, { Country } from "./Partials/COUNTRIES";
 import { useEffect, useState } from "react";
 import CurrencyInput from "./Partials/CurrencyInput";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
+import TaxRateInput from "./Partials/TaxRateInput";
 
 export default function BusinessForm({
   form,
@@ -23,6 +24,7 @@ export default function BusinessForm({
     const c = COUNTRIES.find((c) => c.name === form.data.country);
     if (c) {
       setCountry(c);
+      if (c.tax) form.setData("taxPercent", c.tax);
     }
   }, [form.data.country]);
 
@@ -31,7 +33,7 @@ export default function BusinessForm({
       <div>
         <Input
           label="Business Name"
-          name="businessName"
+          type="text"
           value={form.data.name}
           errorMsg={form.errors.name}
           hideError={form.isDirty("name")}
@@ -52,9 +54,9 @@ export default function BusinessForm({
       <div className="mt-4">
         <Input
           label="City"
+          type="text"
           errorMsg={form.errors.city}
           hideError={form.isDirty("city")}
-          name="city"
           value={form.data.city}
           className="mt-1 block w-full"
           autoComplete="city"
@@ -67,7 +69,7 @@ export default function BusinessForm({
       <div className="mt-4">
         <Input
           label="Address"
-          name="address"
+          type="text"
           value={form.data.address}
           errorMsg={form.errors.address}
           hideError={form.isDirty("address")}
@@ -81,6 +83,19 @@ export default function BusinessForm({
 
       <div className="mt-4">
         <CurrencyInput form={form} chosenCountry={country} />
+      </div>
+
+      <div className="mt-4">
+        <TaxRateInput
+          disabled={form.processing}
+          errorMsg={form.errors.taxPercent}
+          hideError={form.isDirty("taxPercent")}
+          onChange={(e) =>
+            form.setData("taxPercent", Number(e.target.value) / 100)
+          }
+          value={form.data.taxPercent * 100}
+          currency={form.data.currency ?? "$"}
+        />
       </div>
 
       <div className="mt-4">

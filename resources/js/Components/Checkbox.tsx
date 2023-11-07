@@ -30,7 +30,7 @@ export default function Checkbox({
       />
 
       <ErrorMessage
-        className="ml-4 mt-0"
+        className="ml-4 !mt-0"
         message={errorMsg}
         {...errorMsgProps}
       />

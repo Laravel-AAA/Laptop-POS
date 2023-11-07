@@ -19,16 +19,17 @@ export default function Register({ auth }: AuthPageProps) {
   );
 
   const businessForm = useBetterForm<ICreateBusiness>({
-    address: "",
-    city: "",
-    country: "",
-    currency: null,
+    name: "",
     logo: null,
     logoFile: null,
-    name: "",
-    phone: "",
-    taxIdentificationNumber: null,
+    country: "",
+    city: "",
+    address: "",
+    currency: null,
     taxPercent: 0,
+    phone: "",
+    countryCallingCode: "",
+    taxIdentificationNumber: null,
   });
 
   const submit: FormEventHandler = (e) => {

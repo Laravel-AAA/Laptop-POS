@@ -87,7 +87,7 @@ export default function UpdatePasswordForm({
             className="mt-1 block w-full"
             autoComplete="new-password"
             errorMsg={errors.password}
-            hideError={isDirty("password")}
+            hideError={isDirty("password") || isDirty("password_confirmation")} //if user changed password or confirmPassword then hideError
             disabled={processing}
           />
         </div>
@@ -103,7 +103,7 @@ export default function UpdatePasswordForm({
             autoComplete="new-password"
             required
             errorMsg={errors.password_confirmation}
-            hideError={isDirty("password_confirmation")}
+            hideError={isDirty("password_confirmation") || isDirty("password")}
             disabled={processing}
           />
         </div>

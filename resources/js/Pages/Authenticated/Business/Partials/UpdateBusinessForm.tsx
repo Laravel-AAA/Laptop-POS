@@ -5,6 +5,8 @@ import { Transition } from "@headlessui/react";
 import { FormEventHandler } from "react";
 import { AuthPageProps, IBusiness } from "@/types";
 import useBetterForm from "@/Utilities/useBetterForm";
+import Num from "@/Utilities/Num";
+import TaxRateInput from "@/Pages/Authenticating/Register/Partials/BusinessForm/Partials/TaxRateInput";
 
 export default function UpdateBusinessInformation({
   className = "",
@@ -37,22 +39,19 @@ export default function UpdateBusinessInformation({
 
       <form onSubmit={submit} className="mt-6 space-y-6">
         <div>
-          <Input
-            id="taxPercent"
-            label="Tax Percent"
-            className="mt-1 block w-full"
-            type="number"
-            value={form.data.taxPercent * 100}
-            onChange={(e) =>
-              form.setData("taxPercent", Number(e.target.value) / 100)
-            }
+          <TaxRateInput
             disabled={form.processing}
-            required
-            autoFocus
-            autoComplete="off"
             errorMsg={form.errors.taxPercent}
             hideError={form.isDirty("taxPercent")}
-          />
+            onChange={(e) =>
+              form.setData(
+                "taxPercent",
+                Number((Number(e.target.value) / 100).toFixed(6)), //0.00001
+              )
+            }
+            value={form.data.taxPercent * 100}
+            currency={form.data.currency ?? "$"}
+          />{" "}
         </div>
 
         <div>
@@ -68,6 +67,16 @@ export default function UpdateBusinessInformation({
             autoComplete="off"
             errorMsg={form.errors.currency}
             hideError={form.isDirty("currency")}
+            hint={
+              <span>
+                You can use any Unicode symbol ({" "}
+                <span className="font-semibold text-blue-gray-600">$</span>,{" "}
+                <span className="font-semibold text-blue-gray-600">£</span>,{" "}
+                <span className="font-semibold text-blue-gray-600">¥</span>,{" "}
+                <span className="font-semibold text-blue-gray-600">€</span>,
+                ...etc)
+              </span>
+            }
           />
         </div>
 

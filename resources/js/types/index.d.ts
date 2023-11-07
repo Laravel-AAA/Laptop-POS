@@ -21,7 +21,7 @@ export interface IUser extends ICreateUser {
 export type AuthPageProps<
   T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {
-  auth: { user: IUser; business:IBusiness };
+  auth: { user: IUser; business: IBusiness };
 };
 
 
@@ -80,8 +80,9 @@ export interface ICreateBusiness {
   city: string;
   address: string;
   currency: string | null;
+  taxPercent: number;
   phone: string;
-  taxPercent: number | null;
+  countryCallingCode: string;
   taxIdentificationNumber: string | null;
 }
 

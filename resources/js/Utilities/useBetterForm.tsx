@@ -19,7 +19,6 @@ export type UseBetterForm<T extends object> = Omit<
   readonly processing: boolean;
 };
 
-export function useBetterForm<T extends object>(initialValue: T);
 export default function useBetterForm<T extends object>(
   initialValue: T,
   rememberKey?: string,
@@ -33,6 +32,7 @@ export default function useBetterForm<T extends object>(
   const [oldValues, setOldValues] = useState<T>(
     JSON.parse(JSON.stringify(initialValue)),
   );
+
   useEffect(() => {
     setOldValues(form.data);
   }, [form.hasErrors]);

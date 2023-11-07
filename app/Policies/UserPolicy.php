@@ -21,8 +21,11 @@ class UserPolicy
      */
     public function delete(User $user, User $userEntity): bool
     {
+        if($user->role == 'Admin')
+            throw ValidationException::withMessages(['isAdmin'=>'You cannot delete your admin account. To delete all accounts under your business, please go to Business > Delete Business.']);
+
         if ($user->id == $userEntity->id) {
-            $productsCount = $user->products()->count();
+            $productsCount = $user->business->products()->count();
             if ($productsCount != 0) {
                 throw ValidationException::withMessages(['hasProducts' => 'You have to delete all products. Found ' . $productsCount . ' products.']);
             } else

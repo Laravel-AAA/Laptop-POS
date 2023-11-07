@@ -15,7 +15,8 @@ return new class extends Migration {
             $table->string('name', 50);
             $table->string('logo')->nullable();
             $table->string('phone', 15)->unique();
-            $table->decimal('taxPercent')->default(0);// 0.5 is 50% tax rate
+            $table->string('countryCallingCode', 6);//Ex: '+966'
+            $table->decimal('taxPercent');// 0.5 is 50% tax rate
             $table->string('currency', 10)->default('$');// '$' or '﷼'
             $table->string('country', 50);
             $table->string('city', 50);

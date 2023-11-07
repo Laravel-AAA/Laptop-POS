@@ -21,13 +21,24 @@ export function PhoneInput({
   const countries = COUNTRIES.filter((c) => c.countryCallingCode).sort(
     (a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0),
   );
-  const [callCodeCountry, setCallCodeCountry] = useState<Country>(
-    country ?? countries[0],
-  );
+
+  let defaultCallCode;
+  if (form.data.countryCallingCode)
+    defaultCallCode = countries.find(
+      (c) => c.countryCallingCode == form.data.countryCallingCode,
+    );
+  if (!defaultCallCode) defaultCallCode = country ?? countries[0];
+
+  const [chosenCountryForCode, setChosenCountryForCode] =
+    useState<Country>(defaultCallCode);
 
   useEffect(() => {
-    if (country) setCallCodeCountry(country);
+    if (country) setChosenCountryForCode(country);
   }, [country]);
+
+  useEffect(() => {
+    form.setData("countryCallingCode", chosenCountryForCode.countryCallingCode);
+  }, [chosenCountryForCode]);
 
   return (
     <>
@@ -37,16 +48,17 @@ export function PhoneInput({
             <Button
               size="lg"
               ripple={false}
+              disabled={form.processing}
               variant="text"
               color="blue-gray"
               className="flex h-11 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
             >
               <img
-                src={callCodeCountry.flags.svg}
-                alt={callCodeCountry.name}
+                src={chosenCountryForCode.flags.svg}
+                alt={chosenCountryForCode.name}
                 className="h-4 w-5 rounded object-cover"
               />
-              {callCodeCountry.countryCallingCode}
+              {chosenCountryForCode.countryCallingCode}
             </Button>
           </MenuHandler>
           <MenuList className="max-h-[20rem] max-w-[18rem]">
@@ -56,7 +68,7 @@ export function PhoneInput({
                   key={c.name}
                   value={c.name}
                   className="flex items-center gap-2"
-                  onClick={() => setCallCodeCountry(countries[i])}
+                  onClick={() => setChosenCountryForCode(countries[i])}
                 >
                   <img
                     src={c.flags.svg}
@@ -83,9 +95,9 @@ export function PhoneInput({
           crossOrigin={undefined}
         />
       </div>
-      {form.errors.phone && (
+      {( form.errors.phone || form.errors.countryCallingCode ) && (
         <p className="ml-2 mt-2 text-xs text-danger-600 ">
-          {form.errors.phone}
+          {( form.errors.phone || form.errors.countryCallingCode )}
         </p>
       )}
     </>

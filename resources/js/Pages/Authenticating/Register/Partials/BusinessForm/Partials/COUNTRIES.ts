@@ -8,10 +8,6 @@ export type Country = {
     symbol?: string;
   }[];
   languages: string[];
-  maps: {
-    googleMaps: string;
-    openStreetMaps: string;
-  };
   postalCode?: {
     format: string;
     regex?: string;
@@ -20,9 +16,9 @@ export type Country = {
     png: string;
     svg: string;
   };
-  population: number;
   emoji: string;
   countryCallingCode: string;
+  tax?: number;
 };
 
 //export default
@@ -34,16 +30,11 @@ const COUNTRIES: Country[] = [
     coordinates: [1, 38],
     currencies: [{ name: "Kenyan shilling", symbol: "Sh" }],
     languages: ["English", "Swahili"],
-    maps: {
-      googleMaps: "https://goo.gl/maps/Ni9M7wcCxf8bJHLX8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192798",
-    },
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/ke.png",
       svg: "https://flagcdn.com/ke.svg",
     },
-    population: 53771300,
     emoji: "🇰🇪",
     countryCallingCode: "+254",
   },
@@ -54,11 +45,6 @@ const COUNTRIES: Country[] = [
     languages: ["English"],
     coordinates: [8.5, -11.5],
     area: 71740,
-    maps: {
-      googleMaps: "https://goo.gl/maps/jhacar85oq9QaeKB7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192777",
-    },
-    population: 7976985,
     flags: {
       png: "https://flagcdn.com/w320/sl.png",
       svg: "https://flagcdn.com/sl.svg",
@@ -73,11 +59,6 @@ const COUNTRIES: Country[] = [
     languages: ["French", "Malagasy"],
     coordinates: [-20, 47],
     area: 587041,
-    maps: {
-      googleMaps: "https://goo.gl/maps/AHQh2ABBaFW6Ngj26",
-      openStreetMaps: "https://www.openstreetmap.org/relation/447325",
-    },
-    population: 27691019,
     postalCode: { format: "###", regex: "^(\\d{3})$" },
     flags: {
       png: "https://flagcdn.com/w320/mg.png",
@@ -93,11 +74,6 @@ const COUNTRIES: Country[] = [
     languages: ["English"],
     coordinates: [10, 8],
     area: 923768,
-    maps: {
-      googleMaps: "https://goo.gl/maps/LTn417qWwBPFszuV9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192787",
-    },
-    population: 206139587,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/ng.png",
@@ -105,6 +81,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇳🇬",
     countryCallingCode: "+234",
+    tax: 0.075
   },
   {
     name: "Jordan",
@@ -113,11 +90,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [31, 36],
     area: 89342,
-    maps: {
-      googleMaps: "https://goo.gl/maps/ko1dzSDKg8Gsi9A98",
-      openStreetMaps: "https://www.openstreetmap.org/relation/184818",
-    },
-    population: 10203140,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/jo.png",
@@ -133,11 +105,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [25, 17],
     area: 1759540,
-    maps: {
-      googleMaps: "https://goo.gl/maps/eLgGnaQWcJEdYRMy5",
-      openStreetMaps: "openstreetmap.org/relation/192758",
-    },
-    population: 6871287,
     flags: {
       png: "https://flagcdn.com/w320/ly.png",
       svg: "https://flagcdn.com/ly.svg",
@@ -152,11 +119,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [23, -102],
     area: 1964375,
-    maps: {
-      googleMaps: "https://goo.gl/maps/s5g7imNPMDEePxzbA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/114686",
-    },
-    population: 128932753,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/mx.png",
@@ -164,6 +126,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇲🇽",
     countryCallingCode: "+52",
+    tax: 0.16,
   },
   {
     name: "Turkmenistan",
@@ -172,11 +135,6 @@ const COUNTRIES: Country[] = [
     languages: ["Russian", "Turkmen"],
     coordinates: [40, 60],
     area: 488100,
-    maps: {
-      googleMaps: "https://goo.gl/maps/cgfUcaQHSWKuqeKk9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/223026",
-    },
-    population: 6031187,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/tm.png",
@@ -195,11 +153,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [9, -80],
     area: 75417,
-    maps: {
-      googleMaps: "https://goo.gl/maps/sEN7sKqeawa5oPNLA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/287668",
-    },
-    population: 4314768,
     flags: {
       png: "https://flagcdn.com/w320/pa.png",
       svg: "https://flagcdn.com/pa.svg",
@@ -214,11 +167,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [28, 3],
     area: 2381741,
-    maps: {
-      googleMaps: "https://goo.gl/maps/RsAyAfyaiNVb8DpW8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192756",
-    },
-    population: 44000000,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/dz.png",
@@ -226,6 +174,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇩🇿",
     countryCallingCode: "+213",
+    tax: 0.19,
   },
   {
     name: "Sweden",
@@ -234,11 +183,6 @@ const COUNTRIES: Country[] = [
     languages: ["Swedish"],
     coordinates: [62, 15],
     area: 450295,
-    maps: {
-      googleMaps: "https://goo.gl/maps/iqygE491ADVgnBW39",
-      openStreetMaps: "https://www.openstreetmap.org/relation/52822",
-    },
-    population: 10353442,
     postalCode: { format: "SE-### ##", regex: "^(?:SE)*(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/se.png",
@@ -254,11 +198,6 @@ const COUNTRIES: Country[] = [
     languages: ["French", "Swiss German", "Italian", "Romansh"],
     coordinates: [47, 8],
     area: 41284,
-    maps: {
-      googleMaps: "https://goo.gl/maps/uVuZcXaxSx5jLyEC9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/51701",
-    },
-    population: 17500657,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/ch.png",
@@ -274,11 +213,6 @@ const COUNTRIES: Country[] = [
     languages: ["Amharic"],
     coordinates: [8, 38],
     area: 1104300,
-    maps: {
-      googleMaps: "https://goo.gl/maps/2Q4hQWCbhuZLj3fG6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192800",
-    },
-    population: 114963583,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/et.png",
@@ -286,6 +220,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇪🇹",
     countryCallingCode: "+251",
+    tax: 0.15,
   },
   {
     name: "Somalia",
@@ -294,11 +229,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic", "Somali"],
     coordinates: [10, 49],
     area: 637657,
-    maps: {
-      googleMaps: "https://goo.gl/maps/8of8q7D1a8p7R6Fc9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192799",
-    },
-    population: 15893219,
     postalCode: { format: "@@  #####", regex: "^([A-Z]{2}\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/so.png",
@@ -314,11 +244,6 @@ const COUNTRIES: Country[] = [
     languages: ["French"],
     coordinates: [46, 2],
     area: 551695,
-    maps: {
-      googleMaps: "https://goo.gl/maps/g7QxxSFsWyTPKuzd7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/1403916",
-    },
-    population: 67391582,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/fr.png",
@@ -334,12 +259,6 @@ const COUNTRIES: Country[] = [
     languages: ["Russian"],
     coordinates: [60, 100],
     area: 17098242,
-    maps: {
-      googleMaps: "https://goo.gl/maps/4F4PpDhGJgVvLby57",
-      openStreetMaps:
-        "https://www.openstreetmap.org/relation/60189#map=3/65.15/105.29",
-    },
-    population: 144104080,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/ru.png",
@@ -347,6 +266,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "",
     countryCallingCode: "",
+    tax: 0.20,
   },
   {
     name: "Chad",
@@ -355,11 +275,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic", "French"],
     coordinates: [15, 19],
     area: 1284000,
-    maps: {
-      googleMaps: "https://goo.gl/maps/ziUdAZ8skuNfx5Hx7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/2361304",
-    },
-    population: 16425859,
     flags: {
       png: "https://flagcdn.com/w320/td.png",
       svg: "https://flagcdn.com/td.svg",
@@ -374,11 +289,6 @@ const COUNTRIES: Country[] = [
     languages: ["English"],
     coordinates: [11, -61],
     area: 5130,
-    maps: {
-      googleMaps: "https://goo.gl/maps/NrRfDEWoG8FGZqWY7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/555717",
-    },
-    population: 1399491,
     flags: {
       png: "https://flagcdn.com/w320/tt.png",
       svg: "https://flagcdn.com/tt.svg",
@@ -393,11 +303,6 @@ const COUNTRIES: Country[] = [
     languages: ["French", "Sango"],
     coordinates: [7, 21],
     area: 622984,
-    maps: {
-      googleMaps: "https://goo.gl/maps/51V8dsi2rGYC9n3c9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192790",
-    },
-    population: 4829764,
     flags: {
       png: "https://flagcdn.com/w320/cf.png",
       svg: "https://flagcdn.com/cf.svg",
@@ -412,11 +317,6 @@ const COUNTRIES: Country[] = [
     languages: ["Macedonian"],
     coordinates: [41.83333333, 22],
     area: 25713,
-    maps: {
-      googleMaps: "https://goo.gl/maps/55Q8MEnF6ACdu3q79",
-      openStreetMaps: "https://www.openstreetmap.org/relation/53293",
-    },
-    population: 2077132,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/mk.png",
@@ -432,11 +332,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [13.83333333, -88.91666666],
     area: 21041,
-    maps: {
-      googleMaps: "https://goo.gl/maps/cZnCEi5sEMQtKKcB7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/1520612",
-    },
-    population: 6486201,
     postalCode: { format: "CP ####", regex: "^(?:CP)*(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/sv.png",
@@ -444,6 +339,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇸🇻",
     countryCallingCode: "+503",
+    tax: 0.13,
   },
   {
     name: "Kosovo",
@@ -452,11 +348,6 @@ const COUNTRIES: Country[] = [
     languages: ["Albanian", "Serbian"],
     coordinates: [42.666667, 21.166667],
     area: 10908,
-    maps: {
-      googleMaps: "https://goo.gl/maps/CSC4Yc8SWPgburuD9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/2088990",
-    },
-    population: 1775378,
     flags: {
       png: "https://flagcdn.com/w320/xk.png",
       svg: "https://flagcdn.com/xk.svg",
@@ -471,17 +362,13 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [4, -72],
     area: 1141748,
-    maps: {
-      googleMaps: "https://goo.gl/maps/RdwTG8e7gPwS62oR6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/120027",
-    },
-    population: 50882884,
     flags: {
       png: "https://flagcdn.com/w320/co.png",
       svg: "https://flagcdn.com/co.svg",
     },
     emoji: "🇨🇴",
     countryCallingCode: "+57",
+    tax: 0.19,
   },
   {
     name: "Iran",
@@ -490,11 +377,6 @@ const COUNTRIES: Country[] = [
     languages: ["Persian (Farsi)"],
     coordinates: [32, 53],
     area: 1648195,
-    maps: {
-      googleMaps: "https://goo.gl/maps/dMgEGuacBPGYQnjY7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/304938",
-    },
-    population: 83992953,
     postalCode: { format: "##########", regex: "^(\\d{10})$" },
     flags: {
       png: "https://flagcdn.com/w320/ir.png",
@@ -510,17 +392,13 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [24, 54],
     area: 83600,
-    maps: {
-      googleMaps: "https://goo.gl/maps/AZZTDA6GzVAnKMVd8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/307763",
-    },
-    population: 9890400,
     flags: {
       png: "https://flagcdn.com/w320/ae.png",
       svg: "https://flagcdn.com/ae.svg",
     },
     emoji: "🇦🇪",
     countryCallingCode: "+971",
+    tax: 0.05,
   },
   {
     name: "South Africa",
@@ -541,11 +419,6 @@ const COUNTRIES: Country[] = [
     ],
     coordinates: [-29, 24],
     area: 1221037,
-    maps: {
-      googleMaps: "https://goo.gl/maps/CLCZ1R8Uz1KpYhRv6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/87565",
-    },
-    population: 59308690,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/za.png",
@@ -561,11 +434,6 @@ const COUNTRIES: Country[] = [
     languages: ["Czech", "Slovak"],
     coordinates: [49.75, 15.5],
     area: 78865,
-    maps: {
-      googleMaps: "https://goo.gl/maps/47dmgeXMZyhDHyQW8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/51684",
-    },
-    population: 10698896,
     postalCode: { format: "### ##", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/cz.png",
@@ -581,11 +449,6 @@ const COUNTRIES: Country[] = [
     languages: ["Hungarian"],
     coordinates: [47, 20],
     area: 93028,
-    maps: {
-      googleMaps: "https://goo.gl/maps/9gfPupm5bffixiFJ6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/21335",
-    },
-    population: 9749763,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/hu.png",
@@ -601,11 +464,6 @@ const COUNTRIES: Country[] = [
     languages: ["Aymara", "Quechua", "Spanish"],
     coordinates: [-10, -76],
     area: 1285216,
-    maps: {
-      googleMaps: "https://goo.gl/maps/uDWEUaXNcZTng1fP6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/288247",
-    },
-    population: 32971846,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/pe.png",
@@ -613,6 +471,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇵🇪",
     countryCallingCode: "+51",
+    tax: 0.18,
   },
   {
     name: "Benin",
@@ -621,11 +480,6 @@ const COUNTRIES: Country[] = [
     languages: ["French"],
     coordinates: [9.5, 2.25],
     area: 112622,
-    maps: {
-      googleMaps: "https://goo.gl/maps/uMw1BsHEXQYgVFFu6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192784",
-    },
-    population: 12123198,
     flags: {
       png: "https://flagcdn.com/w320/bj.png",
       svg: "https://flagcdn.com/bj.svg",
@@ -640,11 +494,6 @@ const COUNTRIES: Country[] = [
     languages: ["English"],
     coordinates: [7, 30],
     area: 619745,
-    maps: {
-      googleMaps: "https://goo.gl/maps/Zm1AYCXb9HSNF1P27",
-      openStreetMaps: "https://www.openstreetmap.org/relation/1656678",
-    },
-    population: 11193729,
     flags: {
       png: "https://flagcdn.com/w320/ss.png",
       svg: "https://flagcdn.com/ss.svg",
@@ -659,11 +508,6 @@ const COUNTRIES: Country[] = [
     languages: ["Turkish"],
     coordinates: [39, 35],
     area: 783562,
-    maps: {
-      googleMaps: "https://goo.gl/maps/dXFFraiUDfcB6Quk6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/174737",
-    },
-    population: 84339067,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/tr.png",
@@ -671,6 +515,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇹🇷",
     countryCallingCode: "+90",
+    tax: 0.19,
   },
   {
     name: "Ireland",
@@ -679,11 +524,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Irish"],
     coordinates: [53, -8],
     area: 70273,
-    maps: {
-      googleMaps: "https://goo.gl/maps/hxd1BKxgpchStzQC6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/62273",
-    },
-    population: 4994724,
     flags: {
       png: "https://flagcdn.com/w320/ie.png",
       svg: "https://flagcdn.com/ie.svg",
@@ -698,17 +538,13 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Tswana"],
     coordinates: [-22, 24],
     area: 582000,
-    maps: {
-      googleMaps: "https://goo.gl/maps/E364KeLy6N4JwxwQ8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/1889339",
-    },
-    population: 2351625,
     flags: {
       png: "https://flagcdn.com/w320/bw.png",
       svg: "https://flagcdn.com/bw.svg",
     },
     emoji: "🇧🇼",
     countryCallingCode: "+267",
+    tax: 0.14,
   },
   {
     name: "Haiti",
@@ -717,11 +553,6 @@ const COUNTRIES: Country[] = [
     languages: ["French", "Haitian Creole"],
     coordinates: [19, -72.41666666],
     area: 27750,
-    maps: {
-      googleMaps: "https://goo.gl/maps/9o13xtjuUdqFnHbn9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/307829",
-    },
-    population: 11402533,
     postalCode: { format: "HT####", regex: "^(?:HT)*(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/ht.png",
@@ -737,11 +568,6 @@ const COUNTRIES: Country[] = [
     languages: ["Japanese"],
     coordinates: [36, 138],
     area: 377930,
-    maps: {
-      googleMaps: "https://goo.gl/maps/NGTLSCSrA8bMrvnX9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/382313",
-    },
-    population: 125836021,
     postalCode: { format: "###-####", regex: "^(\\d{7})$" },
     flags: {
       png: "https://flagcdn.com/w320/jp.png",
@@ -749,6 +575,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇯🇵",
     countryCallingCode: "+81",
+    tax: 0.10,
   },
   {
     name: "Sudan",
@@ -757,11 +584,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic", "English"],
     coordinates: [15, 30],
     area: 1886068,
-    maps: {
-      googleMaps: "https://goo.gl/maps/bNW7YUJCaqR8zcXn7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192789",
-    },
-    population: 43849269,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/sd.png",
@@ -777,17 +599,13 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Swahili"],
     coordinates: [1, 32],
     area: 241550,
-    maps: {
-      googleMaps: "https://goo.gl/maps/Y7812hFiGa8LD9N68",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192796",
-    },
-    population: 45741000,
     flags: {
       png: "https://flagcdn.com/w320/ug.png",
       svg: "https://flagcdn.com/ug.svg",
     },
     emoji: "🇺🇬",
     countryCallingCode: "+256",
+    tax: 0.18,
   },
   {
     name: "Kazakhstan",
@@ -796,11 +614,6 @@ const COUNTRIES: Country[] = [
     languages: ["Kazakh", "Russian"],
     coordinates: [48, 68],
     area: 2724900,
-    maps: {
-      googleMaps: "https://goo.gl/maps/8VohJGu7ShuzZYyeA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/214665",
-    },
-    population: 18754440,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/kz.png",
@@ -808,6 +621,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇰🇿",
     countryCallingCode: "+7",
+    tax: 0.12,
   },
   {
     name: "Moldova",
@@ -816,11 +630,6 @@ const COUNTRIES: Country[] = [
     languages: ["Moldavian"],
     coordinates: [47, 29],
     area: 33846,
-    maps: {
-      googleMaps: "https://goo.gl/maps/JjmyUuULujnDeFPf7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/58974",
-    },
-    population: 2617820,
     postalCode: { format: "MD-####", regex: "^(?:MD)*(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/md.png",
@@ -836,11 +645,6 @@ const COUNTRIES: Country[] = [
     languages: ["Guaraní", "Spanish"],
     coordinates: [-23, -58],
     area: 406752,
-    maps: {
-      googleMaps: "https://goo.gl/maps/JtnqG73WJn1Gx6mz6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/287077",
-    },
-    population: 7132530,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/py.png",
@@ -856,11 +660,6 @@ const COUNTRIES: Country[] = [
     languages: ["Estonian"],
     coordinates: [59, 26],
     area: 45227,
-    maps: {
-      googleMaps: "https://goo.gl/maps/6SsynwGUodL1sDvq8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/79510",
-    },
-    population: 1331057,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/ee.png",
@@ -880,11 +679,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [31.9, 35.2],
     area: 6220,
-    maps: {
-      googleMaps: "https://goo.gl/maps/QvTbkRdmdWEoYAmt5",
-      openStreetMaps: "https://www.openstreetmap.org/relation/1703814",
-    },
-    population: 4803269,
     flags: {
       png: "https://flagcdn.com/w320/ps.png",
       svg: "https://flagcdn.com/ps.svg",
@@ -899,11 +693,6 @@ const COUNTRIES: Country[] = [
     languages: ["Finnish", "Swedish"],
     coordinates: [64, 26],
     area: 338424,
-    maps: {
-      googleMaps: "https://goo.gl/maps/HjgWDCNKRAYHrkMn8",
-      openStreetMaps: "openstreetmap.org/relation/54224",
-    },
-    population: 5530719,
     postalCode: { format: "#####", regex: "^(?:FI)*(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/fi.png",
@@ -919,11 +708,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [15, -86.5],
     area: 112492,
-    maps: {
-      googleMaps: "https://goo.gl/maps/BbeJK8Sk2VkMHbdF8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/287670",
-    },
-    population: 9904608,
     postalCode: { format: "@@####", regex: "^([A-Z]{2}\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/hn.png",
@@ -939,11 +723,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [19, -70.66666666],
     area: 48671,
-    maps: {
-      googleMaps: "https://goo.gl/maps/soxooTHxEeiAbn3UA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/307828",
-    },
-    population: 10847904,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/do.png",
@@ -959,11 +738,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "French", "Kinyarwanda"],
     coordinates: [-2, 30],
     area: 26338,
-    maps: {
-      googleMaps: "https://goo.gl/maps/j5xb5r7CLqjYbyP86",
-      openStreetMaps: "https://www.openstreetmap.org/relation/171496",
-    },
-    population: 12952209,
     flags: {
       png: "https://flagcdn.com/w320/rw.png",
       svg: "https://flagcdn.com/rw.svg",
@@ -978,11 +752,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [21, 57],
     area: 309500,
-    maps: {
-      googleMaps: "https://goo.gl/maps/L2BoXoAwDDwWecnw5",
-      openStreetMaps: "https://www.openstreetmap.org/relation/305138",
-    },
-    population: 5106622,
     postalCode: { format: "###", regex: "^(\\d{3})$" },
     flags: {
       png: "https://flagcdn.com/w320/om.png",
@@ -990,6 +759,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇴🇲",
     countryCallingCode: "+968",
+    tax: 0.05,
   },
   {
     name: "Portugal",
@@ -998,11 +768,6 @@ const COUNTRIES: Country[] = [
     languages: ["Portuguese"],
     coordinates: [39.5, -8],
     area: 92090,
-    maps: {
-      googleMaps: "https://goo.gl/maps/BaTBSyc4GWMmbAKB8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/295480",
-    },
-    population: 10305564,
     postalCode: { format: "####-###", regex: "^(\\d{7})$" },
     flags: {
       png: "https://flagcdn.com/w320/pt.png",
@@ -1018,11 +783,6 @@ const COUNTRIES: Country[] = [
     languages: ["Thai"],
     coordinates: [15, 100],
     area: 513120,
-    maps: {
-      googleMaps: "https://goo.gl/maps/qeU6uqsfW4nCCwzw9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/2067731",
-    },
-    population: 69799978,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/th.png",
@@ -1030,6 +790,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇹🇭",
     countryCallingCode: "+66",
+    tax: 0.07,
   },
   {
     name: "Timor-Leste",
@@ -1038,11 +799,6 @@ const COUNTRIES: Country[] = [
     languages: ["Portuguese", "Tetum"],
     coordinates: [-8.83333333, 125.91666666],
     area: 14874,
-    maps: {
-      googleMaps: "https://goo.gl/maps/sFqBC9zjgUXPR1iTA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/305142",
-    },
-    population: 1318442,
     flags: {
       png: "https://flagcdn.com/w320/tl.png",
       svg: "https://flagcdn.com/tl.svg",
@@ -1057,11 +813,6 @@ const COUNTRIES: Country[] = [
     languages: ["Armenian"],
     coordinates: [40, 45],
     area: 29743,
-    maps: {
-      googleMaps: "https://goo.gl/maps/azWUtK9bUQYEyccbA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/364066",
-    },
-    population: 2963234,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/am.png",
@@ -1069,6 +820,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇦🇲",
     countryCallingCode: "+374",
+    tax: 0.20,
   },
   {
     name: "Kuwait",
@@ -1077,11 +829,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [29.5, 45.75],
     area: 17818,
-    maps: {
-      googleMaps: "https://goo.gl/maps/aqr3aNQjS1BAvksJ7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/305099",
-    },
-    population: 4270563,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/kw.png",
@@ -1089,6 +836,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇰🇼",
     countryCallingCode: "+965",
+    tax: 0,
   },
   {
     name: "Georgia",
@@ -1097,11 +845,6 @@ const COUNTRIES: Country[] = [
     languages: ["Georgian"],
     coordinates: [42, 43.5],
     area: 69700,
-    maps: {
-      googleMaps: "https://goo.gl/maps/bvCaGBePR1ZEDK5cA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/28699",
-    },
-    population: 3714000,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/ge.png",
@@ -1109,6 +852,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇬🇪",
     countryCallingCode: "+995",
+    tax: 0.18,
   },
   {
     name: "Burundi",
@@ -1117,11 +861,6 @@ const COUNTRIES: Country[] = [
     languages: ["French", "Kirundi"],
     coordinates: [-3.5, 30],
     area: 27834,
-    maps: {
-      googleMaps: "https://goo.gl/maps/RXPWoRrB9tfrJpUG7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/195269",
-    },
-    population: 11890781,
     flags: {
       png: "https://flagcdn.com/w320/bi.png",
       svg: "https://flagcdn.com/bi.svg",
@@ -1139,11 +878,6 @@ const COUNTRIES: Country[] = [
     languages: ["Khmer"],
     coordinates: [13, 105],
     area: 181035,
-    maps: {
-      googleMaps: "https://goo.gl/maps/nztQtFSrUXZymJaW8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/49898",
-    },
-    population: 16718971,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/kh.png",
@@ -1162,11 +896,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Sotho"],
     coordinates: [-29.5, 28.5],
     area: 30355,
-    maps: {
-      googleMaps: "https://goo.gl/maps/H8gJi5mL4Cmd1SF28",
-      openStreetMaps: "https://www.openstreetmap.org/relation/2093234",
-    },
-    population: 2142252,
     postalCode: { format: "###", regex: "^(\\d{3})$" },
     flags: {
       png: "https://flagcdn.com/w320/ls.png",
@@ -1182,17 +911,13 @@ const COUNTRIES: Country[] = [
     languages: ["Aymara", "Guaraní", "Quechua", "Spanish"],
     coordinates: [-17, -65],
     area: 1098581,
-    maps: {
-      googleMaps: "https://goo.gl/maps/9DfnyfbxNM2g5U9b9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/252645",
-    },
-    population: 11673029,
     flags: {
       png: "https://flagcdn.com/w320/bo.png",
       svg: "https://flagcdn.com/bo.svg",
     },
     emoji: "",
     countryCallingCode: "",
+    tax: 0.13,
   },
   {
     name: "United Kingdom",
@@ -1201,11 +926,6 @@ const COUNTRIES: Country[] = [
     languages: ["English"],
     coordinates: [54, -2],
     area: 242900,
-    maps: {
-      googleMaps: "https://goo.gl/maps/FoDtc3UKMkFsXAjHA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/62149",
-    },
-    population: 67215293,
     postalCode: {
       format: "@# #@@|@## #@@|@@# #@@|@@## #@@|@#@ #@@|@@#@ #@@|GIR0AA",
       regex:
@@ -1217,6 +937,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇬🇧",
     countryCallingCode: "+44",
+    tax: 0.20,
   },
   {
     name: "Spain",
@@ -1225,11 +946,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [40, -4],
     area: 505992,
-    maps: {
-      googleMaps: "https://goo.gl/maps/138JaXW8EZzRVitY9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/1311341",
-    },
-    population: 47351567,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/es.png",
@@ -1245,11 +961,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Malay"],
     coordinates: [2.5, 112.5],
     area: 330803,
-    maps: {
-      googleMaps: "https://goo.gl/maps/qrY1PNeUXGyXDcPy6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/2108121",
-    },
-    population: 32365998,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/my.png",
@@ -1265,11 +976,6 @@ const COUNTRIES: Country[] = [
     languages: ["French", "Kikongo", "Lingala", "Tshiluba", "Swahili"],
     coordinates: [0, 25],
     area: 2344858,
-    maps: {
-      googleMaps: "https://goo.gl/maps/KfhNVn6VqdZXWu8n9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192795",
-    },
-    population: 89561404,
     flags: {
       png: "https://flagcdn.com/w320/cd.png",
       svg: "https://flagcdn.com/cd.svg",
@@ -1287,11 +993,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [21.5, -80],
     area: 109884,
-    maps: {
-      googleMaps: "https://goo.gl/maps/1dDw1QfZspfMUTm99",
-      openStreetMaps: "https://www.openstreetmap.org/relation/307833",
-    },
-    population: 11326616,
     postalCode: { format: "CP #####", regex: "^(?:CP)*(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/cu.png",
@@ -1307,11 +1008,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [-30, -71],
     area: 756102,
-    maps: {
-      googleMaps: "https://goo.gl/maps/XboxyNHh2fAjCPNn9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/167454",
-    },
-    population: 19116209,
     postalCode: { format: "#######", regex: "^(\\d{7})$" },
     flags: {
       png: "https://flagcdn.com/w320/cl.png",
@@ -1319,6 +1015,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇨🇱",
     countryCallingCode: "+56",
+    tax: 0.19,
   },
   {
     name: "Bosnia and Herzegovina",
@@ -1327,11 +1024,6 @@ const COUNTRIES: Country[] = [
     languages: ["Bosnian", "Croatian", "Serbian"],
     coordinates: [44, 18],
     area: 51209,
-    maps: {
-      googleMaps: "https://www.google.com/maps/place/Bosnia+and+Herzegovina",
-      openStreetMaps: "https://www.openstreetmap.org/relation/2528142",
-    },
-    population: 3280815,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/ba.png",
@@ -1347,11 +1039,6 @@ const COUNTRIES: Country[] = [
     languages: ["Chinese", "English", "Malay", "Tamil"],
     coordinates: [1.36666666, 103.8],
     area: 710,
-    maps: {
-      googleMaps: "https://goo.gl/maps/QbQt9Y9b5KFzsahV6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/536780",
-    },
-    population: 5685807,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/sg.png",
@@ -1359,6 +1046,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇸🇬",
     countryCallingCode: "+65",
+    tax: 0.08,
   },
   {
     name: "Eswatini",
@@ -1370,11 +1058,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Swazi"],
     coordinates: [-26.5, 31.5],
     area: 17364,
-    maps: {
-      googleMaps: "https://goo.gl/maps/cUY79eqQihFSE8hV6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/88210",
-    },
-    population: 1160164,
     postalCode: { format: "@###", regex: "^([A-Z]\\d{3})$" },
     flags: {
       png: "https://flagcdn.com/w320/sz.png",
@@ -1390,11 +1073,6 @@ const COUNTRIES: Country[] = [
     languages: ["German", "French", "Dutch"],
     coordinates: [50.83333333, 4],
     area: 30528,
-    maps: {
-      googleMaps: "https://goo.gl/maps/UQQzat85TCtPRXAL8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/52411",
-    },
-    population: 11555997,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/be.png",
@@ -1410,11 +1088,6 @@ const COUNTRIES: Country[] = [
     languages: ["Chinese"],
     coordinates: [35, 105],
     area: 9706961,
-    maps: {
-      googleMaps: "https://goo.gl/maps/p9qC6vgiFRRXzvGi7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/270056",
-    },
-    population: 1402112000,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/cn.png",
@@ -1430,11 +1103,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [13, -85],
     area: 130373,
-    maps: {
-      googleMaps: "https://goo.gl/maps/P77LaEVkKJKXneRC6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/287666",
-    },
-    population: 6624554,
     postalCode: { format: "###-###-#", regex: "^(\\d{7})$" },
     flags: {
       png: "https://flagcdn.com/w320/ni.png",
@@ -1450,11 +1118,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "French"],
     coordinates: [60, -95],
     area: 9984670,
-    maps: {
-      googleMaps: "https://goo.gl/maps/jmEVLugreeqiZXxbA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/1428125",
-    },
-    population: 38005238,
     postalCode: {
       format: "@#@ #@#",
       regex:
@@ -1466,6 +1129,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇨🇦",
     countryCallingCode: "+1",
+    tax: 0.05,
   },
   {
     name: "Togo",
@@ -1474,11 +1138,6 @@ const COUNTRIES: Country[] = [
     languages: ["French"],
     coordinates: [8, 1.16666666],
     area: 56785,
-    maps: {
-      googleMaps: "https://goo.gl/maps/jzAa9feXuXPrKVb89",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192782",
-    },
-    population: 8278737,
     flags: {
       png: "https://flagcdn.com/w320/tg.png",
       svg: "https://flagcdn.com/tg.svg",
@@ -1493,11 +1152,6 @@ const COUNTRIES: Country[] = [
     languages: ["French"],
     coordinates: [8, -5],
     area: 322463,
-    maps: {
-      googleMaps: "https://goo.gl/maps/wKsmN7f5qAeNtGjP6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192779",
-    },
-    population: 26378275,
     flags: {
       png: "https://flagcdn.com/w320/ci.png",
       svg: "https://flagcdn.com/ci.svg",
@@ -1512,11 +1166,6 @@ const COUNTRIES: Country[] = [
     languages: ["Slovene"],
     coordinates: [46.11666666, 14.81666666],
     area: 20273,
-    maps: {
-      googleMaps: "https://goo.gl/maps/7zgFmswcCJh5L5D49",
-      openStreetMaps: "https://www.openstreetmap.org/relation/218657",
-    },
-    population: 2100126,
     postalCode: { format: "SI- ####", regex: "^(?:SI)*(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/si.png",
@@ -1532,11 +1181,6 @@ const COUNTRIES: Country[] = [
     languages: ["Sinhala", "Tamil"],
     coordinates: [7, 81],
     area: 65610,
-    maps: {
-      googleMaps: "https://goo.gl/maps/VkPHoeFSfgzRQCDv8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/536807",
-    },
-    population: 21919000,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/lk.png",
@@ -1552,11 +1196,6 @@ const COUNTRIES: Country[] = [
     languages: ["Greek"],
     coordinates: [39, 22],
     area: 131990,
-    maps: {
-      googleMaps: "https://goo.gl/maps/LHGcAvuRyD2iKECC6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192307",
-    },
-    population: 10715549,
     postalCode: { format: "### ##", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/gr.png",
@@ -1572,11 +1211,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Jamaican Patois"],
     coordinates: [18.25, -77.5],
     area: 10991,
-    maps: {
-      googleMaps: "https://goo.gl/maps/Z8mQ6jxnRQKFwJy9A",
-      openStreetMaps: "https://www.openstreetmap.org/relation/555017",
-    },
-    population: 2961161,
     flags: {
       png: "https://flagcdn.com/w320/jm.png",
       svg: "https://flagcdn.com/jm.svg",
@@ -1591,11 +1225,6 @@ const COUNTRIES: Country[] = [
     languages: ["Italian"],
     coordinates: [42.83333333, 12.83333333],
     area: 301336,
-    maps: {
-      googleMaps: "https://goo.gl/maps/8M1K27TDj7StTRTq8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/365331",
-    },
-    population: 59554023,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/it.png",
@@ -1611,11 +1240,6 @@ const COUNTRIES: Country[] = [
     languages: ["Croatian"],
     coordinates: [45.16666666, 15.5],
     area: 56594,
-    maps: {
-      googleMaps: "https://goo.gl/maps/qSG6xTKUmrYpwmGQ6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/214885",
-    },
-    population: 4047200,
     postalCode: { format: "HR-#####", regex: "^(?:HR)*(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/hr.png",
@@ -1631,11 +1255,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Urdu"],
     coordinates: [30, 70],
     area: 881912,
-    maps: {
-      googleMaps: "https://goo.gl/maps/5LYujdfR5yLUXoERA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/307573",
-    },
-    population: 220892331,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/pk.png",
@@ -1643,6 +1262,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇵🇰",
     countryCallingCode: "+92",
+    tax: 0.18
   },
   {
     name: "Hong Kong",
@@ -1651,17 +1271,13 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Chinese"],
     coordinates: [22.267, 114.188],
     area: 1104,
-    maps: {
-      googleMaps: "https://goo.gl/maps/1sEnNmT47ffrC8MU8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/913110",
-    },
-    population: 7500700,
     flags: {
       png: "https://flagcdn.com/w320/hk.png",
       svg: "https://flagcdn.com/hk.svg",
     },
     emoji: "🇭🇰",
     countryCallingCode: "+852",
+    tax: 0,
   },
   {
     name: "Latvia",
@@ -1670,11 +1286,6 @@ const COUNTRIES: Country[] = [
     languages: ["Latvian"],
     coordinates: [57, 25],
     area: 64559,
-    maps: {
-      googleMaps: "https://goo.gl/maps/iQpUkH7ghq31ZtXe9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/72594",
-    },
-    population: 1901548,
     postalCode: { format: "LV-####", regex: "^(?:LV)*(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/lv.png",
@@ -1690,11 +1301,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic", "French"],
     coordinates: [33.83333333, 35.83333333],
     area: 10452,
-    maps: {
-      googleMaps: "https://goo.gl/maps/Sz5VCU8UFBqMyTdc9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/184843",
-    },
-    population: 6825442,
     postalCode: {
       format: "#### ####|####",
       regex: "^(\\d{4}(\\d{4})?)$",
@@ -1713,17 +1319,13 @@ const COUNTRIES: Country[] = [
     languages: ["English", "French", "Mauritian Creole"],
     coordinates: [-20.28333333, 57.55],
     area: 2040,
-    maps: {
-      googleMaps: "https://goo.gl/maps/PpKtZ4W3tir5iGrz7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/535828",
-    },
-    population: 1265740,
     flags: {
       png: "https://flagcdn.com/w320/mu.png",
       svg: "https://flagcdn.com/mu.svg",
     },
     emoji: "🇲🇺",
     countryCallingCode: "+230",
+    tax: 0.15,
   },
   {
     name: "Guinea",
@@ -1732,11 +1334,6 @@ const COUNTRIES: Country[] = [
     languages: ["French"],
     coordinates: [11, -10],
     area: 245857,
-    maps: {
-      googleMaps: "https://goo.gl/maps/8J5oM5sA4Ayr1ZYGA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192778",
-    },
-    population: 13132792,
     flags: {
       png: "https://flagcdn.com/w320/gn.png",
       svg: "https://flagcdn.com/gn.svg",
@@ -1751,11 +1348,6 @@ const COUNTRIES: Country[] = [
     languages: ["French", "Kikongo", "Lingala"],
     coordinates: [-1, 15],
     area: 342000,
-    maps: {
-      googleMaps: "https://goo.gl/maps/Phf5dDDKdfCtuBTb6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192794",
-    },
-    population: 89561404,
     flags: {
       png: "https://flagcdn.com/w320/cg.png",
       svg: "https://flagcdn.com/cg.svg",
@@ -1770,11 +1362,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic", "English", "Tigrinya"],
     coordinates: [15, 39],
     area: 117600,
-    maps: {
-      googleMaps: "https://goo.gl/maps/HRyqUpnPwwG6jY5j6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/296961",
-    },
-    population: 5352000,
     flags: {
       png: "https://flagcdn.com/w320/er.png",
       svg: "https://flagcdn.com/er.svg",
@@ -1789,11 +1376,6 @@ const COUNTRIES: Country[] = [
     languages: ["Russian", "Tajik"],
     coordinates: [39, 71],
     area: 143100,
-    maps: {
-      googleMaps: "https://goo.gl/maps/8rQgW88jEXijhVb58",
-      openStreetMaps: "https://www.openstreetmap.org/relation/214626",
-    },
-    population: 9537642,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/tj.png",
@@ -1809,11 +1391,6 @@ const COUNTRIES: Country[] = [
     languages: ["French"],
     coordinates: [13, -2],
     area: 272967,
-    maps: {
-      googleMaps: "https://goo.gl/maps/rKRmpcMbFher2ozb7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192783",
-    },
-    population: 20903278,
     flags: {
       png: "https://flagcdn.com/w320/bf.png",
       svg: "https://flagcdn.com/bf.svg",
@@ -1828,11 +1405,6 @@ const COUNTRIES: Country[] = [
     languages: ["Belarusian", "Russian"],
     coordinates: [53, 28],
     area: 207600,
-    maps: {
-      googleMaps: "https://goo.gl/maps/PJUDU3EBPSszCQcu6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/59065",
-    },
-    population: 9398861,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/by.png",
@@ -1848,11 +1420,6 @@ const COUNTRIES: Country[] = [
     languages: ["English"],
     coordinates: [-15, 30],
     area: 752612,
-    maps: {
-      googleMaps: "https://goo.gl/maps/mweBcqvW8TppZW6q9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/195271",
-    },
-    population: 18383956,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/zm.png",
@@ -1868,11 +1435,6 @@ const COUNTRIES: Country[] = [
     languages: ["Icelandic"],
     coordinates: [65, -18],
     area: 103000,
-    maps: {
-      googleMaps: "https://goo.gl/maps/WxFWSQuc3oamNxoE6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/299133",
-    },
-    population: 366425,
     postalCode: { format: "###", regex: "^(\\d{3})$" },
     flags: {
       png: "https://flagcdn.com/w320/is.png",
@@ -1888,11 +1450,6 @@ const COUNTRIES: Country[] = [
     languages: ["Vietnamese"],
     coordinates: [16.16666666, 107.83333333],
     area: 331212,
-    maps: {
-      googleMaps: "https://goo.gl/maps/PCpVt9WzdJ9A9nEZ9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/49915",
-    },
-    population: 97338583,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/vn.png",
@@ -1900,6 +1457,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "",
     countryCallingCode: "",
+    tax: 0.10,
   },
   {
     name: "Brazil",
@@ -1908,11 +1466,6 @@ const COUNTRIES: Country[] = [
     languages: ["Portuguese"],
     coordinates: [-10, -55],
     area: 8515767,
-    maps: {
-      googleMaps: "https://goo.gl/maps/waCKk21HeeqFzkNC9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/59470",
-    },
-    population: 212559409,
     postalCode: { format: "#####-###", regex: "^(\\d{8})$" },
     flags: {
       png: "https://flagcdn.com/w320/br.png",
@@ -1928,11 +1481,6 @@ const COUNTRIES: Country[] = [
     languages: ["Burmese"],
     coordinates: [22, 98],
     area: 676578,
-    maps: {
-      googleMaps: "https://goo.gl/maps/4jrZyJkDERUfHyp26",
-      openStreetMaps: "https://www.openstreetmap.org/relation/50371",
-    },
-    population: 54409794,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/mm.png",
@@ -1948,11 +1496,6 @@ const COUNTRIES: Country[] = [
     languages: ["French"],
     coordinates: [14, -14],
     area: 196722,
-    maps: {
-      googleMaps: "https://goo.gl/maps/o5f1uD5nyihCL3HCA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192775",
-    },
-    population: 16743930,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/sn.png",
@@ -1968,11 +1511,6 @@ const COUNTRIES: Country[] = [
     languages: ["Slovak"],
     coordinates: [48.66666666, 19.5],
     area: 49037,
-    maps: {
-      googleMaps: "https://goo.gl/maps/uNSH2wW4bLoZVYJj7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/14296",
-    },
-    population: 5458827,
     postalCode: { format: "###  ##", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/sk.png",
@@ -1988,11 +1526,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Filipino"],
     coordinates: [13, 122],
     area: 342353,
-    maps: {
-      googleMaps: "https://goo.gl/maps/k8T2fb5VMUfsWFX6A",
-      openStreetMaps: "https://www.openstreetmap.org/relation/443174",
-    },
-    population: 109581085,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/ph.png",
@@ -2000,6 +1533,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇵🇭",
     countryCallingCode: "+63",
+    tax: 0.12,
   },
   {
     name: "Albania",
@@ -2008,11 +1542,6 @@ const COUNTRIES: Country[] = [
     languages: ["Albanian"],
     coordinates: [41, 20],
     area: 28748,
-    maps: {
-      googleMaps: "https://goo.gl/maps/BzN9cTuj68ZA8SyZ8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/53292",
-    },
-    population: 2837743,
     flags: {
       png: "https://flagcdn.com/w320/al.png",
       svg: "https://flagcdn.com/al.svg",
@@ -2027,11 +1556,6 @@ const COUNTRIES: Country[] = [
     languages: ["French"],
     coordinates: [-1, 11.75],
     area: 267668,
-    maps: {
-      googleMaps: "https://www.openstreetmap.org/relation/192793",
-      openStreetMaps: "https://goo.gl/maps/vyRSkqw1H1fnq4ry6",
-    },
-    population: 2225728,
     flags: {
       png: "https://flagcdn.com/w320/ga.png",
       svg: "https://flagcdn.com/ga.svg",
@@ -2046,17 +1570,13 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [25.5, 51.25],
     area: 11586,
-    maps: {
-      googleMaps: "https://goo.gl/maps/ZV76Y49z7LLUZ2KQ6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/305095",
-    },
-    population: 2881060,
     flags: {
       png: "https://flagcdn.com/w320/qa.png",
       svg: "https://flagcdn.com/qa.svg",
     },
     emoji: "🇶🇦",
     countryCallingCode: "+974",
+    tax: 0,
   },
   {
     name: "Venezuela",
@@ -2065,11 +1585,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [8, -66],
     area: 916445,
-    maps: {
-      googleMaps: "https://goo.gl/maps/KLCwDN8sec7z2kse9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/272644",
-    },
-    population: 28435943,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/ve.png",
@@ -2077,6 +1592,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "",
     countryCallingCode: "",
+    tax: 0.16,
   },
   {
     name: "Liberia",
@@ -2085,11 +1601,6 @@ const COUNTRIES: Country[] = [
     languages: ["English"],
     coordinates: [6.5, -9.5],
     area: 111369,
-    maps: {
-      googleMaps: "https://goo.gl/maps/4VsHsc2oeGeRL3wg6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192780",
-    },
-    population: 5057677,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/lr.png",
@@ -2105,17 +1616,13 @@ const COUNTRIES: Country[] = [
     languages: ["French", "Portuguese", "Spanish"],
     coordinates: [2, 10],
     area: 28051,
-    maps: {
-      googleMaps: "https://goo.gl/maps/ucWfFd8aW1FbGMva9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192791",
-    },
-    population: 1402985,
     flags: {
       png: "https://flagcdn.com/w320/gq.png",
       svg: "https://flagcdn.com/gq.svg",
     },
     emoji: "🇬🇶",
     countryCallingCode: "+240",
+    tax: 15,
   },
   {
     name: "Yemen",
@@ -2124,11 +1631,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [15, 48],
     area: 527968,
-    maps: {
-      googleMaps: "https://goo.gl/maps/WCmE76HKcLideQQw7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/305092",
-    },
-    population: 29825968,
     flags: {
       png: "https://flagcdn.com/w320/ye.png",
       svg: "https://flagcdn.com/ye.svg",
@@ -2143,17 +1645,13 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Swahili"],
     coordinates: [-6, 35],
     area: 945087,
-    maps: {
-      googleMaps: "https://goo.gl/maps/NWYMqZYXte4zGZ2Q8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/195270",
-    },
-    population: 59734213,
     flags: {
       png: "https://flagcdn.com/w320/tz.png",
       svg: "https://flagcdn.com/tz.svg",
     },
     emoji: "",
     countryCallingCode: "",
+    tax: 0.18,
   },
   {
     name: "Australia",
@@ -2162,11 +1660,6 @@ const COUNTRIES: Country[] = [
     languages: ["English"],
     coordinates: [-27, 133],
     area: 7692024,
-    maps: {
-      googleMaps: "https://goo.gl/maps/DcjaDa7UbhnZTndH6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/80500",
-    },
-    population: 25687041,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/au.png",
@@ -2174,6 +1667,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇦🇺",
     countryCallingCode: "+61",
+    tax: 0.10,
   },
   {
     name: "Mongolia",
@@ -2182,11 +1676,6 @@ const COUNTRIES: Country[] = [
     languages: ["Mongolian"],
     coordinates: [46, 105],
     area: 1564110,
-    maps: {
-      googleMaps: "https://goo.gl/maps/A1X7bMCKThBDNjzH6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/161033",
-    },
-    population: 3278292,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/mn.png",
@@ -2202,11 +1691,6 @@ const COUNTRIES: Country[] = [
     languages: ["Polish"],
     coordinates: [52, 20],
     area: 312679,
-    maps: {
-      googleMaps: "https://goo.gl/maps/gY9Xw4Sf4415P4949",
-      openStreetMaps: "https://www.openstreetmap.org/relation/49715",
-    },
-    population: 37950802,
     postalCode: { format: "##-###", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/pl.png",
@@ -2222,11 +1706,6 @@ const COUNTRIES: Country[] = [
     languages: ["Nepali"],
     coordinates: [28, 84],
     area: 147181,
-    maps: {
-      googleMaps: "https://goo.gl/maps/UMj2zpbQp7B5c3yT7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/184633",
-    },
-    population: 29136808,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/np.png",
@@ -2242,11 +1721,6 @@ const COUNTRIES: Country[] = [
     languages: ["Guaraní", "Spanish"],
     coordinates: [-34, -64],
     area: 2780400,
-    maps: {
-      googleMaps: "https://goo.gl/maps/Z9DXNxhf2o93kvyc6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/286393",
-    },
-    population: 45376763,
     postalCode: { format: "@####@@@", regex: "^([A-Z]\\d{4}[A-Z]{3})$" },
     flags: {
       png: "https://flagcdn.com/w320/ar.png",
@@ -2262,11 +1736,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Chewa"],
     coordinates: [-13.5, 34],
     area: 118484,
-    maps: {
-      googleMaps: "https://goo.gl/maps/mc6z83pW9m98X2Ef6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/195290",
-    },
-    population: 19129955,
     flags: {
       png: "https://flagcdn.com/w320/mw.png",
       svg: "https://flagcdn.com/mw.svg",
@@ -2281,11 +1750,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [35, 38],
     area: 185180,
-    maps: {
-      googleMaps: "https://goo.gl/maps/Xe3VnFbwdb4nv2SM9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/184840",
-    },
-    population: 17500657,
     flags: {
       png: "https://flagcdn.com/w320/sy.png",
       svg: "https://flagcdn.com/sy.svg",
@@ -2300,11 +1764,6 @@ const COUNTRIES: Country[] = [
     languages: ["Kyrgyz", "Russian"],
     coordinates: [41, 75],
     area: 199951,
-    maps: {
-      googleMaps: "https://goo.gl/maps/SKG8BSMMQVvxkRkB7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/178009",
-    },
-    population: 6591600,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/kg.png",
@@ -2320,11 +1779,6 @@ const COUNTRIES: Country[] = [
     languages: ["Russian", "Uzbek"],
     coordinates: [41, 64],
     area: 447400,
-    maps: {
-      googleMaps: "https://goo.gl/maps/AJpo6MjMx23qSWCz8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/196240",
-    },
-    population: 34232050,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/uz.png",
@@ -2332,6 +1786,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇺🇿",
     countryCallingCode: "+998",
+    tax: 0.12,
   },
   {
     name: "Netherlands",
@@ -2340,11 +1795,6 @@ const COUNTRIES: Country[] = [
     languages: ["Dutch"],
     coordinates: [52.5, 5.75],
     area: 41850,
-    maps: {
-      googleMaps: "https://goo.gl/maps/Hv6zQswGhFxoVVBm6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/47796",
-    },
-    population: 16655799,
     postalCode: { format: "#### @@", regex: "^(\\d{4}[A-Z]{2})$" },
     flags: {
       png: "https://flagcdn.com/w320/nl.png",
@@ -2360,11 +1810,6 @@ const COUNTRIES: Country[] = [
     languages: ["French"],
     coordinates: [16, 8],
     area: 1267000,
-    maps: {
-      googleMaps: "https://goo.gl/maps/VKNU2TLsZcgxM49c8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192786",
-    },
-    population: 24206636,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/ne.png",
@@ -2380,11 +1825,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [26, 50.55],
     area: 765,
-    maps: {
-      googleMaps: "https://goo.gl/maps/5Zue99Zc6vFBHxzJ7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/378734",
-    },
-    population: 1701583,
     postalCode: { format: "####|###", regex: "^(\\d{3}\\d?)$" },
     flags: {
       png: "https://flagcdn.com/w320/bh.png",
@@ -2392,6 +1832,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇧🇭",
     countryCallingCode: "+973",
+    tax: 0.10,
   },
   {
     name: "Indonesia",
@@ -2400,11 +1841,6 @@ const COUNTRIES: Country[] = [
     languages: ["Indonesian"],
     coordinates: [-5, 120],
     area: 1904569,
-    maps: {
-      googleMaps: "https://goo.gl/maps/9gfPupm5bffixiFJ6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/21335",
-    },
-    population: 273523621,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/id.png",
@@ -2412,6 +1848,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇮🇩",
     countryCallingCode: "+62",
+    tax: 0.11,
   },
   {
     name: "Bangladesh",
@@ -2420,11 +1857,6 @@ const COUNTRIES: Country[] = [
     languages: ["Bengali"],
     coordinates: [24, 90],
     area: 147570,
-    maps: {
-      googleMaps: "https://goo.gl/maps/op6gmLbHcvv6rLhH6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/184640",
-    },
-    population: 164689383,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/bd.png",
@@ -2440,11 +1872,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [15.5, -90.25],
     area: 108889,
-    maps: {
-      googleMaps: "https://goo.gl/maps/JoRAbem4Hxb9FYbVA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/1521463",
-    },
-    population: 16858333,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/gt.png",
@@ -2452,6 +1879,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇬🇹",
     countryCallingCode: "+502",
+    tax: 0.12,
   },
   {
     name: "Uruguay",
@@ -2460,11 +1888,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [-33, -56],
     area: 181034,
-    maps: {
-      googleMaps: "https://goo.gl/maps/tiQ9Baekb1jQtDSD9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/287072",
-    },
-    population: 3473727,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/uy.png",
@@ -2472,6 +1895,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇺🇾",
     countryCallingCode: "+598",
+    tax: 0.22,
   },
   {
     name: "Morocco",
@@ -2480,11 +1904,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic", "Berber"],
     coordinates: [32, -5],
     area: 446550,
-    maps: {
-      googleMaps: "https://goo.gl/maps/6oMv3dyBZg3iaXQ5A",
-      openStreetMaps: "https://www.openstreetmap.org/relation/3630439",
-    },
-    population: 36910558,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/ma.png",
@@ -2492,6 +1911,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇲🇦",
     countryCallingCode: "+212",
+    tax: 0.20,
   },
   {
     name: "Germany",
@@ -2500,11 +1920,6 @@ const COUNTRIES: Country[] = [
     languages: ["German"],
     coordinates: [51, 9],
     area: 357114,
-    maps: {
-      googleMaps: "https://goo.gl/maps/mD9FBMq1nvXUBrkv6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/51477",
-    },
-    population: 83240525,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/de.png",
@@ -2520,12 +1935,6 @@ const COUNTRIES: Country[] = [
     languages: ["English"],
     coordinates: [38, -97],
     area: 9372610,
-    maps: {
-      googleMaps: "https://goo.gl/maps/e8M246zY4BSjkjAv6",
-      openStreetMaps:
-        "https://www.openstreetmap.org/relation/148838#map=2/20.6/-85.8",
-    },
-    population: 329484123,
     postalCode: { format: "#####-####", regex: "^\\d{5}(-\\d{4})?$" },
     flags: {
       png: "https://flagcdn.com/w320/us.png",
@@ -2541,11 +1950,6 @@ const COUNTRIES: Country[] = [
     languages: ["Bulgarian"],
     coordinates: [43, 25],
     area: 110879,
-    maps: {
-      googleMaps: "https://goo.gl/maps/F5uAhDGWzc3BrHfm9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/186382",
-    },
-    population: 6927288,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/bg.png",
@@ -2553,6 +1957,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇧🇬",
     countryCallingCode: "+359",
+    tax: 0.20,
   },
   {
     name: "Papua New Guinea",
@@ -2561,11 +1966,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Hiri Motu", "Tok Pisin"],
     coordinates: [-6, 147],
     area: 462840,
-    maps: {
-      googleMaps: "https://goo.gl/maps/ChGmzZBjZ3vnBwR2A",
-      openStreetMaps: "https://goo.gl/maps/ChGmzZBjZ3vnBwR2A",
-    },
-    population: 8947027,
     postalCode: { format: "###", regex: "^(\\d{3})$" },
     flags: {
       png: "https://flagcdn.com/w320/pg.png",
@@ -2581,11 +1981,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [10, -84],
     area: 51100,
-    maps: {
-      googleMaps: "https://goo.gl/maps/RFiwytjvNrpfKN7k6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/287667",
-    },
-    population: 5094114,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/cr.png",
@@ -2593,6 +1988,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇨🇷",
     countryCallingCode: "+506",
+    tax: 0.13,
   },
   {
     name: "Ecuador",
@@ -2601,11 +1997,6 @@ const COUNTRIES: Country[] = [
     languages: ["Spanish"],
     coordinates: [-2, -77.5],
     area: 276841,
-    maps: {
-      googleMaps: "https://goo.gl/maps/TbX8hUW4gcbRPZiK7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/108089",
-    },
-    population: 17643060,
     postalCode: { format: "@####@", regex: "^([a-zA-Z]\\d{4}[a-zA-Z])$" },
     flags: {
       png: "https://flagcdn.com/w320/ec.png",
@@ -2613,6 +2004,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇪🇨",
     countryCallingCode: "+593",
+    tax: 0.12,
   },
   {
     name: "South Korea",
@@ -2621,11 +2013,6 @@ const COUNTRIES: Country[] = [
     languages: ["Korean"],
     coordinates: [37, 127.5],
     area: 100210,
-    maps: {
-      googleMaps: "https://goo.gl/maps/7ecjaJXefjAQhxjGA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/307756",
-    },
-    population: 51780579,
     postalCode: {
       format: "SEOUL ###-###",
       regex: "^(?:SEOUL)*(\\d{6})$",
@@ -2636,6 +2023,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "",
     countryCallingCode: "",
+    tax: 0.10,
   },
   {
     name: "Puerto Rico",
@@ -2644,11 +2032,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Spanish"],
     coordinates: [18.25, -66.5],
     area: 8870,
-    maps: {
-      googleMaps: "https://goo.gl/maps/sygfDbtwn389wu8x5",
-      openStreetMaps: "https://www.openstreetmap.org/relation/4422604",
-    },
-    population: 3194034,
     postalCode: { format: "#####-####", regex: "^(\\d{9})$" },
     flags: {
       png: "https://flagcdn.com/w320/pr.png",
@@ -2656,6 +2039,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇵🇷",
     countryCallingCode: "+1 787",
+    tax: 0.115
   },
   {
     name: "North Korea",
@@ -2664,11 +2048,6 @@ const COUNTRIES: Country[] = [
     languages: ["Korean"],
     coordinates: [40, 127],
     area: 120538,
-    maps: {
-      googleMaps: "https://goo.gl/maps/9q5T2DMeH5JL7Tky6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192734",
-    },
-    population: 25778815,
     postalCode: { format: "###-###", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/kp.png",
@@ -2684,11 +2063,6 @@ const COUNTRIES: Country[] = [
     languages: ["Chinese"],
     coordinates: [23.5, 121],
     area: 36193,
-    maps: {
-      googleMaps: "https://goo.gl/maps/HgMKFQjNadF3Wa6B6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/449220",
-    },
-    population: 23503349,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/tw.png",
@@ -2696,6 +2070,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇹🇼",
     countryCallingCode: "+886",
+    tax: 0.05,
   },
   {
     name: "Lithuania",
@@ -2704,11 +2079,6 @@ const COUNTRIES: Country[] = [
     languages: ["Lithuanian"],
     coordinates: [56, 24],
     area: 65300,
-    maps: {
-      googleMaps: "https://goo.gl/maps/dd1s9rrLjrK2G8yY6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/72596",
-    },
-    population: 2794700,
     postalCode: { format: "LT-#####", regex: "^(?:LT)*(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/lt.png",
@@ -2724,11 +2094,6 @@ const COUNTRIES: Country[] = [
     languages: ["Portuguese"],
     coordinates: [-12.5, 18.5],
     area: 1246700,
-    maps: {
-      googleMaps: "https://goo.gl/maps/q42Qbf1BmQL3fuZg9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/195267",
-    },
-    population: 32866268,
     flags: {
       png: "https://flagcdn.com/w320/ao.png",
       svg: "https://flagcdn.com/ao.svg",
@@ -2743,11 +2108,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [34, 9],
     area: 163610,
-    maps: {
-      googleMaps: "https://goo.gl/maps/KgUmpZdUuNRaougs8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192757",
-    },
-    population: 11818618,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/tn.png",
@@ -2755,6 +2115,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇹🇳",
     countryCallingCode: "+216",
+    tax: 0.19,
   },
   {
     name: "Ghana",
@@ -2763,11 +2124,6 @@ const COUNTRIES: Country[] = [
     languages: ["English"],
     coordinates: [8, -2],
     area: 238533,
-    maps: {
-      googleMaps: "https://goo.gl/maps/Avy5RSmdsXFBaiXq8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192781",
-    },
-    population: 31072945,
     flags: {
       png: "https://flagcdn.com/w320/gh.png",
       svg: "https://flagcdn.com/gh.svg",
@@ -2782,11 +2138,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic", "Aramaic", "Sorani"],
     coordinates: [33, 44],
     area: 438317,
-    maps: {
-      googleMaps: "https://goo.gl/maps/iL8Bmy1sUCW9fUk18",
-      openStreetMaps: "https://www.openstreetmap.org/relation/304934",
-    },
-    population: 40222503,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/iq.png",
@@ -2802,12 +2153,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Māori", "New Zealand Sign Language"],
     coordinates: [-41, 174],
     area: 270467,
-    maps: {
-      googleMaps: "https://goo.gl/maps/xXiDQo65dwdpw9iu8",
-      openStreetMaps:
-        "https://www.openstreetmap.org/relation/556706#map=5/-46.710/172.046",
-    },
-    population: 5084300,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/nz.png",
@@ -2815,6 +2160,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇳🇿",
     countryCallingCode: "+64",
+    tax: 0.15,
   },
   {
     name: "Serbia",
@@ -2823,11 +2169,6 @@ const COUNTRIES: Country[] = [
     languages: ["Serbian"],
     coordinates: [44, 21],
     area: 88361,
-    maps: {
-      googleMaps: "https://goo.gl/maps/2Aqof7aV2Naq8YEK8",
-      openStreetMaps: "https://www.openstreetmap.org/relation/1741311",
-    },
-    population: 6908224,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/rs.png",
@@ -2843,11 +2184,6 @@ const COUNTRIES: Country[] = [
     languages: ["Romanian"],
     coordinates: [46, 25],
     area: 238391,
-    maps: {
-      googleMaps: "https://goo.gl/maps/845hAgCf1mDkN3vr7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/90689",
-    },
-    population: 19286123,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/ro.png",
@@ -2863,11 +2199,6 @@ const COUNTRIES: Country[] = [
     languages: ["Dari", "Pashto", "Turkmen"],
     coordinates: [33, 65],
     area: 652230,
-    maps: {
-      googleMaps: "https://goo.gl/maps/BXBGw7yUUFknCfva9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/303427",
-    },
-    population: 2837743,
     flags: {
       png: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_the_Taliban.svg/320px-Flag_of_the_Taliban.svg.png",
       svg: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg",
@@ -2882,11 +2213,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "Hindi", "Tamil"],
     coordinates: [20, 77],
     area: 3287590,
-    maps: {
-      googleMaps: "https://goo.gl/maps/WSk3fLwG4vtPQetp7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/304716",
-    },
-    population: 1380004385,
     postalCode: { format: "######", regex: "^(\\d{6})$" },
     flags: {
       png: "https://flagcdn.com/w320/in.png",
@@ -2902,11 +2228,6 @@ const COUNTRIES: Country[] = [
     languages: ["Danish"],
     coordinates: [56, 10],
     area: 43094,
-    maps: {
-      googleMaps: "https://goo.gl/maps/UddGPN7hAyrtpFiT6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/50046",
-    },
-    population: 5831404,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/dk.png",
@@ -2922,11 +2243,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [25, 45],
     area: 2149690,
-    maps: {
-      googleMaps: "https://goo.gl/maps/5PSjvdJ1AyaLFRrG9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/307584",
-    },
-    population: 34813867,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/sa.png",
@@ -2934,6 +2250,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇸🇦",
     countryCallingCode: "+966",
+    tax: 0.15,
   },
   {
     name: "Guinea-Bissau",
@@ -2942,11 +2259,6 @@ const COUNTRIES: Country[] = [
     languages: ["Portuguese", "Upper Guinea Creole"],
     coordinates: [12, -15],
     area: 36125,
-    maps: {
-      googleMaps: "https://goo.gl/maps/5Wyaz17miUc1zLc67",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192776",
-    },
-    population: 1967998,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/gw.png",
@@ -2962,11 +2274,6 @@ const COUNTRIES: Country[] = [
     languages: ["Norwegian Nynorsk", "Norwegian Bokmål", "Sami"],
     coordinates: [62, 10],
     area: 323802,
-    maps: {
-      googleMaps: "https://goo.gl/maps/htWRrphA7vNgQNdSA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/2978650",
-    },
-    population: 5379475,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/no.png",
@@ -2982,11 +2289,6 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [27, 30],
     area: 1002450,
-    maps: {
-      googleMaps: "https://goo.gl/maps/uoDRhXbsqjG6L7VG7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/1473947",
-    },
-    population: 102334403,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/eg.png",
@@ -2994,6 +2296,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇪🇬",
     countryCallingCode: "+20",
+    tax: 0.14,
   },
   {
     name: "Cyprus",
@@ -3002,11 +2305,6 @@ const COUNTRIES: Country[] = [
     languages: ["Greek", "Turkish"],
     coordinates: [35, 33],
     area: 9251,
-    maps: {
-      googleMaps: "https://goo.gl/maps/77hPBRdLid8yD5Bm7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/307787",
-    },
-    population: 1207361,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/cy.png",
@@ -3022,11 +2320,6 @@ const COUNTRIES: Country[] = [
     languages: ["Azerbaijani", "Russian"],
     coordinates: [40.5, 47.5],
     area: 86600,
-    maps: {
-      googleMaps: "https://goo.gl/maps/az3Zz7ar2aoB9AUc6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/364110",
-    },
-    population: 10110116,
     postalCode: { format: "AZ ####", regex: "^(?:AZ)*(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/az.png",
@@ -3034,6 +2327,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇦🇿",
     countryCallingCode: "+994",
+    tax: 0.18,
   },
   {
     name: "Zimbabwe",
@@ -3058,11 +2352,6 @@ const COUNTRIES: Country[] = [
     ],
     coordinates: [-20, 30],
     area: 390757,
-    maps: {
-      googleMaps: "https://goo.gl/maps/M26BqdwQctqxXS65A",
-      openStreetMaps: "https://www.openstreetmap.org/relation/195272",
-    },
-    population: 14862927,
     flags: {
       png: "https://flagcdn.com/w320/zw.png",
       svg: "https://flagcdn.com/zw.svg",
@@ -3077,11 +2366,6 @@ const COUNTRIES: Country[] = [
     languages: ["French"],
     coordinates: [17, -4],
     area: 1240192,
-    maps: {
-      googleMaps: "https://goo.gl/maps/u9mYJkCB19wyuzh27",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192785",
-    },
-    population: 20250834,
     flags: {
       png: "https://flagcdn.com/w320/ml.png",
       svg: "https://flagcdn.com/ml.svg",
@@ -3096,17 +2380,13 @@ const COUNTRIES: Country[] = [
     languages: ["Arabic"],
     coordinates: [20, -12],
     area: 1030700,
-    maps: {
-      googleMaps: "https://goo.gl/maps/im2MmQ5jFjzxWBks5",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192763",
-    },
-    population: 4649660,
     flags: {
       png: "https://flagcdn.com/w320/mr.png",
       svg: "https://flagcdn.com/mr.svg",
     },
     emoji: "🇲🇷",
     countryCallingCode: "+222",
+    tax: 0.16,
   },
   {
     name: "Ukraine",
@@ -3115,11 +2395,6 @@ const COUNTRIES: Country[] = [
     languages: ["Ukrainian"],
     coordinates: [49, 32],
     area: 603500,
-    maps: {
-      googleMaps: "https://goo.gl/maps/DvgJMiPJ7aozKFZv7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/60199",
-    },
-    population: 44134693,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/ua.png",
@@ -3127,6 +2402,7 @@ const COUNTRIES: Country[] = [
     },
     emoji: "🇺🇦",
     countryCallingCode: "+380",
+    tax: 0.20,
   },
   {
     name: "Cameroon",
@@ -3135,11 +2411,6 @@ const COUNTRIES: Country[] = [
     languages: ["English", "French"],
     coordinates: [6, 12],
     area: 475442,
-    maps: {
-      googleMaps: "https://goo.gl/maps/JqiipHgFboG3rBJh9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192830",
-    },
-    population: 26545864,
     flags: {
       png: "https://flagcdn.com/w320/cm.png",
       svg: "https://flagcdn.com/cm.svg",
@@ -3154,11 +2425,6 @@ const COUNTRIES: Country[] = [
     languages: ["Portuguese"],
     coordinates: [-18.25, 35],
     area: 801590,
-    maps: {
-      googleMaps: "https://goo.gl/maps/xCLcY9fzU6x4Pueu5",
-      openStreetMaps: "https://www.openstreetmap.org/relation/195273",
-    },
-    population: 31255435,
     postalCode: { format: "####", regex: "^(\\d{4})$" },
     flags: {
       png: "https://flagcdn.com/w320/mz.png",
@@ -3187,11 +2453,6 @@ const COUNTRIES: Country[] = [
     ],
     coordinates: [-22, 17],
     area: 825615,
-    maps: {
-      googleMaps: "https://goo.gl/maps/oR1i8BFEYX3EY83WA",
-      openStreetMaps: "https://www.openstreetmap.org/relation/195266",
-    },
-    population: 2540916,
     flags: {
       png: "https://flagcdn.com/w320/na.png",
       svg: "https://flagcdn.com/na.svg",
@@ -3206,11 +2467,6 @@ const COUNTRIES: Country[] = [
     languages: ["English"],
     coordinates: [13.46666666, -16.56666666],
     area: 10689,
-    maps: {
-      googleMaps: "https://goo.gl/maps/bbGBCxxtfD2A9Z4m6",
-      openStreetMaps: "https://www.openstreetmap.org/relation/192774",
-    },
-    population: 2416664,
     flags: {
       png: "https://flagcdn.com/w320/gm.png",
       svg: "https://flagcdn.com/gm.svg",
@@ -3225,11 +2481,6 @@ const COUNTRIES: Country[] = [
     languages: ["Lao"],
     coordinates: [18, 105],
     area: 236800,
-    maps: {
-      googleMaps: "https://goo.gl/maps/F3asVB7sRKgSnwbE7",
-      openStreetMaps: "https://www.openstreetmap.org/relation/49903",
-    },
-    population: 7275556,
     postalCode: { format: "#####", regex: "^(\\d{5})$" },
     flags: {
       png: "https://flagcdn.com/w320/la.png",
@@ -3237,26 +2488,6 @@ const COUNTRIES: Country[] = [
     },
     emoji: "",
     countryCallingCode: "",
-  },
-  {
-    name: "Austria",
-    capital: "Vienna",
-    currencies: [{ name: "Euro", symbol: "€" }],
-    languages: ["Austro-Bavarian German"],
-    coordinates: [47.33333333, 13.33333333],
-    area: 83871,
-    maps: {
-      googleMaps: "https://goo.gl/maps/pCWpWQhznHyRzQcu9",
-      openStreetMaps: "https://www.openstreetmap.org/relation/16239",
-    },
-    population: 8917205,
-    postalCode: { format: "####", regex: "^(\\d{4})$" },
-    flags: {
-      png: "https://flagcdn.com/w320/at.png",
-      svg: "https://flagcdn.com/at.svg",
-    },
-    emoji: "🇦🇹",
-    countryCallingCode: "+43",
   },
 ];
 

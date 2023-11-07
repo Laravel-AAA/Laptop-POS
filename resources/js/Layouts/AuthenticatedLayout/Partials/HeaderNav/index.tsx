@@ -65,6 +65,9 @@ export default function HeaderNav({ user }: { user: IUser }) {
                   <Dropdown.Link href={route("profile.edit")}>
                     Profile
                   </Dropdown.Link>
+                  <Dropdown.Link href={route("business.edit")}>
+                    Business
+                  </Dropdown.Link>
                   <Dropdown.Link
                     href={route("logout")}
                     method="post"

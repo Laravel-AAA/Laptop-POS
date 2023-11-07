@@ -34,8 +34,16 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
     disabled,
     required,
     autoComplete = "off",
-    id = label.toLowerCase().replaceAll(/[^\w]/g, "-"), //replace any non word character with dash
-    name = label.toLowerCase().replaceAll(/[^\w]/g, "-"),
+    //replace first character with empty string,
+    //and any non word character with dash. Ex: '$ item price' => 'item-price'
+    id = label
+      .toLowerCase()
+      .replace(/^[^\w]+/, "")
+      .replaceAll(/[^\w]/g, "-"),
+    name = label
+      .toLowerCase()
+      .replace(/^[^\w]+/, "")
+      .replaceAll(/[^\w]/g, "-"),
     ...props
   },
   ref,
@@ -61,6 +69,7 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
         color={color}
         size={size}
         error={error}
+        autoComplete={autoComplete}
         //   `placeholder:text-slate-400 rounded-md border  border-gray-300 shadow-sm
         //   file:mr-3 file:cursor-pointer file:rounded-md
         //     file:rounded-e-none file:border file:border-transparent file:bg-primary-700 file:px-4

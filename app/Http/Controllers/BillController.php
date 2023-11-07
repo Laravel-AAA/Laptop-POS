@@ -31,9 +31,8 @@ class BillController extends Controller
     /**Bill show will be displayed in Checkout Page */
     protected function show(Request $request, Bill $bill)
     {
-        Gate::authorize('view', $bill);
+        Gate::authorize('show', $bill);
         $bill = $bill->load('transactions.product');
-        // dd($bill);
         return $this->checkoutPage($request, $bill);
     }
 

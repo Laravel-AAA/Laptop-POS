@@ -12,7 +12,7 @@ class BillPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Bill $bill): bool
+    public function show(User $user, Bill $bill): bool
     {
         return $user->business_id == $bill->business_id;
     }
@@ -35,21 +35,4 @@ class BillPolicy
             && ($user->id == $bill->createdBy_id || $user->role == 'Admin');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Bill $bill): bool
-    {
-        return $user->business_id == $bill->business_id
-            && ($user->id == $bill->createdBy_id || $user->role == 'Admin');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Bill $bill): bool
-    {
-        return $user->business_id == $bill->business_id
-            && ($user->id == $bill->createdBy_id || $user->role == 'Admin');
-    }
 }

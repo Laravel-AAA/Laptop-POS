@@ -3,7 +3,7 @@ import Input from "@/Components/Inputs/Input";
 import { usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 import { FormEventHandler } from "react";
-import { AuthPageProps } from "@/types";
+import { AuthPageProps, IBusiness, IUser } from "@/types";
 import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function AccountsTable({
@@ -15,7 +15,9 @@ export default function AccountsTable({
   status?: string;
   className?: string;
 }) {
-  const user = usePage<AuthPageProps>().props.auth.user;
+  const business =
+    usePage<AuthPageProps<{ business: IBusiness & { users: IUser[] } }>>().props
+      .business;
 
   const {
     data,
@@ -25,10 +27,7 @@ export default function AccountsTable({
     processing,
     recentlySuccessful,
     isDirty,
-  } = useBetterForm({
-    name: user.name,
-    email: user.email,
-  });
+  } = useBetterForm(business);
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
@@ -39,48 +38,25 @@ export default function AccountsTable({
   return (
     <section className={className}>
       <header>
-        <h2 className="text-lg font-medium text-gray-900">
-          Profile Information
-        </h2>
+        <h2 className="text-lg font-medium text-gray-900">Accounts</h2>
 
         <p className="mt-1 text-sm text-gray-600">
-          Update your account's profile information and email address.
+          Add, remove, or change an account's role in your business.
         </p>
       </header>
 
       <form onSubmit={submit} className="mt-6 space-y-6">
         <div>
-          <Input
-            id="name"
-            label="Name"
-            type="text"
-            className="mt-1 block w-full"
-            value={data.name}
-            onChange={(e) => setData("name", e.target.value)}
-            disabled={processing}
-            required
-            autoFocus
-            autoComplete="name"
-            errorMsg={errors.name}
-            hideError={isDirty("name")}
-          />
-        </div>
-
-        <div>
-
-          <Input
-            id="email"
-            label="Email"
-            type="email"
-            className="mt-1 block w-full"
-            value={data.email}
-            onChange={(e) => setData("email", e.target.value)}
-            disabled={processing}
-            required
-            autoComplete="username"
-            errorMsg={errors.email}
-            hideError={isDirty('email')}
-          />
+          <table>
+            <thead></thead>
+            <tbody>
+              {business.users.map((user) => (
+                <tr>
+                  <td>{user.name}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         <div className="flex items-center gap-4">

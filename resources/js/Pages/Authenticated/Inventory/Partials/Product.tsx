@@ -51,26 +51,26 @@ export default function Product({
             }
             className="text-lg font-thin text-primary-700"
           >
-            {product.price === null ? (
-              "N/A"
-            ) : (
-              <Num
-                showCurrency
-                className="font-semibold"
-                amount={product.price * (1 + taxPercent)}
-              />
-            )}
+            <Num
+              showCurrency
+              className="font-semibold"
+              amount={
+                product.price === null ? null : product.price * (1 + taxPercent)
+              }
+              defaultNoAmount
+            />
           </p>
           <div className="flex flex-col justify-center">
             {product.stock === 0 ? (
-              <p className="font-thin text-red-500">Out of Stock</p>
+              <span className="font-thin text-red-500">Out of Stock</span>
             ) : (
-              <p className="font-thin text-gray-500">
-                Stock{" "}
-                <span className="font-normal text-secondary-600">
-                  {product.stock ?? "N/A"}
-                </span>
-              </p>
+              <Num
+                className="font-normal  text-secondary-600"
+                amount={product.stock}
+                defaultNoAmount
+                prefix="Stock"
+                prefixProps={{ className: "text-gray-500 font-thin" }}
+              />
             )}
           </div>
         </div>

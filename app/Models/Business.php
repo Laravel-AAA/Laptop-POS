@@ -28,12 +28,13 @@ class Business extends Model
     protected $fillable = [
         'name',
         'logo',
-        'phone',
-        'taxPercent',
-        'currency',
         'country',
         'city',
         'address',
+        'currency',
+        'phone',
+        'countryCallingCode',
+        'taxPercent',
         'taxIdentificationNumber',
     ];
 
