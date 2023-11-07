@@ -53,7 +53,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/checkout/{bill}', [BillController::class, 'show'])->name('bill.show');
     Route::get('/checkout', [BillController::class, 'create'])->name('bill.create');
 
-    Route::get('/business', [BusinessController::class, 'edit'])->name('business.edit');
+    Route::get('/business', [BusinessController::class, 'edit'])
+        ->name('business.edit');
+        
+    Route::patch('/business/{business}', [BusinessController::class, 'update'])
+        ->name('business.update');
 });
 
 Route::middleware('auth')->group(function () {

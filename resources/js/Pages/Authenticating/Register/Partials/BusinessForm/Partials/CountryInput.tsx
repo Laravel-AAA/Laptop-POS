@@ -5,14 +5,16 @@ import { ICreateBusiness } from "@/types";
 import SelectInput from "@/Components/Inputs/SelectInput";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 
-export default function CountryInput({
+export default function CountryInput<T extends ICreateBusiness>({
   form,
 }: {
-  form: UseBetterForm<ICreateBusiness>;
+  form: UseBetterForm<T>;
 }) {
+
   const countries = COUNTRIES.filter(
     (c) => c.currencies?.[0]?.name && c.currencies?.[0]?.symbol,
   );
+  
   return (
     <SelectInput
       label="Country"

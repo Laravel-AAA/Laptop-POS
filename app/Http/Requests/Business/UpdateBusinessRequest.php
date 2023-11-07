@@ -41,7 +41,7 @@ class UpdateBusinessRequest extends FormRequest
             'countryCallingCode'=>'string|max:6',
             'taxPercent' => 'decimal:0,8|min:0|max:10',
             //0.5 is 50% tax rate
-            'currency' => 'string|max:10',
+            'currency' => 'string|max:5',
             'country' => 'string|max:50',
             'city' => 'string|max:50',
             'address' => 'string|max:255',

@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('phone', 15)->unique();
             $table->string('countryCallingCode', 6);//Ex: '+966'
             $table->decimal('taxPercent');// 0.5 is 50% tax rate
-            $table->string('currency', 10)->default('$');// '$' or '﷼'
+            $table->string('currency', 5);// '$' or '﷼'
             $table->string('country', 50);
             $table->string('city', 50);
             $table->string('address');

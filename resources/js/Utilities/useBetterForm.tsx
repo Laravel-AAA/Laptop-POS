@@ -1,6 +1,6 @@
 import { InertiaFormProps } from "@/types/global";
 import { setDataByMethod, setDataByObject } from "@inertiajs/inertia-react";
-import { useForm } from "@inertiajs/react";
+import { router, useForm } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 /**
  * `useBetterForm` is a add-on on `useForm` which adds more functionality such as `setData` with type hint.
@@ -17,6 +17,8 @@ export type UseBetterForm<T extends object> = Omit<
   isDirty: (key?: keyof T) => boolean;
   setProcessing: (isProcessing: boolean) => void;
   readonly processing: boolean;
+  readonly dirtyData: Partial<T>;
+  patchDirty: InertiaFormProps<T>["patch"];
 };
 
 export default function useBetterForm<T extends object>(
@@ -41,24 +43,54 @@ export default function useBetterForm<T extends object>(
     setProcessing(form.processing);
   }, [form.processing]);
 
+  const setData: UseBetterForm<T>["setData"] = (key, value) => {
+    form.setData(key, value);
+  };
+
+  const setAllData: UseBetterForm<T>["setAllData"] = (data) => {
+    form.setData(data);
+  };
+
+  const isDirty: UseBetterForm<T>["isDirty"] = (key) => {
+    if (key) {
+      return form.data[key] !== oldValues[key];
+    }
+    return form.isDirty;
+  };
+
+  const dirtyData = () => {
+    const clone: Partial<T> = JSON.parse(JSON.stringify(form.data));
+    for (let k in clone) {
+      if (clone[k] === oldValues[k]) {
+        delete clone[k];
+      }
+    }
+    return clone;
+  };
+
+  const patchDirty: UseBetterForm<T>["patchDirty"] = (url, options) => {
+    const clone: Partial<T> = JSON.parse(JSON.stringify(form.data));
+    for (let k in clone) {
+      if (clone[k] === oldValues[k]) {
+        delete clone[k];
+      }
+    }
+    router.patch(url, clone as any, options);
+  };
+
   const better: UseBetterForm<T> = {
     ...form,
-    setData: (key, value) => {
-      form.setData(key, value);
-    },
-    setAllData: (data) => {
-      form.setData(data);
-    },
-    isDirty: (key) => {
-      if (key) {
-        return form.data[key] !== oldValues[key];
-      }
-      return form.isDirty;
-    },
-    get processing(): boolean {
+    setData,
+    setAllData,
+    isDirty,
+    get processing() {
       return processing;
     },
     setProcessing: (isProcessing) => setProcessing(isProcessing),
+    get dirtyData() {
+      return dirtyData();
+    },
+    patchDirty,
   };
   return better;
 }

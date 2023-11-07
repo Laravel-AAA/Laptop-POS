@@ -7,6 +7,7 @@ use App\Http\Requests\Business\UpdateBusinessRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -17,8 +18,10 @@ class BusinessController extends Controller
      */
     public function edit(Request $request): Response
     {
+        $business = Business::with('users')->find($request->user()->business_id);
+        Gate::authorize('edit', $business);
         return Inertia::render('Authenticated/Business/Edit', [
-            'business' => Business::with('users')->find($request->user()->business->id),
+            'business' => $business,
         ]);
     }
 
@@ -27,7 +30,14 @@ class BusinessController extends Controller
      */
     public function update(UpdateBusinessRequest $request, Business $business)
     {
+        Gate::authorize('update', $business);
+        dd($business);
+        $business->update($request->validated());
 
+
+        $request->user()->save();
+
+        return Redirect::route('business.edit');
     }
 
     /**

@@ -8,6 +8,10 @@ use App\Models\User;
 class BusinessPolicy
 {
 
+    public function edit(User $user, Business $business){
+        return $user->business_id == $business->id && $user->role == 'Admin';
+    }
+
     /**
      * Determine whether the user can update the model.
      */

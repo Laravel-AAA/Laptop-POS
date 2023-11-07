@@ -29,7 +29,7 @@ class StoreBusinessRequest extends FormRequest
             'phone' => 'required|string|max:15|min:4|unique:' . Business::class,
             'countryCallingCode'=>'required|string|max:6',
             'taxPercent' => 'required|decimal:0,8|min:0|max:10',//0.5 is 50% tax rate
-            'currency' => 'nullable|string|max:10',
+            'currency' => 'required|string|max:5',
             'country' => 'required|string|max:50',
             'city' => 'required|string|max:50',
             'address' => 'required|string|max:255',

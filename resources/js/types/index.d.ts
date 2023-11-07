@@ -79,7 +79,7 @@ export interface ICreateBusiness {
   country: string;
   city: string;
   address: string;
-  currency: string | null;
+  currency: string;
   taxPercent: number;
   phone: string;
   countryCallingCode: string;
@@ -87,9 +87,6 @@ export interface ICreateBusiness {
 }
 
 export interface IBusiness extends ICreateBusiness, BasicModel {
-  //these have a default value in the database so when creating they maybe null but when created they are defined.
-  taxPercent: number;
-  currency: string;
 }
 
 export interface ILaravelPaginate<T extends object> {

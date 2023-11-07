@@ -51,7 +51,7 @@ export default function AccountsTable({
             <thead></thead>
             <tbody>
               {business.users.map((user) => (
-                <tr>
+                <tr key={user.id}>
                   <td>{user.name}</td>
                 </tr>
               ))}

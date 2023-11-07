@@ -5,11 +5,11 @@ import { ICreateBusiness } from "@/types";
 import SelectInput from "@/Components/Inputs/SelectInput";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 
-export default function CurrencyInput({
+export default function CurrencyInput<T extends ICreateBusiness>({
   form,
   chosenCountry: country,
 }: {
-  form: UseBetterForm<ICreateBusiness>;
+  form: UseBetterForm<T>;
   chosenCountry: Country | null;
 }) {
   let countries = COUNTRIES.filter(
@@ -40,7 +40,7 @@ export default function CurrencyInput({
     let index = getCountryIndex(country);
     if (index) {
       setCountryIndex(index);
-      form.setData("currency", countries[index].currencies[0].symbol ?? null);
+      form.setData("currency", countries[index].currencies[0].symbol as string );
     }
   }, [country]);
 
@@ -57,7 +57,7 @@ export default function CurrencyInput({
         setCountryIndex(Number(v));
         form.setData(
           "currency",
-          countries[Number(v)].currencies[0].symbol ?? null,
+          countries[Number(v)].currencies[0].symbol as string,
         );
       }}
       required

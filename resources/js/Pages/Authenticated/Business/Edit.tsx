@@ -2,7 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { AuthPageProps } from "@/types";
 import AccountsTable from "./Partials/AccountsTable";
-import UpdateBusinessForm from "./Partials/UpdateBusinessForm";
+import UpdateBusinessForm from "./Partials/UpdateBusinessInformation";
 
 export default function Edit({
   auth,

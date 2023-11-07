@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   Input,
   Menu,
@@ -11,34 +10,25 @@ import COUNTRIES, { Country } from "./COUNTRIES";
 import { ICreateBusiness } from "@/types";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 
-export function PhoneInput({
+export function PhoneInput<T extends ICreateBusiness>({
   form,
   chosenCountry: country,
 }: {
-  form: UseBetterForm<ICreateBusiness>;
+  form: UseBetterForm<T>;
   chosenCountry: Country | null;
 }) {
   const countries = COUNTRIES.filter((c) => c.countryCallingCode).sort(
     (a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0),
   );
 
-  let defaultCallCode;
+  let chosenCountryForCode: Country | undefined;
   if (form.data.countryCallingCode)
-    defaultCallCode = countries.find(
-      (c) => c.countryCallingCode == form.data.countryCallingCode,
+    chosenCountryForCode = countries.find(
+      (c) => c.countryCallingCode === form.data.countryCallingCode,
     );
-  if (!defaultCallCode) defaultCallCode = country ?? countries[0];
-
-  const [chosenCountryForCode, setChosenCountryForCode] =
-    useState<Country>(defaultCallCode);
-
-  useEffect(() => {
-    if (country) setChosenCountryForCode(country);
-  }, [country]);
-
-  useEffect(() => {
-    form.setData("countryCallingCode", chosenCountryForCode.countryCallingCode);
-  }, [chosenCountryForCode]);
+  if (chosenCountryForCode === undefined) {
+    chosenCountryForCode = country?.countryCallingCode ? country : countries[0];
+  }
 
   return (
     <>
@@ -68,7 +58,9 @@ export function PhoneInput({
                   key={c.name}
                   value={c.name}
                   className="flex items-center gap-2"
-                  onClick={() => setChosenCountryForCode(countries[i])}
+                  onClick={() =>
+                    form.setData("countryCallingCode", c.countryCallingCode)
+                  }
                 >
                   <img
                     src={c.flags.svg}
@@ -91,13 +83,14 @@ export function PhoneInput({
           value={form.data.phone}
           error={!!form.errors.phone && !form.isDirty("phone")}
           onChange={(v) => form.setData("phone", v.target.value)}
-          required
+          disabled={form.processing}
+          required={!form.processing}
           crossOrigin={undefined}
         />
       </div>
-      {( form.errors.phone || form.errors.countryCallingCode ) && (
+      {(form.errors.phone || form.errors.countryCallingCode) && (
         <p className="ml-2 mt-2 text-xs text-danger-600 ">
-          {( form.errors.phone || form.errors.countryCallingCode )}
+          {form.errors.phone || form.errors.countryCallingCode}
         </p>
       )}
     </>

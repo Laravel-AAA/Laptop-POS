@@ -9,6 +9,7 @@ import TaxRateInput from "@/Pages/Authenticating/Register/Partials/BusinessForm/
 import CountryInput from "@/Pages/Authenticating/Register/Partials/BusinessForm/Partials/CountryInput";
 import { PhoneInput } from "@/Pages/Authenticating/Register/Partials/BusinessForm/Partials/PhoneInput";
 
+
 export default function UpdateBusinessInformation({
   className = "",
 }: {
@@ -23,7 +24,7 @@ export default function UpdateBusinessInformation({
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    form.patchDirty(route("business.update", business.id), {
+    router.patch(route("business.update", business.id), {
       preserveScroll: true,
     });
   };
@@ -53,8 +54,7 @@ export default function UpdateBusinessInformation({
             maxLength={50}
             onChange={(e) => form.setData("name", e.target.value)}
             required
-            disabled={form.processing}
-          />
+            disabled={form.processing} />
         </div>
 
         <div className="mt-4">
@@ -72,8 +72,7 @@ export default function UpdateBusinessInformation({
             autoComplete="city"
             onChange={(e) => form.setData("city", e.target.value)}
             required
-            disabled={form.processing}
-          />
+            disabled={form.processing} />
         </div>
 
         <div className="mt-4">
@@ -87,8 +86,7 @@ export default function UpdateBusinessInformation({
             autoComplete="address"
             onChange={(e) => form.setData("address", e.target.value)}
             required
-            disabled={form.processing}
-          />
+            disabled={form.processing} />
         </div>
 
         <div>
@@ -104,17 +102,14 @@ export default function UpdateBusinessInformation({
             autoComplete="off"
             errorMsg={form.errors.currency}
             hideError={form.isDirty("currency")}
-            hint={
-              <span>
-                You can use any Unicode symbol ({" "}
-                <span className="font-semibold text-blue-gray-600">$</span>,{" "}
-                <span className="font-semibold text-blue-gray-600">£</span>,{" "}
-                <span className="font-semibold text-blue-gray-600">¥</span>,{" "}
-                <span className="font-semibold text-blue-gray-600">€</span>,
-                ...etc)
-              </span>
-            }
-          />
+            hint={<span>
+              You can use any Unicode symbol ({" "}
+              <span className="font-semibold text-blue-gray-600">$</span>,{" "}
+              <span className="font-semibold text-blue-gray-600">£</span>,{" "}
+              <span className="font-semibold text-blue-gray-600">¥</span>,{" "}
+              <span className="font-semibold text-blue-gray-600">€</span>,
+              ...etc)
+            </span>} />
         </div>
 
         <div className="mt-4">
@@ -122,15 +117,12 @@ export default function UpdateBusinessInformation({
             disabled={form.processing}
             errorMsg={form.errors.taxPercent}
             hideError={form.isDirty("taxPercent")}
-            onChange={(e) =>
-              form.setData(
-                "taxPercent",
-                Number((Number(e.target.value) / 100).toFixed(6)), //0.00001
-              )
-            }
+            onChange={(e) => form.setData(
+              "taxPercent",
+              Number((Number(e.target.value) / 100).toFixed(6))
+            )}
             value={form.data.taxPercent * 100}
-            currency={form.data.currency ?? "$"}
-          />
+            currency={form.data.currency ?? "$"} />
         </div>
 
         <div className="mt-4">
@@ -142,14 +134,11 @@ export default function UpdateBusinessInformation({
             type="text"
             label="Tax Identification Number"
             value={form.data.taxIdentificationNumber ?? ""}
-            onChange={(e) =>
-              form.setData("taxIdentificationNumber", e.target.value)
-            }
+            onChange={(e) => form.setData("taxIdentificationNumber", e.target.value)}
             disabled={form.processing}
             required={false}
             errorMsg={form.errors.taxIdentificationNumber}
-            hideError={form.isDirty("taxIdentificationNumber")}
-          />
+            hideError={form.isDirty("taxIdentificationNumber")} />
         </div>
 
         <div className="flex items-center gap-4">

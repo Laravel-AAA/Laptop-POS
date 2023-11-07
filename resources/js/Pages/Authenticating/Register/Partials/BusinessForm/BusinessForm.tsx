@@ -10,10 +10,8 @@ import TaxRateInput from "./Partials/TaxRateInput";
 
 export default function BusinessForm({
   form,
-  onNext,
 }: {
   form: UseBetterForm<ICreateBusiness>;
-  onNext: () => void;
 }) {
   let initial: Country | null = null;
   if (form.data.country)
@@ -91,7 +89,10 @@ export default function BusinessForm({
           errorMsg={form.errors.taxPercent}
           hideError={form.isDirty("taxPercent")}
           onChange={(e) =>
-            form.setData("taxPercent", Number(e.target.value) / 100)
+            form.setData(
+              "taxPercent",
+              Number((Number(e.target.value) / 100).toFixed(6)), //0.00001
+            )
           }
           value={form.data.taxPercent * 100}
           currency={form.data.currency ?? "$"}
@@ -101,25 +102,6 @@ export default function BusinessForm({
       <div className="mt-4">
         <PhoneInput chosenCountry={country} form={form} />
       </div>
-
-      {/* <div className="mt-4 flex items-center justify-end">
-        <Link
-          href={route("login")}
-          className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-        >
-          Already registered?
-        </Link>
-
-        <PrimaryButton
-          type="button"
-          className="ml-4 flex !border-primary bg-white !text-primary hover:bg-primary hover:bg-opacity-10"
-          disabled={form.processing}
-          onClick={() => onNext()}
-        >
-          <span>Next&nbsp;</span>
-          <FaArrowRight />
-        </PrimaryButton>
-      </div> */}
     </>
   );
 }
