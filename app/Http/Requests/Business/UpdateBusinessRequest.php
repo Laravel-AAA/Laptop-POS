@@ -30,22 +30,23 @@ class UpdateBusinessRequest extends FormRequest
                 'min:3',
                 Rule::unique(Business::class)->ignore($this->user()->business_id),
             ],
-            'logoFile' => 'image|mimes:jpeg,jpg,png,apng,bmp,avif,webp,gif,svg|max:2048',
+            'logoFile' => 'nullable|image|mimes:jpeg,jpg,png,apng,bmp,avif,webp,gif,svg|max:2048',
             //max file 2 MB
+            'logo' => 'nullable|string|max:250',
             'phone' => [
                 'string',
                 'max:15',
                 'min:4',
                 Rule::unique(Business::class)->ignore($this->user()->business_id),
             ],
-            'countryCallingCode'=>'string|max:6',
+            'countryCallingCode' => 'string|max:6',
             'taxPercent' => 'decimal:0,8|min:0|max:10',
             //0.5 is 50% tax rate
             'currency' => 'string|max:5',
             'country' => 'string|max:50',
             'city' => 'string|max:50',
             'address' => 'string|max:255',
-            'taxIdentificationNumber' => 'string|max:255',
+            'taxIdentificationNumber' => 'nullable|string|max:255',
         ];
     }
 }

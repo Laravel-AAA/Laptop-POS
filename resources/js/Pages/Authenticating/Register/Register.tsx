@@ -25,7 +25,7 @@ export default function Register({ auth }: AuthPageProps) {
     country: "",
     city: "",
     address: "",
-    currency: null,
+    currency: '$',
     taxPercent: 0,
     phone: "",
     countryCallingCode: "",
@@ -95,9 +95,6 @@ export default function Register({ auth }: AuthPageProps) {
           Business Information
         </p>
         <BusinessForm
-          onNext={() => {
-            // setTabIndex(1)
-          }}
           form={businessForm}
         />
         {/* </Transition>
@@ -117,9 +114,6 @@ export default function Register({ auth }: AuthPageProps) {
           Account Information
         </p>
         <UserForm
-          onBack={() => {
-            // setTabIndex(0)
-          }}
           form={userForm}
         />
 

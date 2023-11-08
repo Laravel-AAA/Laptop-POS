@@ -9,11 +9,7 @@ import TaxRateInput from "@/Pages/Authenticating/Register/Partials/BusinessForm/
 import CountryInput from "@/Pages/Authenticating/Register/Partials/BusinessForm/Partials/CountryInput";
 import { PhoneInput } from "@/Pages/Authenticating/Register/Partials/BusinessForm/Partials/PhoneInput";
 
-export default function UpdateBusinessInformation({
-  className = "",
-}: {
-  className?: string;
-}) {
+export default function UpdateBusinessForm() {
   const business = usePage<AuthPageProps>().props.auth.business;
 
   const form = useBetterForm<IBusiness>({
@@ -29,145 +25,156 @@ export default function UpdateBusinessInformation({
   };
 
   return (
-    <section className={className}>
-      <header>
-        <h2 className="text-lg font-medium text-gray-900">
-          Business Information
-        </h2>
+    <>
+      <form onSubmit={submit} className="space-y-6">
+        <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+          <section className="max-w-xl">
+            <header>
+              <h2 className="text-lg font-medium text-gray-900">
+                Business Details
+              </h2>
 
-        <p className="mt-1 text-sm text-gray-600">
-          Update your business's information.
-        </p>
-      </header>
+              <p className="mt-1 text-normal text-gray-600">Name and Logo</p>
+            </header>
+            <div className="mt-6 space-y-6">
+              <Input
+                label="Business Name"
+                type="text"
+                value={form.data.name}
+                errorMsg={form.errors.name}
+                hideError={form.isDirty("name")}
+                className="mt-1 block w-full"
+                autoComplete="off"
+                maxLength={50}
+                onChange={(e) => form.setData("name", e.target.value)}
+                required
+                disabled={form.processing}
+              />
+              <p className="!mt-9 text-normal text-gray-600">
+                Location and Contact
+              </p>
+              <CountryInput form={form} />
+              <Input
+                label="City"
+                type="text"
+                errorMsg={form.errors.city}
+                hideError={form.isDirty("city")}
+                value={form.data.city}
+                className="mt-1 block w-full"
+                autoComplete="city"
+                onChange={(e) => form.setData("city", e.target.value)}
+                required
+                disabled={form.processing}
+              />
+              <Input
+                label="Address"
+                type="text"
+                value={form.data.address}
+                errorMsg={form.errors.address}
+                hideError={form.isDirty("address")}
+                className="mt-1 block w-full"
+                autoComplete="address"
+                onChange={(e) => form.setData("address", e.target.value)}
+                required
+                disabled={form.processing}
+              />
+              <div className="flex items-center gap-4">
+                <PrimaryButton type="submit" disabled={form.processing}>
+                  Save
+                </PrimaryButton>
 
-      <form onSubmit={submit} className="mt-6 space-y-6">
-        <div>
-          <Input
-            label="Business Name"
-            type="text"
-            value={form.data.name}
-            errorMsg={form.errors.name}
-            hideError={form.isDirty("name")}
-            className="mt-1 block w-full"
-            autoComplete="off"
-            maxLength={50}
-            onChange={(e) => form.setData("name", e.target.value)}
-            required
-            disabled={form.processing}
-          />
+                <Transition
+                  show={form.recentlySuccessful}
+                  enter="transition ease-in-out"
+                  enterFrom="opacity-0"
+                  leave="transition ease-in-out"
+                  leaveTo="opacity-0"
+                >
+                  <p className="text-sm text-green-500">Saved</p>
+                </Transition>
+              </div>{" "}
+            </div>
+          </section>
         </div>
 
-        <div className="mt-4">
-          <CountryInput form={form} />
-        </div>
+        <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+          <section className="max-w-xl">
+            <header>
+              <h2 className="text-lg font-medium text-gray-900">
+                Financial Details
+              </h2>
 
-        <div className="mt-4">
-          <Input
-            label="City"
-            type="text"
-            errorMsg={form.errors.city}
-            hideError={form.isDirty("city")}
-            value={form.data.city}
-            className="mt-1 block w-full"
-            autoComplete="city"
-            onChange={(e) => form.setData("city", e.target.value)}
-            required
-            disabled={form.processing}
-          />
-        </div>
+              <p className="mt-1 text-normal text-gray-600">Currency and Tax.</p>
+            </header>
+            <div className="mt-6 space-y-6">
+              <Input
+                id="currency"
+                label="Currency"
+                type="text"
+                className="mt-1 block w-full"
+                value={form.data.currency}
+                onChange={(e) => form.setData("currency", e.target.value)}
+                disabled={form.processing}
+                required
+                autoComplete="off"
+                errorMsg={form.errors.currency}
+                hideError={form.isDirty("currency")}
+                hint={
+                  <span>
+                    You can use any Unicode symbol ({" "}
+                    <span className="font-semibold text-blue-gray-600">$</span>,{" "}
+                    <span className="font-semibold text-blue-gray-600">£</span>,{" "}
+                    <span className="font-semibold text-blue-gray-600">¥</span>,{" "}
+                    <span className="font-semibold text-blue-gray-600">€</span>,
+                    ...etc)
+                  </span>
+                }
+              />
+              <TaxRateInput
+                disabled={form.processing}
+                errorMsg={form.errors.taxPercent}
+                hideError={form.isDirty("taxPercent")}
+                onChange={(e) =>
+                  form.setData(
+                    "taxPercent",
+                    Number((Number(e.target.value) / 100).toFixed(6)),
+                  )
+                }
+                value={form.data.taxPercent * 100}
+                currency={form.data.currency ?? "$"}
+              />
+              <PhoneInput chosenCountry={null} form={form} />
+              <Input
+                type="text"
+                label="Tax Identification Number"
+                value={form.data.taxIdentificationNumber ?? ""}
+                onChange={(e) =>
+                  form.setData("taxIdentificationNumber", e.target.value)
+                }
+                disabled={form.processing}
+                required={false}
+                errorMsg={form.errors.taxIdentificationNumber}
+                hideError={form.isDirty("taxIdentificationNumber")}
+              />
+              <div className="flex items-center gap-4">
+                <PrimaryButton type="submit" disabled={form.processing}>
+                  Save
+                </PrimaryButton>
 
-        <div className="mt-4">
-          <Input
-            label="Address"
-            type="text"
-            value={form.data.address}
-            errorMsg={form.errors.address}
-            hideError={form.isDirty("address")}
-            className="mt-1 block w-full"
-            autoComplete="address"
-            onChange={(e) => form.setData("address", e.target.value)}
-            required
-            disabled={form.processing}
-          />
-        </div>
-
-        <div>
-          <Input
-            id="currency"
-            label="Currency"
-            type="text"
-            className="mt-1 block w-full"
-            value={form.data.currency}
-            onChange={(e) => form.setData("currency", e.target.value)}
-            disabled={form.processing}
-            required
-            autoComplete="off"
-            errorMsg={form.errors.currency}
-            hideError={form.isDirty("currency")}
-            hint={
-              <span>
-                You can use any Unicode symbol ({" "}
-                <span className="font-semibold text-blue-gray-600">$</span>,{" "}
-                <span className="font-semibold text-blue-gray-600">£</span>,{" "}
-                <span className="font-semibold text-blue-gray-600">¥</span>,{" "}
-                <span className="font-semibold text-blue-gray-600">€</span>,
-                ...etc)
-              </span>
-            }
-          />
-        </div>
-
-        <div className="mt-4">
-          <TaxRateInput
-            disabled={form.processing}
-            errorMsg={form.errors.taxPercent}
-            hideError={form.isDirty("taxPercent")}
-            onChange={(e) =>
-              form.setData(
-                "taxPercent",
-                Number((Number(e.target.value) / 100).toFixed(6)), //0.00001
-              )
-            }
-            value={form.data.taxPercent * 100}
-            currency={form.data.currency ?? "$"}
-          />
-        </div>
-
-        <div className="mt-4">
-          <PhoneInput chosenCountry={null} form={form} />
-        </div>
-
-        <div>
-          <Input
-            type="text"
-            label="Tax Identification Number"
-            value={form.data.taxIdentificationNumber ?? ""}
-            onChange={(e) =>
-              form.setData("taxIdentificationNumber", e.target.value)
-            }
-            disabled={form.processing}
-            required={false}
-            errorMsg={form.errors.taxIdentificationNumber}
-            hideError={form.isDirty("taxIdentificationNumber")}
-          />
-        </div>
-
-        <div className="flex items-center gap-4">
-          <PrimaryButton type="submit" disabled={form.processing}>
-            Save
-          </PrimaryButton>
-
-          <Transition
-            show={form.recentlySuccessful}
-            enter="transition ease-in-out"
-            enterFrom="opacity-0"
-            leave="transition ease-in-out"
-            leaveTo="opacity-0"
-          >
-            <p className="text-sm text-green-500">Saved.</p>
-          </Transition>
+                <Transition
+                  show={form.recentlySuccessful}
+                  enter="transition ease-in-out"
+                  enterFrom="opacity-0"
+                  leave="transition ease-in-out"
+                  leaveTo="opacity-0"
+                >
+                  <p className="text-sm text-green-500">Saved</p>
+                </Transition>
+              </div>{" "}
+            </div>
+          </section>
         </div>
       </form>
-    </section>
+    </>
   );
 }

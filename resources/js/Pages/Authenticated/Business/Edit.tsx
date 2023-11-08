@@ -2,7 +2,8 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { AuthPageProps } from "@/types";
 import AccountsTable from "./Partials/AccountsTable";
-import UpdateBusinessForm from "./Partials/UpdateBusinessInformation";
+import UpdateBusinessForm from "./Partials/UpdateBusinessForm";
+import Footer from "@/Layouts/GuestLayout/Partials/Footer";
 
 export default function Edit({
   auth,
@@ -22,12 +23,10 @@ export default function Edit({
               className="max-w-xl"
             />
           </div>
-
-          <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-            <UpdateBusinessForm className="max-w-xl" />
-          </div>
+          <UpdateBusinessForm />
         </div>
       </div>
+      <Footer />
     </AuthenticatedLayout>
   );
 }

@@ -4,6 +4,7 @@ import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
 import { Head } from "@inertiajs/react";
 import { AuthPageProps } from "@/types";
+import Footer from "@/Layouts/GuestLayout/Partials/Footer";
 
 export default function Edit({
   auth,
@@ -33,6 +34,7 @@ export default function Edit({
           </div>
         </div>
       </div>
+      <Footer/>
     </AuthenticatedLayout>
   );
 }

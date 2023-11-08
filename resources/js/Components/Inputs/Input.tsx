@@ -55,7 +55,7 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
   }
 
   return (
-    <>
+    <div>
       <MaterialInput
         {...props}
         id={id}
@@ -95,6 +95,6 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
       ) : (
         <HintMessage>{hint}</HintMessage>
       )}
-    </>
+    </div>
   );
 });

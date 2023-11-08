@@ -8,10 +8,8 @@ import { useEffect } from "react";
 
 export default function UserForm({
   form,
-  onBack,
 }: {
   form: UseBetterForm<ICreateUser & { termsAndConditions: boolean }>;
-  onBack: () => void;
 }) {
   useEffect(() => {
     return () => {

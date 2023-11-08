@@ -30,8 +30,8 @@ class BusinessController extends Controller
      */
     public function update(UpdateBusinessRequest $request, Business $business)
     {
+        // dd($request->validated());
         Gate::authorize('update', $business);
-        dd($business);
         $business->update($request->validated());
 
 

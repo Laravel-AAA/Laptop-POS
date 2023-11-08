@@ -43,7 +43,7 @@ export default function UpdateProfileInformation({
           Profile Information
         </h2>
 
-        <p className="mt-1 text-sm text-gray-600">
+        <p className="mt-1 text-normal text-gray-600">
           Update your account's profile information and email address.
         </p>
       </header>
@@ -116,7 +116,7 @@ export default function UpdateProfileInformation({
             leave="transition ease-in-out"
             leaveTo="opacity-0"
           >
-            <p className="text-sm text-green-500">Saved.</p>
+            <p className="text-sm text-green-500">Saved</p>
           </Transition>
         </div>
       </form>

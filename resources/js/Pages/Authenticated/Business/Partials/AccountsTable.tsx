@@ -40,7 +40,7 @@ export default function AccountsTable({
       <header>
         <h2 className="text-lg font-medium text-gray-900">Accounts</h2>
 
-        <p className="mt-1 text-sm text-gray-600">
+        <p className="mt-1 text-normal text-gray-600">
           Add, remove, or change an account's role in your business.
         </p>
       </header>
@@ -71,7 +71,7 @@ export default function AccountsTable({
             leave="transition ease-in-out"
             leaveTo="opacity-0"
           >
-            <p className="text-sm text-green-500">Saved.</p>
+            <p className="text-sm text-green-500">Saved</p>
           </Transition>
         </div>
       </form>
