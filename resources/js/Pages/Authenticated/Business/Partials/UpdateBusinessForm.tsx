@@ -8,6 +8,7 @@ import useBetterForm from "@/Utilities/useBetterForm";
 import TaxRateInput from "@/Pages/Authenticating/Register/Partials/BusinessForm/Partials/TaxRateInput";
 import CountryInput from "@/Pages/Authenticating/Register/Partials/BusinessForm/Partials/CountryInput";
 import { PhoneInput } from "@/Pages/Authenticating/Register/Partials/BusinessForm/Partials/PhoneInput";
+import BusinessLogoInput from "./BusinessLogoInput";
 
 export default function UpdateBusinessForm() {
   const business = usePage<AuthPageProps>().props.auth.business;
@@ -31,7 +32,7 @@ export default function UpdateBusinessForm() {
           <section className="max-w-xl">
             <header>
               <h2 className="text-lg font-medium text-gray-900">
-                Business Details
+                Business Identity
               </h2>
 
               <p className="text-normal mt-1 text-gray-600">Name and Logo</p>
@@ -50,9 +51,36 @@ export default function UpdateBusinessForm() {
                 required
                 disabled={form.processing}
               />
-              <p className="text-normal !mt-9 text-gray-600">
-                Location and Contact
-              </p>
+              <BusinessLogoInput form={form} />
+
+              <div className="flex items-center gap-4">
+                <PrimaryButton type="submit" disabled={form.processing}>
+                  Save
+                </PrimaryButton>
+
+                <Transition
+                  show={form.recentlySuccessful}
+                  enter="transition ease-in-out"
+                  enterFrom="opacity-0"
+                  leave="transition ease-in-out"
+                  leaveTo="opacity-0"
+                >
+                  <p className="text-sm text-green-500">Saved</p>
+                </Transition>
+              </div>{" "}
+            </div>
+          </section>
+        </div>
+        <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+          <section className="max-w-xl">
+            <header>
+              <h2 className="text-lg font-medium text-gray-900">
+                Location & Contact
+              </h2>
+
+              {/* <p className="text-normal mt-1 text-gray-600">Name and Logo</p> */}
+            </header>
+            <div className="mt-6 space-y-6">
               <CountryInput form={form} />
               <Input
                 label="City"
@@ -106,7 +134,7 @@ export default function UpdateBusinessForm() {
               </h2>
 
               <p className="text-normal mt-1 text-gray-600">
-                Currency and Tax.
+                Currency and Tax
               </p>
             </header>
             <div className="mt-6 space-y-6">

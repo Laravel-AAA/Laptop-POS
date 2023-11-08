@@ -66,7 +66,6 @@ export default function FormInputs({
         />
 
         <Checkbox
-          name="remember"
           label={
             <span>
               Price includes tax (

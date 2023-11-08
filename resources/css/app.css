@@ -1,5 +1,5 @@
-/*<div> with onClick should be <button> with this class for accessibility.
-It changes the button element to look like a div.
+/*<div> with onClick should be <button> for accessibility.
+This class changes the button element to look like a div.
 Written first to be overwrite by tailwind or any other classes*/
 .div-style {
   display: block;

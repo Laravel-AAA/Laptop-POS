@@ -23,17 +23,99 @@ export default function FormImage({
   const [editImageState, setEditImageState] = useState<
     "removed" | "change" | "default"
   >(() => "default");
-  const imageElement = (
+
+  if (state === "create")
+    return (
+      <InputImage
+        img={img}
+        state={state}
+        editImageState={editImageState}
+        form={form}
+      />
+    );
+
+  if (state === "show") {
+    if (img === null) return <NoImageImage />;
+    else return <ImageElement img={img} productName={form.data.name} />;
+  }
+  
+  //if edit
+  if (img === null)
+    return (
+      <InputImage
+        img={img}
+        state={state}
+        editImageState={editImageState}
+        form={form}
+      />
+    );
+
+  if (editImageState === "default")
+    return (
+      <>
+        <ImageElement img={img} productName={form.data.name} />
+        <div className="mb-4 mt-1 flex justify-center gap-8">
+          <TertiaryButton
+            disabled={form.processing}
+            onClick={() => {
+              setEditImageState("change");
+            }}
+          >
+            Change&nbsp;Image
+          </TertiaryButton>
+          <DangerButton
+            disabled={form.processing}
+            onClick={() => {
+              setEditImageState("removed");
+              form.setData("img", null);
+            }}
+          >
+            Remove&nbsp;Image
+          </DangerButton>
+        </div>
+      </>
+    );
+  //if editImageState is `change` OR `removed`
+  return (
+    <InputImage
+      img={img}
+      state={state}
+      editImageState={editImageState}
+      form={form}
+    />
+  );
+}
+
+function ImageElement({
+  img,
+  productName,
+}: {
+  img: string | null;
+  productName: string;
+}) {
+  return (
     <div className="mt-1  rounded-md border border-gray-300">
       <img
         className="mx-auto h-40"
         src={img?.startsWith("http") ? img : "products-images/" + img}
-        alt={"Image " + (img ?? "") + " of product " + form.data.name}
+        alt={"Image " + (img ?? "") + " of product " + productName}
       />
     </div>
   );
+}
 
-  const inputImage = (
+function InputImage({
+  img,
+  state,
+  editImageState,
+  form,
+}: {
+  img: string | null;
+  state: IModalAction<ICreateProduct>["state"];
+  editImageState: "removed" | "change" | "default";
+  form: UseBetterForm<ICreateProduct>;
+}) {
+  return (
     <>
       <Input
         label={
@@ -67,40 +149,4 @@ export default function FormImage({
       )}
     </>
   );
-
-  if (state === "create") return inputImage;
-  if (state === "show") {
-    if (img === null) return <NoImageImage />;
-    else return imageElement;
-  }
-  //if edit
-  if (img === null) return inputImage;
-
-  if (editImageState === "default")
-    return (
-      <>
-        {imageElement}
-        <div className="mb-4 mt-1 flex justify-center gap-8">
-          <TertiaryButton
-            disabled={form.processing}
-            onClick={() => {
-              setEditImageState("change");
-            }}
-          >
-            Change&nbsp;Image
-          </TertiaryButton>
-          <DangerButton
-            disabled={form.processing}
-            onClick={() => {
-              setEditImageState("removed");
-              form.setData("img", null);
-            }}
-          >
-            Remove&nbsp;Image
-          </DangerButton>
-        </div>
-      </>
-    );
-  //if editImageState is `change` OR `removed`
-  return inputImage;
 }
