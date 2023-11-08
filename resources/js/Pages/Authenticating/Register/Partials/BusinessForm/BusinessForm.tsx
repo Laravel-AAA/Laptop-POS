@@ -23,6 +23,8 @@ export default function BusinessForm({
     if (c) {
       setCountry(c);
       if (c.tax) form.setData("taxPercent", c.tax);
+      if (c.countryCallingCode)
+        form.setData("countryCallingCode", c.countryCallingCode);
     }
   }, [form.data.country]);
 
@@ -100,7 +102,7 @@ export default function BusinessForm({
       </div>
 
       <div className="mt-4">
-        <PhoneInput chosenCountry={country} form={form} />
+        <PhoneInput form={form} />
       </div>
     </>
   );

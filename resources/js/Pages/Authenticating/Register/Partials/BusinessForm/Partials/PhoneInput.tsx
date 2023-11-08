@@ -12,23 +12,18 @@ import { UseBetterForm } from "@/Utilities/useBetterForm";
 
 export function PhoneInput<T extends ICreateBusiness>({
   form,
-  chosenCountry: country,
 }: {
   form: UseBetterForm<T>;
-  chosenCountry: Country | null;
 }) {
   const countries = COUNTRIES.filter((c) => c.countryCallingCode).sort(
     (a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0),
   );
 
-  let chosenCountryForCode: Country | undefined;
-  if (form.data.countryCallingCode)
-    chosenCountryForCode = countries.find(
-      (c) => c.countryCallingCode === form.data.countryCallingCode,
-    );
-  if (chosenCountryForCode === undefined) {
-    chosenCountryForCode = country?.countryCallingCode ? country : countries[0];
-  }
+  const country = form.data.countryCallingCode
+    ? countries.find(
+        (c) => c.countryCallingCode === form.data.countryCallingCode,
+      ) ?? countries[0]
+    : countries[0];
 
   return (
     <>
@@ -44,11 +39,11 @@ export function PhoneInput<T extends ICreateBusiness>({
               className="flex h-11 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
             >
               <img
-                src={chosenCountryForCode.flags.svg}
-                alt={chosenCountryForCode.name}
+                src={country.flags.svg}
+                alt={country.name}
                 className="h-4 w-5 rounded object-cover"
               />
-              {chosenCountryForCode.countryCallingCode}
+              {country.countryCallingCode}
             </Button>
           </MenuHandler>
           <MenuList className="max-h-[20rem] max-w-[18rem]">

@@ -34,7 +34,7 @@ export default function UpdateBusinessForm() {
                 Business Details
               </h2>
 
-              <p className="mt-1 text-normal text-gray-600">Name and Logo</p>
+              <p className="text-normal mt-1 text-gray-600">Name and Logo</p>
             </header>
             <div className="mt-6 space-y-6">
               <Input
@@ -50,7 +50,7 @@ export default function UpdateBusinessForm() {
                 required
                 disabled={form.processing}
               />
-              <p className="!mt-9 text-normal text-gray-600">
+              <p className="text-normal !mt-9 text-gray-600">
                 Location and Contact
               </p>
               <CountryInput form={form} />
@@ -78,6 +78,7 @@ export default function UpdateBusinessForm() {
                 required
                 disabled={form.processing}
               />
+              <PhoneInput form={form} />
               <div className="flex items-center gap-4">
                 <PrimaryButton type="submit" disabled={form.processing}>
                   Save
@@ -104,7 +105,9 @@ export default function UpdateBusinessForm() {
                 Financial Details
               </h2>
 
-              <p className="mt-1 text-normal text-gray-600">Currency and Tax.</p>
+              <p className="text-normal mt-1 text-gray-600">
+                Currency and Tax.
+              </p>
             </header>
             <div className="mt-6 space-y-6">
               <Input
@@ -143,7 +146,6 @@ export default function UpdateBusinessForm() {
                 value={form.data.taxPercent * 100}
                 currency={form.data.currency ?? "$"}
               />
-              <PhoneInput chosenCountry={null} form={form} />
               <Input
                 type="text"
                 label="Tax Identification Number"
