@@ -6,24 +6,29 @@ import {
   MenuItem,
   Button,
 } from "@material-tailwind/react";
-import COUNTRIES, { Country } from "./COUNTRIES";
+import COUNTRIES from "./COUNTRIES";
 import { ICreateBusiness } from "@/types";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
+import { useMemo } from "react";
 
 export function PhoneInput<T extends ICreateBusiness>({
   form,
 }: {
   form: UseBetterForm<T>;
 }) {
-  const countries = COUNTRIES.filter((c) => c.countryCallingCode).sort(
-    (a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0),
+  const countries = useMemo(
+    () =>
+      COUNTRIES.filter((c) => c.countryCallingCode).sort((a, b) =>
+        a.name > b.name ? 1 : a.name < b.name ? -1 : 0,
+      ),
+    [],
   );
 
-  const country = form.data.countryCallingCode
+  const country = useMemo(()=> form.data.countryCallingCode
     ? countries.find(
         (c) => c.countryCallingCode === form.data.countryCallingCode,
       ) ?? countries[0]
-    : countries[0];
+    : countries[0] ,[form.data.countryCallingCode]);
 
   return (
     <>

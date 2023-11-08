@@ -1,5 +1,5 @@
 import { Option } from "@material-tailwind/react";
-import React from "react";
+import React, { useMemo } from "react";
 import COUNTRIES from "./COUNTRIES";
 import { ICreateBusiness } from "@/types";
 import SelectInput from "@/Components/Inputs/SelectInput";
@@ -11,10 +11,10 @@ export default function CountryInput<T extends ICreateBusiness>({
   form: UseBetterForm<T>;
 }) {
 
-  const countries = COUNTRIES.filter(
+  const countries = useMemo(()=>COUNTRIES.filter(
     (c) => c.currencies?.[0]?.name && c.currencies?.[0]?.symbol,
-  );
-  
+  ),[]);
+
   return (
     <SelectInput
       label="Country"

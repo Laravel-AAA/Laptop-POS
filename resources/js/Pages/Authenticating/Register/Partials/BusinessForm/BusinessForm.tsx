@@ -13,10 +13,11 @@ export default function BusinessForm({
 }: {
   form: UseBetterForm<ICreateBusiness>;
 }) {
-  let initial: Country | null = null;
-  if (form.data.country)
-    initial = COUNTRIES.find((c) => c.name === form.data.country) ?? null;
-  const [country, setCountry] = useState<Country | null>(initial);
+  const [country, setCountry] = useState<Country | null>(
+    form.data.country
+      ? COUNTRIES.find((c) => c.name === form.data.country) ?? null
+      : null,
+  );
 
   useEffect(() => {
     const c = COUNTRIES.find((c) => c.name === form.data.country);
