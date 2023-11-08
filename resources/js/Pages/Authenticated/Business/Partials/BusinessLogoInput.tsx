@@ -1,5 +1,3 @@
-import DangerButton from "@/Components/Buttons/DangerButton";
-import TertiaryButton from "@/Components/Buttons/TertiaryButton";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { IBusiness } from "@/types";
 import { useRef, useState } from "react";
@@ -15,7 +13,7 @@ export default function BusinessLogoInput({
     form.data.logo?.startsWith("http")
       ? form.data.logo
       : form.data.logo
-      ? "businesses-logo/" + form.data.logo
+      ? "/businesses-logo/" + form.data.logo
       : "/assets/logo/laptop-pos-logo.svg",
   );
   return (
@@ -32,7 +30,7 @@ export default function BusinessLogoInput({
           className="pointer-events-none absolute bottom-0 left-0 right-0  top-0 rounded-md
         bg-[radial-gradient(#000,#00000030,#00000010,transparent)] opacity-0 transition duration-200 group-hover:opacity-100"
         >
-          <p className="flex h-full w-full items-center justify-center gap-2 text-center text-lg text-white">
+          <p className="flex h-full w-full items-center justify-center gap-2 text-center text-lg text-gray-100">
             <FaEdit />
             Edit Business Logo
           </p>

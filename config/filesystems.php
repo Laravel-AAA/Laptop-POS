@@ -15,7 +15,7 @@ $cloudDriver = [
     'throw' => true,
     'visibility' => 'public',
     'root' => '',
-    // 'scheme' => 'http' //the server should be served on https or uncomment this line.
+    // 'scheme' => 'http' //the server should be served on https or uncomment this line for local development using cloud storage s3.
 ];
 //for DRY
 $localDriver = [
@@ -34,10 +34,12 @@ if ($isLocal) {
         'visibility' => 'public',
     ];
     $productsImages = [...$localDriver, 'root' => storage_path('app/public/products-images')];
+    $businessesLogo = [...$localDriver, 'root' => storage_path('app/public/businesses-logo')];
 } else { //Cloud
     $appDisk = [...$cloudDriver, 'root' => 'app'];
     $publicDisk = [...$cloudDriver, 'root' => 'app/public'];
     $productsImages = [...$cloudDriver, 'root' => 'products-images'];
+    $businessesLogo = [...$cloudDriver, 'root' => 'businesses-logo'];
 }
 
 
@@ -70,13 +72,11 @@ return [
     */
 
     'disks' => [
-        //here local is `app` folder/disk. Don't confuse with local driver.
+        //here local is `app` folder/disk. Don't be confused with local driver.
         'local' => $appDisk,
-
         'public' => $publicDisk,
-
         'products-images' => $productsImages,
-
+        'businesses-logo' => $businessesLogo,
     ],
 
     /*
@@ -93,6 +93,7 @@ return [
     'links' => [
         //this is used only for local files. On the cloud we don't use such an approach.
         public_path('products-images') => storage_path('app/public/products-images'),
+        public_path('businesses-logo') => storage_path('app/public/businesses-logo'),
     ],
 
 ];

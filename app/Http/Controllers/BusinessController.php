@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Business;
 use App\Http\Requests\Business\UpdateBusinessRequest;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -57,5 +59,27 @@ class BusinessController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+
+    private function deleteImg(string $filePath)
+    {
+        if (env('FILESYSTEM_DISK') == 's3')
+            return Storage::disk('businesses-logo')->delete(basename($filePath));
+        return Storage::disk('businesses-logo')->delete($filePath);
+    }
+
+    /**Store an img file in the correspond filesystem and return the img path/name. path if it stored in the cloud and name if locally  */
+    private function storeImg(Request $request): string
+    {
+        if (env('FILESYSTEM_DISK') == 's3')
+            return $this->businessesStorage()->url($request->imageFile->store('', 'businesses-logo'));
+        return $request->imageFile->store('', 'businesses-logo');
+    }
+
+    //to ignore an error of intelephense extension.
+    private function businessesStorage(): FilesystemAdapter
+    {
+        return Storage::disk('businesses-logo');
     }
 }
