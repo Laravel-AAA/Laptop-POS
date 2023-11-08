@@ -55,9 +55,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/business', [BusinessController::class, 'edit'])
         ->name('business.edit');
-        
     Route::patch('/business/{business}', [BusinessController::class, 'update'])
         ->name('business.update');
+    Route::delete('/business/{business}', [BusinessController::class, 'destroy'])
+        ->name('business.destroy');
 });
 
 Route::middleware('auth')->group(function () {

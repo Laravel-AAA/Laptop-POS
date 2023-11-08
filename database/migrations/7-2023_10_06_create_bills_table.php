@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,8 +14,10 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->decimal('cashReceived')->nullable();
             $table->timestamps();
-            $table->foreignUlid('createdBy_id')->constrained('users');//created by
-            $table->foreignUlid('business_id')->constrained('business');
+            $table->foreignUlid('createdBy_id')->constrained('users'); //created by
+            $table->foreignUlid('business_id')
+                ->constrained('business')
+                ->cascadeOnDelete();
         });
     }
 

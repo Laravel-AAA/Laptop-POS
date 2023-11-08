@@ -61,16 +61,16 @@ class ProfileTest extends TestCase
         $this->assertNotNull($user->refresh()->email_verified_at);
     }
 
-    public function test_user_can_delete_their_account(): void
+    public function test_admin_can_delete_thir_business(): void
     {
         $user = User::factory()->create();
 
         $response = $this
             ->actingAs($user)
-            ->delete('/profile', [
+            ->delete('/business/' . $user->business_id, [
                 'password' => 'asdfasdf',
             ]);
-
+            
         $response
             ->assertSessionHasNoErrors()
             ->assertRedirect('/');

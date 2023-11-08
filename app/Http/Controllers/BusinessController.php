@@ -43,9 +43,19 @@ class BusinessController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Business $business)
+    public function destroy(Request $request, Business $business)
     {
+        $request->validate([
+            'password' => ['required', 'current_password'],
+        ]);
         Gate::authorize('destroy', $business);
-        //
+        $user = $request->user();
+        Auth::logout();
+        $user->delete();
+        $business->delete();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::to('/');
     }
 }

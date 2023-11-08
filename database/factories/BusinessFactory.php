@@ -17,7 +17,16 @@ class BusinessFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => 'Laptop POS',
+            'logo' => null,
+            'country' => 'Saudi Arabia',
+            'city' => 'Makkah',
+            'address' => 'Ray',
+            'currency' => 'ريال',
+            'phone' => '555555555',
+            'countryCallingCode' => '+966',
+            'taxPercent' => 0.15,
+            'taxIdentificationNumber' => null,
         ];
     }
 }
