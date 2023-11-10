@@ -32,14 +32,22 @@ class BusinessController extends Controller
      */
     public function update(UpdateBusinessRequest $request, Business $business)
     {
-        // dd($request->validated());
         Gate::authorize('update', $business);
-        $business->update($request->validated());
 
+        $updatedBusiness = $request->validated();
+        //1- if logo is null OR there is new logo THEN delete the old logo.
+        if ($business->logo && ($request->hasFile('logoFile') || $updatedBusiness['logo'] == null)) {
+            $this->deleteFile($business->logo);
+        }
+        //2- if there is new logo store it.
+        if ($request->hasFile('logoFile')) {
+            $updatedBusiness['logo'] = $this->storeFile($request);
+        }
 
-        $request->user()->save();
+        $business->update($updatedBusiness);
+        $business->save();
 
-        return Redirect::route('business.edit');
+        return redirect()->back()->with('success', 'Business information was updated successfully');
     }
 
     /**
@@ -51,6 +59,10 @@ class BusinessController extends Controller
             'password' => ['required', 'current_password'],
         ]);
         Gate::authorize('destroy', $business);
+
+        if ($business->logo)
+            $this->deleteFile($business->logo);
+
         $user = $request->user();
         Auth::logout();
         $user->delete();
@@ -62,19 +74,19 @@ class BusinessController extends Controller
     }
 
 
-    private function deleteImg(string $filePath)
+    private function deleteFile(string $filePath)
     {
         if (env('FILESYSTEM_DISK') == 's3')
             return Storage::disk('businesses-logo')->delete(basename($filePath));
         return Storage::disk('businesses-logo')->delete($filePath);
     }
 
-    /**Store an img file in the correspond filesystem and return the img path/name. path if it stored in the cloud and name if locally  */
-    private function storeImg(Request $request): string
+    /**Store a file in the correspond filesystem and return the path/name. If file stored in the cloud and name if locally  */
+    private function storeFile(Request $request): string
     {
         if (env('FILESYSTEM_DISK') == 's3')
-            return $this->businessesStorage()->url($request->imageFile->store('', 'businesses-logo'));
-        return $request->imageFile->store('', 'businesses-logo');
+            return $this->businessesStorage()->url($request->logoFile->store('', 'businesses-logo'));
+        return $request->logoFile->store('', 'businesses-logo');
     }
 
     //to ignore an error of intelephense extension.

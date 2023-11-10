@@ -3,11 +3,9 @@ import { IBusiness } from "@/types";
 import { useRef, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
-export default function BusinessLogoInput({
-  form,
-}: {
-  form: UseBetterForm<IBusiness>;
-}) {
+export default function BusinessLogoInput<
+  T extends { logo: IBusiness["logo"]; logoFile: IBusiness["logoFile"] },
+>({ form }: { form: UseBetterForm<T> }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [logoSrc, setLogoSrc] = useState<string>(
     form.data.logo?.startsWith("http")
@@ -17,11 +15,14 @@ export default function BusinessLogoInput({
       : "/assets/logo/laptop-pos-logo.svg",
   );
   return (
-    <>
+    <div>
       <button
         type="button"
         onClick={() => fileInputRef.current?.click?.()}
-        className="div-style group relative"
+        className={
+          "div-style group relative " + (form.processing && "opacity-25")
+        }
+        disabled={form.processing}
       >
         <p className="absolute -top-2 left-3 bg-white px-1 text-xs text-blue-gray-400">
           Logo
@@ -39,16 +40,25 @@ export default function BusinessLogoInput({
           <input
             ref={fileInputRef}
             type="file"
-            className="hidden"
+            hidden={true}
+            accept="image/*"
             onChange={(e) => {
-              if (e?.target?.files?.[0]) {
-                setLogoSrc(URL.createObjectURL(e.target.files[0]));
+              let file = e?.target?.files?.[0];
+              if (file) {
+                form.setData("logoFile", file);
+                setLogoSrc(URL.createObjectURL(file));
               }
             }}
           />
           <img className="mx-auto h-40" src={logoSrc} alt={"Business logo"} />
         </div>
       </button>
-    </>
+
+      {(form.errors.logo || form.errors.logoFile) && (
+        <p className="ml-2 mt-2 text-xs text-danger-600 ">
+          {form.errors.logo || form.errors.logoFile}
+        </p>
+      )}
+    </div>
   );
 }

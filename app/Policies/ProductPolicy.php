@@ -13,7 +13,7 @@ class ProductPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Product $product): bool
+    public function show(User $user, Product $product): bool
     {
         return $user->business_id == $product->business_id;
     }
@@ -37,27 +37,10 @@ class ProductPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Product $product): bool
+    public function destroy(User $user, Product $product): bool
     {
         return $user->business_id == $product->business_id
             && ($user->id == $product->createdBy_id || $user->role == 'Admin');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Product $product): bool
-    {
-        return $user->business_id == $product->business_id
-            && ($user->id == $product->createdBy_id || $user->role == 'Admin');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Product $product): bool
-    {
-        return $user->business_id == $product->business_id
-            && ($user->id == $product->createdBy_id || $user->role == 'Admin');
-    }
 }

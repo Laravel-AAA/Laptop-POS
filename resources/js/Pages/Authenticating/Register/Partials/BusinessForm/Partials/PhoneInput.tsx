@@ -7,15 +7,16 @@ import {
   Button,
 } from "@material-tailwind/react";
 import COUNTRIES from "./COUNTRIES";
-import { ICreateBusiness } from "@/types";
+import { IBusiness, ICreateBusiness } from "@/types";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { useMemo } from "react";
 
-export function PhoneInput<T extends ICreateBusiness>({
-  form,
-}: {
-  form: UseBetterForm<T>;
-}) {
+export function PhoneInput<
+  T extends {
+    phone: IBusiness["phone"];
+    countryCallingCode: IBusiness["countryCallingCode"];
+  },
+>({ form }: { form: UseBetterForm<T> }) {
   const countries = useMemo(
     () =>
       COUNTRIES.filter((c) => c.countryCallingCode).sort((a, b) =>
@@ -24,11 +25,15 @@ export function PhoneInput<T extends ICreateBusiness>({
     [],
   );
 
-  const country = useMemo(()=> form.data.countryCallingCode
-    ? countries.find(
-        (c) => c.countryCallingCode === form.data.countryCallingCode,
-      ) ?? countries[0]
-    : countries[0] ,[form.data.countryCallingCode]);
+  const country = useMemo(
+    () =>
+      form.data.countryCallingCode
+        ? countries.find(
+            (c) => c.countryCallingCode === form.data.countryCallingCode,
+          ) ?? countries[0]
+        : countries[0],
+    [form.data.countryCallingCode],
+  );
 
   return (
     <>

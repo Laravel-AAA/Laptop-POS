@@ -18,7 +18,7 @@ export default function HeaderNav({ user }: { user: IUser }) {
           <div className="flex">
             <div className="flex shrink-0 items-center">
               <Link href="/">
-                <Logo className="h-9" />
+                <Logo className="h-9" businessLogo />
               </Link>
             </div>
 
@@ -147,6 +147,9 @@ export default function HeaderNav({ user }: { user: IUser }) {
           <div className="mt-3 space-y-1">
             <ResponsiveNavLink href={route("profile.edit")}>
               Profile
+            </ResponsiveNavLink>
+            <ResponsiveNavLink href={route("business.edit")}>
+              Business
             </ResponsiveNavLink>
             <ResponsiveNavLink method="post" href={route("logout")} as="button">
               Log Out

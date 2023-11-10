@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     protected function show(Request $request, Product $product)
     {
-        Gate::authorize('view', $product);
+        Gate::authorize('show', $product);
 
         return response()->json($product);
     }
@@ -54,7 +54,7 @@ class ProductController extends Controller
 
     protected function destroy(Product $product)
     {
-        Gate::authorize('delete', $product);
+        Gate::authorize('destroy', $product);
 
         if ($product->img)
             $this->deleteImg($product->img);
@@ -64,6 +64,7 @@ class ProductController extends Controller
 
     protected function update(UpdateProductRequest $request, Product $product)
     {
+        Gate::authorize('update',$product);
         $newProduct = $request->validated();
         //1- if img is null OR there is new image THEN delete the old image.
         if ($product->img && ($request->hasFile('imageFile') || $newProduct['img'] == null)) {

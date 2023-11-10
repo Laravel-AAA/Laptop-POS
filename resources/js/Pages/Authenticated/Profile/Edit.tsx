@@ -34,7 +34,7 @@ export default function Edit({
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </AuthenticatedLayout>
   );
 }

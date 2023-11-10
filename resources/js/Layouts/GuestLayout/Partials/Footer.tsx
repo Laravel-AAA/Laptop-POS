@@ -4,8 +4,8 @@ export default function Footer({ className = "" }: { className?: string }) {
 
     <>
        {/* <hr className="mt-24 border-gray-300" /> */}
-      <div className="pb-24"></div>
-      <div className="absolute bottom-4 w-full">
+      <div className="pb-20"></div>
+      <div className="absolute bottom-0 w-full">
         <footer
           className={
             "flex min-h-full w-full flex-wrap-reverse justify-center px-6 py-4 sm:items-center sm:justify-between " +

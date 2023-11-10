@@ -38,7 +38,7 @@ export default function FormImage({
     if (img === null) return <NoImageImage />;
     else return <ImageElement img={img} productName={form.data.name} />;
   }
-  
+
   //if edit
   if (img === null)
     return (
@@ -129,6 +129,7 @@ function InputImage({
         }
         type="file"
         className="mt-1 block w-full"
+        accept="image/*"
         hidden={!!img}
         disabled={state === "show" || form.processing}
         required={false}

@@ -1,24 +1,16 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import Input from "@/Components/Inputs/Input";
-import { usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 import { FormEventHandler } from "react";
-import { AuthPageProps, IBusiness, IUser } from "@/types";
+import { IBusiness, IUser } from "@/types";
 import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function AccountsTable({
-  mustVerifyEmail,
-  status,
   className = "",
+  business,
 }: {
-  mustVerifyEmail: boolean;
-  status?: string;
   className?: string;
+  business: IBusiness & { users: IUser[] };
 }) {
-  const business =
-    usePage<AuthPageProps<{ business: IBusiness & { users: IUser[] } }>>().props
-      .business;
-
   const {
     data,
     setData,
@@ -36,11 +28,11 @@ export default function AccountsTable({
   };
 
   return (
-    <section className={className}>
+    <section className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
       <header>
         <h2 className="text-lg font-medium text-gray-900">Accounts</h2>
 
-        <p className="mt-1 text-normal text-gray-600">
+        <p className="text-normal mt-1 text-gray-600">
           Add, remove, or change an account's role in your business.
         </p>
       </header>

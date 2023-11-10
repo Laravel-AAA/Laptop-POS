@@ -54,7 +54,6 @@ export default function useBetterForm<T extends object>(
     setRecentlySuccessful(form.recentlySuccessful);
   }, [form.recentlySuccessful]);
 
-
   const setData: UseBetterForm<T>["setData"] = (key, value) => {
     form.setData(key, value);
   };
@@ -81,11 +80,27 @@ export default function useBetterForm<T extends object>(
   };
 
   const patchDirty: UseBetterForm<T>["patchDirty"] = (url, options) => {
-    const clone: Partial<T> = JSON.parse(JSON.stringify(form.data));
+    const clone: Partial<T> = { ...form.data };
     for (let k in clone) {
       if (clone[k] === oldValues[k]) {
+        console.log(
+          "\n\nnot dirty:",
+          k,
+          "\nvalue:",
+          clone[k],
+          "\noldValue:",
+          oldValues[k],
+        );
         delete clone[k];
-      }
+      } else
+        console.log(
+          "\n\nDirty:",
+          k,
+          "\nvalue:",
+          clone[k],
+          "\noldValue:",
+          oldValues[k],
+        );
     }
     router.patch(url, clone as any, {
       ...options,
