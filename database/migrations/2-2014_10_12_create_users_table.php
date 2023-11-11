@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('role', 10); //Admin, Cashier...
+            $table->string('role', 10); //Owner, Maintainer, Cashier... see User Model for more info
             $table->timestamps();
             $table->foreignUlid('business_id')->constrained('business', 'id');
         });

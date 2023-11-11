@@ -20,7 +20,12 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 {
     use HasApiTokens, HasFactory, Notifiable, HasUlids, \Illuminate\Auth\Passwords\CanResetPassword;
 
-    public static $ROLES = ['Admin','Cashier'];
+    /**
+     * Owner: have all privileges on his business.
+     * Maintainer: have all privileges but can't change business information or business's accounts.
+     * Cashier: can add new checkout, and update/delete bills created by himself.
+     */
+    public static $ROLES = ['Owner', 'Maintainer', 'Cashier'];
 
     /**
      * The table associated with the model.

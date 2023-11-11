@@ -22,7 +22,7 @@ class ProductPolicy
     public function store(User $user, Product $product): bool
     {
         return $user->business_id == $product->business_id
-        && ($user->id == $product->createdBy_id || $user->role == 'Admin');
+            && ($user->id == $product->createdBy_id || in_array($user->role, ['Owner', 'Maintainer']));
     }
 
     /**
@@ -31,7 +31,8 @@ class ProductPolicy
     public function update(User $user, Product $product): bool
     {
         return $user->business_id == $product->business_id
-            && ($user->id == $product->createdBy_id || $user->role == 'Admin');
+            && ($user->id == $product->createdBy_id
+                || in_array($user->role, ['Owner', 'Maintainer']));
     }
 
     /**
@@ -40,7 +41,7 @@ class ProductPolicy
     public function destroy(User $user, Product $product): bool
     {
         return $user->business_id == $product->business_id
-            && ($user->id == $product->createdBy_id || $user->role == 'Admin');
+            && ($user->id == $product->createdBy_id || in_array($user->role, ['Owner', 'Maintainer']));
     }
 
 }

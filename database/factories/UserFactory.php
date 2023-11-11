@@ -27,7 +27,7 @@ class UserFactory extends Factory
             // password: asdfasdf
             'password' => '$2y$10$eq9cyRecAlRJ6Ot0VquiNOEJrpZqk9whpqapa2bC1vlqFY13.SRdy',
             'remember_token' => Str::random(10),
-            'role' => 'Admin',
+            'role' => 'Owner',
             'business_id' => Business::factory(),
         ];
     }

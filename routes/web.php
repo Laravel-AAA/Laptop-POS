@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BusinessController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,7 +18,7 @@ use Inertia\Inertia;
 |
 |
 |    Method	   |  URI	               | Action  | Route Name
-|    ----------|-----------------------|---------|----------------
+|    ----------|-----------------------|---------|---------------
 |    GET	   |  /photos	           | index   | photos.index
 |    GET	   |  /photos/create	   | create  | photos.create
 |    POST	   |  /photos	           | store   | photos.store
@@ -59,12 +59,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('business.update');
     Route::delete('/business/{business}', [BusinessController::class, 'destroy'])
         ->name('business.destroy');
+
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [UserController::class, 'update'])->name('profile.update');
 });
 
 require __DIR__ . '/auth.php';

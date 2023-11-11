@@ -10,7 +10,7 @@ export interface ICreateUser {
   email: string;
   password: string;
   password_confirmation: string;
-  role: 'Admin' | 'Cashier';
+  role: 'Owner' | 'Maintainer' | 'Cashier';
 }
 
 export interface IUser extends ICreateUser {

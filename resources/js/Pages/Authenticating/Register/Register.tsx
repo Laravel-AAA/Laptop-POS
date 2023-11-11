@@ -13,7 +13,7 @@ export default function Register({ auth }: AuthPageProps) {
       email: "",
       password: "",
       password_confirmation: "",
-      role: "Admin",
+      role: "Owner",
       termsAndConditions: false,
     },
   );

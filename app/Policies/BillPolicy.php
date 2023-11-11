@@ -23,7 +23,7 @@ class BillPolicy
     public function update(User $user, Bill $bill): bool
     {
         return $user->business_id == $bill->business_id
-            && ($user->id == $bill->createdBy_id || $user->role == 'Admin');
+            && ($user->id == $bill->createdBy_id || in_array($user->role, ['Owner', 'Maintainer']));
     }
 
     /**
@@ -32,7 +32,7 @@ class BillPolicy
     public function delete(User $user, Bill $bill): bool
     {
         return $user->business_id == $bill->business_id
-            && ($user->id == $bill->createdBy_id || $user->role == 'Admin');
+            && ($user->id == $bill->createdBy_id || in_array($user->role, ['Owner', 'Maintainer']));
     }
 
 }
