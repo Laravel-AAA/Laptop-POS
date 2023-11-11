@@ -10,20 +10,18 @@ export default function CreateEditProductModal({
   modalAction: IModalAction<IProduct>;
   setModalAction: React.Dispatch<React.SetStateAction<IModalAction<IProduct>>>;
 }) {
-
-  function getTitle(): string {
-    if (modalAction.state === "create") return "Add New Product";
-    if (modalAction.state === "edit") return "Edit Product";
-    return "View Product";
-  }
-
   return (
     <TemplateModal
-      title={getTitle()}
+      title={getTitle(modalAction.state)}
       open={modalAction.open}
       closeModal={() => setModalAction((prev) => ({ ...prev, open: false }))}
     >
       <Form modalAction={modalAction} setModalAction={setModalAction} />
     </TemplateModal>
   );
+}
+function getTitle(state: IModalAction<IProduct>["state"]): string {
+  if (state === "create") return "Add New Product";
+  if (state === "edit") return "Edit Product";
+  return "View Product";
 }

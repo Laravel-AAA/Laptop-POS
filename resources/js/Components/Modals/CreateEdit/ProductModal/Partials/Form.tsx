@@ -11,7 +11,7 @@ export default function Form({
   modalAction: IModalAction<IProduct>;
   setModalAction: React.Dispatch<React.SetStateAction<IModalAction<IProduct>>>;
 }) {
-  const form = useBetterForm<ICreateProduct>(
+  const form = useBetterForm<IProduct | ICreateProduct>(
     modalAction.state === "create"
       ? {
           name: "", //name is required
@@ -22,7 +22,7 @@ export default function Form({
           price: null,
           stock: null,
         }
-      : ({ ...modalAction.data, _method: "patch" } as ICreateProduct), //`method spoofing` is a workaround because image can only be submitted on `post` method so we send a hint to laravel that it should consider it `patch`
+      : ({ ...modalAction.data, _method: "patch" } as IProduct), //`method spoofing` is a workaround because image can only be submitted on `post` method so we send a hint to laravel that it should consider it `patch`
     modalAction.data
       ? modalAction.data.id.toString() + modalAction.data.img //if img changed the the form needs to update the FormImage
       : modalAction.state,
@@ -56,7 +56,7 @@ export default function Form({
       <FormActions
         modalAction={modalAction}
         setModalAction={setModalAction}
-        formProps={form}
+        form={form}
       />
     </form>
   );
