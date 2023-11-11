@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -15,7 +16,7 @@ class GreetingNewCustomer extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public User $user)
     {
         //
     }
@@ -26,7 +27,7 @@ class GreetingNewCustomer extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome 👋',
+            subject: 'Welcome '.$this->user->name.' 👋',
         );
     }
 
@@ -40,13 +41,4 @@ class GreetingNewCustomer extends Mailable
         );
     }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
-    }
 }

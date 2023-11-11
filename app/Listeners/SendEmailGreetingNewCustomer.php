@@ -14,6 +14,6 @@ class SendEmailGreetingNewCustomer implements ShouldQueue
      */
     public function handle(Verified $event): void
     {
-        Mail::to($event->user)->send(new GreetingNewCustomer());
+        Mail::to($event->user)->send(new GreetingNewCustomer($event->user));
     }
 }
