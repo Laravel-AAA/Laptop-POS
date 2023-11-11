@@ -9,12 +9,14 @@ export default function Logo({
   businessLogo?: boolean;
 }) {
   let src: string | null = null;
+  const businessLogoPath =
+    usePage<AuthPageProps>()?.props?.auth?.business?.logo;
 
-  if (businessLogo) {
-    const businessLogoPath = usePage<AuthPageProps>().props.auth.business.logo;
-    if (businessLogoPath) src = "/businesses-logo/" + businessLogoPath;
-  }
-  if (!src) src = "/assets/logo/laptop-pos-logo.svg";
+  if (businessLogo && businessLogoPath) {
+    src = businessLogoPath.startsWith("http")
+      ? businessLogoPath
+      : "/businesses-logo/" + businessLogoPath;
+  } else src = "/assets/logo/laptop-pos-logo.svg";
 
   return <img className={className} src={src} alt="Application Logo" />;
 }

@@ -57,6 +57,7 @@ export default function CurrencyInput<T extends ICreateBusiness>({
       value={countryIndex?.toString()}
       errorMsg={form.errors.currency}
       hideError={form.isDirty("currency")}
+      disabled={form.processing}
       onChange={(v) => {
         setCountryIndex(Number(v));
         form.setData(
