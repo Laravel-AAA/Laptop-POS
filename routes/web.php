@@ -60,6 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/business/{business}', [BusinessController::class, 'destroy'])
         ->name('business.destroy');
 
+    Route::Resource('account', UserController::class)->only(['store','update', 'destroy']);
 });
 
 Route::middleware('auth')->group(function () {

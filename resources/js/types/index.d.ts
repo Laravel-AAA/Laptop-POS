@@ -13,9 +13,9 @@ export interface ICreateUser {
   role: 'Owner' | 'Maintainer' | 'Cashier';
 }
 
-export interface IUser extends ICreateUser {
-  id: number;
+export interface IUser extends ICreateUser, BasicModel {
   email_verified_at: string;
+  business_id: string;
 }
 
 export type AuthPageProps<

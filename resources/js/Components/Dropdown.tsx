@@ -39,26 +39,26 @@ const Trigger = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <button
+      <div
+        role="button"
         className="div-style"
-        type="button"
         onClick={(e) => {
           e.stopPropagation();
           toggleOpen();
         }}
       >
         {children}
-      </button>
+      </div>
 
       {open && (
-        <button
+        <div
+          role="button"
           className="div-style fixed inset-0 z-40 h-[100vh] w-full"
-          type="button"
           onClick={(e) => {
             e.stopPropagation();
             setOpen(false);
           }}
-        ></button>
+        ></div>
       )}
     </>
   );
@@ -102,8 +102,8 @@ const Content = ({
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <button
-          type="button"
+        <div
+          role="button"
           className={`div-style absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
           onClick={(e) => {
             e.stopPropagation();
@@ -117,7 +117,7 @@ const Content = ({
           >
             {children}
           </div>
-        </button>
+        </div>
       </Transition>
     </>
   );

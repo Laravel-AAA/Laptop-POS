@@ -73,11 +73,6 @@ export default function DeleteUserForm({
           </p>
 
           <div className="mt-6">
-            {/* <InputLabel
-              htmlFor="password"
-              value="Password"
-              className="sr-only"
-            /> */}
 
             <Input
               id="password"
@@ -91,7 +86,7 @@ export default function DeleteUserForm({
               autoFocus
               required
               placeholder="Password"
-              errorMsg={errors.password || (errors as any).hasProducts || (errors as any).isAdmin}
+              errorMsg={errors.password || (errors as any).hasProducts || (errors as any).isOwner}
               hideError={isDirty("password")}
               disabled={processing}
             />

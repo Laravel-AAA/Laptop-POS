@@ -43,7 +43,7 @@ export default function UpdateProfileInformation({
           Profile Information
         </h2>
 
-        <p className="mt-1 text-normal text-gray-600">
+        <p className="text-normal mt-1 text-gray-600">
           Update your account's profile information and email address.
         </p>
       </header>
@@ -103,6 +103,12 @@ export default function UpdateProfileInformation({
             )}
           </div>
         )}
+
+        <div>
+          <p className="ml-1 text-blue-gray-400">
+            Role:&nbsp;<span className="text-gray-700">{user.role}</span>
+          </p>
+        </div>
 
         <div className="flex items-center gap-4">
           <PrimaryButton type="submit" disabled={processing}>

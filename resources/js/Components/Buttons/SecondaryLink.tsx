@@ -1,6 +1,6 @@
 import { AnchorHTMLAttributes } from "react";
 
-export default function SecondaryButton({
+export default function SecondaryLink({
   href,
   className = "",
   children,

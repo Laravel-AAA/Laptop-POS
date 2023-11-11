@@ -28,7 +28,7 @@ export default function SelectInput({
     else if (errorMsg) error = true;
     else error = false;
   }
-  
+
   return (
     <>
       <Select
