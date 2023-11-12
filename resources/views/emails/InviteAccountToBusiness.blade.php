@@ -4,14 +4,14 @@
 
 Hello {{ $account->name }},
 
-You have been invited to join **{{ $owner->business->name }}** business by <b>{{ $owner->name }}</b>, the administrator of the business. To activate your account, please verify your email address by clicking the button below.
+You have been invited to join **{{ $owner->business->name }}** business by **{{ $owner->name }}**, the administrator of the business. To activate your account, please reset your password by clicking the button below.
 
 
 @component('mail::button',['url'=>$verificationUrl])
-        Activate & Verify Email
+        Activate & Reset Password
 @endcomponent
 
-Please reset your password at Profile > Update Password. Contact the administrator to get your current password. Or click at [ Forget password ]({{ env('APP_URL') }}/forgot-password) on Login page.
+This activation link will expire in 60 minutes. If the link expired don't worry you can either contact the administrator **{{ $owner->name }}** for the initial password, or you can claim that you have [forgot your password]({{ env('APP_URL') }}/forgot-password) on the login page and get password reset link.
 
 If you think this email is sent to you by mistake, you can ignore it and no further action is required.
 
@@ -19,7 +19,7 @@ If you think this email is sent to you by mistake, you can ignore it and no furt
 
 @component('mail::subcopy')
 
-If you're having trouble clicking the "Activate & Verify Email" button, copy and paste the URL below into your web browser: <br/><span class="break-all"><a href="{{ $verificationUrl }}">{{ $verificationUrl }}</a></span>
+If you're having trouble clicking the "Activate & Reset Password" button, copy and paste the URL below into your web browser: <br/><span class="break-all"><a href="{{ $verificationUrl }}">{{ $verificationUrl }}</a></span>
 
 @endcomponent
 

@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\Business;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,8 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Password;
 
 class InviteAccountToBusiness extends Mailable implements ShouldQueue
 {
@@ -30,7 +28,7 @@ class InviteAccountToBusiness extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'You are invited to join '.$this->owner->business->name.'!',
+            subject: 'You are invited to join ' . $this->owner->business->name . '!',
         );
     }
 
@@ -39,19 +37,18 @@ class InviteAccountToBusiness extends Mailable implements ShouldQueue
      */
     public function content(): Content
     {
+        $token = Password::getRepository()->create($this->account);
+        $verificationUrl = url(route('password.reset', [
+            'token' => $token,
+            'email' => $this->account->email,
+        ], false));
+        
         return new Content(
             markdown: 'emails.InviteAccountToBusiness',
             with: [
                 'owner' => $this->owner,
                 'account' => $this->account,
-                'verificationUrl' => URL::temporarySignedRoute(
-                    'verification.verify',
-                    Carbon::now()->addMinutes(24 * 60),
-                    [
-                        'id' => $this->account->getKey(),
-                        'hash' => sha1($this->account->getEmailForVerification()),
-                    ]
-                )
+                'verificationUrl' => $verificationUrl,
             ],
         );
     }
