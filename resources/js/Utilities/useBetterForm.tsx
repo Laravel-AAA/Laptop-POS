@@ -14,7 +14,10 @@ export type UseBetterForm<T extends object> = Omit<
 > & {
   //for type hint.
   //We remove `setData` from `InertiaFormProps` and add another `setData` with different param type.
-  setData: <K extends keyof T>(key: K, value: T[K]) => void;
+  setData: <K extends keyof T>(
+    key: K,
+    value: T[K],
+  ) => void;
   setAllData: setDataByObject<T> & setDataByMethod<T>;
   isDirty: (key?: keyof T) => boolean;
   setProcessing: (isProcessing: boolean) => void;

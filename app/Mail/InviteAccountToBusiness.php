@@ -5,6 +5,7 @@ namespace App\Mail;
 use App\Models\Business;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -12,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\URL;
 
-class InviteNewAccountCreatedByOwner extends Mailable
+class InviteAccountToBusiness extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -29,7 +30,7 @@ class InviteNewAccountCreatedByOwner extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'You are invited to join **'.$this->owner->business->name.'**!',
+            subject: 'You are invited to join '.$this->owner->business->name.'!',
         );
     }
 
@@ -39,7 +40,7 @@ class InviteNewAccountCreatedByOwner extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.InvitingNewAccountCreatedByOwner',
+            markdown: 'emails.InviteAccountToBusiness',
             with: [
                 'owner' => $this->owner,
                 'account' => $this->account,

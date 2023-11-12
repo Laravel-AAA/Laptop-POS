@@ -1,5 +1,5 @@
 import { Option } from "@material-tailwind/react";
-import React, { useMemo } from "react";
+import React from "react";
 import { IUser } from "@/types";
 import SelectInput from "@/Components/Inputs/SelectInput";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
@@ -9,24 +9,6 @@ export default function CountryInput<T extends { role: IUser["role"] }>({
 }: {
   form: UseBetterForm<T>;
 }) {
-  const roles: { name: IUser["role"]; desc: string }[] = useMemo(
-    () => [
-      {
-        name: "Cashier",
-        desc: "Can perform checkout. Can edit or delete only the bills that they have created themselves.",
-      },
-      {
-        name: "Maintainer",
-        desc: "Can perform checkout. Can manage all bills and inventory.",
-      },
-      {
-        name: "Owner",
-        desc: "Have all Maintainer privileges. And manage business information and accounts.",
-      },
-    ],
-    [],
-  );
-
   return (
     <SelectInput
       label="Role"
@@ -47,7 +29,7 @@ export default function CountryInput<T extends { role: IUser["role"] }>({
         })
       }
     >
-      {roles.map((r) => (
+      {ROLES.map((r) => (
         <Option key={r.name} value={r.name} className="flex flex-col gap-1">
           {r.name}
           <span className={"text-xs text-blue-gray-300 group-[]:hidden"}>
@@ -58,3 +40,18 @@ export default function CountryInput<T extends { role: IUser["role"] }>({
     </SelectInput>
   );
 }
+
+export const ROLES: { name: IUser["role"]; desc: string }[] = [
+  {
+    name: "Cashier",
+    desc: "Can perform checkout. Can edit or delete only the bills that they have created themselves.",
+  },
+  {
+    name: "Maintainer",
+    desc: "Can perform checkout. Can manage all bills and inventory.",
+  },
+  {
+    name: "Owner",
+    desc: "Have all Maintainer privileges. And manage business information and accounts.",
+  },
+];

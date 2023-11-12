@@ -14,7 +14,9 @@ export default function Form({
   setModalAction: React.Dispatch<React.SetStateAction<IModalAction<IUser>>>;
 }) {
   const business_id = usePage<AuthPageProps>().props.auth.user.business_id;
-  const form = useBetterForm<IUser | ICreateUser>(
+  const form = useBetterForm<
+    (IUser | ICreateUser) & { resendVerificationLink?: boolean }
+  >(
     modalAction.state === "create"
       ? ({
           name: "",
@@ -24,8 +26,8 @@ export default function Form({
           role: "Cashier",
           business_id,
         } as ICreateUser)
-      : ({ ...modalAction.data } as IUser),
-    modalAction.data ? modalAction.data.id.toString() : 'create',
+      : { ...modalAction.data, resendVerificationLink: true },
+    modalAction.data ? modalAction.data.id.toString() : "create",
   );
 
   function handleSubmit(e: FormEvent) {

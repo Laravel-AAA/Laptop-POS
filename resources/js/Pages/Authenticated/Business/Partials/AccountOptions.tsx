@@ -1,9 +1,11 @@
 import Dropdown from "@/Components/Dropdown";
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { IUser } from "@/types";
+import { FaUserEdit } from "react-icons/fa";
+import { AuthPageProps, IUser } from "@/types";
 import DeleteConfirmAccountModal from "@/Components/Modals/CreateEdit/AccountModal/DeleteConfirmAccountModal";
+import { Link, usePage } from "@inertiajs/react";
+import { FaUserMinus } from "react-icons/fa6";
 
 export default function AccountOptions({
   account,
@@ -14,10 +16,11 @@ export default function AccountOptions({
 }) {
   const [openConfirmDeleteModal, setOpenConfirmDeleteModal] =
     useState<boolean>(false);
+
+  const loggedInId = usePage<AuthPageProps>().props.auth.user.id;
+
   return (
-    <div
-      className={"text-center " + (account.role === "Owner" ? "hidden" : "")}
-    >
+    <div className="text-center ">
       <Dropdown>
         <Dropdown.Trigger>
           <button
@@ -37,29 +40,34 @@ export default function AccountOptions({
               <FaBars className="text-base" /> View
             </div>
           </button> */}
-          <button
-            onClick={() => requestEdit()}
-            className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
-          >
-            <div className="flex items-center gap-3">
-              <FaEdit className="text-base" /> Edit
-            </div>
-          </button>
-          {/* <Link
-            className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
-            href={route('account.')}
-          >
-            <div className="flex items-center gap-3">
-              <FaUserEdit className="text-base" /> Edit
-            </div>
-          </Link> */}
+          {account.id !== loggedInId && (
+            <button
+              onClick={() => requestEdit()}
+              className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+            >
+              <div className="flex items-center gap-3">
+                <FaUserEdit className="text-base text-gray-900" /> Edit
+              </div>
+            </button>
+          )}
+          {account.id === loggedInId && (
+            <Link
+              className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+              href={route("profile.edit")}
+            >
+              <div className="flex items-center gap-3">
+                <FaUserEdit className="text-base text-gray-900" /> Edit
+              </div>
+            </Link>
+          )}
 
           <button
+            disabled={account.id === loggedInId}
             onClick={() => setOpenConfirmDeleteModal(true)}
-            className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+            className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:opacity-50 disabled:hover:bg-white"
           >
             <div className="flex items-center gap-3 text-danger-600">
-              <FaTrashAlt className="text-base" /> Delete
+              <FaUserMinus className="text-base" /> Delete
             </div>
           </button>
         </Dropdown.Content>

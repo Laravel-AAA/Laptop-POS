@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfileRequest;
+use App\Mail\InviteAccountToBusiness;
 use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
@@ -26,35 +28,49 @@ class UserController extends Controller
         ]);
     }
 
-    //Create an account by business's Owner.
+    //Create an account by business's Owner. Registering is in RegisterController
     public function store(Request $request)
     {
 
         $newUser = new User($request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:' . User::class,
-            'password' => ['required', 'confirmed', Password::defaults()],
+            'password' => ['required', Password::defaults()],
             'role' => ['required', Rule::in(User::$ROLES)],
         ]));
         $newUser->business_id = $request->user()->business_id;
         $newUser->save();
+        Mail::to($newUser)->send(new InviteAccountToBusiness($request->user(), $newUser));
+
         return redirect()->back()->with('success', 'Account ' . $newUser->name . ' have been created successfully. An invitation link sent to ' . $newUser->email . ' with the login information');
     }
 
     /**
-     * Update the user's profile information.
+     * @param $account if $account is null then user updating profile. If not then owner is updating a business's account.
      */
-    public function update(UpdateProfileRequest $request): RedirectResponse
+    public function update(UpdateProfileRequest $request, User $account): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        Gate::authorize('update', $account);
+        if (isset($account)) { //update a business's account
+            dd('it is update account', $account);
+            $account->fill($request->validated());
+            if ($account->isDirty('email')) {
+                $account->email_verified_at = null;
+                if ($request->input('resendVerificationLink', false)) {
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+                    Mail::to($account)->send(new InviteAccountToBusiness($request->user(), $account));
+                }
+            }
+            $account->save();
+        } else { //update profile
+            $request->user()->fill($request->validated());
+            if ($request->user()->isDirty('email')) {
+                $request->user()->email_verified_at = null;
+            }
+            $request->user()->save();
         }
 
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')
+        return redirect()->back()
             ->with('success', 'Your information have been updated successfully');
     }
 

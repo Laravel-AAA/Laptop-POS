@@ -19,9 +19,12 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, User $userEntity): bool
+    public function update(User $user, User $account): bool
     {
-        return $user->id == $userEntity->id || ($user->business_id == $userEntity->business_id && $user->role == 'Owner');
+        if(isset($account)){
+            return $user->business_id == $account->business_id && $user->role == 'Owner';
+        }
+        return true;
     }
 
     /**
