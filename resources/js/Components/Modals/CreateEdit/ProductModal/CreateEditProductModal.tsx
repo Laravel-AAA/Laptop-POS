@@ -2,6 +2,7 @@ import React from "react";
 import { IModalAction, IProduct } from "@/types";
 import Form from "./Partials/Form";
 import TemplateModal from "../../TemplateModal";
+import ViewProductInfo from "./Partials/ViewProductInfo";
 
 export default function CreateEditProductModal({
   modalAction, //modal action used to determine the behavior of the modal
@@ -16,7 +17,11 @@ export default function CreateEditProductModal({
       open={modalAction.open}
       closeModal={() => setModalAction((prev) => ({ ...prev, open: false }))}
     >
-      <Form modalAction={modalAction} setModalAction={setModalAction} />
+      {modalAction.state === "show" ? (
+        <ViewProductInfo product={modalAction.data} />
+      ) : (
+        <Form modalAction={modalAction} setModalAction={setModalAction} />
+      )}
     </TemplateModal>
   );
 }

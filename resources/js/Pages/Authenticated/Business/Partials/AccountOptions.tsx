@@ -22,12 +22,11 @@ export default function AccountOptions({
     <div className="text-center ">
       <Dropdown>
         <Dropdown.Trigger>
-          <button
-            type="button"
+          <div
             className="rounded-[50%] p-2  align-middle text-gray-700 transition duration-200 ease-in-out hover:bg-black hover:bg-opacity-10 hover:text-gray-900 focus:outline-none"
           >
             <BsThreeDotsVertical className="text-lg" />
-          </button>
+          </div>
         </Dropdown.Trigger>
 
         <Dropdown.Content>

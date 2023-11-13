@@ -39,16 +39,16 @@ const Trigger = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <div
+      <button
         role="button"
-        className="div-style cursor-default"
+        className="div-style"
         onClick={(e) => {
           e.stopPropagation();
           toggleOpen();
         }}
       >
         {children}
-      </div>
+      </button>
 
       {open && (
         <div

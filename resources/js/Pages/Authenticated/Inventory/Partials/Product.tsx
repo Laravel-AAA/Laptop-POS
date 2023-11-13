@@ -16,7 +16,10 @@ export default function Product({
   const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
   return (
     <button
-      onClick={() => requestShow()}
+      onClick={(e) => {
+        e.stopPropagation();
+        requestShow();
+      }}
       className="div-style group relative m-4 flex cursor-pointer flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:w-52"
     >
       <ProductOptions

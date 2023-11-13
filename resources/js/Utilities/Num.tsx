@@ -1,18 +1,7 @@
 import { AuthPageProps } from "@/types";
 import { usePage } from "@inertiajs/react";
-import { InputProps } from "@material-tailwind/react";
-import { HTMLAttributes, ReactNode } from "react";
-
-export default function Num({
-  className = "",
-  amount,
-  noAmount,
-  showCurrency = false,
-  //prefix will be shown even if amount is null
-  prefix = "",
-  prefixProps = {},
-  fixed = 2,
-}: {
+import { HTMLAttributes } from "react";
+export type NumProps = {
   className?: string;
   fixed?: number;
   showCurrency?: boolean;
@@ -24,7 +13,18 @@ export default function Num({
       | { noAmount: string }
       | { noAmount?: undefined; defaultNoAmount: true }
     ))
-)) {
+);
+
+export default function Num({
+  className = "",
+  amount,
+  noAmount,
+  showCurrency = false,
+  //prefix will be shown even if amount is null
+  prefix = "",
+  prefixProps = {},
+  fixed = 2,
+}: NumProps) {
   let number: string; //number is either number or noAmount. Ex: '1123' or 'N/A'
   const currency =
     showCurrency && amount !== null ? (

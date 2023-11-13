@@ -45,6 +45,7 @@ export type GuestPageProps<
 export interface IProduct extends ICreateProduct, BasicModel {
   business_id: string;
   createdBy_id: string;
+  created_by?: IUser;
 }
 
 export interface ICreateProduct {

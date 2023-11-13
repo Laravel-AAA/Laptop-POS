@@ -7,21 +7,21 @@ use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Response;
 
 class ProductController extends Controller
 {
     protected function index(Request $request)
     {
         //filter is a scope function in the Product model
-        $products = $request->user()->business->products()->latest()
-            ->filter($request->only('search'))
+        $products = $request->user()->business->products()->with([
+            'createdBy' => function ($query) {
+                $query->withTrashed();
+            }
+        ])->latest()->filter($request->only('search'))
             ->paginate(15)->appends($request->all());
-
         return Inertia::render('Authenticated/Inventory/index', [
             'products' => $products,
             'filter' => $request->only('search'),

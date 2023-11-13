@@ -5,6 +5,7 @@ import { Transition } from "@headlessui/react";
 import { FormEventHandler } from "react";
 import { AuthPageProps } from "@/types";
 import useBetterForm from "@/Utilities/useBetterForm";
+import KeyValue from "@/Utilities/KeyValue";
 
 export default function UpdateProfileInformation({
   mustVerifyEmail,
@@ -105,9 +106,7 @@ export default function UpdateProfileInformation({
         )}
 
         <div>
-          <p className="ml-1 text-blue-gray-400">
-            Role:&nbsp;<span className="text-gray-700">{user.role}</span>
-          </p>
+          <KeyValue className="ml-1" k="Role" v={user.role}/>
         </div>
 
         <div className="flex items-center gap-4">
