@@ -22,7 +22,7 @@ export default function AccountsTable({
   >({ open: false });
 
   return (
-    <section className="bg-white p-4 pb-0 shadow sm:rounded-lg sm:p-8 sm:pb-0">
+    <section className="bg-white p-4 max-w-xl pb-0 shadow sm:rounded-lg sm:p-8 sm:pb-0">
       <CreateEditAccountModal
         modalAction={modalAction}
         setModalAction={setModalAction}
