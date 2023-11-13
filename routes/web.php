@@ -17,15 +17,17 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 |
-|    Method	   |  URI	               | Action  | Route Name
-|    ----------|-----------------------|---------|---------------
-|    GET	   |  /photos	           | index   | photos.index
-|    GET	   |  /photos/create	   | create  | photos.create
-|    POST	   |  /photos	           | store   | photos.store
-|    GET	   |  /photos/{photo}      | show    | photos.show
-|    GET	   |  /photos/{photo}/edit | edit    | photos.edit
-|    PUT/PATCH |  /photos/{photo}      | update  | photos.update
-|    DELETE	   |  /photos/{photo}      | destroy | photos.destroy
+|    Method	   |  URI	                        | Action       | Route Name
+|    ----------|--------------------------------|--------------|--------------------
+|    GET	   |  /photos	                    | index        | photos.index
+|    GET	   |  /photos/create	            | create       | photos.create
+|    POST	   |  /photos	                    | store        | photos.store
+|    GET	   |  /photos/{photo}               | show         | photos.show
+|    GET	   |  /photos/{photo}/edit          | edit         | photos.edit
+|    PUT/PATCH |  /photos/{photo}               | update       | photos.update
+|    DELETE	   |  /photos/{photo}               | destroy      | photos.destroy
+|    POST	   |  /photos/{photo}/restore       | restore      | photos.restore
+|    DELETE	   |  /photos/{photo}/force-destroy | forceDestroy | photos.forceDestroy
 */
 
 Route::get('/', function () {
@@ -60,7 +62,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/business/{business}', [BusinessController::class, 'destroy'])
         ->name('business.destroy');
 
-    Route::Resource('account', UserController::class)->only(['store','update', 'destroy']);
+    // Route::Resource('account', UserController::class)->only(['store', 'update', 'destroy', 'forceDestroy', 'restore']);
+    Route::post('/account', [UserController::class, 'store'])->name('account.store');
+    Route::patch('/account/{account}', [UserController::class, 'update'])->name('account.update');
+    Route::delete('/account/{account}', [UserController::class, 'destroy'])->name('account.destroy');
+    Route::post('/account/{id}/restore', [UserController::class, 'restore'])->name('account.restore');
+    Route::delete('/account/{id}/force-destroy', [UserController::class, 'forceDestroy'])->name('account.forceDestroy');
 });
 
 Route::middleware('auth')->group(function () {

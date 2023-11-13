@@ -18,12 +18,17 @@ export default function BusinessForm({
       ? COUNTRIES.find((c) => c.name === form.data.country) ?? null
       : null,
   );
+  const [taxPercent, setTaxPercent] = useState<number>(0);
+
+  useEffect(()=>{
+    form.setData('taxPercent',Number((Number(taxPercent) / 100).toFixed(6)))
+  },[taxPercent])
 
   useEffect(() => {
     const c = COUNTRIES.find((c) => c.name === form.data.country);
     if (c) {
       setCountry(c);
-      if (c.tax) form.setData("taxPercent", c.tax);
+      if (typeof c.tax === "number") setTaxPercent(c.tax * 100);
       if (c.countryCallingCode)
         form.setData("countryCallingCode", c.countryCallingCode);
     }
@@ -92,12 +97,9 @@ export default function BusinessForm({
           errorMsg={form.errors.taxPercent}
           hideError={form.isDirty("taxPercent")}
           onChange={(e) =>
-            form.setData(
-              "taxPercent",
-              Number((Number(e.target.value) / 100).toFixed(6)), //0.00001
-            )
+            setTaxPercent(Number(Number(e.target.value).toFixed(6)))
           }
-          value={form.data.taxPercent * 100}
+          value={taxPercent}
           currency={form.data.currency ?? "$"}
         />
       </div>

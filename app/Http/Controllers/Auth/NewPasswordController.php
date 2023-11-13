@@ -53,6 +53,10 @@ class NewPasswordController extends Controller
                 ])->save();
 
                 event(new PasswordReset($user));
+
+                $request->authenticate();
+
+                $request->session()->regenerate();
             }
         );
 

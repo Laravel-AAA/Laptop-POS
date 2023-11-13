@@ -1,13 +1,10 @@
-import {
-  HTMLAttributes,
-  PropsWithChildren,
-  useState,
-} from "react";
+import { HTMLAttributes, PropsWithChildren, useState } from "react";
 import { IBusiness, IModalAction, IUser } from "@/types";
 import AccountRow from "./AccountRow";
 import CreateEditAccountModal from "@/Components/Modals/CreateEdit/AccountModal/CreateEditAccountModal";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import { FaUserPlus } from "react-icons/fa6";
+import PermanentDeleteConfirmAccountModal from "@/Components/Modals/CreateEdit/AccountModal/PermanentDeleteConfirmAccountModal";
 
 export default function AccountsTable({
   business,
@@ -19,6 +16,10 @@ export default function AccountsTable({
     open: false,
     data: null,
   });
+
+  const [deleteModal, setDeleteModal] = useState<
+    { open: true; account: IUser } | { open: false; account?: IUser }
+  >({ open: false });
 
   return (
     <section className="bg-white p-4 pb-0 shadow sm:rounded-lg sm:p-8 sm:pb-0">
@@ -32,7 +33,7 @@ export default function AccountsTable({
 
         <div className="flex">
           <p className="text-normal mt-1 grow text-gray-600">
-            Add, remove, or change an account's role in your business.
+            Add, remove, or edit an account in your business.
           </p>
           <SecondaryButton
             className="!mx-2 flex gap-2 xl:!mr-10 "
@@ -56,7 +57,7 @@ export default function AccountsTable({
                     <TH className="rounded-tl-md">Name</TH>
                     <TH>Email</TH>
                     <TH>Role</TH>
-                    <TH title="Either verified or unverified. Verified account can access the system. Unverified can not">
+                    <TH title="Only verified accounts can access the system">
                       State
                     </TH>
                     <TH title="Created date">Date</TH>
@@ -70,6 +71,9 @@ export default function AccountsTable({
                     <AccountRow
                       key={account.id}
                       account={account}
+                      requestOpenDeleteModal={(account) =>
+                        setDeleteModal({ open: true, account: account })
+                      }
                       requestEdit={() =>
                         setModalAction(() => ({
                           state: "edit",
@@ -85,6 +89,11 @@ export default function AccountsTable({
           </div>
         </div>
       </div>
+      <PermanentDeleteConfirmAccountModal
+        account={deleteModal.account as IUser}
+        isOpen={deleteModal.open}
+        requestClose={() => setDeleteModal(p=>( {...p, open: false } ))}
+      />
     </section>
   );
 }

@@ -9,9 +9,7 @@ export default function FormInputs({
   form,
   modalAction,
 }: {
-  form: UseBetterForm<
-    (ICreateUser | IUser) & { resendVerificationLink?: boolean }
-  >;
+  form: UseBetterForm<ICreateUser | IUser>;
   modalAction: IModalAction<IUser>;
 }) {
   return (
@@ -49,7 +47,7 @@ export default function FormInputs({
         hint={
           <>
             {modalAction.state === "create" && (
-              <span>An invitation link will be sent to this email</span>
+              <span>A verification link will be sent to this email</span>
             )}
             {modalAction.state === "edit" && (
               <span>
@@ -60,18 +58,6 @@ export default function FormInputs({
           </>
         }
       />
-
-      {modalAction.state === "edit" && form.isDirty("email") && (
-        <Checkbox
-          label={<span>Send new verification link.</span>}
-          checked={form.data.resendVerificationLink}
-          errorMsg={undefined}
-          disabled={form.processing}
-          onChange={(e) =>
-            form.setData("resendVerificationLink", e.target.checked)
-          }
-        />
-      )}
 
       {modalAction.state === "create" && (
         <Input
@@ -91,19 +77,6 @@ export default function FormInputs({
         />
       )}
 
-      {/* <Input
-        label="Confirm Password"
-        type="password"
-        name="password_confirmation"
-        value={form.data.password_confirmation}
-        errorMsg={form.errors.password_confirmation}
-        hideError={form.isDirty("password_confirmation")}
-        disabled={form.processing}
-        className="mt-1 block w-full"
-        autoComplete="new-password"
-        onChange={(e) => form.setData("password_confirmation", e.target.value)}
-        required
-      /> */}
       <RoleSelector form={form} />
     </div>
   );

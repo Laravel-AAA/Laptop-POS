@@ -5,6 +5,16 @@
 // This way we can easily use triple equal `===`/`!==` with null values
 // and be confident we don't treat falsy values (e.g., "false", 0, "",...etc) as `null`.
 
+interface BasicModel {
+  id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface SoftDelete {
+  deleted_at: string | null;
+}
+
 export interface ICreateUser {
   name: string;
   email: string;
@@ -13,7 +23,7 @@ export interface ICreateUser {
   role: 'Owner' | 'Maintainer' | 'Cashier';
 }
 
-export interface IUser extends ICreateUser, BasicModel {
+export interface IUser extends ICreateUser, BasicModel, SoftDelete {
   email_verified_at: string;
   business_id: string;
 }
@@ -31,11 +41,6 @@ export type GuestPageProps<
   auth: { user: IUser } | null;
 }
 
-interface BasicModel {
-  id: string;
-  created_at: string;
-  updated_at: string;
-}
 
 export interface IProduct extends ICreateProduct, BasicModel {
   business_id: string;
@@ -86,7 +91,7 @@ export interface ICreateBusiness {
   taxIdentificationNumber: string | null;
 }
 
-export interface IBusiness extends ICreateBusiness, BasicModel {
+export interface IBusiness extends ICreateBusiness, BasicModel, SoftDelete {
 }
 
 export interface ILaravelPaginate<T extends object> {

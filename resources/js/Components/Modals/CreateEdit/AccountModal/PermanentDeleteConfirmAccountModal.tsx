@@ -1,31 +1,27 @@
 import { useState } from "react";
 import AlertModal from "../../AlertModal";
 import { IUser } from "@/types";
-import ID from "@/Utilities/ID";
 import { router } from "@inertiajs/react";
 
-export default function DeleteConfirmBillModal({
+export default function PermanentDeleteConfirmAccountModal({
   account,
   isOpen,
   requestClose,
 }: {
-  account: IUser;
+  account: IUser | null;
   isOpen: boolean;
   requestClose: (clickedButtonText?: string) => any;
 }) {
-  const [deleteProgress, setDeleteProgress] = useState<boolean>(false);
+  const [progress, setProgress] = useState<boolean>(false);
   return (
     <AlertModal
       icon="danger"
       title="Are you sure?"
       paragraph={
         <span>
-          You are about to delete the following account:
-          <br />
-          Name:{" "}
-          <span className="font-semibold text-gray-600">{account.name}</span><br/>
-          Email:{" "}
-          <span className="font-semibold text-gray-600">{account.email}</span>
+          You are about to permanently delete{" "}
+          <span className="font-semibold text-gray-600">{account?.name}</span>{" "}
+          account?
         </span>
       }
       buttons={{
@@ -33,13 +29,17 @@ export default function DeleteConfirmBillModal({
           text: "Delete",
           props: {
             onClick: () => {
-              setDeleteProgress(true);
-              router.delete(route("account.destroy", account.id), {
+              setProgress(true);
+              router.delete(route("account.forceDestroy", account?.id), {
                 preserveScroll: true,
                 preserveState: true,
+                onFinish: () => setProgress(false),
+                onError: (e) => {
+                  if (e.serverError) alert(e.serverError);
+                },
               });
             },
-            disabled: deleteProgress,
+            disabled: progress,
           },
         },
         secondary: { text: "Cancel" },

@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->string('address');
             $table->string('taxIdentificationNumber')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

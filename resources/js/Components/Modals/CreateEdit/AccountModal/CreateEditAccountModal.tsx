@@ -1,7 +1,7 @@
 import React from "react";
 import { IModalAction, IUser } from "@/types";
 import TemplateModal from "../../TemplateModal";
-import Form from "./Form/Form";
+import Form from "./Partials/Form";
 
 export default function CreateEditAccountModal({
   modalAction, //modal action used to determine the behavior of the modal

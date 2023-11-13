@@ -43,7 +43,7 @@ export default function FinancialSection({
         <div className="mt-6 space-y-6">
           <Input
             id="currency"
-            label="Currency"
+            label="Currency Symbol"
             type="text"
             className="mt-1 block w-full"
             maxLength={5}

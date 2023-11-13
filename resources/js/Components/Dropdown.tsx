@@ -41,7 +41,7 @@ const Trigger = ({ children }: PropsWithChildren) => {
     <>
       <div
         role="button"
-        className="div-style"
+        className="div-style cursor-default"
         onClick={(e) => {
           e.stopPropagation();
           toggleOpen();
@@ -53,7 +53,7 @@ const Trigger = ({ children }: PropsWithChildren) => {
       {open && (
         <div
           role="button"
-          className="div-style fixed inset-0 z-40 h-[100vh] w-full"
+          className="div-style fixed inset-0 z-40 h-[100vh] w-full cursor-default"
           onClick={(e) => {
             e.stopPropagation();
             setOpen(false);
@@ -104,7 +104,7 @@ const Content = ({
       >
         <div
           role="button"
-          className={`div-style absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
+          className={`div-style absolute z-50 mt-2 cursor-default rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
           onClick={(e) => {
             e.stopPropagation();
             setOpen(false);

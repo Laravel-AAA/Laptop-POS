@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import TertiaryButton from "@/Components/Buttons/TertiaryButton";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
-import DeleteConfirmAccountModal from "../DeleteConfirmAccountModal";
+import PermanentDeleteConfirmAccountModal from "../PermanentDeleteConfirmAccountModal";
 
 export default function FormActions({
   modalAction,
@@ -40,18 +40,18 @@ export default function FormActions({
         </>
       ) : (
         <>
-          <EditButton setModalAction={setModalAction} form={form} />
+          {/* <EditButton setModalAction={setModalAction} form={form} />
           <DangerButton
             disabled={form.processing}
             onClick={() => setOpenConfirmDelete(true)}
           >
             Delete
           </DangerButton>
-          <CancelButton setModalAction={setModalAction} form={form} />
+          <CancelButton setModalAction={setModalAction} form={form} /> */}
         </>
       )}
 
-      <DeleteConfirmAccountModal
+      {/* <PermanentDeleteConfirmAccountModal
         isOpen={openConfirmDelete}
         requestClose={(clickedButton) => {
           setOpenConfirmDelete(false);
@@ -59,7 +59,7 @@ export default function FormActions({
             setModalAction((p) => ({ ...p, open: false }));
         }}
         account={form.data as IUser}
-      />
+      /> */}
     </div>
   );
 }

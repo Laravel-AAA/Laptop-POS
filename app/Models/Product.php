@@ -49,7 +49,7 @@ class Product extends Model
 
     public function createdBy(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'createdBy_id');
     }
 
     public function business(): BelongsTo

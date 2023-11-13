@@ -21,7 +21,7 @@ class UserPolicy
      */
     public function update(User $user, User $account): bool
     {
-        if(isset($account)){
+        if (isset($account->id)) {
             return $user->business_id == $account->business_id && $user->role == 'Owner';
         }
         return true;
@@ -30,15 +30,27 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function destroy(User $user, User $userEntity): bool
+    public function destroy(User $user, User $account): bool
     {
-        if ($user->id == $userEntity->id && $user->role == 'Owner')
-            throw ValidationException::withMessages(['isOwner' => 'You cannot delete your Owner account. To delete all accounts under your business, please go to Business > Delete Business.']);
-        else if ($user->id != $userEntity->id && $user->role == 'Owner')
-            return true;
-        else
-            return false;
+        return $user->id != $account->id && $user->role == 'Owner' && $user->business_id == $account->business_id;
 
+    }
+
+    public function restore(User $user, User $account): bool
+    {
+        return $user->id != $account->id && $user->role == 'Owner' && $user->business_id == $account->business_id;
+    }
+
+    public function forceDestroy(User $user, User $account): bool
+    {
+        if ($user->id != $account->id && $user->role == 'Owner' && $user->business_id == $account->business_id) {
+            $productsCount = $account->products()->count();
+            if ($productsCount != 0) {
+                throw ValidationException::withMessages(['serverError' => 'This account has created ' . $productsCount . ' products. You cannot delete this account unless you delete all the products that belong to it. We do not recommend permanent deletion.']);
+            } else
+                return true;
+        } else
+            return false;
     }
 
 }

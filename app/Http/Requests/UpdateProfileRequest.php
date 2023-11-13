@@ -15,9 +15,14 @@ class UpdateProfileRequest extends FormRequest
      */
     public function rules(): array
     {
+        $account = $this->route('account');
+        if (isset($account))
+            $id = $account->id;
+        else
+            $id = $this->user()->id;
         return [
             'name' => ['string', 'max:255'],
-            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($id)],
         ];
     }
 }

@@ -51,48 +51,56 @@ class UserController extends Controller
     public function update(UpdateProfileRequest $request, User $account): RedirectResponse
     {
         Gate::authorize('update', $account);
-        if (isset($account)) { //update a business's account
-            dd('it is update account', $account);
+        if (isset($account->id)) { //update a business's account
             $account->fill($request->validated());
             if ($account->isDirty('email')) {
                 $account->email_verified_at = null;
-                if ($request->input('resendVerificationLink', false)) {
-
-                    Mail::to($account)->send(new InviteAccountToBusiness($request->user(), $account));
-                }
             }
             $account->save();
+            return redirect()->back()
+                ->with('success', 'Updated successfully');
         } else { //update profile
             $request->user()->fill($request->validated());
             if ($request->user()->isDirty('email')) {
                 $request->user()->email_verified_at = null;
             }
             $request->user()->save();
+            return redirect()->back()
+                ->with('success', 'Updated successfully');
         }
 
-        return redirect()->back()
-            ->with('success', 'Your information have been updated successfully');
     }
 
-    // /**
-    //  * Delete the user's account.
-    //  */
-    // public function destroy(Request $request): RedirectResponse
-    // {
-    //     $request->validate([
-    //         'password' => ['required', 'current_password'],
-    //     ]);
-    //     //!user should have no products to be able to delete his account to insure images are deleted and prevent accident deletion
-    //     $user = $request->user();
-    //     Gate::authorize('destroy', $user);
+    /**
+     * Delete the user's account.
+     */
+    public function destroy(User $account): RedirectResponse
+    {
+        Gate::authorize('destroy', $account);
+        // Auth::logout();
 
-    //     Auth::logout();
+        $account->delete();
 
-    //     $user->delete();
+        // $request->session()->invalidate();
+        // $request->session()->regenerateToken();
 
-    //     $request->session()->invalidate();
-    //     $request->session()->regenerateToken();
+        return redirect()->back()->with('success', 'Deleted successfully');
+    }
 
-    //     return Redirect::to('/');
-    // }
+    /**Type hint won't work for trashed entity */
+    public function restore(string $accountId): RedirectResponse
+    {
+        $account = User::onlyTrashed()->findOrFail($accountId);
+        Gate::authorize('restore', $account);
+        $account->restore();
+        return redirect()->back()->with('success', 'Restored successfully');
+    }
+
+    public function forceDestroy(string $accountId): RedirectResponse
+    {
+        $account = User::onlyTrashed()->findOrFail($accountId);
+        Gate::authorize('forceDestroy', $account);
+        $account->forceDelete();
+        return redirect()->back()->with('success', 'Deleted successfully');
+    }
 }

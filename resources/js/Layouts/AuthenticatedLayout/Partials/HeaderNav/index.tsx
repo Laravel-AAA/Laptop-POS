@@ -23,7 +23,10 @@ export default function HeaderNav({ user }: { user: IUser }) {
             </div>
 
             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-              {ROUTES.map((r) => (
+              {/* only owner can see dashboard page */}
+              {ROUTES.filter(
+                (v) => v.link !== "dashboard" || user.role === "Owner",
+              ).map((r) => (
                 <NavLink
                   key={r.link}
                   href={route(r.link)}
@@ -40,9 +43,7 @@ export default function HeaderNav({ user }: { user: IUser }) {
               <Dropdown>
                 <Dropdown.Trigger>
                   <span className="inline-flex rounded-md">
-                    <div
-                      className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-                    >
+                    <div className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
                       {user.name}
 
                       <svg
@@ -65,9 +66,11 @@ export default function HeaderNav({ user }: { user: IUser }) {
                   <Dropdown.Link href={route("profile.edit")}>
                     Profile
                   </Dropdown.Link>
-                  <Dropdown.Link href={route("business.edit")}>
-                    Business
-                  </Dropdown.Link>
+                  {user.role === "Owner" && (
+                    <Dropdown.Link href={route("business.edit")}>
+                      Business
+                    </Dropdown.Link>
+                  )}
                   <Dropdown.Link
                     href={route("logout")}
                     method="post"

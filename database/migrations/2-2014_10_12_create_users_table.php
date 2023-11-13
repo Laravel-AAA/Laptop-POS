@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->rememberToken();
             $table->string('role', 10); //Owner, Maintainer, Cashier... see User Model for more info
             $table->timestamps();
+            $table->softDeletes();
             $table->foreignUlid('business_id')->constrained('business', 'id');
         });
     }

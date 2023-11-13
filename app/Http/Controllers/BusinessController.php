@@ -20,7 +20,11 @@ class BusinessController extends Controller
      */
     public function edit(Request $request): Response
     {
-        $business = Business::with('users')->find($request->user()->business_id);
+        $business = Business::with([
+            'users' => function ($query) {
+                $query->withTrashed();
+            }
+        ])->find($request->user()->business_id);
         Gate::authorize('edit', $business);
         return Inertia::render('Authenticated/Business/Edit', [
             'business' => $business,
