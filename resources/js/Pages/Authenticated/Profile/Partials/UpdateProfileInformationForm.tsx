@@ -6,6 +6,7 @@ import { FormEventHandler } from "react";
 import { AuthPageProps } from "@/types";
 import useBetterForm from "@/Utilities/useBetterForm";
 import KeyValue from "@/Utilities/KeyValue";
+import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn";
 
 export default function UpdateProfileInformation({
   mustVerifyEmail,
@@ -110,9 +111,9 @@ export default function UpdateProfileInformation({
         </div>
 
         <div className="flex items-center gap-4">
-          <PrimaryButton type="submit" disabled={processing}>
+          <PrimaryMaterialBtn type="submit" disabled={processing}>
             Save
-          </PrimaryButton>
+          </PrimaryMaterialBtn>
 
           <Transition
             show={recentlySuccessful}

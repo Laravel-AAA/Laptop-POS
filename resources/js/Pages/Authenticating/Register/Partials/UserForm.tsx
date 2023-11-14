@@ -109,17 +109,6 @@ export default function UserForm({
       </div>
 
       <div className="mt-3 flex items-center justify-end">
-        {/* <div className="flex items-center justify-end">
-          <PrimaryButton
-          type="button"
-          className="flex !border-primary bg-white !text-primary hover:bg-primary hover:bg-opacity-10"
-            disabled={form.processing}
-            onClick={() => onBack()}
-          >
-            <FaArrowLeft />
-            <span>&nbsp;Back</span>
-          </PrimaryButton>
-        </div> */}
 
         <div className="flex items-center justify-end">
           <Link

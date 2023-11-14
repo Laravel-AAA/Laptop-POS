@@ -1,10 +1,10 @@
 import { IBill, ICreateBill } from "@/types";
 import { FormEvent } from "react";
 import TemplateModal from "../TemplateModal";
-import PrimaryButton from "../../Buttons/PrimaryButton";
-import SecondaryButton from "../../Buttons/SecondaryButton";
 import FormFields from "./Partials/FormFields";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
+import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn";
+import SecondaryMaterialBtn from "@/Components/Buttons/Material/SecondaryMaterialBtn";
 
 export default function CheckoutModal({
   form,
@@ -43,11 +43,11 @@ export default function CheckoutModal({
         <FormFields form={form} />
 
         <div className="mt-4 flex flex-col gap-4 sm:flex-row-reverse">
-          <PrimaryButton type="submit" disabled={form.processing}>
+          <PrimaryMaterialBtn type="submit" disabled={form.processing}>
             {(form.data as IBill).id === undefined ? "Checkout" : "Update"}
-          </PrimaryButton>
+          </PrimaryMaterialBtn>
 
-          <SecondaryButton
+          <SecondaryMaterialBtn
             type="button"
             onClick={() => {
               form.cancel();
@@ -56,7 +56,7 @@ export default function CheckoutModal({
             }}
           >
             Cancel
-          </SecondaryButton>
+          </SecondaryMaterialBtn>
         </div>
       </form>
     </TemplateModal>

@@ -1,8 +1,8 @@
 import { useRef, FormEventHandler } from "react";
-import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import Input from "@/Components/Inputs/Input";
 import { Transition } from "@headlessui/react";
 import useBetterForm from "@/Utilities/useBetterForm";
+import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn";
 
 export default function UpdatePasswordForm({
   className = "",
@@ -109,9 +109,9 @@ export default function UpdatePasswordForm({
         </div>
 
         <div className="flex items-center gap-4">
-          <PrimaryButton type="submit" disabled={processing}>
+          <PrimaryMaterialBtn type="submit" disabled={processing}>
             Save
-          </PrimaryButton>
+          </PrimaryMaterialBtn>
 
           <Transition
             show={recentlySuccessful}

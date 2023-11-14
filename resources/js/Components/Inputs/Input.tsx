@@ -70,18 +70,9 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
         size={size}
         error={error}
         autoComplete={autoComplete}
-        //   `placeholder:text-slate-400 rounded-md border  border-gray-300 shadow-sm
-        //   file:mr-3 file:cursor-pointer file:rounded-md
-        //     file:rounded-e-none file:border file:border-transparent file:bg-primary-700 file:px-4
-        //   file:py-[0.69rem] file:text-center file:text-xs
-        //   file:font-semibold file:uppercase file:tracking-widest file:text-white
-        //   file:transition file:duration-200 file:ease-in-out
-        //   placeholder:italic file:hover:bg-primary-600
-        //   focus:border-primary-600 focus:ring-primary-600 file:active:scale-95
-        //     disabled:opacity-60 ` +
         className={`${className} file:mr-2 file:cursor-pointer file:rounded-md file:border-none
         file:bg-white file:text-center file:text-sm
-        file:font-semibold file:uppercase  file:text-brown-900
+        file:font-semibold file:uppercase  file:text-blue-gray-700
         file:transition file:duration-200 file:ease-in-out placeholder:italic
         focus:ring-0
         file:active:scale-95 file:disabled:opacity-60`}

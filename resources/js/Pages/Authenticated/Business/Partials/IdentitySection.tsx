@@ -1,10 +1,10 @@
 import Input from "@/Components/Inputs/Input";
 import BusinessLogoInput from "./BusinessLogoInput";
-import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import { Transition } from "@headlessui/react";
 import useBetterForm from "@/Utilities/useBetterForm";
 import { IBusiness } from "@/types";
 import { FormEventHandler } from "react";
+import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn";
 
 export default function IdentitySection({ business }: { business: IBusiness }) {
   const form = useBetterForm<{
@@ -56,9 +56,9 @@ export default function IdentitySection({ business }: { business: IBusiness }) {
           <BusinessLogoInput form={form} />
 
           <div className="flex items-center gap-4">
-            <PrimaryButton type="submit" disabled={form.processing}>
+            <PrimaryMaterialBtn type="submit" disabled={form.processing}>
               Save
-            </PrimaryButton>
+            </PrimaryMaterialBtn>
 
             <Transition
               show={form.recentlySuccessful}

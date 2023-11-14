@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 
-export default function SecondaryButton({
+export default function SecondaryMaterialBtn({
   type = "button",
   className = "",
   disabled,
@@ -12,13 +12,13 @@ export default function SecondaryButton({
       {...props}
       type={type}
       className={
-        `inline-block items-center rounded-md border
-        border-transparent bg-secondary-400 px-4
-        py-2 text-center  text-xs font-semibold
-        uppercase tracking-wider
-        text-gray-900 transition duration-200
-        ease-in-out hover:bg-secondary-300 focus:outline-none
-         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
+        `text-stone inline-block items-center rounded-md
+        border border-blue-gray-100 bg-white
+        px-4 py-2  text-center text-xs
+        font-semibold uppercase
+        tracking-wide  transition duration-200
+        ease-in-out hover:bg-blue-gray-50 focus:outline-none
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
         focus-visible:ring-offset-2 active:scale-95
         disabled:opacity-25 disabled:active:scale-100 ${
           disabled ? "cursor-not-allowed opacity-25" : "cursor-pointer"

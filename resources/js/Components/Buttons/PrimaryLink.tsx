@@ -14,7 +14,7 @@ export default function PrimaryLink({
       className={`inline-block items-center rounded-md border
         border-transparent bg-primary-700 px-4
         py-2 text-center  text-xs font-semibold
-        uppercase tracking-widest
+        uppercase tracking-wider
         text-white transition duration-200
         ease-in-out hover:bg-primary-600 focus:outline-none
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600

@@ -1,11 +1,10 @@
 import { Textarea, TextareaProps } from "@material-tailwind/react";
-import { InputProps } from "./Input";
 import { HTMLAttributes, ReactNode } from "react";
 import ErrorMessage from "./ErrorMessage";
 import HintMessage from "./HintMessage";
 
 export default function TextArea({
-  color = "black",
+  color = "teal",
   variant = "outlined",
   size = "lg",
   className = "",

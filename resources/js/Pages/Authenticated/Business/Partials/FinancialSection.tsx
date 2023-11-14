@@ -5,6 +5,7 @@ import useBetterForm from "@/Utilities/useBetterForm";
 import { IBusiness } from "@/types";
 import { FormEventHandler } from "react";
 import TaxRateInput from "@/Pages/Authenticating/Register/Partials/BusinessForm/Partials/TaxRateInput";
+import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn";
 
 export default function FinancialSection({
   business,
@@ -91,9 +92,9 @@ export default function FinancialSection({
             hideError={form.isDirty("taxIdentificationNumber")}
           />
           <div className="flex items-center gap-4">
-            <PrimaryButton type="submit" disabled={form.processing}>
+            <PrimaryMaterialBtn type="submit" disabled={form.processing}>
               Save
-            </PrimaryButton>
+            </PrimaryMaterialBtn>
 
             <Transition
               show={form.recentlySuccessful}

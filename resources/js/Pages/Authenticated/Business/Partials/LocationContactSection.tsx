@@ -1,4 +1,4 @@
-import PrimaryButton from "@/Components/Buttons/PrimaryButton";
+import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn";
 import Input from "@/Components/Inputs/Input";
 import CountryInput from "@/Pages/Authenticating/Register/Partials/BusinessForm/Partials/CountryInput";
 import { PhoneInput } from "@/Pages/Authenticating/Register/Partials/BusinessForm/Partials/PhoneInput";
@@ -70,9 +70,9 @@ export default function LocationContactSection({
           />
           <PhoneInput form={form} />
           <div className="flex items-center gap-4">
-            <PrimaryButton type="submit" disabled={form.processing}>
+            <PrimaryMaterialBtn type="submit" disabled={form.processing}>
               Save
-            </PrimaryButton>
+            </PrimaryMaterialBtn>
 
             <Transition
               show={form.recentlySuccessful}

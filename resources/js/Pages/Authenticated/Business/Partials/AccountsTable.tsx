@@ -2,9 +2,9 @@ import { HTMLAttributes, PropsWithChildren, useState } from "react";
 import { IBusiness, IModalAction, IUser } from "@/types";
 import AccountRow from "./AccountRow";
 import CreateEditAccountModal from "@/Components/Modals/CreateEdit/AccountModal/CreateEditAccountModal";
-import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import { FaUserPlus } from "react-icons/fa6";
 import PermanentDeleteConfirmAccountModal from "@/Components/Modals/CreateEdit/AccountModal/PermanentDeleteConfirmAccountModal";
+import SecondaryMaterialBtn from "@/Components/Buttons/Material/SecondaryMaterialBtn";
 
 export default function AccountsTable({
   business,
@@ -35,7 +35,7 @@ export default function AccountsTable({
           <p className="text-normal mt-1 grow text-gray-600">
             Add, remove, or edit an account in your business.
           </p>
-          <SecondaryButton
+          <SecondaryMaterialBtn
             className="!mx-2 flex gap-2 xl:!mr-10 "
             onClick={() =>
               setModalAction({ open: true, state: "create", data: null })
@@ -43,7 +43,7 @@ export default function AccountsTable({
           >
             <FaUserPlus className="w-4" />
             Create New Account
-          </SecondaryButton>
+          </SecondaryMaterialBtn>
         </div>
       </header>
 

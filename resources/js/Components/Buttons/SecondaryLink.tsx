@@ -15,7 +15,7 @@ export default function SecondaryLink({
         `inline-block items-center rounded-md border
         border-transparent bg-secondary-400 px-4
         py-2 text-center  text-xs font-semibold
-        uppercase tracking-widest
+        uppercase tracking-wider
         text-gray-900 transition duration-200
         ease-in-out hover:bg-secondary-300 focus:outline-none
        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600

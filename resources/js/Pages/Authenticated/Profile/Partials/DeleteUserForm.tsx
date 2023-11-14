@@ -2,8 +2,8 @@ import { useRef, useState, FormEventHandler } from "react";
 import Modal from "@/Components/Modal";
 import Input from "@/Components/Inputs/Input";
 import DangerButton from "@/Components/Buttons/DangerButton";
-import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import useBetterForm from "@/Utilities/useBetterForm";
+import SecondaryMaterialBtn from "@/Components/Buttons/Material/SecondaryMaterialBtn";
 
 export default function DeleteUserForm({
   className = "",
@@ -51,7 +51,7 @@ export default function DeleteUserForm({
       <header>
         <h2 className="text-lg font-medium text-gray-900">Delete Account</h2>
 
-        <p className="mt-1 text-normal text-gray-600">
+        <p className="text-normal mt-1 text-gray-600">
           Once your account is deleted, all of its resources and data will be
           permanently deleted. Before deleting your account, please download any
           data or information that you wish to retain.
@@ -73,7 +73,6 @@ export default function DeleteUserForm({
           </p>
 
           <div className="mt-6">
-
             <Input
               id="password"
               label="Password"
@@ -86,14 +85,20 @@ export default function DeleteUserForm({
               autoFocus
               required
               placeholder="Password"
-              errorMsg={errors.password || (errors as any).hasProducts || (errors as any).isOwner}
+              errorMsg={
+                errors.password ||
+                (errors as any).hasProducts ||
+                (errors as any).isOwner
+              }
               hideError={isDirty("password")}
               disabled={processing}
             />
           </div>
 
           <div className="mt-6 flex justify-end">
-            <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+            <SecondaryMaterialBtn onClick={closeModal}>
+              Cancel
+            </SecondaryMaterialBtn>
 
             <DangerButton type="submit" className="ml-3" disabled={processing}>
               Delete Account

@@ -7,8 +7,8 @@ import {
 } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import DangerButton from "../Buttons/DangerButton";
-import PrimaryButton from "../Buttons/PrimaryButton";
-import SecondaryButton from "../Buttons/SecondaryButton";
+import PrimaryMaterialBtn from "../Buttons/Material/PrimaryMaterialBtn";
+import SecondaryMaterialBtn from "../Buttons/Material/SecondaryMaterialBtn";
 
 export interface IModalButtons {
   primary?: { text: string; props?: ButtonHTMLAttributes<HTMLButtonElement> };
@@ -83,10 +83,10 @@ export default function TemplateModal({
                 {(buttons?.primary ||
                   buttons?.secondary ||
                   buttons?.danger) && (
-                  <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                  <div className="bg-gray-50 space-y-2 sm:space-y-0 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                     {buttons?.danger && (
                       <DangerButton
-                        className="my-1 w-full shadow sm:ml-3 sm:w-auto"
+                        className="w-full shadow sm:ml-3 sm:w-auto"
                         {...buttons?.danger?.props}
                         onClick={(e) => {
                           closeModal(buttons?.danger?.text);
@@ -97,8 +97,8 @@ export default function TemplateModal({
                       </DangerButton>
                     )}
                     {buttons?.primary && (
-                      <PrimaryButton
-                        className="my-1 w-full shadow sm:ml-3 sm:w-auto"
+                      <PrimaryMaterialBtn
+                        className="w-full sm:ml-3 sm:w-auto"
                         {...buttons?.primary?.props}
                         onClick={(e) => {
                           closeModal(buttons?.primary?.text);
@@ -106,11 +106,11 @@ export default function TemplateModal({
                         }}
                       >
                         {buttons.primary.text}
-                      </PrimaryButton>
+                      </PrimaryMaterialBtn>
                     )}
                     {buttons?.secondary && (
-                      <SecondaryButton
-                        className="my-1 mb-0 w-full shadow sm:ml-3 sm:w-auto"
+                      <SecondaryMaterialBtn
+                        className="w-full sm:ml-3 sm:w-auto"
                         {...buttons?.secondary?.props}
                         onClick={(e) => {
                           closeModal(buttons?.secondary?.text);
@@ -118,7 +118,7 @@ export default function TemplateModal({
                         }}
                       >
                         {buttons.secondary.text}
-                      </SecondaryButton>
+                      </SecondaryMaterialBtn>
                     )}
                   </div>
                 )}
