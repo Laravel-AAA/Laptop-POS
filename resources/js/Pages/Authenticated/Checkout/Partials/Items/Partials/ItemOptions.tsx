@@ -68,8 +68,8 @@ function ItemBtn({
       bg-white bg-opacity-80 p-2 leading-4  text-gray-800 shadow transition
       duration-200 ease-in-out  hover:bg-opacity-90
       hover:text-black hover:shadow-md focus:outline-none focus:ring-2
-      focus:ring-gray-700 focus:ring-offset-2 focus-visible:outline-none focus-visible:ring-2
-      focus-visible:ring-gray-700 focus-visible:ring-offset-2
+      focus:ring-blue-600 focus:ring-offset-2 focus-visible:outline-none focus-visible:ring-2
+      focus-visible:ring-blue-600 focus-visible:ring-offset-2
       active:scale-95 disabled:opacity-25 disabled:active:scale-100 ${
         disabled && "opacity-25"
       } `}

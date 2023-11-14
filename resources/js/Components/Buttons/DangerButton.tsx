@@ -17,7 +17,7 @@ export default function DangerButton({
         py-2 text-center text-xs font-semibold uppercase text-white
         duration-200 ease-in-out hover:bg-danger-500
         focus:outline-none focus:ring-2
-        focus:ring-danger-300 focus:ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-danger-300
+        focus:ring-blue-600 focus:ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
         focus-visible:ring-offset-2 active:scale-95
         active:bg-danger-700 disabled:opacity-25 disabled:active:scale-100 ${
           disabled ? "cursor-not-allowed opacity-25" : "cursor-pointer"

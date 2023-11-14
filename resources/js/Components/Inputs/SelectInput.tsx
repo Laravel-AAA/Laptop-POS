@@ -5,7 +5,7 @@ import ErrorMessage from "./ErrorMessage";
 export default function SelectInput({
   children,
   ref, //typescript shit. ref will be ignored if passed to SelectInput
-  color = "teal",
+  // color = "brown",
   size = "lg",
   variant = "outlined",
   errorMsg,
@@ -39,7 +39,7 @@ export default function SelectInput({
           if (onFocus) onFocus(e);
         }}
         variant={variant}
-        color={color}
+        // color={color}
         size={size}
         error={error}
       >

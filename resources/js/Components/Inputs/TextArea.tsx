@@ -5,7 +5,7 @@ import ErrorMessage from "./ErrorMessage";
 import HintMessage from "./HintMessage";
 
 export default function TextArea({
-  color = "teal",
+  color = "black",
   variant = "outlined",
   size = "lg",
   className = "",

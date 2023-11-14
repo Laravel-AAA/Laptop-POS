@@ -17,8 +17,8 @@ export default function TertiaryButton({
         py-2 text-center  text-xs font-semibold
         uppercase tracking-widest
         text-white transition duration-200
-        ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2  focus:ring-indigo-300
-        focus:ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300
+        ease-in-out hover:bg-indigo-600 focus:outline-none
+        focus:ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
         focus-visible:ring-offset-2 active:scale-95
          disabled:opacity-25 disabled:active:scale-100 ${
            disabled ? "cursor-not-allowed opacity-25" : "cursor-pointer"

@@ -111,7 +111,7 @@ const Content = ({
         >
           <div
             className={
-              `rounded-md ring-1 ring-black ring-opacity-5 ` + contentClasses
+              `rounded-md ring-1 ring-blue-600 ring-opacity-5 ` + contentClasses
             }
           >
             {children}

@@ -80,8 +80,8 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
         //   focus:border-primary-600 focus:ring-primary-600 file:active:scale-95
         //     disabled:opacity-60 ` +
         className={`${className} file:mr-2 file:cursor-pointer file:rounded-md file:border-none
-        file:bg-white file:p-1 file:pb-0 file:text-center file:text-sm
-        file:font-semibold file:uppercase  file:text-primary-700
+        file:bg-white file:text-center file:text-sm
+        file:font-semibold file:uppercase  file:text-brown-900
         file:transition file:duration-200 file:ease-in-out placeholder:italic
         focus:ring-0
         file:active:scale-95 file:disabled:opacity-60`}
