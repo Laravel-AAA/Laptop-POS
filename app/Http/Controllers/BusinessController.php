@@ -67,8 +67,8 @@ class BusinessController extends Controller
         if ($business->logo)
             $this->deleteFile($business->logo);
 
-        $user = $request->user();
         Auth::logout();
+        $user = $request->user();
         $user->delete();
         $business->delete();
         $request->session()->invalidate();

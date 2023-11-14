@@ -30,14 +30,15 @@ class BusinessPolicy
         if ($user->business_id == $business->id && $user->role == 'Owner') {
             $productsCount = $user->business->products()->count();
             if ($productsCount != 0) {
-                throw ValidationException::withMessages(['hasProducts' => 'You have to delete all products. Found ' . $productsCount . ' products.']);
+                dd('products',$productsCount);
+                throw ValidationException::withMessages(['serverError' => 'You have to delete all products. Found ' . $productsCount . ' products.']);
             }
 
             $usersCount = $user->business->users()->count();
             if ($usersCount > 1) {
-                throw ValidationException::withMessages(['hasProducts' => 'You have to delete all accounts within your business. Found ' . $usersCount . ' accounts.']);
+                dd('users',$usersCount);
+                throw ValidationException::withMessages(['serverError' => 'You have to delete all accounts within your business. Found ' . $usersCount - 1 . ' accounts.']);
             }
-
             return true;
         }
         return false;
