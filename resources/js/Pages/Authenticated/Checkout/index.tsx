@@ -39,6 +39,10 @@ export default function Checkout({
     },
   );
 
+  console.log(products);
+  console.log('form.data',form.data);
+  console.log('bill',bill);
+
   const setBill = (
     data: (previousData: ICreateBill | IBill) => ICreateBill | IBill,
   ) => form.setAllData(data);

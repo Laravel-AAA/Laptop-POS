@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Business;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,21 +20,29 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
             'name' => fake()->sentence(3),
-            'img' => fake()->imageUrl(640, 480, 'Product'),
-            'barcode' => fake()->isbn13(),
             'price' => $this->fakePrice(),
-            'stock' => fake()->biasedNumberBetween(0, 50, 'sqrt'),
-            'description' => fake()->sentence(substr(fake()->numberBetween(0, 30), 0, 500)),
-            // 'transactions' => function () {
-            //     return Transaction::factory()->count(1)->create();
-            // },
+            'stock' => fake()->optional()->biasedNumberBetween(0, 50, 'sqrt'),
+            'barcode' => fake()->optional()->isbn13(),
+            'img' => fake()->optional()->imageUrl(640, 480, 'Product'),
+            'description' => fake()->optional()->sentence(substr(fake()->numberBetween(0, 30), 0, 500)),
+
+            'createdBy_id' => User::factory(),
+            'business_id' => Business::factory(),
+
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
+            'updated_at' => function (array $attributes) {
+                return $this->faker->dateTimeBetween($attributes['created_at'], 'now');
+            },
         ];
     }
 
-    private function fakePrice(): float
+
+    private function fakePrice(): float|null
     {
+        $optional = fake()->optional()->numberBetween(0, 1);
+        if (!isset($optional))
+            return null;
         $chance = fake()->numberBetween(1, 10);
         //biased number is random number between minimum and maximum numbers but it has different        $biased
         // probability (tends) towards one end base on a mathematical function

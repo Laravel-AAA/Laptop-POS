@@ -17,16 +17,24 @@ class BusinessFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Laptop POS',
-            'logo' => null,
-            'country' => 'Saudi Arabia',
-            'city' => 'Makkah',
-            'address' => 'Ray',
-            'currency' => 'ريال',
-            'phone' => '555555555',
+            'logo' => fake()->optional()->imageUrl(640, 480, 'Product'),
+            'name' => ucwords(fake()->word()),
+            'country' => fake()->country(),
+            'city' => fake()->city(),
+            'address' => fake()->address(),
+            'currency' => fake()->currencyCode(),
+            'taxPercent' => fake()->randomFloat(2, 0, 0.3),
             'countryCallingCode' => '+966',
-            'taxPercent' => 0.15,
-            'taxIdentificationNumber' => null,
+            'phone' => fake()->unique()->numerify('5#########'),
+            'taxIdentificationNumber' => fake()->optional()->numerify('###############'),
+
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
+            'updated_at' => function (array $attributes) {
+                return $this->faker->dateTimeBetween($attributes['created_at'], 'now');
+            },
+            // 'deleted_at' =>function (array $attributes) {
+            //     return $this->faker->optional(0.3)->dateTimeBetween($attributes['updated_at'], 'now');
+            // },
         ];
     }
 }

@@ -13,10 +13,10 @@ return new class extends Migration {
         Schema::create('products', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('name');
-            $table->string('img')->nullable();
-            $table->string('barcode', 16)->nullable();
             $table->decimal('price')->nullable();
             $table->integer('stock')->nullable();
+            $table->string('barcode', 16)->nullable();
+            $table->string('img')->nullable();
             $table->string('description', 500)->nullable();
             $table->timestamps();
             $table->foreignUlid('createdBy_id')->constrained('users');

@@ -15,7 +15,8 @@ export default function Product({
 }: PropsProduct) {
   const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
   return (
-    <button
+    <div
+      role="button"
       onClick={(e) => {
         e.stopPropagation();
         requestShow();
@@ -78,6 +79,6 @@ export default function Product({
           </div>
         </div>
       </div>
-    </button>
+    </div>
   );
 }

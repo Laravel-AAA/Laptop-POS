@@ -12,15 +12,15 @@ return new class extends Migration {
     {
         Schema::create('business', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('name', 50);
             $table->string('logo')->nullable();
-            $table->string('phone', 15)->unique();
-            $table->string('countryCallingCode', 6);//Ex: '+966'
-            $table->decimal('taxPercent');// 0.5 is 50% tax rate
-            $table->string('currency', 5);// '$' or '﷼'
+            $table->string('name', 50);
             $table->string('country', 50);
             $table->string('city', 50);
             $table->string('address');
+            $table->string('currency', 5);// '$' or '﷼'
+            $table->decimal('taxPercent');// 0.5 is 50% tax rate
+            $table->string('countryCallingCode', 6);//Ex: '+966'
+            $table->string('phone', 15)->unique();
             $table->string('taxIdentificationNumber')->nullable();
             $table->timestamps();
             $table->softDeletes();

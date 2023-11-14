@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Bill;
 use App\Models\Business;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -20,15 +21,30 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $role = fake()->randomElement(User::$ROLES);
+        if ($role === 'Owner')
+            $verifiedAt = now();
+        else
+            $verifiedAt = fake()->optional()->time();
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'email_verified_at' => $verifiedAt,
             // password: asdfasdf
             'password' => '$2y$10$eq9cyRecAlRJ6Ot0VquiNOEJrpZqk9whpqapa2bC1vlqFY13.SRdy',
             'remember_token' => Str::random(10),
-            'role' => 'Owner',
+            'role' => $role,
+            
             'business_id' => Business::factory(),
+
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
+            'updated_at' => function (array $attributes) {
+                return $this->faker->dateTimeBetween($attributes['created_at'], 'now');
+            },
+            'deleted_at' =>function (array $attributes) {
+                return $this->faker->optional(0.3)->dateTimeBetween($attributes['updated_at'], 'now');
+            },
         ];
     }
 
