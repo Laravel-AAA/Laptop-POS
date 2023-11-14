@@ -63,6 +63,7 @@ export default function FormInputs({
           errorMsg={form.errors.price}
           hideError={form.isDirty("price")}
           required={false}
+          hint={modalAction.state==='edit'&&<span>If you change the price of this product, it may affect the bills that have already been issued with the old price. This could result in incorrect calculations, such as the total price of a bill. Please make sure you have no bills that have this product.</span>}
         />
 
         <Checkbox
