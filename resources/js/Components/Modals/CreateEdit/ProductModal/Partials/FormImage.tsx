@@ -1,4 +1,5 @@
 import DangerButton from "@/Components/Buttons/DangerButton";
+import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import TertiaryButton from "@/Components/Buttons/TertiaryButton";
 import Input from "@/Components/Inputs/Input";
 import NoImageImage from "@/Pages/Authenticated/Inventory/Partials/NoImageImage";
@@ -55,14 +56,14 @@ export default function FormImage({
       <>
         <ImageElement img={img} productName={form.data.name} />
         <div className="mb-4 mt-1 flex justify-center gap-8">
-          <TertiaryButton
+          <SecondaryButton
             disabled={form.processing}
             onClick={() => {
               setEditImageState("change");
             }}
           >
             Change&nbsp;Image
-          </TertiaryButton>
+          </SecondaryButton>
           <DangerButton
             disabled={form.processing}
             onClick={() => {

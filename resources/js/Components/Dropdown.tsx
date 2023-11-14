@@ -40,7 +40,6 @@ const Trigger = ({ children }: PropsWithChildren) => {
   return (
     <>
       <button
-        role="button"
         className="div-style"
         onClick={(e) => {
           e.stopPropagation();

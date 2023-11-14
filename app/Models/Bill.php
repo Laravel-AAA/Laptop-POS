@@ -58,6 +58,8 @@ class Bill extends Model
     protected $fillable = [
         'cashReceived',
         'transactions',
+        'createdBy_id',
+        'business_id',
     ];
 
     /**

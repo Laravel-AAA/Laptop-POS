@@ -65,6 +65,7 @@ export default function ViewProductInfo({ product }: { product: IProduct }) {
       </div>
       <div className="flex justify-center">
         <IconButton
+        title="More info"
           className="rounded-full"
           onClick={() => setShowMore((v) => !v)}
         >

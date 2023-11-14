@@ -67,13 +67,13 @@ export default function FormFields({
           errorMsg={form.errors.cashReceived}
           hideError={form.isDirty("cashReceived")}
           hint={
-            <p
+            <span
               style={{ visibility: !isDigitalPayment ? "visible" : "hidden" }}
               className="ml-1 text-lg text-gray-700"
             >
               Remaining:&nbsp;
               <Num className="text-gray-900 font-semibold" amount={remaining} />
-            </p>
+            </span>
           }
         />
 

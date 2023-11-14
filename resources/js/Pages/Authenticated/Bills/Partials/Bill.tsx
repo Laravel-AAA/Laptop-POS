@@ -9,7 +9,9 @@ type PropsProduct = {
   bill: IBill;
 };
 export default function Product({ bill }: PropsProduct) {
-  const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
+  const auth = usePage<AuthPageProps>().props.auth;
+  const taxPercent = auth.business.taxPercent;
+  const loggedInId = auth.user.id;
 
   const subTotalPrice = bill.transactions.reduce(
     (v, t) => v + (t.product.price ?? 0) * t.quantity,
@@ -20,7 +22,13 @@ export default function Product({ bill }: PropsProduct) {
   return (
     <tr className="even:bg-blue-gray-50/50">
       <TD>
-        <ID id={bill.id} />
+        {/* <ID id={bill.id} /> */}
+
+        {bill.createdBy_id === loggedInId ? (
+          <span className="select-none text-gray-600">You</span>
+        ) : (
+          bill.created_by?.name ?? "N/A"
+        )}
       </TD>
       <TD>
         <FromDate date={bill.created_at} />
@@ -33,11 +41,7 @@ export default function Product({ bill }: PropsProduct) {
         />
       </TD>
       <TD>
-        <Num
-          className="text-primary-700"
-          showCurrency
-          amount={totalPrice}
-        />
+        <Num className="text-primary-700" showCurrency amount={totalPrice} />
       </TD>
       <TD>
         <Num

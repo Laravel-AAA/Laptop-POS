@@ -17,7 +17,11 @@ class BillController extends Controller
      */
     public function index(Request $request)
     {
-        $bills = $request->user()->business->bills()->latest()
+        $bills = $request->user()->business->bills()->with([
+            'createdBy' => function ($query) {
+                $query->withTrashed();
+            }
+        ])->latest()
             ->with('transactions')->with('transactions.product')
             ->filter($request->only('search', 'product'))
             ->paginate(15)->appends($request->all());
@@ -58,38 +62,30 @@ class BillController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store or Update.
      */
     public function store(StoreBillRequest $request)
     {
         //Store is for creating new bill and Updating which is destroy then renew because there is one to many relationship with Transactions and each transaction could be updated with the Bill.
-        $billId = $request->get('id');
         $bill = $request->validated();
-        $createdBill = new Bill($bill);
-        $createdBill->business_id = $request->user()->business_id;
-        $createdBill->createdBy_id = $request->user()->id;
-        if (isset($billId))
-            Gate::authorize('update', $createdBill);
-        unset($createdBill->transactions); //We remove this attribute because there is no column called transactions 😑
-        $createdBill->save();
+        $bill['business_id'] = $request->user()->business_id;
+        $bill['createdBy_id'] = $request->user()->id;
 
-        $tras = [];
-        foreach ($bill['transactions'] as $tra)
-            $tras[] = new Transaction($tra);
-        $createdBill->transactions()->saveMany($tras);
-        if (isset($billId)) {
-            Bill::destroy($billId);
+        $transactions = $bill['transactions'];
+        unset($bill['transactions']); //There is no column called transactions 😑
+
+        if ($request->get('id')) {
+            Gate::authorize('update', new Bill($bill));
         }
 
-        return to_route('bill.create')->with('success', 'The bill was created successfully');
-    }
+        $createdBill = Bill::create($bill);
+        $createdBill->transactions()->createMany($transactions);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateBillRequest $request, Bill $bill)
-    {
-        //
+        if ($request->get('id')) {
+            Bill::destroy($request->get('id'));
+        }
+
+        return to_route('bill.create')->with('success', 'Successfully created');
     }
 
     /**

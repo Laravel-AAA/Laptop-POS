@@ -19,10 +19,16 @@ export default function CheckoutModal({
     e.preventDefault();
 
     form.post(route(`bill.store`), {
+      preserveState: false,
+      preserveScroll: false,
       onSuccess: () => {
         requestClose();
         form.clearErrors();
         form.reset();
+      },
+      onError: (e) => {
+        console.error(e);
+        if (e?.serverError) alert(e.serverError);
       },
     });
   }

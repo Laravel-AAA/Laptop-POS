@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->integer('quantity')->nullable();
+            $table->integer('quantity');
             $table->timestamps();
             $table->foreignUlid('product_id')->constrained();
             $table->foreignUlid('bill_id')->constrained()->cascadeOnDelete();

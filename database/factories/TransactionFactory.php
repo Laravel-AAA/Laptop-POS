@@ -19,11 +19,11 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         return [
-            'quantity' => fake()->optional()->biasedNumberBetween(0, 5, 'sqrt'),
+            'quantity' => fake()->biasedNumberBetween(0, 5, 'sqrt'),
 
             'product_id' => Product::factory(),
             'bill_id' => Bill::factory(),
-            
+
             'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
             'updated_at' => function (array $attributes) {
                 return $this->faker->dateTimeBetween($attributes['created_at'], 'now');

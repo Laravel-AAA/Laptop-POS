@@ -1,4 +1,4 @@
-import { AuthPageProps, ICreateTransaction } from "@/types";
+import { AuthPageProps, ICreateProduct, ICreateTransaction, IProduct } from "@/types";
 import ItemOptions from "./ItemOptions";
 import Num from "@/Utilities/Num";
 import { usePage } from "@inertiajs/react";
@@ -8,11 +8,13 @@ export default function ProductItem({
   requestIncrease,
   requestDecrease,
   transaction,
+  changeStockNumber,
 }: {
   requestChanged: (qty: number) => any;
   requestIncrease: () => any;
   requestDecrease: () => any;
   transaction: ICreateTransaction;
+  changeStockNumber: boolean;
 }) {
   const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
   const product = transaction.product;
@@ -73,18 +75,25 @@ export default function ProductItem({
           <div className="flex flex-col justify-center">
             {product.stock === 0 ? (
               <p className="font-normal text-danger-400">Out of Stock</p>
-            ) : transaction.quantity > (product.stock || Infinity) ? (
+            ) : transaction.quantity >= (product.stock || Infinity) ? (
               <p className="font-normal text-danger-400">
-                Stock {product.stock ?? "N/A"}
+                Stock{" "}
+                {product.stock === null
+                  ? "N/A"
+                  : product.stock}
               </p>
             ) : (
               <p className="text-gray-200">
                 Stock&nbsp;
-                {product.stock === null ? (
-                  <span>N/A</span>
-                ) : (
-                  <Num amount={product.stock} className="font-normal text-secondary-100" />
-                )}
+                <Num
+                  amount={
+                    product.stock === null
+                      ? null
+                      : product.stock
+                  }
+                  defaultNoAmount
+                  className="font-normal text-secondary-100"
+                />
               </p>
             )}
           </div>

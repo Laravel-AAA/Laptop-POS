@@ -30,7 +30,7 @@ export default function Bills({
             <table className="table-auto text-left">
               <thead>
                 <tr>
-                  <TH className="w-[11ch] rounded-tl-md">#</TH>
+                  <TH className="rounded-tl-md">Created By</TH>
                   <TH>Date</TH>
                   <TH title="Sub total price (tax is NOT included)">
                     Sub total

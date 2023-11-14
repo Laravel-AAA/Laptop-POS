@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { BsDashLg, BsPlusLg } from "react-icons/bs";
 import { ICreateTransaction, IProduct } from "@/types";
+import { MAX_QUANTITY } from "@/Utilities/Constant";
 
 export default function ItemOptions({
   product,
@@ -16,7 +17,10 @@ export default function ItemOptions({
   transaction: ICreateTransaction;
 }) {
   return (
-    <div style={{zIndex:1}} className="absolute left-0 top-2 hidden w-full group-hover:block">
+    <div
+      style={{ zIndex: 1 }}
+      className="absolute left-0 top-2 hidden w-full group-hover:block"
+    >
       <div className="mx-2 flex justify-between">
         <ItemBtn
           onClick={() => requestDecrease()}
@@ -26,17 +30,18 @@ export default function ItemOptions({
         <input
           type="number"
           name="quantity"
-          className={`remove-arrow mx-5 block min-w-0 rounded-md border border-transparent bg-white bg-opacity-90 p-2 px-4 text-center font-semibold shadow  ${
+          maxLength={4}
+          max={MAX_QUANTITY}
+          className={`remove-arrow mx-5 block min-w-0 rounded-md border border-transparent bg-white bg-opacity-90 p-2 text-center font-semibold shadow  ${
             transaction.quantity > (product.stock ?? Infinity)
               ? "text-danger-600 focus:border-danger-500 focus:ring-danger-500"
               : " text-black focus:border-gray-700 focus:ring-gray-700"
           }`}
-          inputMode="numeric"
           value={transaction.quantity}
           onFocus={(e) => e.target.select()}
           onChange={(e) => {
             const n = Number(e.target.value);
-            if (n) requestChanged(n);
+            if ((n === 0 || n) && n <= MAX_QUANTITY) requestChanged(n);
           }}
         />
         <ItemBtn

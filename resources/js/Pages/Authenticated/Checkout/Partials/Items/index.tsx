@@ -1,4 +1,4 @@
-import { ILaravelPaginate, IProduct } from "@/types";
+import { IBill, ILaravelPaginate, IProduct } from "@/types";
 import ProductItem from "./Partials/ProductItem";
 import { BillOperations } from "../..";
 import Pagination from "@/Components/Pagination";
@@ -33,6 +33,7 @@ export default function Items({
                 quantity: 0,
               }
             }
+            changeStockNumber={!( bill as IBill ).id}
             requestChanged={(qty) => changeQty(v, qty)}
             requestDecrease={() => decreaseQty(v)}
             requestIncrease={() => increaseQty(v)}
@@ -47,7 +48,7 @@ export default function Items({
       </div>
       <Pagination
         style={{ paddingBottom: "0" }}
-        className="mt-4"
+        className="my-4"
         paginateItems={paginateProducts}
       />
     </section>

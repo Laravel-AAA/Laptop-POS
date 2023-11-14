@@ -5,8 +5,8 @@ export default function GradientCircle() {
       <svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="b" cx="50%" cy="50%" r="50%" fx="43%" fy="42%">
-            <stop offset="0%" stop-color="#26a69a" />
-            <stop offset="100%" stop-color="rgba(38,82,166,0.2)" />
+            <stop offset="0%" stopColor="#26a69a" />
+            <stop offset="100%" stopColor="rgba(38,82,166,0.2)" />
           </radialGradient>
           <filter
             id="a"

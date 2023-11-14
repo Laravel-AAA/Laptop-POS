@@ -15,9 +15,9 @@ export default function CheckoutBtn({
     <>
       {/* The white shadow above Checkout button.
       Shadow is white on white background so we don't need to hide it if there is little items
-      (i.e., table dose not had a scroll).
-      Table has bottom margin of nearly same hight of the shadow, so we don't need to hide it;
-      when user scroll till the last row it will disappear ;)
+      (i.e., table does not had a scroll bar).
+      Table has bottom margin with the same hight of the shadow, so we don't need to hide it;
+      when user scroll till the last row the shadow will disappear ;)
        */}
       <div className="pointer-events-none absolute bottom-[50px] h-5 w-full bg-gradient-to-t from-white to-transparent opacity-90"></div>
       <div className="absolute bottom-0 w-full">
@@ -28,7 +28,7 @@ export default function CheckoutBtn({
           disabled={form.processing || form.data.transactions.length == 0}
           title={
             form.processing || form.data.transactions.length == 0
-              ? "You can't checkout with an empty cart!"
+              ? "You can't Checkout with an empty cart!"
               : ""
           }
           onClick={() => setCheckoutModal(true)}
