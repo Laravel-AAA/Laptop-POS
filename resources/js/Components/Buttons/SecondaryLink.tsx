@@ -18,7 +18,7 @@ export default function SecondaryLink({
         uppercase tracking-widest
         text-gray-900 transition duration-200
         ease-in-out hover:bg-secondary-300 focus:outline-none
-        focus:ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
+       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
         focus-visible:ring-offset-2 active:scale-95
         disabled:opacity-25 disabled:active:scale-100 ${
           disabled ? "cursor-not-allowed opacity-25" : "cursor-pointer"

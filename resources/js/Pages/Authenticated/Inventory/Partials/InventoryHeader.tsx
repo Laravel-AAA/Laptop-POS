@@ -1,3 +1,4 @@
+import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import Input from "@/Components/Inputs/Input";
 import { IFilterProduct, PagePropsWithFilter } from "@/types";
@@ -85,13 +86,13 @@ export default function InventoryHeader({
             number={totalResult}
           />
         )}
-        <SecondaryButton
+        <PrimaryMaterialBtn
           className="inline-flex pl-2 pr-2"
           onClick={() => requestCreateProduct()}
         >
           <FaPlus className="mr-2" />
           <span>Add New Product</span>
-        </SecondaryButton>
+        </PrimaryMaterialBtn>
       </div>
     </div>
   );
