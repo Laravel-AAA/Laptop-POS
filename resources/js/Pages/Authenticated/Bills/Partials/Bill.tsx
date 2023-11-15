@@ -67,7 +67,7 @@ export default function Product({ bill }: PropsProduct) {
         <Num amount={bill.transactions.reduce((v, t) => v + t.quantity, 0)} />
       </TD>
       <td>
-        <BillOptions bill={bill} />
+        <BillOptions bill={bill} user={auth.user} />
       </td>
     </tr>
   );

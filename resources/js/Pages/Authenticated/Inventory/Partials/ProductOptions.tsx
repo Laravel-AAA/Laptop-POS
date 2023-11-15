@@ -2,8 +2,9 @@ import Dropdown from "@/Components/Dropdown";
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaBars, FaEdit, FaTrashAlt } from "react-icons/fa";
-import { IProduct } from "@/types";
+import { AuthPageProps, IProduct } from "@/types";
 import DeleteConfirmProductModal from "@/Components/Modals/CreateEdit/ProductModal/DeleteConfirmProductModal";
+import { usePage } from "@inertiajs/react";
 
 export default function ProductOptions({
   requestEdit,
@@ -14,6 +15,7 @@ export default function ProductOptions({
   requestEdit: () => void;
   requestShow: () => void;
 }) {
+  const user = usePage<AuthPageProps>().props.auth.user;
   const [openConfirmDeleteModal, setOpenConfirmDeleteModal] =
     useState<boolean>(false);
   return (
@@ -32,40 +34,56 @@ export default function ProductOptions({
           </span>
         </Dropdown.Trigger>
 
+
         <Dropdown.Content>
-          <button
+
+          <Dropdown.Button
             onClick={(e) => {
               e.stopPropagation();
               requestShow();
             }}
-            className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
           >
             <div className="flex items-center gap-3">
               <FaBars className="text-base" /> View
             </div>
-          </button>
-          <button
+          </Dropdown.Button>
+
+          <Dropdown.Button
+            disabled={
+              !(
+                product.createdBy_id == user.id ||
+                user.role == "Owner" ||
+                user.role == "Maintainer"
+              )
+            }
             onClick={(e) => {
               e.stopPropagation();
               requestEdit();
             }}
-            className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
           >
             <div className="flex items-center gap-3">
               <FaEdit className="text-base" /> Edit
             </div>
-          </button>
-          <button
+          </Dropdown.Button>
+
+          <Dropdown.Button
+            disabled={
+              !(
+                product.createdBy_id == user.id ||
+                user.role == "Owner" ||
+                user.role == "Maintainer"
+              )
+            }
             onClick={(e) => {
               e.stopPropagation();
               setOpenConfirmDeleteModal(true);
             }}
-            className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+            className="block w-full cursor-not-allowed px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:opacity-50 disabled:hover:bg-white"
           >
             <div className="flex items-center gap-3 text-danger-600">
               <FaTrashAlt className="text-base" /> Delete
             </div>
-          </button>
+          </Dropdown.Button>
         </Dropdown.Content>
       </Dropdown>
 

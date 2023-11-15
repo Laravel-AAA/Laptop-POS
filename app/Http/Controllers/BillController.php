@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Bill;
 use App\Http\Requests\Bill\StoreBillRequest;
-use App\Http\Requests\Bill\UpdateBillRequest;
-use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
@@ -75,7 +73,8 @@ class BillController extends Controller
         unset($bill['transactions']); //There is no column called transactions 😑
 
         if ($request->get('id')) {
-            Gate::authorize('update', new Bill($bill));
+            $oldBill = Bill::findOrFail($request->get('id'));
+            Gate::authorize('update', $oldBill);
         }
 
         $createdBill = Bill::create($bill);

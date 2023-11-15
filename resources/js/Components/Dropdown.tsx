@@ -6,9 +6,11 @@ import {
   PropsWithChildren,
   Dispatch,
   SetStateAction,
+  ButtonHTMLAttributes,
 } from "react";
-import { Link, InertiaLinkProps } from "@inertiajs/react";
+import { InertiaLinkProps } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
+import BetterLink from "./Buttons/BetterLink";
 
 const DropDownContext = createContext<{
   open: boolean;
@@ -128,20 +130,39 @@ const DropdownLink = ({
   ...props
 }: InertiaLinkProps) => {
   return (
-    <Link
+    <BetterLink
       {...props}
       className={
-        "block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none " +
+        "block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white " +
+        (props?.disabled === true ? "cursor-not-allowed opacity-50  " : "") +
         className
       }
     >
       {children}
-    </Link>
+    </BetterLink>
+  );
+};
+
+const DropdownButton = ({
+  className = "",
+  children,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement>) => {
+  return (
+    <button
+      {...props}
+      className={
+        "block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white " +
+        className
+      }
+    >
+      {children}
+    </button>
   );
 };
 
 Dropdown.Trigger = Trigger;
 Dropdown.Content = Content;
 Dropdown.Link = DropdownLink;
-
+Dropdown.Button = DropdownButton;
 export default Dropdown;

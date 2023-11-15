@@ -52,23 +52,23 @@ export default function DeleteBusinessSection({
 
   return (
     <section className=" bg-white p-4 shadow sm:rounded-lg sm:p-8">
-      <div className="max-w-2xl space-y-6">
+      <div className="max-w-3xl space-y-6">
         <header>
           <h2 className="text-lg font-medium text-gray-900">Delete Business</h2>
 
-          <p className="text-normal mt-1 text-gray-600">
+          <p className="text-normal mt-3 text-gray-600">
             When you delete your business, you will lose access to all the
             resources associated with it, such as accounts, products, bills, and
             business data. They will be permanently erased from our system and
             cannot be recovered.
           </p>
-          <p className="text-normal mt-1 text-gray-600">
+          <p className="text-normal mt-3 text-gray-600">
             To prevent accidental deletion of large businesses, you must first
             delete all other accounts under your business. This
             is a safety measure to ensure that you are fully aware of the
             consequences of deleting your business.
           </p>
-          <p className="text-normal mt-1 text-gray-600">
+          <p className="text-normal mt-3 text-gray-600">
             If you have any questions or concerns about deleting your business,
             please contact us at <SupportEmailLink />. We are happy to assist
             you with any issues you may have.

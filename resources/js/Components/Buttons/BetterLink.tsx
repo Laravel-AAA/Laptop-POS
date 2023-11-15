@@ -9,7 +9,10 @@ export default function BetterLink({
   return (
     <div className="relative">
       {disabled && (
-        <div className="absolute z-10 h-full w-full cursor-default"></div>
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="absolute z-10 h-full w-full cursor-not-allowed"
+        ></div>
       )}
       <Link disabled={disabled} {...props}>
         {children}

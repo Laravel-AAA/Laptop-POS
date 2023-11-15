@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import PrimaryLink from "@/Components/Buttons/PrimaryLink";
 import { FaArrowRight } from "react-icons/fa";
-import { GuestPageProps, IUser,  } from "@/types";
+import { GuestPageProps, IUser } from "@/types";
 import { ROUTES } from "@/Layouts/AuthenticatedLayout";
 import TextLink from "@/Components/TextLink";
 
@@ -75,62 +75,25 @@ export default function MobileMenu({ auth }: GuestPageProps) {
           leaveTo="opacity-0"
         >
           <ul className="px-5 py-2">
-            {auth?.user ? (
-              <>
-                {ROUTES.map((r, i) => (
-                  <li key={i}>
-                    <TextLink
-                      href={route(r.link)}
-                      className="justify-center"
-                      onClick={() => setMobileNavOpen(false)}
-                    >
-                      {r.name}
-                    </TextLink>
-                  </li>
-                ))}
-                <hr />
-                <li>
-                  <TextLink
-                    href={route("profile.edit")}
-                    className="justify-center"
-                    onClick={() => setMobileNavOpen(false)}
-                  >
-                    Profile
-                  </TextLink>
-                </li>
-                <li>
-                  <TextLink
-                    href={route("logout")}
-                    className="justify-center"
-                    onClick={() => setMobileNavOpen(false)}
-                  >
-                    <span className="font-bold">Log Out</span>
-                  </TextLink>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <TextLink
-                    href={route("login")}
-                    className="justify-center"
-                    onClick={() => setMobileNavOpen(false)}
-                  >
-                    Login
-                  </TextLink>
-                </li>
-                <li>
-                  <PrimaryLink
-                    href={route("register")}
-                    className="flex justify-center normal-case"
-                    onClick={() => setMobileNavOpen(false)}
-                  >
-                    <span>Register&nbsp;</span>
-                    <FaArrowRight />
-                  </PrimaryLink>
-                </li>
-              </>
-            )}
+            <li>
+              <TextLink
+                href={route("login")}
+                className="justify-center"
+                onClick={() => setMobileNavOpen(false)}
+              >
+                Login
+              </TextLink>
+            </li>
+            <li>
+              <PrimaryLink
+                href={route("register")}
+                className="flex justify-center normal-case"
+                onClick={() => setMobileNavOpen(false)}
+              >
+                <span>Register&nbsp;</span>
+                <FaArrowRight />
+              </PrimaryLink>
+            </li>
           </ul>
         </Transition>
       </div>
