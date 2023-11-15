@@ -35,7 +35,10 @@ export default function UpdateProfileInformation({
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    patch(route("profile.update"));
+    patch(route("profile.update"), {
+      preserveScroll: true,
+      preserveState: true,
+    });
   };
 
   return (
@@ -107,7 +110,7 @@ export default function UpdateProfileInformation({
         )}
 
         <div>
-          <KeyValue className="ml-1" k="Role" v={user.role}/>
+          <KeyValue className="ml-1" k="Role" v={user.role} />
         </div>
 
         <div className="flex items-center gap-4">

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Mail\InviteAccountToBusiness;
 use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -48,7 +48,7 @@ class UserController extends Controller
     /**
      * @param $account if $account is null then user updating profile. If not then owner is updating a business's account.
      */
-    public function update(UpdateProfileRequest $request, User $account): RedirectResponse
+    public function update(UpdateUserRequest $request, User $account): RedirectResponse
     {
         Gate::authorize('update', $account);
         if (isset($account->id)) { //update a business's account

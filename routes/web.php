@@ -40,9 +40,10 @@ Route::get('/', function () {
 })->middleware(['guest']);
 
 Route::get('/dashboard', function () {
-    if( request()->user()->role == 'Cashier' )
+    if (in_array(request()->user()->role, ['Owner', 'Maintainer']))
+        return Inertia::render('Authenticated/Dashboard/index'); //tsx component location on resources/js/Pages folder
+    else
         return redirect(route('bill.create'));
-    return Inertia::render('Authenticated/Dashboard/index'); //tsx component location on resources/js/Pages folder
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -56,6 +57,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/checkout/{bill}', [BillController::class, 'show'])->name('bill.show');
     Route::get('/checkout', [BillController::class, 'create'])->name('bill.create');
+
+});
+
+Route::middleware(['auth', 'verified', 'role:Owner'])->group(function () {
 
     Route::get('/business', [BusinessController::class, 'edit'])
         ->name('business.edit');
