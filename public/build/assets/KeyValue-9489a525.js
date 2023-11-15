@@ -1,1 +1,0 @@
-import{j as e}from"./app-597d038e.js";import{N as m}from"./Num-5d713926.js";function x({k:a,v:t,vProps:s,className:n="",title:r=""}){return e.jsxs("p",{className:n,children:[e.jsx("span",{className:"text-blue-gray-500",children:a}),": ",e.jsx("span",{className:"text-gray-800",title:r,children:typeof s<"u"?e.jsx(m,{defaultNoAmount:!0,amount:t,...s}):t??"N/A"})]})}export{x as K};
