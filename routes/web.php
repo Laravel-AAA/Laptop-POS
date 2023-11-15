@@ -40,6 +40,8 @@ Route::get('/', function () {
 })->middleware(['guest']);
 
 Route::get('/dashboard', function () {
+    if( request()->user()->role == 'Cashier' )
+        return redirect(route('bill.create'));
     return Inertia::render('Authenticated/Dashboard/index'); //tsx component location on resources/js/Pages folder
 })->middleware(['auth', 'verified'])->name('dashboard');
 

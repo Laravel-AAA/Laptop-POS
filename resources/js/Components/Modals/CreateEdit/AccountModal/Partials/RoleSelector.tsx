@@ -12,8 +12,6 @@ export default function CountryInput<T extends { role: IUser["role"] }>({
   return (
     <SelectInput
       label="Role"
-      id="role"
-      name="role"
       value={form.data.role}
       errorMsg={form.errors.role}
       hideError={form.isDirty("role")}
@@ -52,6 +50,6 @@ export const ROLES: { name: IUser["role"]; desc: string }[] = [
   },
   {
     name: "Owner",
-    desc: "Have all Maintainer privileges. And manage business information and accounts.",
+    desc: "Have all Maintainer privileges. And manage accounts and business information.",
   },
 ];
