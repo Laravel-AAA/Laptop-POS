@@ -93,7 +93,7 @@ export interface ICreateBusiness {
   taxIdentificationNumber: string | null;
 }
 
-export interface IBusiness extends ICreateBusiness, BasicModel, SoftDelete {
+export interface IBusiness extends ICreateBusiness, BasicModel {
 }
 
 export interface ILaravelPaginate<T extends object> {

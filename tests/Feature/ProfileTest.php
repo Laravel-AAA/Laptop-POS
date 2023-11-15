@@ -65,36 +65,35 @@ class ProfileTest extends TestCase
 
     public function test_admin_can_delete_their_business(): void
     {
-        $user = User::factory()->create(['email_verified_at' => now(), 'deleted_at' => null]);
+        $user = User::factory()->create(['role'=>'Owner','email_verified_at' => now(), 'deleted_at' => null]);
 
         $response = $this
             ->actingAs($user)
-            ->delete('/business/' . $user->business_id, [
+            ->delete(route('business.destroy',$user->business_id), [
                 'password' => 'asdfasdf',
             ]);
 
         $response
-            ->assertSessionHasNoErrors();
-            // ->assertRedirect('/');
+            ->assertSessionHasNoErrors()
+            ->assertRedirect('/');
 
-        // $this->assertGuest();
-        // $this->assertNull($user->fresh());
+        $this->assertGuest();
+        $this->assertNotNull($user->fresh()->deleted_at);
     }
 
-    public function test_correct_password_must_be_provided_to_delete_account(): void
+    public function test_owner_cannot_delete_their_business_with_wrong_password(): void
     {
-        $user = User::factory()->create(['email_verified_at' => now(), 'deleted_at' => null]);
-
+        $user = User::factory()->create(['email_verified_at' => now(), 'deleted_at' => null,'role'=>'Owner']);
         $response = $this
             ->actingAs($user)
-            ->from('/profile')
-            ->delete('/profile', [
-                // 'password' => 'wrong-password',
+            ->from(route('business.edit'))
+            ->delete(route('business.destroy',$user->business_id), [
+                'password' => 'wrong-password',
             ]);
 
-        // $response
-        // ->assertSessionHasErrors('password')
-        // ->assertRedirect('/profile');
+        $response
+        ->assertSessionHasErrors('password')
+        ->assertRedirect(route('business.edit'));
 
         $this->assertNotNull($user->fresh());
     }

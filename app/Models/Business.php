@@ -38,6 +38,17 @@ class Business extends Model
         'taxIdentificationNumber',
     ];
 
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'deleted_at',
+    ];
+
+
     /**
      * The attributes that should be cast.
      *
