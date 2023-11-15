@@ -3,7 +3,7 @@ import BillOptions from "./BillOptions";
 import FromDate from "@/Utilities/FromDate";
 import Num from "@/Utilities/Num";
 import ID from "@/Utilities/ID";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useMemo } from "react";
 import { usePage } from "@inertiajs/react";
 type PropsProduct = {
   bill: IBill;
@@ -13,9 +13,13 @@ export default function Product({ bill }: PropsProduct) {
   const taxPercent = auth.business.taxPercent;
   const loggedInId = auth.user.id;
 
-  const subTotalPrice = bill.transactions.reduce(
-    (v, t) => v + (t.product.price ?? 0) * t.quantity,
-    0,
+  const subTotalPrice = useMemo(
+    () =>
+      bill.transactions.reduce(
+        (v, t) => v + (t.product.price ?? 0) * t.quantity,
+        0,
+      ),
+    [bill.transactions],
   );
   const totalPrice = subTotalPrice * (1 + taxPercent);
 

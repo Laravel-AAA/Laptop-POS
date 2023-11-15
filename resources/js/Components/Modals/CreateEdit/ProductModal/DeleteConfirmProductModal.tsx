@@ -32,6 +32,9 @@ export default function DeleteConfirmProductModal({
               router.delete(route("product.destroy", product.id), {
                 preserveScroll: true,
                 preserveState: true,
+                onError: (e) => {
+                  if (e.serverError) alert(e.serverError);
+                },
               });
             },
             disabled: deleteProgress,

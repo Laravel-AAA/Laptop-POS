@@ -28,16 +28,9 @@ class BusinessPolicy
     public function destroy(User $user, Business $business): bool
     {
         if ($user->business_id == $business->id && $user->role == 'Owner') {
-            $productsCount = $user->business->products()->count();
-            if ($productsCount != 0) {
-                dd('products',$productsCount);
-                throw ValidationException::withMessages(['serverError' => 'You have to delete all products. Found ' . $productsCount . ' products.']);
-            }
-
             $usersCount = $user->business->users()->count();
             if ($usersCount > 1) {
-                dd('users',$usersCount);
-                throw ValidationException::withMessages(['serverError' => 'You have to delete all accounts within your business. Found ' . $usersCount - 1 . ' accounts.']);
+                throw ValidationException::withMessages(['serverError' => 'You have to delete all accounts within your business. There are ' . $usersCount - 1 . ' accounts remaining.']);
             }
             return true;
         }

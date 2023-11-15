@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import AlertModal from "../../AlertModal";
-import { IBill } from "@/types";
-import { Inertia } from "@inertiajs/inertia";
-import ID from "@/Utilities/ID";
-import { router } from "@inertiajs/react";
+import { AuthPageProps, IBill } from "@/types";
+import { router, usePage } from "@inertiajs/react";
+import KeyValue from "@/Utilities/KeyValue";
+import FromDate from "@/Utilities/FromDate";
 
 export default function DeleteConfirmBillModal({
   bill,
@@ -14,14 +14,57 @@ export default function DeleteConfirmBillModal({
   isOpen: boolean;
   requestClose: (clickedButtonText?: string) => any;
 }) {
+  const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
+
   const [deleteProgress, setDeleteProgress] = useState<boolean>(false);
+
+  const subTotalPrice = useMemo(
+    () =>
+      bill.transactions.reduce(
+        (v, t) => v + (t.product.price ?? 0) * t.quantity,
+        0,
+      ),
+    [bill.transactions],
+  );
+
+  const totalPrice = subTotalPrice * (1 + taxPercent);
+
   return (
     <AlertModal
       icon="danger"
       title="Are you sure?"
       paragraph={
-        <span>
-          You are about to delete the bill <ID id={bill.id} />
+        <span className="space-y-1">
+          You are about to delete the bill with this information:
+          <br />
+          <KeyValue
+            k="Date"
+            v={<FromDate date={bill.created_at}/>}
+          />
+          <KeyValue
+            k="Sub Total Price"
+            numProps={{
+              amount: subTotalPrice,
+              defaultNoAmount: true,
+              showCurrency: true,
+            }}
+          />
+          <KeyValue
+            k="Total Price"
+            numProps={{
+              amount: totalPrice,
+              defaultNoAmount: true,
+              showCurrency: true,
+            }}
+          />
+          <KeyValue
+            k="Received"
+            numProps={{
+              amount: bill.cashReceived,
+              showCurrency: true,
+              noAmount:'Digital Payment'
+            }}
+          />
         </span>
       }
       buttons={{

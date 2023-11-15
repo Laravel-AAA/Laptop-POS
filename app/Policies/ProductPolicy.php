@@ -4,8 +4,7 @@ namespace App\Policies;
 
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Validation\ValidationException;
 
 class ProductPolicy
 {
@@ -40,8 +39,17 @@ class ProductPolicy
      */
     public function destroy(User $user, Product $product): bool
     {
-        return $user->business_id == $product->business_id
-            && ($user->id == $product->createdBy_id || in_array($user->role, ['Owner', 'Maintainer']));
+        if (
+            $user->business_id == $product->business_id
+            && ($user->id == $product->createdBy_id || in_array($user->role, ['Owner', 'Maintainer']))
+        ) {
+            $count = $product->transactions()->count();
+            if ($count != 0) {
+                throw ValidationException::withMessages(['serverError' => 'This product ('.$product->name.') is used by ' .$count. ' bills. Please make sure no bill is using this product before deleting.']);
+            }
+            return true;
+        } else
+            return false;
     }
 
 }

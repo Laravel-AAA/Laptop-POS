@@ -6,6 +6,7 @@ import Footer from "@/Layouts/GuestLayout/Partials/Footer";
 import IdentitySection from "./Partials/IdentitySection";
 import LocationContactSection from "./Partials/LocationContactSection";
 import FinancialSection from "./Partials/FinancialSection";
+import DeleteBusinessSection from "./Partials/DeleteBusinessSection";
 
 export default function Edit({ auth }: AuthPageProps) {
   const business =
@@ -22,6 +23,7 @@ export default function Edit({ auth }: AuthPageProps) {
           <IdentitySection business={business} />
           <LocationContactSection business={business} />
           <FinancialSection business={business} />
+          <DeleteBusinessSection business={business} />
         </div>
       </div>
       <Footer />

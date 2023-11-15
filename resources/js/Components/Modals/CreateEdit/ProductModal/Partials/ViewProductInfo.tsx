@@ -33,15 +33,28 @@ export default function ViewProductInfo({ product }: { product: IProduct }) {
 
       <KeyValue
         k="Price (Tax included)"
-        v={product.price === null ? null : product.price * (1 + taxPercent)}
-        vProps={{ showCurrency: true }}
+        numProps={{
+          amount:
+            product.price === null ? null : product.price * (1 + taxPercent),
+          defaultNoAmount: true,
+          showCurrency: true,
+        }}
       />
       <KeyValue
         k="Price (Tax not included)"
-        v={product.price}
-        vProps={{ showCurrency: true }}
+        numProps={{
+          amount: product.price,
+          defaultNoAmount: true,
+          showCurrency: true,
+        }}
       />
-      <KeyValue k="Stock" v={product.stock} vProps={{}} />
+      <KeyValue
+        k="Stock"
+        numProps={{
+          amount: product.stock,
+          defaultNoAmount: true,
+        }}
+      />
       <KeyValue k="Barcode" v={product.barcode} />
       <KeyValue k="Description" v={product.description} />
       <div className="space-y-3 border-t" hidden={!showMore}>
@@ -65,7 +78,7 @@ export default function ViewProductInfo({ product }: { product: IProduct }) {
       </div>
       <div className="flex justify-center">
         <IconButton
-        title="More info"
+          title="More info"
           className="rounded-full"
           onClick={() => setShowMore((v) => !v)}
         >

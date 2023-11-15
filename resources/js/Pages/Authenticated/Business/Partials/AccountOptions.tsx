@@ -23,7 +23,7 @@ export default function AccountOptions({
       <Dropdown>
         <Dropdown.Trigger>
           <div
-            className="rounded-[50%] p-2  align-middle text-gray-700 transition duration-200 ease-in-out hover:bg-black hover:bg-opacity-10 hover:text-gray-900 focus:outline-none"
+            className="rounded-[50%] p-2 inline-block align-middle text-gray-700 transition duration-200 ease-in-out hover:bg-black hover:bg-opacity-10 hover:text-gray-900 focus:outline-none"
           >
             <BsThreeDotsVertical className="text-lg" />
           </div>

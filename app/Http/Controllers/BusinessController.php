@@ -64,17 +64,19 @@ class BusinessController extends Controller
         ]);
         Gate::authorize('destroy', $business);
 
-        if ($business->logo)
+        if ($business->logo) {
             $this->deleteFile($business->logo);
+            $business->update(['logo'=>null]);
+        }
 
-        Auth::logout();
         $user = $request->user();
+        Auth::logout();
         $user->delete();
         $business->delete();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/')->with('success', 'Successfully deleted');
     }
 
 
