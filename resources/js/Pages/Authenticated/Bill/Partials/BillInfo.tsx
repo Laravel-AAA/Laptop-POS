@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 import TransactionsTable from "./TransactionsTable";
 import ID from "@/Utilities/ID";
 import Num from "@/Utilities/Num";
+import QRCode from "react-qr-code";
 
 export default function BillInfo({ bill }: { bill: IBill }) {
   if (!bill.business)
@@ -35,12 +36,15 @@ export default function BillInfo({ bill }: { bill: IBill }) {
             v={bill.business.taxIdentificationNumber}
           />
         )}
+      </header>
+
+      <section>
         <KeyValue
           k="Date"
           v={new Date(bill.updated_at).toLocaleDateString("en-ca")}
         />
         <KeyValue k="Invoice ID" v={<ID id={bill.id} />} />
-      </header>
+      </section>
 
       <TransactionsTable bill={bill} />
 
@@ -110,7 +114,11 @@ export default function BillInfo({ bill }: { bill: IBill }) {
           />
         )}
       </section>
-      <section></section>
+
+      <section className="flex justify-center">
+        <QRCode value={location.href} size={160} />
+      </section>
+      <p className="text-center font-extrabold text-xl">Thank you</p>
     </section>
   );
 }

@@ -6,7 +6,7 @@
         "start": "npm run dev",
         "serve": "npm run dev",
         "build": "tsc && vite build",
-        "format":"npx prettier --write resources/js"
+        "format": "npx prettier --write resources/js"
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
@@ -43,6 +43,7 @@
         "@material-tailwind/react": "^2.1.4",
         "@react-icons/all-files": "^4.1.0",
         "moment": "^2.29.4",
+        "react-qr-code": "^2.0.12",
         "react-resizable": "^3.0.5",
         "react-use": "^17.4.0"
     }
