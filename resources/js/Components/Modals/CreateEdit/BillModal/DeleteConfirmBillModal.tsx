@@ -4,6 +4,7 @@ import { AuthPageProps, IBill } from "@/types";
 import { router, usePage } from "@inertiajs/react";
 import KeyValue from "@/Utilities/KeyValue";
 import FromDate from "@/Utilities/FromDate";
+import Num from "@/Utilities/Num";
 
 export default function DeleteConfirmBillModal({
   bill,
@@ -37,33 +38,24 @@ export default function DeleteConfirmBillModal({
         <span className="space-y-1">
           You are about to delete the bill with this information:
           <br />
-          <KeyValue
-            k="Date"
-            v={<FromDate date={bill.created_at}/>}
-          />
+          <KeyValue k="Date" v={<FromDate date={bill.created_at} />} />
           <KeyValue
             k="Sub Total Price"
-            numProps={{
-              amount: subTotalPrice,
-              defaultNoAmount: true,
-              showCurrency: true,
-            }}
+            v={<Num amount={subTotalPrice} defaultNoAmount showCurrency />}
           />
           <KeyValue
             k="Total Price"
-            numProps={{
-              amount: totalPrice,
-              defaultNoAmount: true,
-              showCurrency: true,
-            }}
+            v={<Num amount={totalPrice} defaultNoAmount showCurrency />}
           />
           <KeyValue
             k="Received"
-            numProps={{
-              amount: bill.cashReceived,
-              showCurrency: true,
-              noAmount:'Digital Payment'
-            }}
+            v={
+              <Num
+                amount={bill.cashReceived}
+                showCurrency
+                noAmount="Digital Payment"
+              />
+            }
           />
         </span>
       }

@@ -1,16 +1,17 @@
 import Logo from "@/Components/Logo/Logo";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import React, { useState } from "react";
 import NavLink from "./Partials/NavLink";
 import Dropdown from "@/Components/Dropdown";
 import ResponsiveNavLink from "./Partials/ResponsiveNavLink";
 import { ROUTES } from "../..";
-import { IUser } from "@/types";
+import { AuthPageProps, IUser } from "@/types";
 
 export default function HeaderNav({ user }: { user: IUser }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false);
-
+  const businessLogo = usePage<AuthPageProps>().props.auth.business.logo;
+  
   return (
     <nav className="border-b border-gray-100 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -18,7 +19,7 @@ export default function HeaderNav({ user }: { user: IUser }) {
           <div className="flex">
             <div className="flex shrink-0 items-center">
               <Link href="/">
-                <Logo className="h-9" businessLogo />
+                <Logo className="h-9" businessLogo={businessLogo} />
               </Link>
             </div>
 

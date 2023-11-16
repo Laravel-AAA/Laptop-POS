@@ -5,13 +5,10 @@ import { Head } from "@inertiajs/react";
 import GuestLayout from "@/Layouts/GuestLayout";
 import Hero from "./Partials/Hero";
 import Features from "./Partials/Features";
-import { GuestPageProps } from "@/types";
 
-export default function Welcome({
-  auth,
-}: GuestPageProps<{ laravelVersion: string; phpVersion: string }>) {
+export default function Welcome() {
   return (
-    <GuestLayout auth={auth}>
+    <GuestLayout>
       <Head title="Welcome" />
       <Hero />
       <Features />

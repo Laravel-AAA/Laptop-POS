@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import MobileMenu from "./Partials/MobileMenu";
 import DesktopMenu from "./Partials/DesktopMenu";
 import FullLogo from "@/Components/Logo/FullLogo";
-import { GuestPageProps } from "@/types";
 
-export default function Header({ auth }: GuestPageProps) {
+export default function Header() {
   const [top, setTop] = useState<boolean>(true);
 
   // detect whether user has scrolled the page down by 10px
@@ -30,8 +29,8 @@ export default function Header({ auth }: GuestPageProps) {
           <div className="flex h-16 items-center justify-between md:h-20">
             {/* Site branding */}
             <FullLogo />
-            <DesktopMenu auth={auth} />
-            <MobileMenu auth={auth} />
+            <DesktopMenu />
+            <MobileMenu  />
           </div>
         </div>
       </header>

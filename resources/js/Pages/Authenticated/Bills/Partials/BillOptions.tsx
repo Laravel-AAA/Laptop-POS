@@ -1,7 +1,7 @@
 import Dropdown from "@/Components/Dropdown";
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaList, FaTrashAlt } from "react-icons/fa";
+import { FaEdit, FaList, FaTrashAlt } from "react-icons/fa";
 import { IBill, IUser } from "@/types";
 import DeleteConfirmBillModal from "@/Components/Modals/CreateEdit/BillModal/DeleteConfirmBillModal";
 
@@ -25,6 +25,12 @@ export default function BillOptions({
         </Dropdown.Trigger>
 
         <Dropdown.Content>
+          <Dropdown.Link href={route("bill.show", bill.id)}>
+            <div className="flex items-center gap-3">
+              <FaList className="text-base text-gray-800" /> View
+            </div>
+          </Dropdown.Link>
+
           <Dropdown.Link
             disabled={
               !(
@@ -33,10 +39,10 @@ export default function BillOptions({
                 user.role == "Maintainer"
               )
             }
-            href={"/checkout/" + bill.id}
+            href={route("bill.edit", bill.id)}
           >
             <div className="flex items-center gap-3">
-              <FaList className="text-base" /> Details
+              <FaEdit className="text-base text-gray-800" /> Edit
             </div>
           </Dropdown.Link>
 

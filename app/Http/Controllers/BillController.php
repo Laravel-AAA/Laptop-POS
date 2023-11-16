@@ -30,10 +30,21 @@ class BillController extends Controller
         ]);
     }
 
-    /**Bill show will be displayed in Checkout Page */
-    protected function show(Request $request, Bill $bill)
+    /**Bill show can be accessed by anyone for QR link on the bill paper */
+    protected function show(Bill $bill)
     {
         Gate::authorize('show', $bill);
+        $bill = $bill->load([ 'transactions.product','business' ]);
+
+        return Inertia::render('Authenticated/Bill/index', [
+            'bill' => $bill,
+        ]);
+    }
+
+    /**Bill edit will be displayed in Checkout Page */
+    protected function edit(Request $request, Bill $bill)
+    {
+        Gate::authorize('edit', $bill);
         $bill = $bill->load('transactions.product');
         return $this->checkoutPage($request, $bill);
     }

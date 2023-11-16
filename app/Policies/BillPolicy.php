@@ -9,12 +9,27 @@ use Illuminate\Auth\Access\Response;
 class BillPolicy
 {
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function show(User $user, Bill $bill): bool
+    public function show(?User $user, Bill $bill)
     {
-        return $user->business_id == $bill->business_id;
+        if (isset($user) && $user->business_id == $bill->business_id) {
+            return true;
+        } else {
+            //bill is issued in less than 6 months.
+            if (now()->diffInDays($bill->created_at) < 180) {
+                return true;
+            } else { //otherwise the response will be Not Found for ambiguity
+                abort(404);
+            }
+        }
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     */
+    public function edit(User $user, Bill $bill): bool
+    {
+        return $user->business_id == $bill->business_id
+            && ($user->id == $bill->createdBy_id || in_array($user->role, ['Owner', 'Maintainer']));
     }
 
     /**

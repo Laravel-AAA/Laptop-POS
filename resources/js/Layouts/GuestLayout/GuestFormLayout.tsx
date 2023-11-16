@@ -1,14 +1,12 @@
 import { PropsWithChildren } from "react";
-import { GuestPageProps } from "@/types";
 import GuestLayout from ".";
 import FormLayout from "./FormLayout";
 
 export default function GuestFormLayout({
   children,
-  auth,
-}: PropsWithChildren<GuestPageProps>) {
+}: PropsWithChildren) {
   return (
-    <GuestLayout auth={auth}>
+    <GuestLayout>
       <FormLayout>
         {children}
       </FormLayout>

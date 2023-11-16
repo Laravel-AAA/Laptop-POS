@@ -2,11 +2,9 @@ import { useState, useRef, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import PrimaryLink from "@/Components/Buttons/PrimaryLink";
 import { FaArrowRight } from "react-icons/fa";
-import { GuestPageProps, IUser } from "@/types";
-import { ROUTES } from "@/Layouts/AuthenticatedLayout";
 import TextLink from "@/Components/TextLink";
 
-export default function MobileMenu({ auth }: GuestPageProps) {
+export default function MobileMenu() {
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false);
 
   const trigger = useRef<HTMLButtonElement>(null);

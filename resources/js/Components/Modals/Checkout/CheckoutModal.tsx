@@ -44,7 +44,7 @@ export default function CheckoutModal({
 
         <div className="mt-4 flex flex-col gap-4 sm:flex-row-reverse">
           <PrimaryMaterialBtn type="submit" disabled={form.processing}>
-            {(form.data as IBill).id === undefined ? "Checkout" : "Update"}
+            {(form.data as IBill).id === undefined ? "Proceed" : "Update"}
           </PrimaryMaterialBtn>
 
           <SecondaryMaterialBtn

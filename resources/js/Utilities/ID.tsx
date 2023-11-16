@@ -7,7 +7,7 @@ import React from "react";
 export default function ID({ id }: { id: string }) {
   return (
     <span className="flex-nowrap whitespace-nowrap font-semibold italic tracking-wide">
-      #{id?.substring(16) ?? "NULL"}
+      #{id?.substring(18) ?? "NULL"}
     </span>
   );
 }

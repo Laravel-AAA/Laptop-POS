@@ -7,6 +7,7 @@ export type NumProps = {
   showCurrency?: boolean;
   prefix?: string;
   prefixProps?: HTMLAttributes<HTMLSpanElement>;
+  currency?: string;
 } & ( //if amount is possibly null then you should declare either `defaultNoAmount` or specify custom `noAmount`. Typescript will help us force such specification.
   | { amount: number; noAmount?: string }
   | ({ amount: number | null } & (
@@ -20,6 +21,7 @@ export default function Num({
   amount,
   noAmount,
   showCurrency = false,
+  currency: currencySymbol,//when user is not authorized then showCurrency will throw an exception in usePage hook. So, you should provide the currency symbol.
   //prefix will be shown even if amount is null
   prefix = "",
   prefixProps = {},
@@ -29,7 +31,10 @@ export default function Num({
   const currency =
     showCurrency && amount !== null ? (
       <span>
-        {usePage<AuthPageProps>().props.auth.business.currency}&#8239;
+        {currencySymbol
+          ? currencySymbol
+          : usePage<AuthPageProps>().props.auth.business.currency}
+        &#8239;
       </span>
     ) : (
       ""

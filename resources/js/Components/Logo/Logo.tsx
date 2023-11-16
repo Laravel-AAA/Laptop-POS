@@ -1,21 +1,17 @@
-import { AuthPageProps } from "@/types";
-import { usePage } from "@inertiajs/react";
 
 export default function Logo({
   className,
-  businessLogo = false,
+  businessLogo,
 }: {
-  className: string;
-  businessLogo?: boolean;
+  className?: string;
+  businessLogo?: string|null;
 }) {
   let src: string | null = null;
-  const businessLogoPath =
-    usePage<AuthPageProps>()?.props?.auth?.business?.logo;
 
-  if (businessLogo && businessLogoPath) {
-    src = businessLogoPath.startsWith("http")
-      ? businessLogoPath
-      : "/businesses-logo/" + businessLogoPath;
+  if (businessLogo) {
+    src = businessLogo.startsWith("http")
+      ? businessLogo
+      : "/businesses-logo/" + businessLogo;
   } else src = "/assets/logo/laptop-pos-logo.svg";
 
   return <img className={className} src={src} alt="Application Logo" />;

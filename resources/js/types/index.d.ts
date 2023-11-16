@@ -34,14 +34,6 @@ export type AuthPageProps<
   auth: { user: IUser; business: IBusiness };
 };
 
-
-export type GuestPageProps<
-  T extends Record<string, unknown> = Record<string, unknown>,
-> = T & {
-  auth: { user: IUser } | null;
-}
-
-
 export interface IProduct extends ICreateProduct, BasicModel {
   business_id: string;
   createdBy_id: string;
@@ -59,24 +51,28 @@ export interface ICreateProduct {
   description: string | null;
 }
 
-export interface IBill extends ICreateBill, BasicModel {
-  business_id: string;
-  createdBy_id: string;
-  created_by?: IUser;
-}
-
 export interface ICreateBill {
   cashReceived: number | null;
   transactions: ICreateTransaction[];
 }
 
-export interface ITransaction extends ICreateTransaction, BasicModel {
-  bill_id: string;
+export interface IBill extends ICreateBill, BasicModel {
+  business_id: string;
+  business?: IBusiness;
+  createdBy_id: string;
+  created_by?: IUser;
+  override transactions: ITransaction[];
+
 }
+
 export interface ICreateTransaction {
   quantity: number;
   product_id: string;
   product: IProduct;
+}
+
+export interface ITransaction extends ICreateTransaction, BasicModel {
+  bill_id: string;
 }
 
 export interface ICreateBusiness {

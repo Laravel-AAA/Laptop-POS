@@ -1,6 +1,7 @@
 import NoImageImage from "@/Pages/Authenticated/Inventory/Partials/NoImageImage";
 import FromDate from "@/Utilities/FromDate";
 import KeyValue from "@/Utilities/KeyValue";
+import Num from "@/Utilities/Num";
 import { AuthPageProps, IProduct } from "@/types";
 import { usePage } from "@inertiajs/react";
 import { IconButton } from "@material-tailwind/react";
@@ -33,28 +34,21 @@ export default function ViewProductInfo({ product }: { product: IProduct }) {
 
       <KeyValue
         k="Price (Tax included)"
-        numProps={{
-          amount:
-            product.price === null ? null : product.price * (1 + taxPercent),
-          defaultNoAmount: true,
-          showCurrency: true,
-        }}
+        v={
+          <Num
+            amount={
+              product.price === null ? null : product.price * (1 + taxPercent)
+            }
+            defaultNoAmount
+            showCurrency
+          />
+        }
       />
       <KeyValue
         k="Price (Tax not included)"
-        numProps={{
-          amount: product.price,
-          defaultNoAmount: true,
-          showCurrency: true,
-        }}
+        v={<Num amount={product.price} defaultNoAmount showCurrency />}
       />
-      <KeyValue
-        k="Stock"
-        numProps={{
-          amount: product.stock,
-          defaultNoAmount: true,
-        }}
-      />
+      <KeyValue k="Stock" v={<Num amount={product.stock} defaultNoAmount />} />
       <KeyValue k="Barcode" v={product.barcode} />
       <KeyValue k="Description" v={product.description} />
       <div className="space-y-3 border-t" hidden={!showMore}>

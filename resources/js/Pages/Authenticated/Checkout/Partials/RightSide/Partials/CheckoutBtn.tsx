@@ -33,7 +33,7 @@ export default function CheckoutBtn({
           }
           onClick={() => setCheckoutModal(true)}
         >
-          {(form.data as IBill).id === undefined ? "Checkout" : "Update"}
+          {(form.data as IBill).id === undefined ? "Submit" : "Update"}
         </SecondaryButton>
       </div>
       <CheckoutModal
