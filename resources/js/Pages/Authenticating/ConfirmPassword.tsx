@@ -25,7 +25,7 @@ export default function ConfirmPassword({ auth }: AuthPageProps) {
   };
 
   return (
-    <GuestFormLayout auth={auth}>
+    <GuestFormLayout>
       <Head title="Confirm Password" />
 
       <div className="mb-4 text-sm text-gray-600">

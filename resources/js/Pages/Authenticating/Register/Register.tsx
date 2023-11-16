@@ -72,7 +72,7 @@ export default function Register({ auth }: AuthPageProps) {
 
   // const [tabIndex, setTabIndex] = useState<number>(0);
   return (
-    <GuestFormLayout auth={auth}>
+    <GuestFormLayout>
       <Head title="Register" />
       <h1 className="mx-3 mb-4 text-center text-3xl font-extrabold">
         Register

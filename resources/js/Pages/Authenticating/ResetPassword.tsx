@@ -35,7 +35,7 @@ export default function ResetPassword({
   };
 
   return (
-    <GuestFormLayout auth={auth}>
+    <GuestFormLayout>
       <Head title="Reset Password" />
 
       <form onSubmit={submit}>

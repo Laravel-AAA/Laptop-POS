@@ -1,0 +1,1 @@
+import{j as s}from"./app-1c25774f.js";function c({k:e,v:a,className:r="",keyClassName:t="",valueClassName:n="",title:x=""}){return s.jsxs("p",{className:r,children:[s.jsx("span",{className:"text-blue-gray-500 "+t,children:e}),": ",s.jsx("span",{className:"text-gray-800 "+n,title:x,children:a})]})}export{c as K};

@@ -35,7 +35,7 @@ export default function Login({
   };
 
   return (
-    <GuestFormLayout auth={auth}>
+    <GuestFormLayout>
       <Head title="Log in" />
 
       {status && (
