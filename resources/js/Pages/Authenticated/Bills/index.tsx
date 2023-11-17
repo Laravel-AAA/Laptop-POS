@@ -7,6 +7,7 @@ import { BsSearch } from "react-icons/bs";
 import Bill from "./Partials/Bill";
 import Pagination from "@/Components/Pagination";
 import Footer from "@/Layouts/GuestLayout/Partials/Footer";
+import BillsHeader from "./Partials/BillsHeader";
 
 export default function Bills({
   auth,
@@ -18,7 +19,10 @@ export default function Bills({
   const bills: IBill[] = paginateBills.data;
 
   return (
-    <AuthenticatedLayout user={auth.user}>
+    <AuthenticatedLayout
+      user={auth.user}
+      header={<BillsHeader totalResult={paginateBills.total} />}
+    >
       <Head title="Bills" />
       <div className="flex min-h-[75vh] flex-col justify-between">
         {/* Overflow classes will set the position to relative, and this cause a problem
@@ -30,7 +34,8 @@ export default function Bills({
             <table className="table-auto text-left">
               <thead>
                 <tr>
-                  <TH className="rounded-tl-md">Created By</TH>
+                  <TH className="rounded-tl-md">#</TH>
+                  <TH>Created By</TH>
                   <TH>Date</TH>
                   <TH title="Sub total price (tax is NOT included)">
                     Sub total

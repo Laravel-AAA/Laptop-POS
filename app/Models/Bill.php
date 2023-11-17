@@ -91,12 +91,7 @@ class Bill extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('cashReceived', 'like', '%' . $search . '%');
-        });
-        $query->when($filters['product'] ?? null, function ($query, $product_id) {
-            $query->whereHas('transactions', function ($query) use ($product_id) {
-                $query->where('product_id', $product_id);
-            });
+            $query->where('id', 'like', '%' . $search . '%');
         });
     }
 }

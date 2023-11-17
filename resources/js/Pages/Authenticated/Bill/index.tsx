@@ -14,6 +14,9 @@ import GuestLayout from "@/Layouts/GuestLayout";
 import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import FormLayout from "@/Layouts/GuestLayout/FormLayout";
 import Footer from "@/Layouts/GuestLayout/Partials/Footer";
+import { Link } from "@inertiajs/react";
+import ID from "@/Utilities/ID";
+import BillHeader from "./Partials/BillHeader";
 
 export default function Bill({
   auth: { user },
@@ -27,12 +30,17 @@ export default function Bill({
   return (
     <>
       {user !== null ? (
-        <Authenticated user={user}>
+        <Authenticated
+          user={user}
+          header={
+            <BillHeader bill={bill}/>
+          }
+        >
           <div className="mt-6">
             <FormLayout businessLogo={bill.business?.logo}>
               <BillInfo bill={bill} />
             </FormLayout>
-            <Footer/>
+            <Footer />
           </div>
         </Authenticated>
       ) : (

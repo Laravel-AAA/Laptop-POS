@@ -26,8 +26,9 @@ export default function Product({ bill }: PropsProduct) {
   return (
     <tr className="even:bg-blue-gray-50/50">
       <TD>
-        {/* <ID id={bill.id} /> */}
-
+        <ID id={bill.id} />
+      </TD>
+      <TD>
         {bill.createdBy_id === loggedInId ? (
           <span className="select-none text-gray-600">You</span>
         ) : (
