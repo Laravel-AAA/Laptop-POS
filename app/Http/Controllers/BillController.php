@@ -34,7 +34,13 @@ class BillController extends Controller
     protected function show(Bill $bill)
     {
         Gate::authorize('show', $bill);
-        $bill = $bill->load([ 'transactions.product','business' ]);
+        $bill = $bill->load([
+            'transactions.product',
+            'business',
+            'createdBy' => function ($query) {
+                $query->withTrashed();
+            }
+        ]);
 
         return Inertia::render('Authenticated/Bill/index', [
             'bill' => $bill,

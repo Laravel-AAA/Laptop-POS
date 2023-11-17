@@ -34,7 +34,7 @@ export default function Bills({
             <table className="table-auto text-left">
               <thead>
                 <tr>
-                  <TH className="rounded-tl-md">#</TH>
+                  <TH className="rounded-tl-md">ID</TH>
                   <TH>Created By</TH>
                   <TH>Date</TH>
                   <TH title="Sub total price (tax is NOT included)">

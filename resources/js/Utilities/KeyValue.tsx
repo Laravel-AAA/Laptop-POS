@@ -19,7 +19,7 @@ export default function KeyValue({
     <p className={className}>
       <span className={"text-blue-gray-500 " + keyClassName}>{key}</span>:&nbsp;
       <span className={"text-gray-800 " + valueClassName} title={title}>
-        {value}
+        {value??'N/A'}
       </span>
     </p>
   );

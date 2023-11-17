@@ -45,11 +45,15 @@ export default function BillInfo({ bill }: { bill: IBill }) {
           v={
             <span>
               {new Date(bill.updated_at).toLocaleDateString("en-ca")}
-              <span className="print:hidden"> ({<FromDate date={bill.updated_at} />})</span>
+              <span className="print:hidden">
+                {" "}
+                ({<FromDate date={bill.updated_at} />})
+              </span>
             </span>
           }
         />
         <KeyValue k="Invoice ID" v={<ID id={bill.id} />} />
+        <KeyValue k="Cashier" v={bill.created_by?.name} />
       </section>
 
       <TransactionsTable bill={bill} />
