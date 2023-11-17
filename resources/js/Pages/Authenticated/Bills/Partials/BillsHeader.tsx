@@ -39,7 +39,7 @@ export default function BillsHeader({ totalResult }: { totalResult: number }) {
         </h2>
 
         <Input
-          label="Search by bill ID #..."
+          label="Search by ID #..."
           type="search"
           inputMode="search"
           size="md"
@@ -63,14 +63,14 @@ export default function BillsHeader({ totalResult }: { totalResult: number }) {
           />
         )}
       </div>
-      <div className="mt-3 flex items-center justify-end md:my-auto md:block">
-        {!filter.search && prevFilter?.search === filter.search && (
+      {/* <div className="mt-3 flex items-center justify-end md:my-auto md:block"> */}
+        {/* {!filter.search && prevFilter?.search === filter.search && (
           <TotalResult
             className="mt-1 md:mt-0"
             text="Total"
             number={totalResult}
           />
-        )}
+        )} */}
         {filter.search && prevFilter?.search === filter.search && (
           <TotalResult
             className="mt-1 block md:mt-0 md:hidden"
@@ -78,7 +78,7 @@ export default function BillsHeader({ totalResult }: { totalResult: number }) {
             number={totalResult}
           />
         )}
-      </div>
+      {/* </div> */}
     </div>
   );
 }

@@ -3,8 +3,9 @@ import BillOptions from "./BillOptions";
 import FromDate from "@/Utilities/FromDate";
 import Num from "@/Utilities/Num";
 import ID from "@/Utilities/ID";
-import { PropsWithChildren, useMemo } from "react";
+import { PropsWithChildren, useMemo, useState } from "react";
 import { usePage } from "@inertiajs/react";
+import { Tooltip } from "@material-tailwind/react";
 type PropsProduct = {
   bill: IBill;
 };
@@ -23,10 +24,23 @@ export default function Product({ bill }: PropsProduct) {
   );
   const totalPrice = subTotalPrice * (1 + taxPercent);
 
+  const [isCopy, setCopy] = useState<boolean>(false);
+
   return (
     <tr className="even:bg-blue-gray-50/50">
       <TD>
-        <ID id={bill.id} />
+        <Tooltip content={isCopy ? "Copied" : "Copy"}>
+          <button
+            className="dev-style"
+            onClick={() => {
+              navigator.clipboard
+                .writeText(bill.id)
+                .then(() => setCopy(true));
+            }}
+          >
+            <ID id={bill.id} />
+          </button>
+        </Tooltip>
       </TD>
       <TD>
         {bill.createdBy_id === loggedInId ? (
