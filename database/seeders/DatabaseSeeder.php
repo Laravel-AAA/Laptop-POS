@@ -7,7 +7,6 @@ use App\Models\Business;
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\User;
-use Exception;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -38,8 +37,8 @@ class DatabaseSeeder extends Seeder
                 for ($i = 0; $i < 6; $i++) {
                     $products[] = Product::factory()->recycle($businesses[$b])->recycle($users[$u])->create();
                     $bills[] = Bill::factory()->recycle($businesses[$b])->recycle($users[$u])->create();
-                    Transaction::factory()->count(3)->recycle($products[$i])->recycle($bills[$i])->create();
                 }
+                Transaction::factory()->count(20)->recycle($products)->recycle($bills)->create();
             }
             // $bills = Bill::factory()->count(100)->recycle($user)->create();
             // Transaction::factory()->count(500)->recycle($products)->recycle($bills)->create();

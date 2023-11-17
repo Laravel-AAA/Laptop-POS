@@ -37,7 +37,7 @@ export default function Product({
                 ? product.img
                 : "/products-images/" + product.img
             }
-            alt={"Image " + (product.img ?? "") + " of product " + product.name}
+            alt={product.name + " image."}
           />
         ) : (
           <NoImageImage />

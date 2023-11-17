@@ -5,6 +5,7 @@ import TransactionsTable from "./TransactionsTable";
 import ID from "@/Utilities/ID";
 import Num from "@/Utilities/Num";
 import QRCode from "react-qr-code";
+import FromDate from "@/Utilities/FromDate";
 
 export default function BillInfo({ bill }: { bill: IBill }) {
   if (!bill.business)
@@ -41,7 +42,12 @@ export default function BillInfo({ bill }: { bill: IBill }) {
       <section>
         <KeyValue
           k="Date"
-          v={new Date(bill.updated_at).toLocaleDateString("en-ca")}
+          v={
+            <span>
+              {new Date(bill.updated_at).toLocaleDateString("en-ca")}
+              <span className="print:hidden"> ({<FromDate date={bill.updated_at} />})</span>
+            </span>
+          }
         />
         <KeyValue k="Invoice ID" v={<ID id={bill.id} />} />
       </section>
@@ -118,7 +124,7 @@ export default function BillInfo({ bill }: { bill: IBill }) {
       <section className="flex justify-center">
         <QRCode value={location.href} size={160} />
       </section>
-      <p className="text-center font-extrabold text-xl">Thank you</p>
+      <p className="text-center text-xl font-extrabold">Thank you</p>
     </section>
   );
 }
