@@ -7,6 +7,7 @@ export default function KeyValue({
   keyClassName = "",
   valueClassName = "",
   title = "",
+  noColon=false,
 }: {
   k: string;
   className?: string;
@@ -14,10 +15,11 @@ export default function KeyValue({
   valueClassName?: string;
   title?: string;
   v?: ReactNode | string | null | undefined;
+  noColon?:boolean
 }) {
   return (
     <p className={className}>
-      <span className={"text-blue-gray-500 " + keyClassName}>{key}</span>:&nbsp;
+      <span className={"text-blue-gray-500 " + keyClassName}>{key}</span>{!noColon&&':'}&nbsp;
       <span className={"text-gray-800 " + valueClassName} title={title}>
         {value??'N/A'}
       </span>

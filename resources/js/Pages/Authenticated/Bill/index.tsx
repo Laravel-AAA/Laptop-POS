@@ -30,24 +30,13 @@ export default function Bill({
   return (
     <>
       {user !== null ? (
-        <Authenticated
-          user={user}
-          header={
-            <BillHeader bill={bill}/>
-          }
-        >
-          <div className="mt-6">
-            <FormLayout businessLogo={bill.business?.logo}>
-              <BillInfo bill={bill} />
-            </FormLayout>
-            <Footer />
-          </div>
+        <Authenticated user={user} header={<BillHeader bill={bill} />}>
+          <BillInfo bill={bill} />
+          <Footer />
         </Authenticated>
       ) : (
         <GuestLayout>
-          <FormLayout businessLogo={bill.business?.logo}>
-            <BillInfo bill={bill} />
-          </FormLayout>
+          <BillInfo bill={bill} />
         </GuestLayout>
       )}
     </>

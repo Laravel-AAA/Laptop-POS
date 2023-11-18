@@ -11,7 +11,7 @@ export default function Flash({ flash }: { flash: PageProps["flash"] }) {
   useEffect(() => {
     setShow(true);
     const timeout = setTimeout(() => setShow(false), 3000);
-    return () => clearTimeout(timeout);
+    // return () => clearTimeout(timeout);
   }, [flash]);
 
   return (

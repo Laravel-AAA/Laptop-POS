@@ -15,7 +15,7 @@ export default function TransactionRow({
         <td className="flex h-10 w-14 items-center justify-center">
           {t.product.img && (
             <img
-              className="max-w-14 max-h-10"
+              className="max-w-14 max-h-10 print:hidden"
               src={
                 t.product.img.startsWith("http")
                   ? t.product.img
