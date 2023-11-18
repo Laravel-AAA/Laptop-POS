@@ -28,10 +28,20 @@ export interface IUser extends ICreateUser, BasicModel, SoftDelete {
   business_id: string;
 }
 
+export type PageProps<T extends Record<string, unknown> = Record<string, unknown>,> = T & {
+  flash: {
+    success: string | null;
+    error: string | null;
+    warning: string | null;
+    message: string | null;
+  };
+  auth: { user: IUser | null; business: IBusiness | null };
+}
+
 export type AuthPageProps<
   T extends Record<string, unknown> = Record<string, unknown>,
-> = T & {
-  auth: { user: IUser; business: IBusiness };
+> = PageProps<T> & {
+  override auth: { user: IUser; business: IBusiness };
 };
 
 export interface IProduct extends ICreateProduct, BasicModel {

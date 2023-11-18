@@ -1,8 +1,8 @@
 import { Card } from "@material-tailwind/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { AuthPageProps, IBill, IFilterBill, ILaravelPaginate } from "@/types";
-import { Head } from "@inertiajs/react";
-import { HTMLAttributes, PropsWithChildren, useState } from "react";
+import { Head, usePage } from "@inertiajs/react";
+import { HTMLAttributes, PropsWithChildren } from "react";
 import { BsSearch } from "react-icons/bs";
 import Bill from "./Partials/Bill";
 import Pagination from "@/Components/Pagination";
@@ -29,7 +29,7 @@ export default function Bills({
       when rendering the dropdown content, it will render inside the table so
       last item will not be shown because dropdown content is display below the
       item and that is outside the table */}
-        <div className="mx-auto w-full overflow-x-auto overflow-y-hidden pb-28 pt-6 md:w-11/12 ">
+        <div className="mx-auto w-full overflow-x-auto overflow-y-hidden pb-36 pt-6 md:w-11/12 ">
           <Card className="w-full min-w-fit rounded-md">
             <table className="table-auto text-left">
               <thead>
@@ -63,7 +63,7 @@ export default function Bills({
             )}
           </Card>
         </div>
-        <Pagination paginateItems={paginateBills} />
+        <Pagination className="-mt-20" paginateItems={paginateBills} />
         <Footer />
       </div>
     </AuthenticatedLayout>

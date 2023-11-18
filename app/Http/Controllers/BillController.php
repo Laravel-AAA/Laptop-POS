@@ -15,12 +15,13 @@ class BillController extends Controller
      */
     public function index(Request $request)
     {
-        $bills = $request->user()->business->bills()->with([
+        $bills = $request->user()->business->bills()->latest()->with([
             'createdBy' => function ($query) {
                 $query->withTrashed();
             }
-        ])->latest()
-            ->with('transactions')->with('transactions.product')
+            ,
+            'transactions.product'
+        ])
             ->filter($request->only('search', 'product'))
             ->paginate(15)->appends($request->all());
 
@@ -55,7 +56,7 @@ class BillController extends Controller
         return $this->checkoutPage($request, $bill);
     }
 
-    //Also known as Checkout
+    //AKA Checkout
     protected function create(Request $request)
     {
         return $this->checkoutPage($request);
@@ -99,9 +100,10 @@ class BillController extends Controller
 
         if ($request->get('id')) {
             Bill::destroy($request->get('id'));
-        }
 
-        return to_route('bill.create')->with('success', 'Successfully created');
+            return to_route('bill.create')->with('success', 'Successfully updated');
+        } else
+            return to_route('bill.create')->with('success', 'Successfully created');
     }
 
     /**
@@ -112,6 +114,6 @@ class BillController extends Controller
         Gate::authorize('delete', $bill);
 
         $bill->delete();
-        return redirect()->back()->with('success', 'The bill was deleted successfully');
+        return redirect()->back()->with('success', 'Successfully deleted');
     }
 }

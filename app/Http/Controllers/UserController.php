@@ -42,7 +42,7 @@ class UserController extends Controller
         $newUser->save();
         Mail::to($newUser)->send(new InviteAccountToBusiness($request->user(), $newUser));
 
-        return redirect()->back()->with('success', 'Account ' . $newUser->name . ' have been created successfully. An invitation link sent to ' . $newUser->email . ' with the login information');
+        return redirect()->back()->with('success', 'Successfully created. An invitation link sent to ' . $newUser->email);
     }
 
     /**
@@ -66,7 +66,7 @@ class UserController extends Controller
             }
             $request->user()->save();
             return redirect()->back()
-                ->with('success', 'Updated successfully');
+                ->with('success', 'Successfully updated');
         }
 
     }
@@ -84,7 +84,7 @@ class UserController extends Controller
         // $request->session()->invalidate();
         // $request->session()->regenerateToken();
 
-        return redirect()->back()->with('success', 'Deleted successfully');
+        return redirect()->back()->with('success', 'Successfully soft-deleted');
     }
 
     /**Type hint won't work for trashed entity */
@@ -93,7 +93,7 @@ class UserController extends Controller
         $account = User::onlyTrashed()->findOrFail($accountId);
         Gate::authorize('restore', $account);
         $account->restore();
-        return redirect()->back()->with('success', 'Restored successfully');
+        return redirect()->back()->with('success', 'Successfully restored');
     }
 
     public function forceDestroy(string $accountId): RedirectResponse
@@ -101,6 +101,6 @@ class UserController extends Controller
         $account = User::onlyTrashed()->findOrFail($accountId);
         Gate::authorize('forceDestroy', $account);
         $account->forceDelete();
-        return redirect()->back()->with('success', 'Deleted successfully');
+        return redirect()->back()->with('success', 'Successfully deleted');
     }
 }

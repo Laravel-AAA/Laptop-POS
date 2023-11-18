@@ -51,7 +51,7 @@ class BusinessController extends Controller
         $business->update($updatedBusiness);
         $business->save();
 
-        return redirect()->back()->with('success', 'Business information was updated successfully');
+        return redirect()->back()->with('success', 'Successfully updated');
     }
 
     /**

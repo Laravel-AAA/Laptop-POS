@@ -46,7 +46,7 @@ export default function AlertModal({
         )
       }
     >
-      <p className="text-sm text-gray-600">{paragraph}</p>
+      <h1 className="text-sm text-gray-600">{paragraph}</h1>
     </TemplateModal>
   );
 }

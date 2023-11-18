@@ -34,9 +34,15 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
-                'business'=>$request->user()?->business,
+                'business' => $request->user()?->business,
             ],
-            'ziggy' => fn () => [
+            'flash' => [
+                'message' => fn() => $request->session()->get('message'),
+                'success' => fn() => $request->session()->get('success'),
+                'error' => fn() => $request->session()->get('error'),
+                'warning' => fn() => $request->session()->get('warning'),
+            ],
+            'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],

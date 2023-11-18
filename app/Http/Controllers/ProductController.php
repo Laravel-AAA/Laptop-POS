@@ -47,9 +47,8 @@ class ProductController extends Controller
             $product['img'] = $this->storeImg($request);
         }
         $product->save();
-        // dd($product);
 
-        return redirect()->back()->with('success', 'The product was created successfully');
+        return redirect()->back()->with('success', 'Successfully created');
     }
 
     protected function destroy(Product $product)
@@ -59,7 +58,7 @@ class ProductController extends Controller
         if ($product->img)
             $this->deleteImg($product->img);
         $product->delete();
-        return redirect()->back()->with('success', 'The product was deleted successfully');
+        return redirect()->back()->with('success', 'Successfully deleted');
     }
 
     protected function update(UpdateProductRequest $request, Product $product)
@@ -76,7 +75,7 @@ class ProductController extends Controller
         }
         $product->update($newProduct);
 
-        return redirect()->back()->with('success', 'The product was updated successfully');
+        return redirect()->back()->with('success', 'Successfully updated');
     }
 
 
