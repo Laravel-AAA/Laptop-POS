@@ -27,7 +27,7 @@ export default function Flash({ flash }: { flash: PageProps["flash"] }) {
         className="opacity-90"
       >
         {flash.message && (
-          <Alert icon={<FaRegMessage className="h-6" />}>{flash.message}</Alert>
+          <Alert>{flash.message}</Alert>
         )}
 
         {flash.error && (
