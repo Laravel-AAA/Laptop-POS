@@ -6,7 +6,9 @@ export type NumProps = {
   fixed?: number;
   showCurrency?: boolean;
   prefix?: string;
+  suffix?: string;
   prefixProps?: HTMLAttributes<HTMLSpanElement>;
+  suffixProps?: HTMLAttributes<HTMLSpanElement>;
   currency?: string;
 } & ( //if amount is possibly null then you should declare either `defaultNoAmount` or specify custom `noAmount`. Typescript will help us force such specification.
   | { amount: number; noAmount?: string }
@@ -24,7 +26,9 @@ export default function Num({
   currency: currencySymbol,//when user is not authorized then showCurrency will throw an exception in usePage hook. So, you should provide the currency symbol.
   //prefix will be shown even if amount is null
   prefix = "",
+  suffix = "",
   prefixProps = {},
+  suffixProps = {},
   fixed = 2,
 }: NumProps) {
   let number: string; //number is either number or noAmount. Ex: '1123' or 'N/A'
@@ -52,10 +56,11 @@ export default function Num({
 
   return (
     <span className={className}>
-      {prefix && <span {...prefixProps}>{prefix}&nbsp;</span>}
+      {prefix && <span {...prefixProps}>{prefix}&#8239;</span>}
       {/* &#8239; is thin space */}
       {currency}
       {number}
+      {suffix && <span {...suffixProps}>&#8239;{suffix}</span>}
     </span>
   );
 }

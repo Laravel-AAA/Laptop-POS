@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\UserController;
@@ -52,12 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::Resource('bill', BillController::class)->only(['index', 'store', 'create', 'edit','update', 'destroy']);
 
-    Route::get('/dashboard', function () {
-        if (in_array(request()->user()->role, ['Owner', 'Maintainer']))
-            return Inertia::render('Authenticated/Dashboard/index'); //tsx component location on resources/js/Pages folder
-        else
-            return redirect(route('bill.create'));
-    })->name('dashboard');
+    Route::get('/dashboard',[DashboardController::class,'index'] )->name('dashboard');
 });
 
 //Anyone can view a bill

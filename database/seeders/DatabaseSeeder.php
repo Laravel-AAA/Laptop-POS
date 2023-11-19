@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         //each 1 creates 6 products & bills for each user
         //each bill creates 3 count of transaction using same product.
         $businesses = [];
-        for ($b = 0; $b < 5; $b++) {
+        for ($b = 0; $b < 2; $b++) {
             $businesses[] = Business::factory()->create();
             $users = [];
             for ($u = 0; $u < 5; $u++) {
@@ -34,11 +34,11 @@ class DatabaseSeeder extends Seeder
                     ->create($u == 0 ? ['name' => 'asdf', 'email' => $b . 'asdf@asdf.asdf', 'role' => 'Owner', 'email_verified_at' => now(), 'deleted_at' => null] : []);
                 $products = [];
                 $bills = [];
-                for ($i = 0; $i < 6; $i++) {
+                for ($i = 0; $i < 60; $i++) {
                     $products[] = Product::factory()->recycle($businesses[$b])->recycle($users[$u])->create();
                     $bills[] = Bill::factory()->recycle($businesses[$b])->recycle($users[$u])->create();
                 }
-                Transaction::factory()->count(20)->recycle($products)->recycle($bills)->create();
+                Transaction::factory()->count(200)->recycle($products)->recycle($bills)->create();
             }
             // $bills = Bill::factory()->count(100)->recycle($user)->create();
             // Transaction::factory()->count(500)->recycle($products)->recycle($bills)->create();
