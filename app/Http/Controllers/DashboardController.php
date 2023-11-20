@@ -16,23 +16,23 @@ class DashboardController extends Controller
     {
         if (in_array(request()->user()->role, ['Owner', 'Maintainer'])) {
 
-            [$salesThisWeek, $salesIncreasePercentage] = $this->calcSales();
-            [$billsCountThisWeek, $billsIncreasePercentage] = $this->calcBillsCount();
-            $cashPaymentsPercentage = $this->calcCashPayment();
+            [$salesThisWeek, $salesIncreasePercent] = $this->calcSales();
+            [$billsCountThisWeek, $billsIncreasePercent] = $this->calcBillsCount();
+            $cashPaymentsPercentThisWeek = $this->calcCashPayment($billsCountThisWeek);
             return Inertia::render('Authenticated/Dashboard/index', [
                 'cardsValue' => [
                     'sales' => [
                         'value' => $salesThisWeek,
-                        'increase' => $salesIncreasePercentage,
+                        'increase' => $salesIncreasePercent,
                     ],
                     'bills' => [
                         'value' => $billsCountThisWeek,
-                        'increase' => $billsIncreasePercentage,
+                        'increase' => $billsIncreasePercent,
                     ],
-                    'cashPaymentPercentage' => $cashPaymentsPercentage,
+                    'cashPaymentPercentage' => $cashPaymentsPercentThisWeek,
                     'productsCount' => request()->user()->business->products()->count(),
                 ],
-            ]); //tsx component location on resources/js/Pages folder
+            ]);
 
         } else
             return redirect(route('bill.create'));
@@ -83,16 +83,16 @@ class DashboardController extends Controller
         return [$countThisWeek, $increasePercentage];
     }
 
-    private function calcCashPayment()
+    private function calcCashPayment(int $billsCountThisWeek)
     {
-        $res = request()->user()->business->bills()
+        $cashPaymentCount = request()->user()->business->bills()
+            ->whereNotNull('cashReceived')
             ->whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()])
-            ->get('cashReceived')->pluck('cashReceived');
-        if ($res->count() > 0)
-            $percentageThisWeek = $res->sum(fn($x) => $x !== null) / $res->count() * 100;
-        else
-            $percentageThisWeek = 0;
+            ->count();
 
-        return $percentageThisWeek;
+        if ($billsCountThisWeek > 0)
+            return $cashPaymentCount / $billsCountThisWeek * 100;
+        else
+            return 0;
     }
 }
