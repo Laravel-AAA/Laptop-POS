@@ -28,6 +28,7 @@ class DashboardController extends Controller
                         'value' => $billsCountThisWeek,
                         'increase' => $billsIncreasePercentage,
                     ],
+                    'productsCount'=> request()->user()->business->products()->count(),
                 ],
             ]); //tsx component location on resources/js/Pages folder
 
@@ -79,5 +80,4 @@ class DashboardController extends Controller
             $increasePercentage = ($countThisWeek - $countLastWeek) / $countLastWeek * 100;
         return [$countThisWeek, $increasePercentage];
     }
-
 }

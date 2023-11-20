@@ -2,7 +2,7 @@ import { AuthPageProps, IProduct } from "@/types";
 import ProductOptions from "./ProductOptions";
 import Num from "@/Utilities/Num";
 import { usePage } from "@inertiajs/react";
-import NoImageImage from "@/Pages/Authenticated/Inventory/Partials/NoImageImage";
+import DefaultProductImg from "@/Pages/Authenticated/Inventory/Partials/DefaultProductImg";
 type PropsProduct = {
   product: IProduct;
   requestEdit: () => void;
@@ -40,7 +40,7 @@ export default function Product({
             alt={product.name + " image."}
           />
         ) : (
-          <NoImageImage />
+          <DefaultProductImg />
         )}
       </div>
       <div className="flex w-full flex-grow flex-col px-4  py-4 ">

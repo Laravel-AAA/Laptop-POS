@@ -29,7 +29,7 @@ export function StatisticsCard({
       >
         {icon}
       </CardHeader>
-      <Tooltip content={tooltip || undefined}>
+      <Tooltip content={tooltip} className={!tooltip?'hidden':""} >
         <CardBody className="p-4 text-right">
           <Typography
             variant="small"
@@ -102,7 +102,7 @@ StatisticsCard.propTypes = {
 export interface StatisticsCardProps {
   icon: ReactNode;
   title: string;
-  tooltip: string;
+  tooltip?: string;
   value: number;
   showCurrency: boolean;
   footer?: {

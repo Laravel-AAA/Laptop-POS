@@ -3,6 +3,7 @@ import { IconButton } from "@material-tailwind/react/components/IconButton";
 import { Link } from "@inertiajs/react";
 import { ILaravelPaginate } from "@/types";
 import { HTMLAttributes, StyleHTMLAttributes } from "react";
+import BetterLink from "./Buttons/BetterLink";
 
 export default function Pagination({
   paginateItems,
@@ -14,13 +15,10 @@ export default function Pagination({
   return (
     <>
       {paginateItems.links.length > 3 && (
-        <div
-          {...props}
-          className={"flex justify-center pb-10 " + className}
-        >
-          <Link
+        <div {...props} className={"flex justify-center pb-10 " + className}>
+          <BetterLink
             href={paginateItems.prev_page_url ?? ""}
-            as={paginateItems.prev_page_url ? "a" : "span"}
+            disabled={!paginateItems.prev_page_url}
             preserveState={true}
           >
             <IconButton
@@ -30,7 +28,7 @@ export default function Pagination({
             >
               <FaArrowLeft strokeWidth={2} className="h-4 w-4" />
             </IconButton>
-          </Link>
+          </BetterLink>
 
           {paginateItems.links
             .filter((v) => Number.isInteger(Number(v.label))) //remove Previous/Next links
@@ -48,9 +46,9 @@ export default function Pagination({
               </Link>
             ))}
 
-          <Link
+          <BetterLink
+            disabled={!paginateItems.next_page_url}
             href={paginateItems.next_page_url ?? ""}
-            as={paginateItems.prev_page_url ? "a" : "span"}
             preserveState={true}
           >
             <IconButton
@@ -60,7 +58,7 @@ export default function Pagination({
             >
               <FaArrowRight strokeWidth={2} className="h-4 w-4" />
             </IconButton>
-          </Link>
+          </BetterLink>
         </div>
       )}
     </>

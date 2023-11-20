@@ -1,6 +1,6 @@
 import { BsImage } from "react-icons/bs";
 
-export default function NoImageImage({
+export default function DefaultProductImg({
   className = "",
 }: {
   className?: string;

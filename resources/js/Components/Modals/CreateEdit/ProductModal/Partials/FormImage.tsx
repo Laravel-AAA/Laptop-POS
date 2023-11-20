@@ -1,7 +1,7 @@
 import DangerButton from "@/Components/Buttons/DangerButton";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import Input from "@/Components/Inputs/Input";
-import NoImageImage from "@/Pages/Authenticated/Inventory/Partials/NoImageImage";
+import DefaultProductImg from "@/Pages/Authenticated/Inventory/Partials/DefaultProductImg";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { ICreateProduct, IModalAction, IProduct } from "@/types";
 import { useState } from "react";
@@ -35,7 +35,7 @@ export default function FormImage({
     );
 
   if (state === "show") {
-    if (img === null) return <NoImageImage />;
+    if (img === null) return <DefaultProductImg />;
     else return <ImageElement img={img} productName={form.data.name} />;
   }
 

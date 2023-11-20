@@ -1,31 +1,19 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { AuthPageProps } from "@/types";
 import { Head } from "@inertiajs/react";
-import { Typography } from "@material-tailwind/react";
 import React from "react";
 import StatisticsCard, { StatisticsCardProps } from "./Partials/StatisticsCard";
 import {
-  FaUsers,
   FaChartBar,
-  FaUserPlus,
-  FaPiggyBank,
-  FaMoneyBill1,
-  FaMoneyBill1Wave,
-  FaMoneyBillTransfer,
-  FaMoneyBillTrendUp,
-  FaMoneyBillWheat,
   FaMoneyBills,
   FaReceipt,
+  FaWarehouse,
 } from "react-icons/fa6";
-import {
-  FaCertificate,
-  FaCreditCard,
-  FaMoneyBill,
-  FaMoneyBillAlt,
-} from "react-icons/fa";
+
 interface CardsValue {
-  sales: { value: number; increase: number }; //Total amount of bills' total-price (tax included)
-  bills: { value: number; increase: number }; //number of bills
+  sales: { value: number; increase: number }; //Total amount of bills' total-price (tax included) (last 24 hours)
+  bills: { value: number; increase: number }; //number of bills (last 7 days)
+  productsCount: number; //number of products (all time).
   users: { value: number; increase: number };
 }
 export default function Dashboard({
@@ -36,7 +24,7 @@ export default function Dashboard({
     {
       icon: <FaMoneyBills className="h-6 w-6 text-white" />,
       title: "Sales",
-      tooltip: "Total amount of sales within 24 hours",
+      tooltip: "Total Amount of Sales in the Past 24 Hours",
       value: cardsValue.sales.value,
       showCurrency: true,
       footer: {
@@ -47,7 +35,7 @@ export default function Dashboard({
     {
       icon: <FaReceipt className="h-6 w-6 text-white" />,
       title: "Bills",
-      tooltip: "Number of bills created within this week",
+      tooltip: "Bills Created in the Past 7 Days",
       value: cardsValue.bills.value,
       showCurrency: false,
       footer: {
@@ -56,15 +44,10 @@ export default function Dashboard({
       },
     },
     {
-      icon: <FaUserPlus className="h-6 w-6 text-white" />,
-      title: "New Clients",
-      tooltip: "",
-      value: 3462,
+      icon: <FaWarehouse className="h-6 w-6 text-white" />,
+      title: "Total Products",
+      value: cardsValue.productsCount,
       showCurrency: false,
-      footer: {
-        increase: -2,
-        label: "than yesterday",
-      },
     },
     {
       icon: <FaChartBar className="h-6 w-6 text-white" />,

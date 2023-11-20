@@ -1,4 +1,4 @@
-import NoImageImage from "@/Pages/Authenticated/Inventory/Partials/NoImageImage";
+import DefaultProductImg from "@/Pages/Authenticated/Inventory/Partials/DefaultProductImg";
 import FromDate from "@/Utilities/FromDate";
 import KeyValue from "@/Utilities/KeyValue";
 import Num from "@/Utilities/Num";
@@ -27,7 +27,7 @@ export default function ViewProductInfo({ product }: { product: IProduct }) {
             alt={"Image of product " + product.name}
           />
         ) : (
-          <NoImageImage className="!my-1" />
+          <DefaultProductImg className="!my-1" />
         )}
       </div>
       <KeyValue k="Name" v={product.name} />
