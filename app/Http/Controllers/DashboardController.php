@@ -18,6 +18,7 @@ class DashboardController extends Controller
 
             [$salesThisWeek, $salesIncreasePercentage] = $this->calcSales();
             [$billsCountThisWeek, $billsIncreasePercentage] = $this->calcBillsCount();
+            $cashPaymentsPercentage = $this->calcCashPayment();
             return Inertia::render('Authenticated/Dashboard/index', [
                 'cardsValue' => [
                     'sales' => [
@@ -28,7 +29,8 @@ class DashboardController extends Controller
                         'value' => $billsCountThisWeek,
                         'increase' => $billsIncreasePercentage,
                     ],
-                    'productsCount'=> request()->user()->business->products()->count(),
+                    'cashPaymentPercentage' => $cashPaymentsPercentage,
+                    'productsCount' => request()->user()->business->products()->count(),
                 ],
             ]); //tsx component location on resources/js/Pages folder
 
@@ -79,5 +81,18 @@ class DashboardController extends Controller
         else
             $increasePercentage = ($countThisWeek - $countLastWeek) / $countLastWeek * 100;
         return [$countThisWeek, $increasePercentage];
+    }
+
+    private function calcCashPayment()
+    {
+        $res = request()->user()->business->bills()
+            ->whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()])
+            ->get('cashReceived')->pluck('cashReceived');
+        if ($res->count() > 0)
+            $percentageThisWeek = $res->sum(fn($x) => $x !== null) / $res->count() * 100;
+        else
+            $percentageThisWeek = 0;
+
+        return $percentageThisWeek;
     }
 }

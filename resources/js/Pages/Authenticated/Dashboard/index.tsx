@@ -4,9 +4,9 @@ import { Head } from "@inertiajs/react";
 import React from "react";
 import StatisticsCard, { StatisticsCardProps } from "./Partials/StatisticsCard";
 import {
-  FaChartBar,
   FaMoneyBills,
   FaReceipt,
+  FaWallet,
   FaWarehouse,
 } from "react-icons/fa6";
 
@@ -14,7 +14,7 @@ interface CardsValue {
   sales: { value: number; increase: number }; //Total amount of bills' total-price (tax included) (last 24 hours)
   bills: { value: number; increase: number }; //number of bills (last 7 days)
   productsCount: number; //number of products (all time).
-  users: { value: number; increase: number };
+  cashPaymentPercentage: number; //percentage of using cash payment method (last 7 days)
 }
 export default function Dashboard({
   auth,
@@ -44,21 +44,18 @@ export default function Dashboard({
       },
     },
     {
+      icon: <FaWallet className="h-6 w-6 text-white" />,
+      title: "Cash Payment",
+      tooltip: "Average Payment Method in the Past 7 Days",
+      value: cardsValue.cashPaymentPercentage,
+      showCurrency: false,
+      suffix: "%",
+    },
+    {
       icon: <FaWarehouse className="h-6 w-6 text-white" />,
       title: "Total Products",
       value: cardsValue.productsCount,
       showCurrency: false,
-    },
-    {
-      icon: <FaChartBar className="h-6 w-6 text-white" />,
-      title: "Sales",
-      tooltip: "",
-      value: 103430,
-      showCurrency: true,
-      footer: {
-        increase: 0,
-        label: "than yesterday",
-      },
     },
   ];
 
@@ -68,13 +65,11 @@ export default function Dashboard({
 
       <div className="py-12">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-          {/* <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg"> */}
           <div className="mb-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {statisticsCardsData.map((rest) => (
               <StatisticsCard key={rest.title} {...rest} />
             ))}
           </div>
-          {/* </div> */}
         </div>
       </div>
     </AuthenticatedLayout>

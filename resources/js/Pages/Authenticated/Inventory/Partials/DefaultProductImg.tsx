@@ -1,4 +1,4 @@
-import { BsImage } from "react-icons/bs";
+import {  FaBoxOpen } from "react-icons/fa6";
 
 export default function DefaultProductImg({
   className = "",
@@ -6,8 +6,8 @@ export default function DefaultProductImg({
   className?: string;
 }) {
   return (
-    <BsImage
-      className={"mx-auto mt-4 h-auto w-24 text-gray-900 " + className}
+    <FaBoxOpen
+      className={"mx-auto mt-4 h-auto w-16 text-gray-900 " + className}
     />
   );
 }
