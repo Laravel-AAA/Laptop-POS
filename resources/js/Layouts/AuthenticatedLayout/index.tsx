@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement, ReactNode } from "react";
 import { IUser } from "@/types";
 import AppLayout from "../AppLayout";
 import HeaderNav from "./Partials/HeaderNav";
@@ -17,7 +17,7 @@ export default function Authenticated({
 }: PropsWithChildren<{
   user: IUser;
   //empty string is for NO header, because null/undefined means default header.
-  header?: ReactElement | " ";
+  header: ReactNode | string | null;
 }>) {
   return (
     <AppLayout>

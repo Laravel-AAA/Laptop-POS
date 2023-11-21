@@ -1,3 +1,4 @@
+import AppName from "@/Components/Logo/AppName";
 import { Transition } from "@headlessui/react";
 import { useEffect, useState } from "react";
 
@@ -36,9 +37,7 @@ export default function Solutions() {
       <span>Whatever your use case,&nbsp;</span>
       <div className="block md:inline ">
         <div className="-ml-28 inline md:ml-0">
-          <span className="font-semibold text-gray-800">Laptop</span>
-          &thinsp;
-          <span className="font-semibold text-primary-700">POS</span> is built
+          <AppName/> is built
           for&nbsp;
           {businesses.map((b, i) => (
             <Transition
