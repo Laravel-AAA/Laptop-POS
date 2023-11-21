@@ -96,7 +96,7 @@ export default function UserForm({
               I agree to the{" "}
               <Link
                 className="font-semibold text-blue-600 hover:text-blue-400"
-                href="/terms-and-conditions"
+                href={route('termsAndConditions')}
               >
                 Terms & Conditions
               </Link>

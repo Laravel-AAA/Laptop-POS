@@ -1,4 +1,6 @@
+import BetterLink from "@/Components/Buttons/BetterLink";
 import AppName from "@/Components/Logo/AppName";
+import A from "@/Components/Typography/A";
 import H1 from "@/Components/Typography/H1";
 import { H2 } from "@/Components/Typography/H2";
 import LI from "@/Components/Typography/LI";
@@ -7,6 +9,7 @@ import UL from "@/Components/Typography/UL";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { PageProps } from "@/types";
+import { Link } from "@inertiajs/react";
 
 export default function TermsAndConditions({ auth }: PageProps) {
   return auth.user === null ? (
@@ -62,7 +65,7 @@ function Content() {
 
       <P>
         We employ the use of cookies. By accessing <AppName/>, you agreed to use
-        cookies in agreement with the <AppName/>'s Privacy Policy.{" "}
+        cookies in agreement with the <AppName/>'s <A href={route('privacyPolicy')}>Privacy Policy</A>.
       </P>
 
       <P>

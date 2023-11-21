@@ -84,11 +84,11 @@ Route::get('/bill/{bill}', [BillController::class, 'show'])->name('bill.show');
 //if you changed privacy & terms url you have to redirect the old url; it used on third party such as X(twitter).
 Route::get('/privacy-policy', function () {
     return Inertia::render('Anyone/PrivacyPolicy');
-});
+})->name('privacyPolicy');
 //if you changed privacy & terms url you have to redirect the old url; it is used on third party such as X(twitter).
 Route::get('/terms-and-conditions', function () {
     return Inertia::render('Anyone/TermsAndConditions');
-});
+})->name('termsAndConditions');
 
 
 
