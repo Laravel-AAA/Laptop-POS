@@ -5,20 +5,18 @@ import { H2 } from "@/Components/Typography/H2";
 import LI from "@/Components/Typography/LI";
 import P from "@/Components/Typography/P";
 import UL from "@/Components/Typography/UL";
-import Authenticated from "@/Layouts/AuthenticatedLayout";
-import GuestLayout from "@/Layouts/GuestLayout";
+import GuestAuthLayout from "@/Layouts/GuestAuthLayout";
 import { PageProps } from "@/types";
-import React, { PropsWithChildren } from "react";
+import { Head } from "@inertiajs/react";
 
 export default function PrivacyPolicy({ auth }: PageProps) {
-  return auth.user === null ? (
-    <GuestLayout>
-      <Content />
-    </GuestLayout>
-  ) : (
-    <Authenticated user={auth.user} header="Privacy Policy">
-      <Content />
-    </Authenticated>
+  return (
+    <>
+      <Head title="Privacy Policy" />
+      <GuestAuthLayout user={auth.user} header="Privacy Policy">
+        <Content />
+      </GuestAuthLayout>
+    </>
   );
 }
 
@@ -71,8 +69,8 @@ function Content() {
       </P>
       <P>
         When you register for an Account, we may ask for your contact
-        information, including items such as name, company name, address, email
-        address, and telephone number.
+        information, including items such as name, business name, country, city,
+        address, email, and phone number.
       </P>
 
       <H2>How we use your information</H2>

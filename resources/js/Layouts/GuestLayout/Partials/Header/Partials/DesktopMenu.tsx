@@ -12,7 +12,7 @@ export default function DesktopMenu() {
         <li>
           <PrimaryLink
             className="ml-5 flex normal-case"
-            href={route("register")}
+            href={route("register.method")}
           >
             <span>Register&nbsp;</span>
             <FaArrowRight />

@@ -1,4 +1,3 @@
-import BetterLink from "@/Components/Buttons/BetterLink";
 import AppName from "@/Components/Logo/AppName";
 import A from "@/Components/Typography/A";
 import H1 from "@/Components/Typography/H1";
@@ -6,20 +5,18 @@ import { H2 } from "@/Components/Typography/H2";
 import LI from "@/Components/Typography/LI";
 import P from "@/Components/Typography/P";
 import UL from "@/Components/Typography/UL";
-import Authenticated from "@/Layouts/AuthenticatedLayout";
-import GuestLayout from "@/Layouts/GuestLayout";
+import GuestAuthLayout from "@/Layouts/GuestAuthLayout";
 import { PageProps } from "@/types";
-import { Link } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 
 export default function TermsAndConditions({ auth }: PageProps) {
-  return auth.user === null ? (
-    <GuestLayout>
-      <Content />
-    </GuestLayout>
-  ) : (
-    <Authenticated user={auth.user} header="Privacy Policy">
-      <Content />
-    </Authenticated>
+  return (
+    <>
+      <Head title="Terms & Conditions" />
+      <GuestAuthLayout user={auth.user} header="Terms & Conditions">
+        <Content/>
+      </GuestAuthLayout>
+    </>
   );
 }
 
@@ -30,16 +27,19 @@ function Content() {
         <strong>Terms and Conditions</strong>
       </H1>
 
-      <P>Welcome to <AppName/>!</P>
+      <P>
+        Welcome to <AppName />!
+      </P>
 
       <P>
         These terms and conditions outline the rules and regulations for the use
-        of <AppName/>'s Website, located at laptop-pos.com.
+        of <AppName />
+        's Website, located at laptop-pos.com.
       </P>
 
       <P>
         By accessing this website we assume you accept these terms and
-        conditions. Do not continue to use <AppName/> if you do not agree to
+        conditions. Do not continue to use <AppName /> if you do not agree to
         take all of the terms and conditions stated on this page.
       </P>
 
@@ -64,8 +64,9 @@ function Content() {
       </H2>
 
       <P>
-        We employ the use of cookies. By accessing <AppName/>, you agreed to use
-        cookies in agreement with the <AppName/>'s <A href={route('privacyPolicy')}>Privacy Policy</A>.
+        We employ the use of cookies. By accessing <AppName />, you agreed to
+        use cookies in agreement with the <AppName />
+        's <A href={route("privacyPolicy")}>Privacy Policy</A>.
       </P>
 
       <P>
@@ -81,19 +82,27 @@ function Content() {
       </H2>
 
       <P>
-        Unless otherwise stated, <AppName/> and/or its licensors own the
-        intellectual property rights for all material on <AppName/>. All
-        intellectual property rights are reserved. You may access this from
-        <AppName/> for your own personal use subjected to restrictions set in
+        Unless otherwise stated, <AppName /> and/or its licensors own the
+        intellectual property rights for all material on <AppName />. All
+        intellectual property rights are reserved. You may access this from{" "}
+        <AppName /> for your own personal use subjected to restrictions set in
         these terms and conditions.
       </P>
 
       <P>You must not:</P>
       <UL>
-        <LI>Republish material from <AppName/></LI>
-        <LI>Sell, rent or sub-license material from <AppName/></LI>
-        <LI>Reproduce, duplicate or copy material from <AppName/></LI>
-        <LI>Redistribute content from <AppName/></LI>
+        <LI>
+          Republish material from <AppName />
+        </LI>
+        <LI>
+          Sell, rent or sub-license material from <AppName />
+        </LI>
+        <LI>
+          Reproduce, duplicate or copy material from <AppName />
+        </LI>
+        <LI>
+          Redistribute content from <AppName />
+        </LI>
       </UL>
 
       <P>
@@ -108,18 +117,19 @@ function Content() {
       <P>
         Parts of this website offer an opportunity for users to post and
         exchange opinions and information in certain areas of the website.
-        <AppName/> does not filter, edit, publish or review Comments prior to
+        <AppName /> does not filter, edit, publish or review Comments prior to
         their presence on the website. Comments do not reflect the views and
-        opinions of <AppName/>,its agents and/or affiliates. Comments reflect
-        the views and opinions of the person who post their views and opinions.
-        To the extent permitted by applicable laws, <AppName/> shall not be
-        liable for the Comments or for any liability, damages or expenses caused
-        and/or suffered as a result of any use of and/or posting of and/or
-        appearance of the Comments on this website.
+        opinions of <AppName />
+        ,its agents and/or affiliates. Comments reflect the views and opinions
+        of the person who post their views and opinions. To the extent permitted
+        by applicable laws, <AppName /> shall not be liable for the Comments or
+        for any liability, damages or expenses caused and/or suffered as a
+        result of any use of and/or posting of and/or appearance of the Comments
+        on this website.
       </P>
 
       <P>
-        <AppName/> reserves the right to monitor all Comments and to remove any
+        <AppName /> reserves the right to monitor all Comments and to remove any
         Comments which can be considered inappropriate, offensive or causes
         breach of these Terms and Conditions.
       </P>
@@ -147,7 +157,7 @@ function Content() {
       </UL>
 
       <P>
-        You hereby grant <AppName/> a non-exclusive license to use, reproduce,
+        You hereby grant <AppName /> a non-exclusive license to use, reproduce,
         edit and authorize others to use, reproduce and edit any of your
         Comments in any and all forms, formats or media.
       </P>
@@ -205,8 +215,8 @@ function Content() {
         that: (a) the link would not make us look unfavorably to ourselves or to
         our accredited businesses; (b) the organization does not have any
         negative records with us; (c) the benefit to us from the visibility of
-        the hyperlink compensates the absence of <AppName/>; and (d) the link is
-        in the context of general resource information.
+        the hyperlink compensates the absence of <AppName />; and (d) the link
+        is in the context of general resource information.
       </P>
 
       <P>
@@ -219,7 +229,7 @@ function Content() {
       <P>
         If you are one of the organizations listed in paragraph 2 above and are
         interested in linking to our website, you must inform us by sending an
-        e-mail to <AppName/>. Please include your name, your organization name,
+        e-mail to <AppName />. Please include your name, your organization name,
         contact information as well as the URL of your site, a list of any URLs
         from which you intend to link to our Website, and a list of the URLs on
         our site to which you would like to link. Wait 2-3 weeks for a response.
@@ -238,8 +248,9 @@ function Content() {
       </UL>
 
       <P>
-        No use of <AppName/>'s logo or other artwork will be allowed for linking
-        absent a trademark license agreement.
+        No use of <AppName />
+        's logo or other artwork will be allowed for linking absent a trademark
+        license agreement.
       </P>
 
       <H2>
@@ -340,8 +351,3 @@ function Content() {
     </section>
   );
 }
-
-
-
-
-

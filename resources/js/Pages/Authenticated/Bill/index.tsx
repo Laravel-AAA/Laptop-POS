@@ -1,22 +1,12 @@
 import {
-  AuthPageProps,
   IBill,
-  IFilterBill,
-  ILaravelPaginate,
   IUser,
 } from "@/types";
-import React from "react";
 import BillInfo from "./Partials/BillInfo";
 import { PageProps } from "@inertiajs/inertia";
-import Authenticated from "@/Layouts/AuthenticatedLayout";
-import AppLayout from "@/Layouts/AppLayout";
-import GuestLayout from "@/Layouts/GuestLayout";
-import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
-import FormLayout from "@/Layouts/GuestLayout/FormLayout";
-import Footer from "@/Layouts/GuestLayout/Partials/Footer";
-import { Link } from "@inertiajs/react";
-import ID from "@/Utilities/ID";
+import { Head} from "@inertiajs/react";
 import BillHeader from "./Partials/BillHeader";
+import GuestAuthLayout from "@/Layouts/GuestAuthLayout";
 
 export default function Bill({
   auth: { user },
@@ -25,20 +15,12 @@ export default function Bill({
   bill: IBill;
   auth: { user: IUser | null };
 }) {
-  console.log("bill", bill);
-  console.log("user", user);
   return (
     <>
-      {user !== null ? (
-        <Authenticated user={user} header={<BillHeader bill={bill} />}>
-          <BillInfo bill={bill} />
-          <Footer />
-        </Authenticated>
-      ) : (
-        <GuestLayout>
-          <BillInfo bill={bill} />
-        </GuestLayout>
-      )}
+      <Head title="Simplified Invoice" />
+      <GuestAuthLayout user={user} header={<BillHeader bill={bill} />}>
+        <BillInfo bill={bill} />
+      </GuestAuthLayout>
     </>
   );
 }

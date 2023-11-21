@@ -10,8 +10,13 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::middleware('guest')->group(function () {
+    Route::get('register/method',function(){
+        return Inertia::render('Authenticating/RegisterMethod');
+    })->name('register.method');
+
     Route::get('register', [RegisterController::class, 'create'])
                 ->name('register');
 

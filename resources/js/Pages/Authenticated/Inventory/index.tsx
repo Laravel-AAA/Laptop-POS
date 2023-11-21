@@ -29,9 +29,9 @@ export default function Inventory({
     data: null,
   });
 
-
   return (
     <>
+      <Head title="Inventory" />
       <CreateEditProductModal
         modalAction={modalAction}
         setModalAction={setModalAction}
@@ -51,7 +51,6 @@ export default function Inventory({
           />
         }
       >
-        <Head title="Inventory" />
         <div className="flex min-h-[75vh] flex-col justify-between">
           <div className="flex flex-wrap justify-center py-6">
             {products.length === 0 && (

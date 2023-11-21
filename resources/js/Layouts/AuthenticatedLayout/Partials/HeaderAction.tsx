@@ -1,11 +1,8 @@
 import { ReactNode } from "react";
-import { ROUTES } from "..";
 
-export default function HeaderAction({
-  header,
-}: {
-  header?: ReactNode | string;
-}) {
+export type HeaderActionProps = { header: ReactNode | string | null };
+
+export default function HeaderAction({ header }: HeaderActionProps) {
   return (
     <header className="my-0 bg-white shadow">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
