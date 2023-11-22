@@ -1,5 +1,6 @@
+import { Typography } from "@material-tailwind/react";
 import { PropsWithChildren } from "react";
 
 export default function P({ children }: PropsWithChildren) {
-  return <p className="mb-1 mt-2 text-gray-700">{children}</p>;
+  return <Typography variant="paragraph" className="text-gray-700">{children}</Typography>;
 }

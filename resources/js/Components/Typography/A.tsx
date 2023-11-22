@@ -1,15 +1,17 @@
-import { PropsWithChildren } from "react";
-import BetterLink from "../Buttons/BetterLink";
-import { Link } from "@inertiajs/react";
+import { InertiaLinkProps, Link } from "@inertiajs/react";
 
 export default function A({
   children,
-  href,
-}: PropsWithChildren<{ href: string }>) {
+  className = "",
+  ...props
+}: InertiaLinkProps) {
   return (
     <Link
-      className="!inline transition duration-200 hover:underline hover:text-blue-500 text-blue-700"
-      href={href}
+      className={
+        "!inline text-blue-700 transition duration-200 hover:text-blue-500 hover:underline " +
+        className
+      }
+      {...props}
     >
       {children}
     </Link>

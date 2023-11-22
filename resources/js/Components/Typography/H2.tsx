@@ -1,9 +1,13 @@
+import { Typography } from "@material-tailwind/react";
 import { PropsWithChildren } from "react";
 
-export function H2({ children }: PropsWithChildren) {
+export function H2({
+  children,
+  className = "",
+}: PropsWithChildren<{ className?: string }>) {
   return (
-    <h2 className="mb-2 mt-4 text-xl font-semibold text-gray-800">
+    <Typography variant="h2" className={"text-gray-900 mb-1 " + className}>
       {children}
-    </h2>
+    </Typography>
   );
 }

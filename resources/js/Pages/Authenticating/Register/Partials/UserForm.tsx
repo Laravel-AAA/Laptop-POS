@@ -1,6 +1,6 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import Checkbox from "@/Components/Checkbox";
 import Input from "@/Components/Inputs/Input";
+import A from "@/Components/Typography/A";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { ICreateUser } from "@/types";
 import { Link } from "@inertiajs/react";
@@ -9,7 +9,7 @@ import { useEffect } from "react";
 export default function UserForm({
   form,
 }: {
-  form: UseBetterForm<ICreateUser & { termsAndConditions: boolean }>;
+  form: UseBetterForm<ICreateUser>;
 }) {
   useEffect(() => {
     return () => {
@@ -85,31 +85,16 @@ export default function UserForm({
         />
       </div>
 
-      <div className="mt-2">
-        <Checkbox
-          checked={form.data.termsAndConditions}
-          onChange={(e) => {
-            form.setData("termsAndConditions", e.target.checked);
-          }}
-          label={
-            <p>
-              I agree to the{" "}
-              <Link
-                className="font-semibold text-blue-600 hover:text-blue-400"
-                href={route('termsAndConditions')}
-              >
-                Terms & Conditions
-              </Link>
-              .
-            </p>
-          }
-          disabled={form.processing}
-          errorMsg={form.errors.termsAndConditions}
-        />
+      <div className="mx-2 mt-2">
+        <p className="text-xs text-gray-600">
+          By proceeding, you agree to our{" "}
+          <A href={route("termsAndConditions")}>Terms & Conditions</A> and
+          confirm you have read our{" "}
+          <A href={route("privacyPolicy")}>Privacy and Cookie Statement</A>.
+        </p>
       </div>
 
       <div className="mt-3 flex items-center justify-end">
-
         <div className="flex items-center justify-end">
           <Link
             href={route("login")}

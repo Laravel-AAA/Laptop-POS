@@ -72,7 +72,7 @@ export default function InventoryHeader({
         )}
       </div>
       <div className="mt-3 flex items-center justify-end md:my-auto md:block">
-        {!filter.search && prevFilter?.search === filter.search && (
+        {!filter.search  && (
           <TotalResult
             className="mt-1 md:mt-0"
             text="Total"
