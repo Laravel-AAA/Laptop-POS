@@ -122,7 +122,7 @@ export default function Checkout({
   };
   // console.log("screen width", window.innerWidth);
   return (
-    <AuthenticatedLayout user={auth.user} header={" "}>
+    <AuthenticatedLayout user={auth.user} header={null}>
       <Head title="Checkout" />
 
       <div className="w-full flex-row-reverse md:flex">

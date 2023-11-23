@@ -12,7 +12,7 @@ export default function Edit({
   status,
 }: AuthPageProps<{ mustVerifyEmail: boolean; status?: string }>) {
   return (
-    <AuthenticatedLayout user={auth.user}>
+    <AuthenticatedLayout user={auth.user} header="Profile">
       <Head title="Profile" />
 
       <div className="py-12">

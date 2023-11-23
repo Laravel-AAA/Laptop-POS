@@ -34,6 +34,10 @@ class RegisterController extends Controller
         $user = new User($registerInfo);
         $business = new Business($registerInfo['business']);
         $business->save();
+        if($request->hasValidSignature() && isset($request->email)){
+            $user->email = $request->email;
+            $user->email_verified_at = now();
+        }
         $user->business_id = $business->id;
         $user->save();
         event(new Registered($user));

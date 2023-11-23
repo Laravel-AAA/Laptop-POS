@@ -20,7 +20,7 @@ export default function VerifyEmail({
   };
 
   return (
-    <AuthenticatedLayout header=" " user={auth.user}>
+    <AuthenticatedLayout header={null} user={auth.user}>
       <FormLayout>
         <Head title="Email Verification" />
 

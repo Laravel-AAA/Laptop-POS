@@ -1,6 +1,6 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import Checkbox from "@/Components/Checkbox";
 import Input from "@/Components/Inputs/Input";
+import A from "@/Components/Typography/A";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { ICreateUser } from "@/types";
 import { Link } from "@inertiajs/react";
@@ -9,8 +9,10 @@ import { useEffect } from "react";
 export default function UserForm({
   form,
 }: {
-  form: UseBetterForm<ICreateUser & { termsAndConditions: boolean }>;
+  form: UseBetterForm<ICreateUser>;
 }) {
+  const params = new URLSearchParams(window.location.search);
+
   useEffect(() => {
     return () => {
       form.reset("password", "password_confirmation");
@@ -43,7 +45,7 @@ export default function UserForm({
           value={form.data.email}
           errorMsg={form.errors.email}
           hideError={form.isDirty("email")}
-          disabled={form.processing}
+          disabled={form.processing || (params.get("email")?.length ?? 0) > 2}
           className="mt-1 block w-full"
           autoComplete="email"
           onChange={(e) => form.setData("email", e.target.value)}
@@ -85,31 +87,16 @@ export default function UserForm({
         />
       </div>
 
-      <div className="mt-2">
-        <Checkbox
-          checked={form.data.termsAndConditions}
-          onChange={(e) => {
-            form.setData("termsAndConditions", e.target.checked);
-          }}
-          label={
-            <p>
-              I agree to the{" "}
-              <Link
-                className="font-semibold text-blue-600 hover:text-blue-400"
-                href="/terms"
-              >
-                Terms & Conditions
-              </Link>
-              .
-            </p>
-          }
-          disabled={form.processing}
-          errorMsg={form.errors.termsAndConditions}
-        />
+      <div className="mx-2 mt-2">
+        <p className="text-xs text-gray-600">
+          By proceeding, you agree to our{" "}
+          <A href={route("termsAndConditions")}>Terms & Conditions</A> and
+          confirm you have read our{" "}
+          <A href={route("privacyPolicy")}>Privacy and Cookie Statement</A>.
+        </p>
       </div>
 
       <div className="mt-3 flex items-center justify-end">
-
         <div className="flex items-center justify-end">
           <Link
             href={route("login")}

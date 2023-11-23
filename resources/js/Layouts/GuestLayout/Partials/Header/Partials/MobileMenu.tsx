@@ -84,7 +84,7 @@ export default function MobileMenu() {
             </li>
             <li>
               <PrimaryLink
-                href={route("register")}
+                href={route("register.method")}
                 className="flex justify-center normal-case"
                 onClick={() => setMobileNavOpen(false)}
               >

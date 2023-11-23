@@ -60,7 +60,7 @@ export default function Dashboard({
   ];
 
   return (
-    <AuthenticatedLayout user={auth.user}>
+    <AuthenticatedLayout user={auth.user} header="Dashboard">
       <Head title="Dashboard" />
 
       <div className="py-12">

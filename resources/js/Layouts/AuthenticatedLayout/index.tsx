@@ -1,8 +1,13 @@
-import { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren } from "react";
 import { IUser } from "@/types";
 import AppLayout from "../AppLayout";
 import HeaderNav from "./Partials/HeaderNav";
-import HeaderAction from "./Partials/HeaderAction";
+import HeaderAction, { HeaderActionProps } from "./Partials/HeaderAction";
+
+export type AuthenticatedLayoutProps = PropsWithChildren<{
+  user: IUser;
+  header: HeaderActionProps["header"];
+}>;
 
 export const ROUTES: { link: string; name: string }[] = [
   { name: "Checkout", link: "bill.create" },
@@ -10,15 +15,12 @@ export const ROUTES: { link: string; name: string }[] = [
   { name: "Bills", link: "bill.index" },
   { name: "Dashboard", link: "dashboard" },
 ];
+
 export default function Authenticated({
   user,
   header,
   children,
-}: PropsWithChildren<{
-  user: IUser;
-  //empty string is for NO header, because null/undefined means default header.
-  header?: ReactElement | " ";
-}>) {
+}: AuthenticatedLayoutProps) {
   return (
     <AppLayout>
       <div className="min-h-screen">

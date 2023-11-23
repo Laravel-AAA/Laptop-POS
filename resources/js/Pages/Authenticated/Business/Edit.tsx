@@ -14,8 +14,8 @@ export default function Edit({ auth }: AuthPageProps) {
       .business;
 
   return (
-    <AuthenticatedLayout user={auth.user}>
-      <Head title="Profile" />
+    <AuthenticatedLayout user={auth.user} header="Business">
+      <Head title="Business" />
 
       <div className="py-12">
         <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
