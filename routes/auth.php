@@ -40,7 +40,7 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
 
-    //Register Methods
+    //Register Methods (google, github, X, ...)
     Route::get('/auth/{provider}/redirect', [OAuthRegister::class, 'redirect'])->name('register.OAuth');
 
     Route::get('/auth/{provider}/callback', [OAuthRegister::class, 'callback']);

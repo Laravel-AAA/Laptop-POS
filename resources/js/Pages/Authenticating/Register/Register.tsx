@@ -8,7 +8,7 @@ import useBetterForm from "@/Utilities/useBetterForm";
 
 export default function Register() {
   const params = new URLSearchParams(window.location.search);
-  
+
   const userForm = useBetterForm<ICreateUser>({
     name: params.get("name") ?? "",
     email: params.get("email") ?? "",
@@ -33,33 +33,36 @@ export default function Register() {
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
-
-    router.post(
-      route("register"),
-      {
-        ...userForm.data,
-        business: businessForm.data,
-      } as any,
-      {
-        onStart: () => {
-          businessForm.clearErrors();
-          userForm.clearErrors();
-          userForm.setProcessing(true);
-          businessForm.setProcessing(true);
+      router.post(
+        route("register", {
+          email: params.get("email") ?? "",
+          expires: params.get("expires") ?? "",
+          signature: params.get("signature") ?? "",
+        }),
+        {
+          ...userForm.data,
+          business: businessForm.data,
+        } as any,
+        {
+          onStart: () => {
+            businessForm.clearErrors();
+            userForm.clearErrors();
+            userForm.setProcessing(true);
+            businessForm.setProcessing(true);
+          },
+          onFinish: () => {
+            userForm.setProcessing(false);
+            businessForm.setProcessing(false);
+          },
+          onError: (e) => {
+            for (let k in e) {
+              if (k.startsWith("business."))
+                businessForm.setError(k.substring(9) as any, e[k]);
+              else userForm.setError(k as any, e[k]);
+            }
+          },
         },
-        onFinish: () => {
-          userForm.setProcessing(false);
-          businessForm.setProcessing(false);
-        },
-        onError: (e) => {
-          for (let k in e) {
-            if (k.startsWith("business."))
-              businessForm.setError(k.substring(9) as any, e[k]);
-            else userForm.setError(k as any, e[k]);
-          }
-        },
-      },
-    );
+      );
   };
 
   return (

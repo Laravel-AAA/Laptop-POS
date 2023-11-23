@@ -37,7 +37,7 @@ return [
         'redirect' => '/auth/github/callback',
     ],
 
-    'twitter-oauth-2'=>[ //apparently Socialite still does not know X
+    'twitter-oauth-2'=>[
         'client_id'=>env('X_CLIENT_ID'),
         'client_secret' => env('X_CLIENT_SECRET'),
         'redirect' => '/auth/x/callback',

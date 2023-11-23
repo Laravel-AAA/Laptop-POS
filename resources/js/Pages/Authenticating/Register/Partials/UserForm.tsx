@@ -11,6 +11,8 @@ export default function UserForm({
 }: {
   form: UseBetterForm<ICreateUser>;
 }) {
+  const params = new URLSearchParams(window.location.search);
+
   useEffect(() => {
     return () => {
       form.reset("password", "password_confirmation");
@@ -43,7 +45,7 @@ export default function UserForm({
           value={form.data.email}
           errorMsg={form.errors.email}
           hideError={form.isDirty("email")}
-          disabled={form.processing}
+          disabled={form.processing || (params.get("email")?.length ?? 0) > 2}
           className="mt-1 block w-full"
           autoComplete="email"
           onChange={(e) => form.setData("email", e.target.value)}

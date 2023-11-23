@@ -18,7 +18,7 @@ export default function RegisterMethod() {
           best of <AppName className="!font-extrabold" />.
         </h2>
         <div className="mt-10 grid space-y-4">
-          {/* <PrimaryLink href={route('register.OAuth','google')} className="group h-12 !rounded-full border-2 !border-gray-300 bg-white px-6 normal-case  hover:!border-primary-800 hover:bg-white">
+          <PrimaryLink href={route('register.OAuth','google')} className="group h-12 !rounded-full border-2 !border-gray-300 bg-white px-6 normal-case  hover:!border-primary-800 hover:bg-white">
             <div className="relative flex items-center justify-center space-x-4">
               <img
                 src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -29,8 +29,8 @@ export default function RegisterMethod() {
                 Register with Google
               </span>
             </div>
-          </PrimaryLink> */}
-          <PrimaryLink
+          </PrimaryLink>
+          {/* X do not provide user's email which is west of time because user then had to verify the email🤷‍♂️ <PrimaryLink
             href={route("register.OAuth", "x")}
             className="group h-12 !rounded-full border-2 !border-gray-300 bg-white px-6 normal-case  hover:!border-primary-800 hover:bg-white"
           >
@@ -40,7 +40,7 @@ export default function RegisterMethod() {
                 Register with X
               </span>
             </div>
-          </PrimaryLink>
+          </PrimaryLink> */}
           <PrimaryLink
             href={route("register.OAuth", "github")}
             className="group h-12 !rounded-full border-2 !border-gray-300 bg-white px-6 normal-case hover:!border-primary-800 hover:bg-white"

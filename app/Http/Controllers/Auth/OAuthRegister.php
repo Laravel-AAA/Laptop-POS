@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\URL;
 use Laravel\Socialite\Facades\Socialite;
 
 class OAuthRegister extends Controller
@@ -12,6 +13,7 @@ class OAuthRegister extends Controller
         if (
             $provider == 'github'
             || $provider == 'x'
+            || $provider == 'google'
         ) {
             if ($provider == 'x')
                 $provider = 'twitter-oauth-2';
@@ -22,7 +24,7 @@ class OAuthRegister extends Controller
 
     public function callback(string $provider)
     {
-        if ($provider == 'github' || $provider == 'x') {
+        if ($provider == 'github' || $provider == 'x' || $provider == 'google') {
             if ($provider == 'x')
                 $provider = 'twitter-oauth-2';
 
@@ -33,14 +35,16 @@ class OAuthRegister extends Controller
             else
                 $name = $userInfo->nickname;
 
-            if (isset($userInfo->email) && isset($name))
-                return redirect('register?email=' . $userInfo->email . '&name=' . $name);
-            else if (isset($name))
-                return redirect('register?name=' . $name);
-            else if (isset($userInfo->email))
-                return redirect('register?email=' . $userInfo->email);
-            else
-                return redirect('register');
+            $emailParam = [];
+            $nameParam = [];
+            if (isset($name))
+                $nameParam['name'] =  $name;
+            if (isset($userInfo->email))
+                $emailParam['email'] =  $userInfo->email;
+            $url = URL::temporarySignedRoute('register', now()->addDay(), $emailParam);
+            if (isset($nameParam['name']))
+                $url = $url . '&' . http_build_query($nameParam);
+            return redirect($url);
         }
 
         abort(404);
