@@ -17,28 +17,36 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         //Run `php artisan migrate:fresh --seed`
-        // create 5 businesses
-        // each business has 5 users one of them asdf
-        // each business has 23 products and bills
+        // create $BUSINESSES businesses
+        // each business has $USERS users one of them asdf with email 'asdf@asdf.asdf', '1asdf@asdf.asdf', '2asdf@asdf.asdf', ...etc.
+        // each business has $PRODUCTS products and $BILLS bills where products won't exceeds number of bills.
+        //transactions should be proportioned to number of bills to prevent unrealistic result we will use $TRANSACTIONS_PROPORTION
         //-----
-        //loop 5 times for each business
-        //each 5 iteration loop 5 times for each users
-        //each 1 creates 6 products & bills for each user
+        //loop $BUSINESSES times for each business
+        //each $BUSINESSES iteration loop $USERS times for each users
+        //each $USERS creates $PRODUCTS products & $BILLS bills for each user
         //each bill creates 3 count of transaction using same product.
+        $BUSINESSES = 3;
+        $USERS = 8;
+        $PRODUCTS = 50;
+        $BILLS = 240;
+        $TRANSACTIONS_PROPORTION = 3.33;
+
         $businesses = [];
-        for ($b = 0; $b < 3; $b++) {
+        for ($b = 0; $b < $BUSINESSES; $b++) {
             $businesses[] = Business::factory()->create();
             $users = [];
-            for ($u = 0; $u < 8; $u++) {
+            for ($u = 0; $u < $USERS; $u++) {
                 $users[] = User::factory()->recycle($businesses[$b])
-                    ->create($u == 0 ? ['name' => 'asdf', 'email' => $b . 'asdf@asdf.asdf', 'role' => 'Owner', 'email_verified_at' => now(), 'deleted_at' => null] : []);
+                    ->create($u == 0 ? ['name' => 'asdf', 'email' => $b == 0 ? '' : $b . 'asdf@asdf.asdf', 'role' => 'Owner', 'email_verified_at' => now(), 'deleted_at' => null] : []);
                 $products = [];
                 $bills = [];
-                for ($i = 0; $i < 240; $i++) {
-                    $products[] = Product::factory()->recycle($businesses[$b])->recycle($users[$u])->create();
-                    $bills[] = Bill::factory()->recycle($businesses[$b])->recycle($users[$u])->create();
+                for ($i = 0; $i < $BILLS; $i++) {
+                    if ($i < $PRODUCTS)
+                        $products[] = Product::factory()->recycle($businesses[$b])->recycle($users[$u])->create();
+                    $bills[] = Bill::factory()->recycle($businesses[$b])->recycle($users[$u])->createQuietly();
                 }
-                Transaction::factory()->count(800)->recycle($products)->recycle($bills)->create();
+                Transaction::factory()->count(ceil($BILLS * $TRANSACTIONS_PROPORTION))->recycle($products)->recycle($bills)->create();
             }
         }
     }
