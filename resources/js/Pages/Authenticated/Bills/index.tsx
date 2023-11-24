@@ -36,7 +36,7 @@ export default function Bills({
                 <tr>
                   <TH className="rounded-tl-md">ID</TH>
                   <TH>Created By</TH>
-                  <TH>Date</TH>
+                  <TH title="Created Before">Date</TH>
                   <TH title="Sub total price (tax is NOT included)">
                     Sub total
                   </TH>

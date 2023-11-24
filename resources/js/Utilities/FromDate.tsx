@@ -8,5 +8,12 @@ export default function FromDate({
   date: string;
   className?: string;
 }) {
-  return <span className={className}>{moment(date).fromNow()}</span>;
+  return (
+    <span
+      title={moment(date).format('LLLL')}
+      className={className}
+    >
+      {moment(date).fromNow()}
+    </span>
+  );
 }

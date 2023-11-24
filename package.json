@@ -42,6 +42,7 @@
         "@inertiajs/inertia-react": "^0.8.1",
         "@material-tailwind/react": "^2.1.4",
         "@react-icons/all-files": "^4.1.0",
+        "apexcharts": "^3.44.0",
         "moment": "^2.29.4",
         "react-apexcharts": "^1.4.1",
         "react-qr-code": "^2.0.12",

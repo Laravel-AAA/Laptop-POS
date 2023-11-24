@@ -80,6 +80,4 @@ export interface StatisticsCardProps {
   };
 }
 
-// StatisticsCard.displayName = "/src/widgets/cards/statistics-card.jsx";
 
-export default StatisticsCard;

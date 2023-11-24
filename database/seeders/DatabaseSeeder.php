@@ -34,11 +34,11 @@ class DatabaseSeeder extends Seeder
                     ->create($u == 0 ? ['name' => 'asdf', 'email' => $b . 'asdf@asdf.asdf', 'role' => 'Owner', 'email_verified_at' => now(), 'deleted_at' => null] : []);
                 $products = [];
                 $bills = [];
-                for ($i = 0; $i < 120; $i++) {
+                for ($i = 0; $i < 240; $i++) {
                     $products[] = Product::factory()->recycle($businesses[$b])->recycle($users[$u])->create();
                     $bills[] = Bill::factory()->recycle($businesses[$b])->recycle($users[$u])->create();
                 }
-                Transaction::factory()->count(400)->recycle($products)->recycle($bills)->create();
+                Transaction::factory()->count(800)->recycle($products)->recycle($bills)->create();
             }
         }
     }

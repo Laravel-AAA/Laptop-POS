@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -17,23 +16,28 @@ class DashboardController extends Controller
         if (in_array(request()->user()->role, ['Owner', 'Maintainer'])) {
 
             [$salesThisWeek, $salesIncreasePercent] = $this->calcSales();
-            [$billsCountThisWeek, $billsIncreasePercent] = $this->calcBillsCount();
+            $billsDailyCount = $this->calcBillsDailyCount();
+            [$billsCountThisWeek, $billsIncreasePercent] = $this->calcBillsCount(array_sum($billsDailyCount));
             $cashPaymentsPercentThisWeek = $this->calcCashPayment($billsCountThisWeek);
             return Inertia::render('Authenticated/Dashboard/index', [
-                'cardsValue' => [
-                    'sales' => [
-                        'value' => $salesThisWeek,
-                        'increase' => $salesIncreasePercent,
+                'dashboard' => [
+                    'cards' => [
+                        'sales' => [
+                            'value' => $salesThisWeek,
+                            'increase' => $salesIncreasePercent,
+                        ],
+                        'bills' => [
+                            'value' => $billsCountThisWeek,
+                            'increase' => $billsIncreasePercent,
+                        ],
+                        'cashPaymentPercentage' => $cashPaymentsPercentThisWeek,
+                        'productsCount' => request()->user()->business->products()->count(),
                     ],
-                    'bills' => [
-                        'value' => $billsCountThisWeek,
-                        'increase' => $billsIncreasePercent,
+                    'charts' => [
+                        'billsDailyCount' => $billsDailyCount,
                     ],
-                    'cashPaymentPercentage' => $cashPaymentsPercentThisWeek,
-                    'productsCount' => request()->user()->business->products()->count(),
                 ],
             ]);
-
         } else
             return redirect(route('bill.create'));
     }
@@ -68,13 +72,30 @@ class DashboardController extends Controller
         return [$salesToday, $increasePercentage];
     }
 
-    private function calcBillsCount()
+    /**Calculate number of bills for each day of the current week.
+     * Ex: returns [1, 23, 34, 45, 55, 61, 7] where last number (7) is the current day, 61 is yesterday...
+     * The result should end with current week day.
+     * The sum of the array will be total number of bills created within last 7 days.
+     */
+    private function calcBillsDailyCount(): array
+    {//we call now()->subWeek()->addDay() because if today is friday then subWeek will get us to friday of the previous week. And we don't want that we want a week range with only one friday :)
+        $res = request()->user()->business->bills()
+            ->whereBetween("created_at", [Carbon::now()->subWeek()->addDay(), Carbon::now()])
+            ->selectRaw("COUNT(*) as count, DAYOFWEEK(created_at) as day")
+            ->groupBy("day")
+            ->get();
+        $dailyCounts = [0, 0, 0, 0, 0, 0, 0];
+        foreach ($res as $dayCount) {
+            $dailyCounts[(($dayCount->day - 1) - date('w') + 6) % 7] = $dayCount->count;
+        }
+
+        return $dailyCounts;
+    }
+
+    private function calcBillsCount(int $countThisWeek)
     {
-        $countThisWeek = request()->user()->business->bills()
-            ->whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()])
-            ->count();
         $countLastWeek = request()->user()->business->bills()
-            ->whereBetween('created_at', [Carbon::now()->subWeeks(2), Carbon::now()->subWeek()])
+            ->whereBetween('created_at', [Carbon::now()->subWeeks(2)->addDay(), Carbon::now()->subWeek()])
             ->count();
         if ($countLastWeek == 0)
             $increasePercentage = null;
@@ -87,7 +108,7 @@ class DashboardController extends Controller
     {
         $cashPaymentCount = request()->user()->business->bills()
             ->whereNotNull('cashReceived')
-            ->whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()])
+            ->whereBetween('created_at', [Carbon::now()->subWeek()->addDay(), Carbon::now()])
             ->count();
 
         if ($billsCountThisWeek > 0)

@@ -157,3 +157,16 @@ export interface IFilterBill extends IFilter { }
 export interface IFilterCheckout extends IFilter {
   barcode: string;
 }
+
+
+export interface IDashboard {
+  cards: {
+    sales: { value: number; increase: number }; //Total amount of bills' total-price (tax included) (last 24 hours)
+    bills: { value: number; increase: number }; //number of bills (last 7 days)
+    productsCount: number; //number of products (all time).
+    cashPaymentPercentage: number; //percentage of using cash payment method (last 7 days)
+  };
+  charts: {
+    billsDailyCount: [number, number, number, number, number, number, number];
+  }
+}
