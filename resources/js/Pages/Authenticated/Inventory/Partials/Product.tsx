@@ -7,11 +7,13 @@ type PropsProduct = {
   product: IProduct;
   requestEdit: () => void;
   requestShow: () => void;
+  requestChangeStock: () => void;
 };
 export default function Product({
   product,
   requestEdit,
   requestShow,
+  requestChangeStock,
 }: PropsProduct) {
   const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
   return (
@@ -27,6 +29,7 @@ export default function Product({
         product={product}
         requestEdit={requestEdit}
         requestShow={requestShow}
+        requestChangeStock={requestChangeStock}
       />
 
       <div className="w-full">

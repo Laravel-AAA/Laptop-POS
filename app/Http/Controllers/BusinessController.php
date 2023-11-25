@@ -40,7 +40,7 @@ class BusinessController extends Controller
 
         $updatedBusiness = $request->validated();
         //1- if logo is null OR there is new logo THEN delete the old logo.
-        if ($business->logo && ($request->hasFile('logoFile') || $updatedBusiness['logo'] == null)) {
+        if (isset($business->logo) && ($request->hasFile('logoFile') || !isset($updatedBusiness['logo']))) {
             $this->deleteFile($business->logo);
         }
         //2- if there is new logo store it.
@@ -64,9 +64,9 @@ class BusinessController extends Controller
         ]);
         Gate::authorize('destroy', $business);
 
-        if ($business->logo) {
+        if (isset($business->logo)) {
             $this->deleteFile($business->logo);
-            $business->update(['logo'=>null]);
+            $business->update(['logo' => null]);
         }
 
         $user = $request->user();

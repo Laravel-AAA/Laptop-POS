@@ -19,6 +19,7 @@ export default function InventoryHeader({
 
   const [filter, setFilter] = useState<IFilterProduct>({
     search: filterProps.search ?? "",
+    stock: filterProps.stock ?? null,
   });
 
   const prevFilter = usePrevious(filter);
@@ -42,37 +43,47 @@ export default function InventoryHeader({
   return (
     <div className="block justify-between py-2 md:flex">
       <div className="flex items-center gap-3">
-        <h2 className="mr-6 text-xl font-semibold leading-tight text-gray-800">
+        {filter.stock != "out" ? (
+          <>
+        <h2 className="mr-6 py-2 text-xl font-semibold leading-tight text-gray-800">
           Inventory
         </h2>
-        <Input
-          id="search"
-          label="Search for products..."
-          type="search"
-          inputMode="search"
-          name="search"
-          size="md"
-          autoComplete="on"
-          icon={<FaSearch />}
-          value={filter.search}
-          autoFocus
-          className=" md:w-72 "
-          onChange={(v) => setFilter((p) => ({ ...p, search: v.target.value }))}
-          errorMsg={undefined}
-          hideError={undefined}
-          required={false}
-          disabled={false}
-        />
-        {filter.search && prevFilter?.search === filter.search && (
-          <TotalResult
-            className="hidden md:block"
-            text="Result"
-            number={totalResult}
-          />
+            <Input
+              id="search"
+              label="Search for products..."
+              type="search"
+              inputMode="search"
+              name="search"
+              size="md"
+              autoComplete="on"
+              icon={<FaSearch />}
+              value={filter.search}
+              autoFocus
+              className=" md:w-72 "
+              onChange={(v) =>
+                setFilter((p) => ({ ...p, search: v.target.value }))
+              }
+              errorMsg={undefined}
+              hideError={undefined}
+              required={false}
+              disabled={false}
+            />
+            {filter.search && prevFilter?.search === filter.search && (
+              <TotalResult
+                className="hidden md:block"
+                text="Result"
+                number={totalResult}
+              />
+            )}
+          </>
+        ):(
+          <h2 className="mr-6 py-2 text-xl font-semibold leading-tight text-gray-800">
+          Products <span className="text-danger-600">Out of Stock</span>
+        </h2>
         )}
       </div>
       <div className="mt-3 flex items-center justify-end md:my-auto md:block">
-        {!filter.search  && (
+        {!filter.search && (
           <TotalResult
             className="mt-1 md:mt-0"
             text="Total"
@@ -86,13 +97,15 @@ export default function InventoryHeader({
             number={totalResult}
           />
         )}
-        <PrimaryMaterialBtn
-          className="inline-flex pl-2 pr-2"
-          onClick={() => requestCreateProduct()}
-        >
-          <FaPlus className="mr-2" />
-          <span>Add New Product</span>
-        </PrimaryMaterialBtn>
+        {filter.stock !== "out" && (
+          <PrimaryMaterialBtn
+            className="inline-flex pl-2 pr-2"
+            onClick={() => requestCreateProduct()}
+          >
+            <FaPlus className="mr-2" />
+            <span>Add New Product</span>
+          </PrimaryMaterialBtn>
+        )}
       </div>
     </div>
   );

@@ -24,20 +24,19 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'name' => [
-                'required',
                 'string',
                 'max:255',
                 Rule::unique('products')->where(function ($query) {
                     return $query->where('business_id', Auth::user()->business_id); //unique only to the same business
                 })->ignore($this->id)
             ],
-            'price' => 'nullable|decimal:0,8|min:0|max:999999999',
-            'imageFile' => 'nullable|image|mimes:jpeg,jpg,png,apng,bmp,avif,webp,gif,svg|max:2048',
+            'price' => 'decimal:0,8|min:0|max:999999999',
+            'imageFile' => 'image|mimes:jpeg,jpg,png,apng,bmp,avif,webp,gif,svg|max:2048',
             //size of 2 MB at most
-            'barcode' => 'nullable|string|max:16',
-            'stock' => 'nullable|integer|min:0|max:9999',
-            'img' => 'nullable|string|max:250',
-            'description' => 'nullable|string|max:500',
+            'barcode' => 'string|max:16',
+            'stock' => 'integer|min:0|max:9999',
+            'img' => 'string|max:250',
+            'description' => 'string|max:500',
         ];
     }
 }

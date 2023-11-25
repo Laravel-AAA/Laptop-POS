@@ -23,6 +23,7 @@ class DashboardController extends Controller
             $cashPaymentsPercentThisWeek = $this->calcCashPayment($billsCountThisWeek);
             $monthlySales = $this->calcMonthlySales();
             $accountsBillsDailyCount = $this->accountsBillsDailyCount();
+            $productsOutOfStock = $this->productsOutOfStock();
             return Inertia::render('Authenticated/Dashboard/index', [
                 'dashboard' => [
                     'cards' => [
@@ -42,10 +43,19 @@ class DashboardController extends Controller
                         'monthlySales' => $monthlySales,
                         'accountsBillsDailyCount' => $accountsBillsDailyCount,
                     ],
+                    'productsOutOfStock' => $productsOutOfStock,
                 ],
             ]);
         } else
             return redirect(route('bill.create'));
+    }
+
+    private function productsOutOfStock(): array
+    {
+        return dd(DB::table('products')
+        ->where('business_id','=',request()->user()->business_id)
+        ->where('stock', '<=', 0)
+        ->paginate(5));
     }
 
     private function accountsBillsDailyCount()
@@ -103,7 +113,7 @@ class DashboardController extends Controller
             ->selectRaw("COUNT(*) as count, DAYOFWEEK(created_at) as day")
             ->groupBy("day")
             ->get();
-            
+
         $dailyCounts = [0, 0, 0, 0, 0, 0, 0];
         foreach ($res as $dayCount) {
             $dailyCounts[(($dayCount->day - 1) - date('w') + 6) % 7] = (int)$dayCount->count;

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
 
+
 class ProductController extends Controller
 {
     protected function index(Request $request)
@@ -20,11 +21,11 @@ class ProductController extends Controller
             'createdBy' => function ($query) {
                 $query->withTrashed();
             }
-        ])->latest()->filter($request->only('search'))
+        ])->latest()->filter($request->only(['search', 'stock']))
             ->paginate(15)->appends($request->all());
         return Inertia::render('Authenticated/Inventory/index', [
             'products' => $products,
-            'filter' => $request->only('search'),
+            'filter' => $request->only(['search', 'stock']),
         ]);
     }
 
@@ -55,7 +56,7 @@ class ProductController extends Controller
     {
         Gate::authorize('destroy', $product);
 
-        if ($product->img)
+        if (isset($product->img))
             $this->deleteImg($product->img);
         $product->delete();
         return redirect()->back()->with('success', 'Successfully deleted');
@@ -63,10 +64,12 @@ class ProductController extends Controller
 
     protected function update(UpdateProductRequest $request, Product $product)
     {
-        Gate::authorize('update',$product);
+        Gate::authorize('update', $product);
         $newProduct = $request->validated();
         //1- if img is null OR there is new image THEN delete the old image.
-        if ($product->img && ($request->hasFile('imageFile') || $newProduct['img'] == null)) {
+        if (
+            isset($product->img) && ($request->hasFile('imageFile') || !isset($newProduct['img']))
+        ) {
             $this->deleteImg($product->img);
         }
         //2- if there is new image store it.

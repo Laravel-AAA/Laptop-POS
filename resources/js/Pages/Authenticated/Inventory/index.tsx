@@ -14,6 +14,7 @@ import { BsSearch } from "react-icons/bs";
 import CreateEditProductModal from "@/Components/Modals/CreateEdit/ProductModal/CreateEditProductModal";
 import InventoryHeader from "./Partials/InventoryHeader";
 import Footer from "@/Layouts/GuestLayout/Partials/Footer";
+import UpdateProductStockModal from "@/Components/Modals/UpdateProductStockModal";
 
 export default function Inventory({
   auth,
@@ -28,6 +29,9 @@ export default function Inventory({
     open: false,
     data: null,
   });
+  const [updateStockAction, setUpdateStockAction] = useState<
+    { open: true; product: IProduct } | { open: false; product: null }
+  >({ open: false, product: null });
 
   return (
     <>
@@ -35,6 +39,10 @@ export default function Inventory({
       <CreateEditProductModal
         modalAction={modalAction}
         setModalAction={setModalAction}
+      />
+      <UpdateProductStockModal
+        modalAction={updateStockAction}
+        close={() => setUpdateStockAction({ product: null, open: false })}
       />
       <AuthenticatedLayout
         user={auth.user}
@@ -72,6 +80,9 @@ export default function Inventory({
                     data: p,
                     open: true,
                   })
+                }
+                requestChangeStock={() =>
+                  setUpdateStockAction({ open: true, product: p })
                 }
               />
             ))}

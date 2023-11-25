@@ -9,8 +9,6 @@ import { useEffect, useState } from "react";
 export type UseBetterForm<T extends object> = Omit<
   InertiaFormProps<T>,
   "setData" | "isDirty" | "processing"
-  // | "errors"
-  // | "clearErrors"
 > & {
   //for type hint.
   //We remove `setData` from `InertiaFormProps` and add another `setData` with different param type.
@@ -19,31 +17,22 @@ export type UseBetterForm<T extends object> = Omit<
   isDirty: (key?: keyof T) => boolean;
   setProcessing: (isProcessing: boolean) => void;
   readonly processing: boolean;
-  // readonly dirtyData: Partial<T>;
-  // patchDirty: InertiaFormProps<T>["patch"];
-  // readonly recentlySuccessful: boolean;
-  // errors: Partial<Record<keyof T, string>>;
-  // clearErrors: () => void;
 };
 
 export default function useBetterForm<T extends object>(
   initialValue: T,
   rememberKey?: string,
 ): UseBetterForm<T> {
-  const form = useForm<T>(
-    rememberKey === undefined ? "" : rememberKey,
-    initialValue,
-  );
-  // rememberKey === undefined
-  //   ? useForm<T>(initialValue)
-  //   : useForm(rememberKey, initialValue);
-  const [processing, setProcessing] = useState<boolean>(form.processing);
-  // const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
   const [oldValues, setOldValues] = useState<T>(
     JSON.parse(JSON.stringify(initialValue)),
   );
 
-  // const [recentlySuccessful, setRecentlySuccessful] = useState<boolean>(false);
+  const form = useForm<T>(
+    rememberKey === undefined ? "hi" : rememberKey,
+    initialValue,
+  );
+
+  const [processing, setProcessing] = useState<boolean>(form.processing);
 
   useEffect(() => {
     setOldValues(form.data);
@@ -52,10 +41,6 @@ export default function useBetterForm<T extends object>(
   useEffect(() => {
     setProcessing(form.processing);
   }, [form.processing]);
-
-  // useEffect(() => {
-  //   setRecentlySuccessful(form.recentlySuccessful);
-  // }, [form.recentlySuccessful]);
 
   const setData: UseBetterForm<T>["setData"] = (key, value) => {
     form.setData(key, value);
@@ -72,58 +57,6 @@ export default function useBetterForm<T extends object>(
     return form.isDirty;
   };
 
-  // const dirtyData = () => {
-  //   const clone: Partial<T> = JSON.parse(JSON.stringify(form.data));
-  //   for (let k in clone) {
-  //     if (clone[k] === oldValues[k]) {
-  //       delete clone[k];
-  //     }
-  //   }
-  //   return clone;
-  // };
-
-  // const patchDirty: UseBetterForm<T>["patchDirty"] = (url, options) => {
-  //   const clone: Partial<T> = { ...form.data };
-  //   for (let k in clone) {
-  //     if (clone[k] === oldValues[k]) {
-  //       console.log(
-  //         "\n\nnot dirty:",
-  //         k,
-  //         "\nvalue:",
-  //         clone[k],
-  //         "\noldValue:",
-  //         oldValues[k],
-  //       );
-  //       delete clone[k];
-  //     } else
-  //       console.log(
-  //         "\n\nDirty:",
-  //         k,
-  //         "\nvalue:",
-  //         clone[k],
-  //         "\noldValue:",
-  //         oldValues[k],
-  //       );
-  //   }
-  //   router.patch(url, clone as any, {
-  //     ...options,
-  //     onSuccess: (e) => {
-  //       setRecentlySuccessful(true);
-  //       setTimeout(() => setRecentlySuccessful(false), 2000);
-  //       options?.onSuccess?.(e);
-  //     },
-  //     onError: (e) => {
-  //       for (let k in e) {
-  //         form.setError(k as keyof T, e[k]);
-  //       }
-  //       options?.onError?.(e);
-  //     },
-  //   });
-  // };
-
-  // const clearErrors = () => {
-  //   form.clearErrors();
-  // };
 
   const better: UseBetterForm<T> = {
     ...form,
@@ -134,13 +67,6 @@ export default function useBetterForm<T extends object>(
       return processing;
     },
     setProcessing: (isProcessing) => setProcessing(isProcessing),
-    // get dirtyData() {
-    //   return dirtyData();
-    // },
-    // patchDirty,
-    // get recentlySuccessful() {
-    //   return recentlySuccessful;
-    // },
   };
   return better;
 }

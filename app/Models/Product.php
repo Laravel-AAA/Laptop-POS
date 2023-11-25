@@ -49,7 +49,7 @@ class Product extends Model
 
     public function createdBy(): BelongsTo
     {
-        return $this->belongsTo(User::class,'createdBy_id');
+        return $this->belongsTo(User::class, 'createdBy_id');
     }
 
     public function business(): BelongsTo
@@ -66,12 +66,22 @@ class Product extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('name', 'like', '%' . $search . '%')
-                ->orWhere('price', 'like', '%' . $search . '%');
+            $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhere('stock', 'like', '%' . $search . '%')
+                    ->orWhere('price', 'like', '%' . $search . '%');
+            });
         });
+
         $query->when($filters['barcode'] ?? null, function ($query, $barcode) {
-            $query->where('barcode', 'like', $barcode . '%')
-                ->orWhere('price', 'like', '%' . $barcode . '%');
+            $query->where('barcode', 'like', $barcode . '%');
+        });
+
+        $query->when($filters['stock'] ?? null, function ($query, $stock) {
+            if ($stock == 'out')
+                $query->where('stock', '<=', 0);
+            else $query->where('stock', '=', $stock);
         });
     }
 }

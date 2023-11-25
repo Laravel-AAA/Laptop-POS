@@ -150,7 +150,9 @@ type PagePropsWithFilter<T extends IFilter>
   }
 
 
-export interface IFilterProduct extends IFilter { }
+export interface IFilterProduct extends IFilter {
+  stock: number | 'out';
+}
 
 export interface IFilterBill extends IFilter { }
 
