@@ -31,7 +31,7 @@ export default function useStatisticsChartsData(
       },
       {
         title: "Cashiers Bills",
-        description: "Number of bills that each account created today",
+        description: "Number of bills that each account created in the past 24 hours",
         chart: cashiersBills,
       },
     ];
@@ -75,6 +75,7 @@ const chartsConfig: ApexOptions = {
         fontWeight: 300,
       },
     },
+    tickAmount:1,
   },
   grid: {
     show: true,

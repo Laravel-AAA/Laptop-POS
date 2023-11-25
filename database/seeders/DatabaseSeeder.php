@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
                         $products[] = Product::factory()->recycle($businesses[$b])->recycle($users[$u])->create();
                     $bills[] = Bill::factory()->recycle($businesses[$b])->recycle($users[$u])->createQuietly();
                 }
-                Transaction::factory()->count(ceil($BILLS * $TRANSACTIONS_PROPORTION))->recycle($products)->recycle($bills)->create();
+                Transaction::factory()->count(ceil($BILLS * $TRANSACTIONS_PROPORTION))->recycle($products)->recycle($bills)->createQuietly();
             }
         }
     }

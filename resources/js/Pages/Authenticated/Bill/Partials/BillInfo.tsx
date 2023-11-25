@@ -28,7 +28,7 @@ export default function BillInfo({ bill }: { bill: IBill }) {
       <div className="mt-6 w-full overflow-hidden bg-white px-6 pb-2 pt-4 shadow-md sm:max-w-md sm:rounded-lg">
         <section className="space-y-4">
           <header>
-            <h1 className="mb-2 text-center text-lg font-bold">
+            <h1 className="mb-2 text-center text-sm">
               {/* فاتورة ضريبية مبسطة */}
               Simplified Invoice
             </h1>
@@ -39,11 +39,11 @@ export default function BillInfo({ bill }: { bill: IBill }) {
               />
             )}
 
-            <p className="text-center">{bill.business.name}</p>
-            <p className="text-center">
+            <p className="text-center text-lg font-semibold">{bill.business.name}</p>
+            {/* <p className="text-center">
               {bill.business.countryCallingCode + " " + bill.business.phone}
-            </p>
-            <p className="text-center">{bill.business.city}</p>
+            </p> */}
+            {/* <p className="text-center">{bill.business.city}</p> */}
             <p className="text-center">{bill.business.address}</p>
             {bill.business.taxIdentificationNumber && (
               <KeyValue
@@ -142,10 +142,10 @@ export default function BillInfo({ bill }: { bill: IBill }) {
           </section>
 
           <section className="flex justify-center">
-            <QRCode value={location.href} size={160} />
+            <QRCode value={location.href} size={150} />
           </section>
-          <footer className="!mb-0">
-            <p className="mb-1 text-center text-xl font-extrabold">Thank you</p>
+            <p className="text-center text-xl font-semibold">Thank you</p>
+          <footer>
             <KeyValue className="text-xs text-center border-t pt-1" k="Programmed by" v="Laptop POS" noColon/>
           </footer>
         </section>

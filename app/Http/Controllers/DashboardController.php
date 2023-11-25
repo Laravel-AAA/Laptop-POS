@@ -14,6 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+
         if (in_array(request()->user()->role, ['Owner', 'Maintainer'])) {
 
             [$salesToday, $salesIncreasePercent] = $this->calcSales();
@@ -53,10 +54,11 @@ class DashboardController extends Controller
         return User::selectRaw("users.name AS account, COUNT(bills.id) AS bills")
             ->leftJoin('bills', function ($join) {
                 $join->on('bills.createdBy_id', '=', 'users.id')
-                    ->whereBetween('bills.created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()]);
+                    ->whereBetween('bills.created_at', [Carbon::now()->subHours(24), Carbon::now()]);
             })
             ->where('users.business_id', '=', request()->user()->business_id)
             ->whereNull('users.deleted_at')
+            ->whereNotNull('users.email_verified_at')
             ->groupBy('account')
             ->get();
     }
@@ -73,8 +75,14 @@ class DashboardController extends Controller
             ->groupByRaw('day')
             ->get();
 
-        $salesYesterday = (float) $res[0]?->daily_sales ?? 0;
-        $salesToday = (float)$res[1]?->daily_sales ?? 0;
+        if (isset($res) && isset($res[0]?->daily_sales))
+            $salesYesterday = (float) $res[0]->daily_sales;
+        else
+            $salesYesterday = 0;
+        if (isset($res) && isset($res[1]?->daily_sales))
+            $salesToday = (float)$res[1]->daily_sales;
+        else $salesToday = 0;
+
         if ($salesYesterday == 0 || $salesToday == 0)
             $increasePercentage = null;
         else
@@ -95,6 +103,7 @@ class DashboardController extends Controller
             ->selectRaw("COUNT(*) as count, DAYOFWEEK(created_at) as day")
             ->groupBy("day")
             ->get();
+            
         $dailyCounts = [0, 0, 0, 0, 0, 0, 0];
         foreach ($res as $dayCount) {
             $dailyCounts[(($dayCount->day - 1) - date('w') + 6) % 7] = (int)$dayCount->count;
