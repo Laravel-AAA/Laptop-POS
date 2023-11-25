@@ -78,7 +78,7 @@ export default function InventoryHeader({
           </>
         ):(
           <h2 className="mr-6 py-2 text-xl font-semibold leading-tight text-gray-800">
-          Products <span className="text-danger-600">Out of Stock</span>
+          <span className="text-danger-600">Out of Stock</span>{" "}Products
         </h2>
         )}
       </div>

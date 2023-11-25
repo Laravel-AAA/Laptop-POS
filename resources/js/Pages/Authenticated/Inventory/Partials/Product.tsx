@@ -23,7 +23,7 @@ export default function Product({
         e.stopPropagation();
         requestShow();
       }}
-      className="div-style group relative m-4 flex cursor-pointer flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:w-52"
+      className="div-style group min-w-[200px] relative m-4 flex cursor-pointer flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:w-52"
     >
       <ProductOptions
         product={product}

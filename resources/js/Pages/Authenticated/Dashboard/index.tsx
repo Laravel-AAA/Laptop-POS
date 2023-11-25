@@ -32,7 +32,7 @@ export default function Dashboard({
               <StatisticsChart key={props.title} {...props} />
             ))}
           </div>
-          <OutOfStock />
+          <OutOfStock paginate={dashboard.productsOutOfStock} />
         </div>
       </div>
       <Footer />

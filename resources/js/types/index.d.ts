@@ -172,5 +172,6 @@ export interface IDashboard {
     billsDailyCount: [number, number, number, number, number, number, number];
     monthlySales: [number, number, number, number, number, number, number, number, number, number, number, number];
     accountsBillsDailyCount: { account: string; bills: number }[];
-  }
+  },
+  productsOutOfStock: ILaravelPaginate<IProduct>;
 }

@@ -50,12 +50,12 @@ class DashboardController extends Controller
             return redirect(route('bill.create'));
     }
 
-    private function productsOutOfStock(): array
+    private function productsOutOfStock()
     {
-        return dd(DB::table('products')
-        ->where('business_id','=',request()->user()->business_id)
-        ->where('stock', '<=', 0)
-        ->paginate(5));
+        return DB::table('products')
+            ->where('business_id', '=', request()->user()->business_id)
+            ->where('stock', '<=', 0)
+            ->paginate(5);
     }
 
     private function accountsBillsDailyCount()
