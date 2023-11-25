@@ -8,24 +8,31 @@ export default function useStatisticsChartsData(
 ): StatisticsChartProps[] {
   return useMemo(() => {
     billsChart.series[0].data = charts.billsDailyCount;
+    salesChart.series[0].data = charts.monthlySales;
+    cashiersBills.series[0].data = charts.accountsBillsDailyCount.map(
+      (v) => v.bills,
+    );
+
+    cashiersBills.options.xaxis.categories = charts.accountsBillsDailyCount.map(
+      (v) => v.account,
+    );
+
     return [
       {
-        title: "Bills",
-        description: "Number of bills created each day within this week",
-        // footer: "campaign sent 2 days ago",
+        title: "Monthly Sales",
+        description: "Total sales of current year (Tax included)",
+        chart: salesChart,
+      },
+      {
+        title: "Daily Bills",
+        description:
+          "Number of bills that were created each day of the current week",
         chart: billsChart,
       },
       {
-        title: "Checkouts",
-        description: "Daily checkouts number of current week",
-        // footer: "campaign sent 2 days ago",
-        chart: billsChart,
-      },
-      {
-        title: "Checkouts",
-        description: "Daily checkouts number of current week",
-        // footer: "campaign sent 2 days ago",
-        chart: billsChart,
+        title: "Cashiers Bills",
+        description: "Number of bills that each account created today",
+        chart: cashiersBills,
       },
     ];
   }, []);
@@ -91,6 +98,85 @@ const chartsConfig: ApexOptions = {
   },
 };
 
+/************************************************************************************************/
+
+const salesChart: ChartProps = {
+  type: "line",
+  height: 220,
+  series: [
+    {
+      name: "Monthly Sales",
+      data: [],
+    },
+  ],
+  options: {
+    ...chartsConfig,
+    colors: ["#0288d1"],
+    stroke: {
+      lineCap: "round",
+    },
+    markers: {
+      size: 5,
+    },
+    xaxis: {
+      ...chartsConfig.xaxis,
+      categories: [
+        getMonth(new Date().getMonth() - 11),
+        getMonth(new Date().getMonth() - 10),
+        getMonth(new Date().getMonth() - 9),
+        getMonth(new Date().getMonth() - 8),
+        getMonth(new Date().getMonth() - 7),
+        getMonth(new Date().getMonth() - 6),
+        getMonth(new Date().getMonth() - 5),
+        getMonth(new Date().getMonth() - 4),
+        getMonth(new Date().getMonth() - 3),
+        getMonth(new Date().getMonth() - 2),
+        getMonth(new Date().getMonth() - 1),
+        getMonth(new Date().getMonth()),
+      ],
+    },
+  },
+};
+
+/**
+ * Smiler to getWeekDay.
+ * @param month is the month of the year (0 to 11) where 0=January, 1=February, ...etc.
+ */
+function getMonth(month: number): string {
+  while (month < 0) month += 12;
+  month %= 12;
+  switch (month) {
+    case 0:
+      return "Jan";
+    case 1:
+      return "Feb";
+    case 2:
+      return "Mar";
+    case 3:
+      return "Apr";
+    case 4:
+      return "May";
+    case 5:
+      return "Jun";
+    case 6:
+      return "Jul";
+    case 7:
+      return "Aug";
+    case 8:
+      return "Sep";
+    case 9:
+      return "Oct";
+    case 10:
+      return "Nov";
+    case 11:
+      return "Dec";
+    default:
+      throw "Unexpected month! month=" + month;
+  }
+}
+
+/************************************************************************************************/
+
 const billsChart: ChartProps = {
   type: "bar",
   height: 220,
@@ -102,7 +188,7 @@ const billsChart: ChartProps = {
   ],
   options: {
     ...chartsConfig,
-    colors: "#44403c" as any,
+    colors: ["#44403c"],
     plotOptions: {
       bar: {
         columnWidth: "16%",
@@ -129,8 +215,7 @@ const billsChart: ChartProps = {
  * day=7 => day=0.
  * day=-1=> day=6.
  * */
-
-function getWeekDay(day: number) {
+function getWeekDay(day: number): string {
   while (day < 0) day += 7;
   day %= 7;
   switch (day) {
@@ -152,3 +237,30 @@ function getWeekDay(day: number) {
       throw "Unexpected day of week! day=" + day;
   }
 }
+
+/************************************************************************************************/
+
+const cashiersBills: ChartProps = {
+  type: "bar",
+  height: 220,
+  series: [
+    {
+      name: "Bills",
+      data: [],
+    },
+  ],
+  options: {
+    ...chartsConfig,
+    colors: ["#f59e0b"],
+    plotOptions: {
+      bar: {
+        columnWidth: "16%",
+        borderRadius: 5,
+      },
+    },
+    xaxis: {
+      ...chartsConfig.xaxis,
+      categories: [],
+    },
+  },
+};

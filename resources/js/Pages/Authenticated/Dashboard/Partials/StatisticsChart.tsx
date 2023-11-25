@@ -67,12 +67,11 @@ export interface ChartProps {
     | "rangeBar"
     | "rangeArea"
     | "treemap";
-  series: ApexAxisChartSeries ;
+  series: ApexAxisChartSeries;
   width?: string | number;
   height?: string | number;
-  options?: ApexOptions;
+  options: ApexOptions & {
+    xaxis: Exclude<ApexOptions["xaxis"] & { categories: string[] }, undefined>;
+  };
   [key: string]: any;
 }
-
-
-

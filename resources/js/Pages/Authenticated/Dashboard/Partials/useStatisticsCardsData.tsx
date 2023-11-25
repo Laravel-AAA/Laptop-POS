@@ -16,7 +16,7 @@ export function useStatisticsCardsData(
       {
         icon: <FaMoneyBills className="h-6 w-6 text-white" />,
         title: "Sales",
-        tooltip: "Total Amount of Sales in the Past 24 Hours",
+        tooltip: "Today Total Amount of Sales",
         value: cardsValue.sales.value,
         showCurrency: true,
         footer: {

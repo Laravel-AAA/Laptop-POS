@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Inertia\Inertia;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -15,15 +16,17 @@ class DashboardController extends Controller
     {
         if (in_array(request()->user()->role, ['Owner', 'Maintainer'])) {
 
-            [$salesThisWeek, $salesIncreasePercent] = $this->calcSales();
+            [$salesToday, $salesIncreasePercent] = $this->calcSales();
             $billsDailyCount = $this->calcBillsDailyCount();
             [$billsCountThisWeek, $billsIncreasePercent] = $this->calcBillsCount(array_sum($billsDailyCount));
             $cashPaymentsPercentThisWeek = $this->calcCashPayment($billsCountThisWeek);
+            $monthlySales = $this->calcMonthlySales();
+            $accountsBillsDailyCount = $this->accountsBillsDailyCount();
             return Inertia::render('Authenticated/Dashboard/index', [
                 'dashboard' => [
                     'cards' => [
                         'sales' => [
-                            'value' => $salesThisWeek,
+                            'value' => $salesToday,
                             'increase' => $salesIncreasePercent,
                         ],
                         'bills' => [
@@ -35,6 +38,8 @@ class DashboardController extends Controller
                     ],
                     'charts' => [
                         'billsDailyCount' => $billsDailyCount,
+                        'monthlySales' => $monthlySales,
+                        'accountsBillsDailyCount' => $accountsBillsDailyCount,
                     ],
                 ],
             ]);
@@ -42,34 +47,40 @@ class DashboardController extends Controller
             return redirect(route('bill.create'));
     }
 
+    private function accountsBillsDailyCount()
+    {
+
+        return User::selectRaw("users.name AS account, COUNT(bills.id) AS bills")
+            ->leftJoin('bills', function ($join) {
+                $join->on('bills.createdBy_id', '=', 'users.id')
+                    ->whereBetween('bills.created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()]);
+            })
+            ->where('users.business_id', '=', request()->user()->business_id)
+            ->whereNull('users.deleted_at')
+            ->groupBy('account')
+            ->get();
+    }
+
     private function calcSales()
     {
-        $salesToday = 0;
-        $salesYesterday = 0;
         $tax = request()->user()->business->taxPercent + 1;
-        request()->user()->business->bills()
-            ->whereBetween('created_at', [Carbon::now()->subDays(2), Carbon::now()])
-            ->with('transactions.product')
-            ->chunk(100, function (Collection $bills) use ($tax, &$salesToday, &$salesYesterday) {
-                foreach ($bills as $bill) {
-                    $carbonBillDate = Carbon::parse($bill->created_at);
-                    foreach ($bill->transactions as $tra) {
-                        if (isset($tra->product->price)) {
-                            if ($carbonBillDate->between(Carbon::now()->subDay(), Carbon::now())) {
-                                $salesToday += $tra->quantity * $tra->product->price * $tax;
-                            } else {
-                                $salesYesterday += $tra->quantity * $tra->product->price * $tax;
-                            }
-                        }
-                    }
-                }
-            });
 
-        if ($salesYesterday == 0)
+        $res = request()->user()->business->bills()
+            ->selectRaw("DAY(bills.created_at) AS day, SUM(COALESCE(products.price, 0) * transactions.quantity * $tax) AS daily_sales")
+            ->join('transactions', 'bills.id', '=', 'transactions.bill_id')
+            ->join('products', 'products.id', '=', 'transactions.product_id')
+            ->whereBetween('bills.created_at', [Carbon::now()->subDays(2), Carbon::now()])
+            ->groupByRaw('day')
+            ->get();
+
+        $salesYesterday = (float) $res[0]?->daily_sales ?? 0;
+        $salesToday = (float)$res[1]?->daily_sales ?? 0;
+        if ($salesYesterday == 0 || $salesToday == 0)
             $increasePercentage = null;
         else
             $increasePercentage = ($salesToday - $salesYesterday) / $salesYesterday * 100;
-        return [$salesToday, $increasePercentage];
+
+        return ([$salesToday, $increasePercentage]);
     }
 
     /**Calculate number of bills for each day of the current week.
@@ -78,7 +89,7 @@ class DashboardController extends Controller
      * The sum of the array will be total number of bills created within last 7 days.
      */
     private function calcBillsDailyCount(): array
-    {//we call now()->subWeek()->addDay() because if today is friday then subWeek will get us to friday of the previous week. And we don't want that we want a week range with only one friday :)
+    { //we call now()->subWeek()->addDay() because if today is friday then subWeek will get us to friday of the previous week. And we don't want that we want a week range with only one friday :)
         $res = request()->user()->business->bills()
             ->whereBetween("created_at", [Carbon::now()->subWeek()->addDay(), Carbon::now()])
             ->selectRaw("COUNT(*) as count, DAYOFWEEK(created_at) as day")
@@ -86,10 +97,30 @@ class DashboardController extends Controller
             ->get();
         $dailyCounts = [0, 0, 0, 0, 0, 0, 0];
         foreach ($res as $dayCount) {
-            $dailyCounts[(($dayCount->day - 1) - date('w') + 6) % 7] = $dayCount->count;
+            $dailyCounts[(($dayCount->day - 1) - date('w') + 6) % 7] = (int)$dayCount->count;
         }
 
         return $dailyCounts;
+    }
+
+    private function calcMonthlySales(): array
+    {
+        $tax = request()->user()->business->taxPercent + 1;
+
+        $res = request()->user()->business->bills()
+            ->selectRaw("MONTH(bills.created_at) AS month, SUM(COALESCE(products.price, 0) * transactions.quantity * $tax) AS month_sales")
+            ->join('transactions', 'bills.id', '=', 'transactions.bill_id')
+            ->join('products', 'products.id', '=', 'transactions.product_id')
+            ->whereBetween('bills.created_at', [Carbon::now()->subYear()->addDay(), Carbon::now()])
+            ->groupByRaw('month')
+            ->get();
+
+        $monthlySales = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        foreach ($res as $monthSales) {
+            $monthlySales[(($monthSales->month - 1) - date('m') + 12) % 12] = round((float)$monthSales->month_sales);
+        }
+
+        return $monthlySales;
     }
 
     private function calcBillsCount(int $countThisWeek)
@@ -97,7 +128,7 @@ class DashboardController extends Controller
         $countLastWeek = request()->user()->business->bills()
             ->whereBetween('created_at', [Carbon::now()->subWeeks(2)->addDay(), Carbon::now()->subWeek()])
             ->count();
-        if ($countLastWeek == 0)
+        if ($countLastWeek == 0 || $countThisWeek == 0)
             $increasePercentage = null;
         else
             $increasePercentage = ($countThisWeek - $countLastWeek) / $countLastWeek * 100;

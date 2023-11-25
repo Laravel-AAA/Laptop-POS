@@ -168,5 +168,7 @@ export interface IDashboard {
   };
   charts: {
     billsDailyCount: [number, number, number, number, number, number, number];
+    monthlySales: [number, number, number, number, number, number, number, number, number, number, number, number];
+    accountsBillsDailyCount: { account: string; bills: number }[];
   }
 }
