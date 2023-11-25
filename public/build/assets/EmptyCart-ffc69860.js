@@ -1,1 +1,0 @@
-import{j as t}from"./app-6c8ebba6.js";import{c as a}from"./index.esm-694e351a.js";import"./iconBase-8323792c.js";function i({length:r}){return r===0&&t.jsxs("div",{className:"flex justify-center gap-4 py-6 opacity-50",children:[t.jsx(a,{className:"mt-1"}),t.jsx("p",{children:"Empty cart!"})]})}export{i as default};
