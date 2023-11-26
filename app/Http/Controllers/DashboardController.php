@@ -84,14 +84,21 @@ class DashboardController extends Controller
             ->whereBetween('bills.created_at', [Carbon::now()->subDays(2), Carbon::now()])
             ->groupByRaw('day')
             ->get();
+        // dd($res, date('d'));
+        //if there is only sales for yesterday then $res[0] is yesterday which is not what expected below. So, we correct that.
+        if (count($res) == 1 && isset($res[0]?->day) && $res[0]->day != date('d')) {
+            $res[1] = $res[0];
+            unset($res[0]);
+        }
 
         if (isset($res) && isset($res[0]?->daily_sales))
-            $salesYesterday = (float) $res[0]->daily_sales;
+            $salesToday = (float) $res[0]->daily_sales;
         else
-            $salesYesterday = 0;
+            $salesToday = 0;
+
         if (isset($res) && isset($res[1]?->daily_sales))
-            $salesToday = (float)$res[1]->daily_sales;
-        else $salesToday = 0;
+            $salesYesterday = (float)$res[1]->daily_sales;
+        else $salesYesterday = 0;
 
         if ($salesYesterday == 0 || $salesToday == 0)
             $increasePercentage = null;
