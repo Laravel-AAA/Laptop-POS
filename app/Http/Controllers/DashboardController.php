@@ -70,6 +70,7 @@ class DashboardController extends Controller
             ->whereNull('users.deleted_at')
             ->whereNotNull('users.email_verified_at')
             ->groupBy('account')
+            ->orderBy('account')
             ->get();
     }
 
@@ -82,9 +83,10 @@ class DashboardController extends Controller
             ->join('transactions', 'bills.id', '=', 'transactions.bill_id')
             ->join('products', 'products.id', '=', 'transactions.product_id')
             ->whereBetween('bills.created_at', [Carbon::now()->subDays(2), Carbon::now()])
-            ->groupByRaw('day')
+            ->groupBy('day')
+            ->orderByDesc('day')
             ->get();
-        // dd($res, date('d'));
+            
         //if there is only sales for yesterday then $res[0] is yesterday which is not what expected below. So, we correct that.
         if (count($res) == 1 && isset($res[0]?->day) && $res[0]->day != date('d')) {
             $res[1] = $res[0];

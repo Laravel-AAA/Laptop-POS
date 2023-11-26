@@ -20,12 +20,12 @@ class DatabaseSeeder extends Seeder
         // create $BUSINESSES businesses
         $BUSINESSES = 3;
         // each business has $USERS users one of them asdf with email 'asdf@asdf.asdf', '1asdf@asdf.asdf', '2asdf@asdf.asdf', ...etc.
-        $USERS = 8;
-        // each business has $PRODUCTS products and $BILLS bills where products won't exceeds number of bills.
-        $PRODUCTS = 50;
-        $BILLS = 250;
+        $USERS = 4;
+        // each user will make $PRODUCTS products and $BILLS bills where products won't exceeds number of bills.
+        $PRODUCTS = 20;//total products = $USERS * $PRODUCTS
+        $BILLS = 900;//  total bills    = $USERS * $BILLS
         //transactions should be proportioned to number of bills to prevent unrealistic result we will use $TRANSACTIONS_PROPORTION
-        $TRANSACTIONS_PROPORTION = 3.33;
+        $TRANSACTIONS_PROPORTION = 3;//float number
         //-----
         //loop $BUSINESSES times for each business
         //each $BUSINESSES iteration loop $USERS times for each users

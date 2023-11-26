@@ -3,19 +3,23 @@ import ProductOptions from "./ProductOptions";
 import Num from "@/Utilities/Num";
 import { usePage } from "@inertiajs/react";
 import DefaultProductImg from "@/Pages/Authenticated/Inventory/Partials/DefaultProductImg";
+
 type PropsProduct = {
   product: IProduct;
   requestEdit: () => void;
   requestShow: () => void;
   requestChangeStock: () => void;
 };
+
 export default function Product({
   product,
   requestEdit,
   requestShow,
   requestChangeStock,
 }: PropsProduct) {
+
   const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
+
   return (
     <div
       role="button"
@@ -23,7 +27,7 @@ export default function Product({
         e.stopPropagation();
         requestShow();
       }}
-      className="div-style group min-w-[200px] relative m-4 flex cursor-pointer flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:w-52"
+      className="div-style group relative m-4 flex min-w-[200px] min-h-[212px] cursor-pointer flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:w-52"
     >
       <ProductOptions
         product={product}
@@ -51,7 +55,7 @@ export default function Product({
           {product.name}
         </h3>
 
-        <div className="mt-2 flex justify-between">
+        <div className="mt-2 flex justify-between gap-2">
           <p
             title={
               product.price === null ? "" : "$" + product.price + " without tax"
@@ -69,7 +73,17 @@ export default function Product({
           </p>
           <div className="flex flex-col justify-center">
             {product.stock === 0 ? (
-              <span className="font-thin text-red-500">Out of Stock</span>
+                <span
+                title="Out of Stock"
+                  style={{
+                    display: "-webkit-box",
+                    WebkitBoxOrient: "vertical",
+                    WebkitLineClamp: 1,
+                  }}
+                  className="overflow-hidden text- font-thin text-red-500  "
+                >
+                  Out of Stock
+                </span>
             ) : (
               <Num
                 className="font-normal  text-secondary-600"

@@ -46,7 +46,7 @@ export default function Num({
 
   if (amount === null) number = noAmount ?? "N/A";
   else {
-    amount = Number(amount.toFixed(fixed));
+    amount = Number(Number( amount ).toFixed(fixed));
 
     //Welcome to javascript where (0 * -1 = -0) 😑
     //also (-0 === 0 is true)

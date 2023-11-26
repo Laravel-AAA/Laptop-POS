@@ -5,8 +5,8 @@ import { StatisticsCard } from "./Partials/StatisticsCard";
 import { useStatisticsCardsData } from "./Partials/useStatisticsCardsData";
 import useStatisticsChartsData from "./Partials/useStatisticsChartsData";
 import { StatisticsChart } from "./Partials/StatisticsChart";
-import OutOfStock from "./Partials/OutOfStock";
 import Footer from "@/Layouts/GuestLayout/Partials/Footer";
+import OutOfStock from "./Partials/OutOfStock";
 
 export default function Dashboard({
   auth,

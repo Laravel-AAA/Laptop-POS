@@ -1,7 +1,6 @@
 - Workflow for testing & building React.
-- Register by Third party app (Google, Facebook, ...etc).
 - Subscription plans AND free trial for month.
 - Pay-as-you-go OR limited db records depends on the plan.
-- QR code on the bill (URL) that can be access by the customer to see their bill.
-- You can't edit the price of a product while there is existed (x) bills with the old price!
 - Validate phone number, base on the phone country.
+- Customize checkout product size with slider for product size.
+- Best products sells on the Dashboard.

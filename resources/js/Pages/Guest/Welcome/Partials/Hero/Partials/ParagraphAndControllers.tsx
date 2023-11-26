@@ -18,7 +18,7 @@ export default function ParagraphAndControllers() {
       >
         <SecondaryLink
           href={route("register.method")}
-          className="px-7 py-4 normal-case shadow-lg"
+          className="!bg-gradient-to-br !from-yellow-600  to-secondary-400 px-7 py-4 normal-case shadow-lg "
         >
           <span className="text-sm tracking-wide">Create FREE Account</span>
         </SecondaryLink>

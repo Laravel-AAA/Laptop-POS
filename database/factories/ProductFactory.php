@@ -43,12 +43,12 @@ class ProductFactory extends Factory
         $optional = fake()->optional(0.7)->numberBetween(0, 1);
         if (!isset($optional))
             return null;
-        $chance = fake()->numberBetween(1, 10);
+        $chance = fake()->numberBetween(1, 20);
         //biased number is random number between minimum and maximum numbers but it has different        $biased
         // probability (tends) towards one end base on a mathematical function
         // (e.g., if the math function is 'log' then the generated number is tends
         //  towards the minimum number)
-        if ($chance == 10) //%10 high price
+        if ($chance == 1) //%5 high price
             $biased = fake()->biasedNumberBetween(1, 999, 'sqrt');
         else
             $biased = fake()->biasedNumberBetween(1, 99, 'sqrt');

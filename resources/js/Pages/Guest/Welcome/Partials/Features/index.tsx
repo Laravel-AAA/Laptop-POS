@@ -1,8 +1,7 @@
 import { Transition } from "@headlessui/react";
 import { useEffect, useRef, useState } from "react";
-import { FaShop } from "react-icons/fa6";
+import { FaChartSimple, FaReceipt, FaShop } from "react-icons/fa6";
 import Solutions from "./Partials/Solutions";
-import GradientCircle from "./Partials/GradientCircle";
 
 export default function Features() {
   const [tab, setTab] = useState<number>(1);
@@ -21,7 +20,6 @@ export default function Features() {
   return (
     <section className="relative overflow-hidden">
       {/* Section background (needs .relative class on parent and next sibling elements) */}
-      <GradientCircle />
       <div className="absolute left-0 right-0 m-auto h-24 w-px -translate-y-1/2 transform bg-gray-300 p-px"></div>
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
@@ -42,19 +40,19 @@ export default function Features() {
               data-aos="fade-right"
             >
               <div className="mb-8 xl:pr-16">
-                <h3 className="mb-2 text-center text-2xl font-bold xl:text-left">
+                <h3 className="text-center text-2xl font-semibold xl:text-left">
                   Simple yet powerful suite of tools
                 </h3>
               </div>
               {/* Tabs buttons */}
               <div className="mb-8 xl:mb-0">
-                <a
-                  className={`mb-3 flex items-center rounded border p-5 text-lg transition duration-300 ease-in-out ${
+                <button
+                  className={`div-style mb-3 flex items-center rounded border p-5 text-lg transition duration-300 ease-in-out ${
                     tab !== 1
                       ? "border-gray-200 bg-white shadow-md hover:shadow-lg"
                       : "border-transparent bg-gray-200"
                   }`}
-                  href="#0"
+                  // href="#0"
                   onClick={(e) => {
                     e.preventDefault();
                     setTab(1);
@@ -74,14 +72,13 @@ export default function Features() {
                   <div className="ml-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white shadow">
                     <FaShop />
                   </div>
-                </a>
-                <a
-                  className={`mb-3 flex items-center rounded border p-5 text-lg transition duration-300 ease-in-out ${
+                </button>
+                <button
+                  className={`div-style mb-3 flex items-center rounded border p-5 text-lg transition duration-300 ease-in-out ${
                     tab !== 2
                       ? "border-gray-200 bg-white shadow-md hover:shadow-lg"
                       : "border-transparent bg-gray-200"
                   }`}
-                  href="#0"
                   onClick={(e) => {
                     e.preventDefault();
                     setTab(2);
@@ -89,33 +86,25 @@ export default function Features() {
                 >
                   <div>
                     <div className="mb-1 font-bold leading-snug tracking-tight">
-                      Building the Simple ecosystem
+                      Process and complete your customer orders
                     </div>
                     <div className="text-gray-600">
-                      Take collaboration to the next level with security and
-                      administrative features built for teams.
+                      Quickly and easily process customer orders with features
+                      like barcode, payment methods, change calculation, and
+                      customizable list. Generate bills with accurate and
+                      detailed information.
                     </div>
                   </div>
                   <div className="ml-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white shadow">
-                    <svg
-                      className="h-3 w-3 fill-current"
-                      viewBox="0 0 12 12"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M11.854.146a.5.5 0 00-.525-.116l-11 4a.5.5 0 00-.015.934l4.8 1.921 1.921 4.8A.5.5 0 007.5 12h.008a.5.5 0 00.462-.329l4-11a.5.5 0 00-.116-.525z"
-                        fillRule="nonzero"
-                      />
-                    </svg>
+                    <FaReceipt />
                   </div>
-                </a>
-                <a
-                  className={`mb-3 flex items-center rounded border p-5 text-lg transition duration-300 ease-in-out ${
+                </button>
+                <button
+                  className={`div-style mb-3 flex items-center rounded border p-5 text-lg transition duration-300 ease-in-out ${
                     tab !== 3
                       ? "border-gray-200 bg-white shadow-md hover:shadow-lg"
                       : "border-transparent bg-gray-200"
                   }`}
-                  href="#0"
                   onClick={(e) => {
                     e.preventDefault();
                     setTab(3);
@@ -123,27 +112,19 @@ export default function Features() {
                 >
                   <div>
                     <div className="mb-1 font-bold leading-snug tracking-tight">
-                      Building the Simple ecosystem
+                      Monitor and analyze your business
                     </div>
                     <div className="text-gray-600">
-                      Take collaboration to the next level with security and
-                      administrative features built for teams.
+                      Gain valuable insights with a clear and simple dashboard
+                      that shows your sales, bills, staff performance, and
+                      inventory status. Find out which products are selling
+                      well, and which ones are out of stock.
                     </div>
                   </div>
                   <div className="ml-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white shadow">
-                    <svg
-                      className="h-3 w-3 fill-current"
-                      viewBox="0 0 12 12"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M11.334 8.06a.5.5 0 00-.421-.237 6.023 6.023 0 01-5.905-6c0-.41.042-.82.125-1.221a.5.5 0 00-.614-.586 6 6 0 106.832 8.529.5.5 0 00-.017-.485z"
-                        fill="#191919"
-                        fillRule="nonzero"
-                      />
-                    </svg>
+                    <FaChartSimple />
                   </div>
-                </a>
+                </button>
               </div>
             </div>
 
@@ -177,9 +158,9 @@ export default function Features() {
                       />
                       <img
                         className="absolute w-[209px] md:w-[372px]"
-                        src="/assets/screenshots/inventory-with-food-products(fullscreen).png"
+                        src="/assets/screenshots/2023-11-26 09_43_52-Inventory - Laptop POS - Brave.png"
                         alt="Inventory page with food products"
-                        style={{ top: "7%", left: "13.8%" }}
+                        style={{ top: "5.58%", left: "13.8%" }}
                       />
                     </div>
                   </Transition>
@@ -199,18 +180,15 @@ export default function Features() {
                   >
                     <div className="relative inline-flex flex-col">
                       <img
-                        className="mx-auto rounded xl:max-w-none"
+                        className="w-[280px]  min-w-[280px] md:w-[500px] md:min-w-[500px]"
                         src="/assets/screen-tv-mockup/index.png"
-                        width={500}
-                        height="462"
-                        alt="Features bg"
+                        alt="Mockup laptop to show pages on screen"
                       />
                       <img
-                        className="animate-float absolute left-0  transform"
-                        // src="/assets/screenshots/inventory-with-food-products(fullscreen).png"
-                        width={317}
-                        alt="Inventory with food products"
-                        style={{ top: "6%", left: "19%" }}
+                        className="absolute w-[209px] md:w-[372px]"
+                        src="/assets/screenshots/2023-11-26 10_05_34-Checkout - Laptop POS - Brave.png"
+                        alt="Inventory page with food products"
+                        style={{ top: "5.58%", left: "13.8%" }}
                       />
                     </div>
                   </Transition>
@@ -230,18 +208,15 @@ export default function Features() {
                   >
                     <div className="relative inline-flex flex-col">
                       <img
-                        className="mx-auto rounded xl:max-w-none"
+                        className="w-[280px]  min-w-[280px] md:w-[500px] md:min-w-[500px]"
                         src="/assets/screen-tv-mockup/index.png"
-                        width={500}
-                        height="462"
-                        alt="Features bg"
+                        alt="Mockup laptop to show pages on screen"
                       />
                       <img
-                        className="animate-float absolute left-0  transform"
-                        // src="/assets/screenshots/inventory-with-food-products(fullscreen).png"
-                        width={317}
-                        alt="Inventory with food products"
-                        style={{ top: "6%", left: "19%" }}
+                        className="absolute w-[209px] md:w-[372px]"
+                        src="/assets/screenshots/2023-11-26 10_43_36-Dashboard - Laptop POS - Brave.png"
+                        alt="Inventory page with food products"
+                        style={{ top: "5.58%", left: "13.8%" }}
                       />
                     </div>
                   </Transition>

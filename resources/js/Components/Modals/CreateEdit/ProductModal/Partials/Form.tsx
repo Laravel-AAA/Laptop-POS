@@ -3,6 +3,7 @@ import React, { FormEvent } from "react";
 import FormInputs from "./FormInputs";
 import FormActions from "./FormActions";
 import useBetterForm from "@/Utilities/useBetterForm";
+import { VisitOptions } from "@inertiajs/inertia";
 
 export default function Form({
   modalAction,
@@ -37,6 +38,7 @@ export default function Form({
         modalAction.state === "edit" ? modalAction.data.id : undefined,
       ),
       {
+        preserveScroll: true,
         onSuccess: () => {
           form.clearErrors();
           form.reset();
@@ -46,7 +48,7 @@ export default function Form({
             open: false,
           }));
         },
-      },
+      } as VisitOptions,
     );
   }
 

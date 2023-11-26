@@ -34,11 +34,11 @@ export default function Solutions() {
   return (
     <div className="mb-6 justify-center text-xl text-gray-600 md:-ml-20">
       {/*The reason for the complexity is when using class 'text-center' with a changing width sentence (hence: dynamic list of businesses) will make the whole sentence re-align to center every time which is a bad thing */}
-      <span>Whatever your use case,&nbsp;</span>
+      <span>Whatever is your use case,&nbsp;</span>
       <div className="block md:inline ">
-        <div className="-ml-28 inline md:ml-0">
+        <div className="-ml-10 inline md:ml-0">
           <AppName/> is built
-          for&nbsp;
+          for&nbsp;<span className="text-secondary-600 md:hidden">all stores</span>
           {businesses.map((b, i) => (
             <Transition
               appear={true}
@@ -51,7 +51,7 @@ export default function Solutions() {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 -translate-y-8"
               unmount={true}
-              className="absolute inline text-left text-secondary-600 "
+              className="absolute text-left text-secondary-600 hidden md:inline"
             >
               {b}
             </Transition>

@@ -167,12 +167,12 @@ export default function Checkout({
 function computedElementWidthById(id: string): number {
   const e = document.getElementById(id);
   // console.log("element", e);
-  if (e == null) return 240;//default: is average width looks in my DevTools.
+  if (e == null) return 240; //default: is average width looks in my DevTools.
   const computedStyle = getComputedStyle(e);
   // console.log("computedStyle", computedStyle);
-  const width = computedStyle.width;//'###px' Ex: '123px'
+  const width = computedStyle.width; //'###px' Ex: '123px'
   // console.log("width", width);
-  const float = parseFloat(width);// '###' Ex: '123'
+  const float = parseFloat(width); // '###' Ex: '123'
   // console.log("float", float);
   return float;
 }

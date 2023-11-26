@@ -67,7 +67,7 @@ class BillController extends Controller
 
         $products = $request->user()->business->products()->latest()
             ->filter($request->only('search', 'barcode'))
-            ->paginate(20)->appends($request->all());
+            ->paginate(30)->appends($request->all());
 
         return Inertia::render('Authenticated/Checkout/index', [
             'products' => $products,
