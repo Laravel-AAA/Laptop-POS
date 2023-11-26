@@ -19,7 +19,7 @@ class BusinessFactory extends Factory
         return [
             'logo' => fake()->optional()->imageUrl(640, 480, 'Product'),
             'name' => ucwords(fake()->word()),
-            'country' => fake()->country(),
+            'country' => substr(fake()->country(), 0, 50),
             'city' => fake()->city(),
             'address' => fake()->address(),
             'currency' => fake()->currencyCode(),
