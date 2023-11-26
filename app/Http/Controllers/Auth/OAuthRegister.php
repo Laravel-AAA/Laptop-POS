@@ -102,7 +102,7 @@ class OAuthRegister extends Controller
  *   "email" => "Ahmad.Alkaf.AHK@gmail.com"
  *   "avatar" => "https://avatars.githubusercontent.com/u/81206551?v=4"
  * ]
- * +token: "gho_eI6yJLAVRbKAhtG1239y7Cj3PglgU1d4V1EInDR"
+ * +token: "blah blah"
  * +refreshToken: null
  * +expiresIn: null
  * +approvedScopes: array:1 [▼
@@ -131,7 +131,7 @@ class OAuthRegister extends Controller
  *    "name" => "أحمد الكاف"
  *    "avatar" => "https://pbs.twimg.com/profile_images/1680551353431515137/7i3yzkEt_normal.jpg"
  *  ]
- *  +token: "NndXNjRWVGNSM2NpeU1QMHpQR2xCU1ExaU1MUm52TWhkb1BDZU1qRllNa3hGOjE3MDA2MjIzMjc4ODQ6MToxOmF0OjE"
+ *  +token: "blah bah"
  *  +refreshToken: null
  *  +expiresIn: 7200
  *  +approvedScopes: array:2 [▼
