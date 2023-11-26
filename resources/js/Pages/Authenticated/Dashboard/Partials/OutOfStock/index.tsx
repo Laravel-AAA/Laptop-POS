@@ -4,7 +4,7 @@ import UpdateProductStockModal from "@/Components/Modals/UpdateProductStockModal
 import A from "@/Components/Typography/A";
 import Product from "@/Pages/Authenticated/Inventory/Partials/Product";
 import { ILaravelPaginate, IModalAction, IProduct } from "@/types";
-import { Card, Typography } from "@material-tailwind/react";
+import { Card, Tooltip, Typography } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { FaBoxesStacked, FaChevronRight } from "react-icons/fa6";
 
@@ -35,33 +35,34 @@ export default function OutOfStock({
         <div className="p-6">
           <header>
             <Typography variant="h6" color="blue-gray">
-              Products out of stock
+              Out of Stock Products
             </Typography>
             <A
               href={route("product.index", { stock: "out" })}
               className="font-normal"
             >
-              Viw all products out of stock
+              Viw all out of stock products
             </A>
           </header>
           <section>
             {paginate.total > 0 ? (
               <div className="relative flex overflow-hidden">
-                  <div className="pointer-events-none absolute right-0 z-10 flex h-full w-52 justify-end bg-gradient-to-l from-white to-transparent">
-                {paginate.total > 5 && (
+                <div className="pointer-events-none absolute right-0 z-[1] flex h-full w-52 justify-end bg-gradient-to-l from-white to-transparent">
+                  {paginate.total > 5 && (
                     <div className="mb-2 self-center">
-                      <span className="pointer-events-auto">
-                        <BetterLink
-                          title="Viw all products out of stock"
-                          className="inline-block self-center rounded-[50%] p-2 align-middle text-gray-700 transition duration-200 ease-in-out hover:bg-black hover:bg-opacity-10 hover:text-gray-900 focus:outline-none"
-                          href={route("product.index", { stock: "out" })}
-                        >
-                          <FaChevronRight className="text-lg" />
-                        </BetterLink>
-                      </span>
+                      <Tooltip content="Viw all out of stock products">
+                        <span className="pointer-events-auto">
+                          <BetterLink
+                            className="inline-block self-center rounded-[50%] p-2 align-middle text-gray-700 transition duration-200 ease-in-out hover:bg-black hover:bg-opacity-10 hover:text-gray-900 focus:outline-none"
+                            href={route("product.index", { stock: "out" })}
+                          >
+                            <FaChevronRight className="text-lg" />
+                          </BetterLink>
+                        </span>
+                      </Tooltip>
                     </div>
-                )}
-                  </div>
+                  )}
+                </div>
                 {paginate.data.map((p) => (
                   <Product
                     key={p.id}

@@ -5,6 +5,7 @@ import { IProduct } from "@/types";
 import useBetterForm from "@/Utilities/useBetterForm";
 import Input from "../Inputs/Input";
 import SecondaryMaterialBtn from "../Buttons/Material/SecondaryMaterialBtn";
+import { VisitOptions } from "@inertiajs/inertia";
 
 export default function UpdateProductStockModal({
   modalAction,
@@ -27,12 +28,13 @@ export default function UpdateProductStockModal({
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     form.patch(route(`product.update`, product?.id), {
+      preserveScroll:true,
       onSuccess: () => {
         form.clearErrors();
         form.reset();
         close();
       },
-    });
+    } as VisitOptions);
   }
 
   return (
@@ -48,7 +50,7 @@ export default function UpdateProductStockModal({
       <form className="mt-3" onSubmit={handleSubmit}>
         <Input
           id="stock"
-          label="Add stock"
+          label="Add to Stock"
           type="number"
           name="stock"
           autoFocus
@@ -72,7 +74,7 @@ export default function UpdateProductStockModal({
               <span className="font-semibold text-gray-600">
                 {product?.stock ?? "N/A"}
               </span>
-              . Update stock to{" "}
+              . Will update to{" "}
               <span className="font-semibold text-gray-600">
                 {(product?.stock ?? 0) + increase}
               </span>

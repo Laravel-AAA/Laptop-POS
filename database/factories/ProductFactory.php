@@ -22,10 +22,10 @@ class ProductFactory extends Factory
         return [
             'name' => fake()->sentence(3),
             'price' => $this->fakePrice(),
-            'stock' => fake()->optional()->biasedNumberBetween(0, 50, 'sqrt'),
-            'barcode' => fake()->optional()->isbn13(),
-            'img' => fake()->optional()->imageUrl(640, 480, 'Product'),
-            'description' => fake()->optional()->sentence(substr(fake()->numberBetween(0, 30), 0, 500)),
+            'stock' => fake()->optional(0.7)->biasedNumberBetween(0, 50, 'sqrt'),
+            'barcode' => fake()->optional(0.7)->isbn13(),
+            'img' => fake()->optional(0.7)->imageUrl(640, 480, 'Product'),
+            'description' => fake()->optional(0.7)->sentence(substr(fake()->numberBetween(0, 30), 0, 500)),
 
             'createdBy_id' => User::factory(),
             'business_id' => Business::factory(),
@@ -40,7 +40,7 @@ class ProductFactory extends Factory
 
     private function fakePrice(): float|null
     {
-        $optional = fake()->optional()->numberBetween(0, 1);
+        $optional = fake()->optional(0.7)->numberBetween(0, 1);
         if (!isset($optional))
             return null;
         $chance = fake()->numberBetween(1, 10);

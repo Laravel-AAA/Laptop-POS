@@ -34,16 +34,16 @@ class DatabaseSeeder extends Seeder
 
         $businesses = [];
         for ($b = 0; $b < $BUSINESSES; $b++) {
-            $businesses[] = Business::factory()->create();
+            $businesses[] = Business::factory()->createOneQuietly();
             $users = [];
             for ($u = 0; $u < $USERS; $u++) {
                 $users[] = User::factory()->recycle($businesses[$b])
-                    ->create($u === 0 ? ['name' => 'asdf', 'email' => ($b == 0 ? '' : $b) . 'asdf@asdf.asdf', 'role' => 'Owner', 'email_verified_at' => now(), 'deleted_at' => null] : []);
+                    ->createQuietly($u === 0 ? ['name' => 'asdf', 'email' => ($b == 0 ? '' : $b) . 'asdf@asdf.asdf', 'role' => 'Owner', 'email_verified_at' => now(), 'deleted_at' => null] : []);
                 $products = [];
                 $bills = [];
                 for ($i = 0; $i < $BILLS; $i++) {
                     if ($i < $PRODUCTS)
-                        $products[] = Product::factory()->recycle($businesses[$b])->recycle($users[$u])->create();
+                        $products[] = Product::factory()->recycle($businesses[$b])->recycle($users[$u])->createQuietly();
                     $bills[] = Bill::factory()->recycle($businesses[$b])->recycle($users[$u])->createQuietly();
                 }
                 Transaction::factory()->count(ceil($BILLS * $TRANSACTIONS_PROPORTION))->recycle($products)->recycle($bills)->createQuietly();
