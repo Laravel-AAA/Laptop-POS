@@ -1,6 +1,0 @@
-import{j as e,r as I}from"./app-a0d3deea.js";import{r as b}from"./index-893d09f4.js";import{E as h}from"./ErrorMessage-63418ae2.js";function c({message:s,children:l,className:r="",...a}){return e.jsx("p",{...a,className:"ml-2 mt-2 text-xs text-blue-gray-400 "+r,children:s||l})}const H=I.forwardRef(function({type:l="text",color:r="teal",variant:a="outlined",size:u="lg",className:p="",errorMsg:o,errorMsgProps:x,hideError:d,error:t,hint:f,hintProps:m,label:i,disabled:n,required:g,autoComplete:j="off",id:w=i.toLowerCase().replace(/^[^\w]+/,"").replaceAll(/[^\w]/g,"-"),name:v=i.toLowerCase().replace(/^[^\w]+/,"").replaceAll(/[^\w]/g,"-"),...y},E){return t===void 0&&(d===!0?t=!1:o?t=!0:t=!1),e.jsxs("div",{children:[e.jsx(b.Input,{...y,id:w,name:v,label:i,"aria-label":i,inputRef:E,ref:null,type:l,variant:a,color:r,size:u,error:t,autoComplete:j,className:`${p} file:mr-2 file:cursor-pointer file:rounded-md file:border-none
-        file:bg-white file:text-center file:text-sm
-        file:font-semibold file:uppercase  file:text-blue-gray-700
-        file:transition file:duration-200 file:ease-in-out placeholder:italic
-        focus:ring-0
-        file:active:scale-95 file:disabled:opacity-60`,disabled:n,required:n===!0?!1:g,crossOrigin:void 0}),e.jsx(h,{message:o,...x}),typeof f=="string"?e.jsx(c,{message:f,...m}):e.jsx(c,{children:f})]})});export{c as H,H as I};
