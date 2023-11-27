@@ -45,7 +45,6 @@ export default function BusinessForm({
           hideError={form.isDirty("name")}
           className="mt-1 block w-full"
           autoComplete="off"
-          autoFocus
           maxLength={50}
           onChange={(e) => form.setData("name", e.target.value)}
           required
