@@ -6,6 +6,7 @@ import GuestLayout from "@/Layouts/GuestLayout";
 import Hero from "./Partials/Hero";
 import Features from "./Partials/Features";
 import PricingCards from "./Partials/PricingCards";
+import LastSection from "./Partials/LastSection";
 
 export default function Welcome() {
   return (
@@ -15,6 +16,7 @@ export default function Welcome() {
       <Features />
       {/* todo segment about the flexibility */}
       <PricingCards />
+      <LastSection/>
     </GuestLayout>
   );
 }
