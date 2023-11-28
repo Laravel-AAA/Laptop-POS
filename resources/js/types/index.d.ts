@@ -152,6 +152,14 @@ type PagePropsWithFilter<T extends IFilter>
 
 export interface IFilterProduct extends IFilter {
   stock: number | 'out';
+  orderBy: "name" |
+  "name-desc" |
+  "created_at" |
+  "created_at-desc" |
+  "updated_at" |
+  "updated_at-desc" |
+  "stock-highest" |
+  "stock-lowest";
 }
 
 export interface IFilterBill extends IFilter { }

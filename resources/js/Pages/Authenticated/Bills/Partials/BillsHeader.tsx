@@ -34,7 +34,7 @@ export default function BillsHeader({ totalResult }: { totalResult: number }) {
   return (
     <div className="block justify-between py-2 md:flex">
       <div className="flex items-center gap-3">
-        <h2 className="mr-6 text-xl font-semibold leading-tight text-gray-800">
+        <h2 className="mr-4 text-xl font-semibold leading-tight text-gray-800">
           Bills
         </h2>
 
@@ -44,10 +44,11 @@ export default function BillsHeader({ totalResult }: { totalResult: number }) {
           inputMode="search"
           size="md"
           autoComplete="on"
-          icon={<FaSearch />}
+          icon={<FaSearch className="mt-[6px]" />}
           value={filter.search}
           autoFocus
-          className="md:w-72 "
+          className="mt-1 md:w-72"
+          labelProps={{ className: "mt-1" }}
           onChange={(v) => setFilter((p) => ({ ...p, search: v.target.value }))}
           errorMsg={undefined}
           hideError={undefined}
@@ -64,20 +65,20 @@ export default function BillsHeader({ totalResult }: { totalResult: number }) {
         )}
       </div>
       {/* <div className="mt-3 flex items-center justify-end md:my-auto md:block"> */}
-        {/* {!filter.search && prevFilter?.search === filter.search && (
+      {/* {!filter.search && prevFilter?.search === filter.search && (
           <TotalResult
             className="mt-1 md:mt-0"
             text="Total"
             number={totalResult}
           />
         )} */}
-        {filter.search && prevFilter?.search === filter.search && (
-          <TotalResult
-            className="mt-1 block md:mt-0 md:hidden"
-            text="Result"
-            number={totalResult}
-          />
-        )}
+      {filter.search && prevFilter?.search === filter.search && (
+        <TotalResult
+          className="mt-1 block md:mt-0 md:hidden"
+          text="Result"
+          number={totalResult}
+        />
+      )}
       {/* </div> */}
     </div>
   );

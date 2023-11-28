@@ -1,11 +1,24 @@
 import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn";
-import SecondaryButton from "@/Components/Buttons/SecondaryButton";
+import { Option } from "@material-tailwind/react";
 import Input from "@/Components/Inputs/Input";
+import SelectInput from "@/Components/Inputs/SelectInput";
 import { IFilterProduct, PagePropsWithFilter } from "@/types";
 import { router, usePage } from "@inertiajs/react";
+import React from "react";
 import { useEffect, useState } from "react";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import { usePrevious } from "react-use";
+
+const OrderByInventoryOptions = {
+  name: "Name (A-Z)",
+  "name-desc": "Name (Z-A)",
+  created_at: "Created At (Newest First)",
+  "created_at-desc": "Created At (Oldest First)",
+  updated_at: "Updated At (Newest First)",
+  "updated_at-desc": "Updated At (Oldest First)",
+  "stock-highest": "Stock (Highest First)",
+  "stock-lowest": "Stock (Lowest First)",
+};
 
 export default function InventoryHeader({
   totalResult,
@@ -20,6 +33,7 @@ export default function InventoryHeader({
   const [filter, setFilter] = useState<IFilterProduct>({
     search: filterProps.search ?? "",
     stock: filterProps.stock ?? null,
+    orderBy: filterProps.orderBy ?? "created_at",
   });
 
   const prevFilter = usePrevious(filter);
@@ -36,6 +50,7 @@ export default function InventoryHeader({
         preserveState: true,
         preserveScroll: true,
       });
+      console.log(filter);
       return () => router.cancel();
     }
   }, [filter]);
@@ -43,63 +58,88 @@ export default function InventoryHeader({
   return (
     <div className="block justify-between py-2 md:flex">
       <div className="flex items-center gap-3">
-        {filter.stock != "out" ? (
-          <>
-        <h2 className="mr-6 py-2 text-xl font-semibold leading-tight text-gray-800">
-          Inventory
+        <h2 className="mb-1 mr-4 text-xl font-semibold leading-tight text-gray-800">
+          {filter.stock === "out" ? (
+            <>
+              <span className="text-danger-600">Out of Stock</span> Products
+            </>
+          ) : (
+            "Inventory"
+          )}
         </h2>
-            <Input
-              id="search"
-              label="Search for products..."
-              type="search"
-              inputMode="search"
-              name="search"
-              size="md"
-              autoComplete="on"
-              icon={<FaSearch />}
-              value={filter.search}
-              autoFocus
-              className=" md:w-72 "
-              onChange={(v) =>
-                setFilter((p) => ({ ...p, search: v.target.value }))
-              }
-              errorMsg={undefined}
-              hideError={undefined}
-              required={false}
-              disabled={false}
-            />
-            {filter.search && prevFilter?.search === filter.search && (
-              <TotalResult
-                className="hidden md:block"
-                text="Result"
-                number={totalResult}
-              />
-            )}
-          </>
-        ):(
-          <h2 className="mr-6 py-2 text-xl font-semibold leading-tight text-gray-800">
-          <span className="text-danger-600">Out of Stock</span>{" "}Products
-        </h2>
-        )}
-      </div>
-      <div className="mt-3 flex items-center justify-end md:my-auto md:block">
-        {!filter.search && (
-          <TotalResult
-            className="mt-1 md:mt-0"
-            text="Total"
-            number={totalResult}
-          />
-        )}
+        <Input
+          id="search"
+          label="Search for products..."
+          type="search"
+          inputMode="search"
+          name="search"
+          size="md"
+          autoComplete="on"
+          icon={<FaSearch className="mt-[6px]" />}
+          value={filter.search}
+          autoFocus
+          className="mt-1 md:w-72 "
+          labelProps={{ className: "mt-1" }}
+          onChange={(v) => setFilter((p) => ({ ...p, search: v.target.value }))}
+          errorMsg={undefined}
+          hideError={undefined}
+          required={false}
+          disabled={false}
+        />
         {filter.search && prevFilter?.search === filter.search && (
           <TotalResult
-            className="mt-1 block md:mt-0 md:hidden"
+            className=""
             text="Result"
             number={totalResult}
           />
         )}
+      </div>
+      <div className="flex flex-col items-center justify-end gap-6 md:my-auto md:flex-row">
+        {!filter.search && (
+          <TotalResult
+            className="!mx-0 md:mt-0 mt-4"
+            text="Total"
+            number={totalResult}
+          />
+        )}
+        <SelectInput
+          label="Order By"
+          className="w-56"
+          labelProps={{ className: "w-56" }}
+          containerProps={{ className: "w-56" }}
+          value={filter.orderBy}
+          errorMsg={undefined}
+          hideError={undefined}
+          onChange={(v) =>
+            setFilter((p) => ({
+              ...p,
+              orderBy: (v as IFilterProduct["orderBy"]) ?? "created_at",
+            }))
+          }
+          required={false}
+          selected={(element) =>
+            element &&
+            React.cloneElement(element, {
+              disabled: true,
+              className:
+                "flex items-center opacity-100 px-0 gap-2 pointer-events-none",
+            })
+          }
+        >
+          {Object.entries(OrderByInventoryOptions).map(([k, v]) => (
+            <Option
+              key={k}
+              value={k}
+              disabled={filter.stock === 'out' && k.includes('stock')}
+              className="flex items-center"
+            >
+              {v}
+            </Option>
+          ))}
+        </SelectInput>
         {filter.stock !== "out" && (
           <PrimaryMaterialBtn
-            className="inline-flex pl-2 pr-2"
+            className="inline-flex h-10 !px-2"
             onClick={() => requestCreateProduct()}
           >
             <FaPlus className="mr-2" />
