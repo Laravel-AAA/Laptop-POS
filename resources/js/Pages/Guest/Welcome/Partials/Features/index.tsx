@@ -6,6 +6,11 @@ import Solutions from "./Partials/Solutions";
 export default function Features() {
   const [tab, setTab] = useState<number>(1);
 
+  useEffect(() => {
+    const interval = setTimeout(() => setTab((t) => (t + 1) % 4 || 1), 6000);
+    return () => clearTimeout(interval);
+  }, [tab]);
+
   const tabs = useRef<HTMLDivElement>(null);
 
   const heightFix = () => {
@@ -18,11 +23,15 @@ export default function Features() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden ">
       {/* Section background (needs .relative class on parent and next sibling elements) */}
-      <div className="absolute left-0 right-0 m-auto h-24 w-px -translate-y-1/2 transform bg-gray-300 p-px"></div>
+      <div
+        className="pointer-events-none absolute inset-0 top-10 bg-blue-gray-100 bg-opacity-20"
+        aria-hidden="true"
+      ></div>
+      <div className="absolute left-0 right-0 m-auto h-40 w-px -translate-y-1/2 transform bg-gray-300 p-px"></div>
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="relative mx-auto mt-16 max-w-6xl px-4 sm:px-6">
         <div className="pt-12 xl:pt-20">
           {/* Section header */}
           <div className="mx-auto max-w-3xl pb-12 text-center xl:pb-16">
@@ -50,7 +59,7 @@ export default function Features() {
                   className={`div-style mb-3 flex items-center rounded border p-5 text-lg transition duration-300 ease-in-out ${
                     tab !== 1
                       ? "border-gray-200 bg-white shadow-md hover:shadow-lg"
-                      : "border-transparent bg-gray-200"
+                      : "border-transparent bg-gray-100"
                   }`}
                   // href="#0"
                   onClick={(e) => {
@@ -77,7 +86,7 @@ export default function Features() {
                   className={`div-style mb-3 flex items-center rounded border p-5 text-lg transition duration-300 ease-in-out ${
                     tab !== 2
                       ? "border-gray-200 bg-white shadow-md hover:shadow-lg"
-                      : "border-transparent bg-gray-200"
+                      : "border-transparent bg-gray-100"
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
@@ -103,7 +112,7 @@ export default function Features() {
                   className={`div-style mb-3 flex items-center rounded border p-5 text-lg transition duration-300 ease-in-out ${
                     tab !== 3
                       ? "border-gray-200 bg-white shadow-md hover:shadow-lg"
-                      : "border-transparent bg-gray-200"
+                      : "border-transparent bg-gray-100"
                   }`}
                   onClick={(e) => {
                     e.preventDefault();

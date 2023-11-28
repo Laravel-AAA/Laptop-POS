@@ -5,6 +5,7 @@ import { Head } from "@inertiajs/react";
 import GuestLayout from "@/Layouts/GuestLayout";
 import Hero from "./Partials/Hero";
 import Features from "./Partials/Features";
+import PricingCards from "./Partials/PricingCards";
 
 export default function Welcome() {
   return (
@@ -13,6 +14,7 @@ export default function Welcome() {
       <Hero />
       <Features />
       {/* todo segment about the flexibility */}
+      <PricingCards />
     </GuestLayout>
   );
 }
