@@ -21,11 +21,11 @@ class ProductController extends Controller
             'createdBy' => function ($query) {
                 $query->withTrashed();
             }
-        ])->latest()->filter($request->only(['search', 'stock']))
+        ])->filter($request->only(['search', 'stock', 'orderBy']))
             ->paginate(15)->appends($request->all());
         return Inertia::render('Authenticated/Inventory/index', [
             'products' => $products,
-            'filter' => $request->only(['search', 'stock']),
+            'filter' => $request->only(['search', 'stock', 'orderBy']),
         ]);
     }
 

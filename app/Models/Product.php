@@ -83,5 +83,35 @@ class Product extends Model
                 $query->where('stock', '<=', 0);
             else $query->where('stock', '=', $stock);
         });
+
+        $query->when($filters['orderBy'] ?? 'created_at', function ($query, $orderBy) {
+            switch ($orderBy) {
+                case 'name':
+                    $query->orderBy('name');
+                    break;
+                case 'name-desc':
+                    $query->orderByDesc('name');
+                    break;
+                case 'created_at-desc':
+                    $query->orderBy('created_at');
+                    break;
+                case 'updated_at':
+                    $query->orderByDesc('updated_at');
+                    break;
+                case 'updated_at-desc':
+                    $query->orderBy('updated_at');
+                    break;
+                case 'stock-highest':
+                    $query->orderByDesc('stock');
+                    break;
+                case 'stock-lowest':
+                    $query->orderBy('stock');
+                    break;
+                case 'created_at':
+                default:
+                    $query->orderByDesc('created_at');
+                    break;
+            }
+        });
     }
 }
