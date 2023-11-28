@@ -18,7 +18,7 @@ export default function LastSection() {
           href={route("register.method")}
           className=" flex border-none bg-gradient-to-r from-primary-600 to-primary-800 !px-32 !py-3 !text-base normal-case shadow hover:shadow-lg"
         >
-          <span>Register&nbsp;</span>
+          <span>Register&nbsp;&nbsp;</span>
           <FaArrowRight />
         </PrimaryLink>
       </div>
