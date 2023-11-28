@@ -3,6 +3,7 @@ import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn
 import PrimaryLink from "@/Components/Buttons/PrimaryLink";
 import { Typography } from "@material-tailwind/react";
 import React from "react";
+import { FaArrowRight } from "react-icons/fa6";
 
 export default function LastSection() {
   return (
@@ -18,9 +19,10 @@ export default function LastSection() {
       <div className="mt-10 self-center lg:mt-0">
         <PrimaryLink
           href={route("register.method")}
-          className=" border-none bg-gradient-to-r from-primary-600 to-primary-800 !px-32 !py-4 shadow hover:shadow-lg"
+          className=" flex border-none bg-gradient-to-r from-primary-600 to-primary-800 !px-32 !py-3 !text-base normal-case shadow hover:shadow-lg"
         >
-          Sign-up
+          <span>Register&nbsp;</span>
+          <FaArrowRight />
         </PrimaryLink>
       </div>
     </section>
