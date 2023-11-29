@@ -14,7 +14,7 @@ export default function SelectInput({
   hideError,
   //There is no such required on Select :|
   required,
-  onFocus,
+  className ='',
   ...props
 }: SelectProps & {
   label: string;
@@ -32,16 +32,14 @@ export default function SelectInput({
   return (
     <>
       <Select
-        {...props}
-        onFocus={(e) => {
-          //This is because of a bug when using tab it dose not focus on Select element.
-          if (e.nativeEvent.relatedTarget) e.target.click();
-          if (onFocus) onFocus(e);
-        }}
+        className={`focus:outline-none
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
+        focus-visible:ring-offset-2 ${className}`}
+        onClick={e=>e.currentTarget.blur()}
         variant={variant}
-        // color={color}
         size={size}
         error={error}
+        {...props}
       >
         {children}
       </Select>
