@@ -104,9 +104,9 @@ export default function InventoryHeader({
         )}
         <SelectInput
           label="Order By"
-          className="w-56"
-          labelProps={{ className: "w-56" }}
-          containerProps={{ className: "w-56" }}
+          className="!w-56"
+          labelProps={{ className: "!w-56" }}
+          containerProps={{ className: "!w-56" }}
           value={filter.orderBy}
           errorMsg={undefined}
           hideError={undefined}
