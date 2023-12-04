@@ -104,6 +104,7 @@ export default function InventoryHeader({
         )}
         <SelectInput
           label="Order By"
+          size="md"
           className="!w-56"
           labelProps={{ className: "!w-56" }}
           containerProps={{ className: "!w-56" }}
@@ -139,7 +140,7 @@ export default function InventoryHeader({
         </SelectInput>
         {filter.stock !== "out" && (
           <PrimaryMaterialBtn
-            className="inline-flex h-10 !px-2"
+            className="inline-flex  h-9"
             onClick={() => requestCreateProduct()}
           >
             <FaPlus className="mr-2" />

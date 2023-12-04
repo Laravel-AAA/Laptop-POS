@@ -18,7 +18,8 @@ export default function PricingCards() {
           <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
             <h3 className="mb-4 text-2xl font-semibold">Starter</h3>
             <p className="font-light text-gray-500 dark:text-gray-400 sm:text-lg">
-              Best option for personal use & for your next project.
+              Suitable for small businesses or individuals who need a simple and
+              affordable POS system
             </p>
             <div className="my-8 flex items-baseline justify-center">
               <span className="mr-2 text-5xl font-extrabold">$29</span>
@@ -125,7 +126,8 @@ export default function PricingCards() {
           <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
             <h3 className="mb-4 text-2xl font-semibold">Company</h3>
             <p className="font-light text-gray-500 dark:text-gray-400 sm:text-lg">
-              Relevant for multiple users, extended & premium support.
+              Ideal for medium-sized businesses or professionals who want a more
+              comprehensive POS system
             </p>
             <div className="my-8 flex items-baseline justify-center">
               <span className="mr-2 text-5xl font-extrabold">$99</span>
@@ -233,7 +235,8 @@ export default function PricingCards() {
           <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
             <h3 className="mb-4 text-2xl font-semibold">Enterprise</h3>
             <p className="font-light text-gray-500 dark:text-gray-400 sm:text-lg">
-              Best for large scale uses and extended redistribution rights.
+              Designed for large businesses or enterprises who require a robust
+              and advanced POS system
             </p>
             <div className="my-8 flex items-baseline justify-center">
               <span className="mr-2 text-5xl font-extrabold">$499</span>
