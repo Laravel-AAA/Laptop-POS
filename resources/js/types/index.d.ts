@@ -183,3 +183,5 @@ export interface IDashboard {
   },
   productsOutOfStock: ILaravelPaginate<IProduct>;
 }
+
+export type PlanPeriod = 'Monthly' | 'Annually';

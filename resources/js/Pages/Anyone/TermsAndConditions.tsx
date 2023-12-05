@@ -1,6 +1,8 @@
 import AppName from "@/Components/Logo/AppName";
 import A from "@/Components/Typography/A";
+import Divider from "@/Components/Typography/Divider";
 import { H2 } from "@/Components/Typography/H2";
+import { H3 } from "@/Components/Typography/H3";
 import { H4 } from "@/Components/Typography/H4";
 import LI from "@/Components/Typography/LI";
 import P from "@/Components/Typography/P";
@@ -22,12 +24,12 @@ export default function TermsAndConditions({ auth }: PageProps) {
 
 function Content() {
   return (
-    <section className="mx-auto space-y-3 mt-6 w-11/12 md:w-10/12">
+    <section className="mx-auto mt-6 w-11/12 space-y-3 md:w-10/12">
       <header>
         <H2>Terms and Conditions</H2>
 
         <P>
-          Welcome to <AppName />!
+          Welcome to <AppName />
         </P>
 
         <P>
@@ -345,6 +347,114 @@ function Content() {
           As long as the website and the information and services on the website
           are provided free of charge, we will not be liable for any loss or
           damage of any nature.
+        </P>
+      </section>
+      <section id="subscription-services">
+        <H3>FastSpring Order Form and Terms of Service</H3>
+
+        {/* <div className="pdf-clearfix"></div> */}
+        <H4>Digital Retailer Services</H4>
+        <P>
+          FastSpring operates as the seller and merchant of record of the
+          Product, enabling instant global sales and allowing FastSpring to
+          handle global transaction security and compliance along with all VAT
+          and sales tax collection, reporting and remittance.
+        </P>
+        <Divider />
+
+        <table id="services-and-fees" className="w-full table-auto">
+          <thead>
+            <tr>
+              <th className="text-start text-gray-700">Description</th>
+              <th className="text-start text-gray-700">Frequency</th>
+              <th className="text-start text-gray-700">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <P>Digital Retailer Rate</P>
+              </td>
+              <td>
+                <P>Per transaction</P>
+              </td>
+              <td>
+                <P>5.9%</P>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <P>Transaction Fee</P>
+              </td>
+
+              <td>
+                <P>Per transaction</P>
+              </td>
+
+              <td>
+                <P>$0.95 USD</P>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <Divider />
+
+        <H4>Additional Terms</H4>
+
+        <H4>Returns and Chargebacks</H4>
+
+        <UL>
+          <LI>
+            Refunds will not incur a fee in addition to the Digital Retailer
+            Rate and Transaction Fee charged on the initial transaction.
+          </LI>
+
+          <LI>
+            Chargebacks will incur a fee charged in addition to the Digital
+            Retailer Rate and Transaction Fee charged on the initial transaction
+            unless otherwise specified. Fees will be assessed in an amount based
+            on payment method reflected below.
+            <Divider />
+            <table id="chargeback-fees" className="w-full table-auto">
+              <thead>
+                <tr>
+                  <th className="text-start">Payment method</th>
+                  <th className="text-start">Chargeback Fee</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <P>All payment methods</P>
+                  </td>
+                  <td>
+                    <P>$20.00 USD</P>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </LI>
+        </UL>
+        <Divider />
+        <H4>Payments to Vendor</H4>
+
+        <UL>
+          <LI>
+            No cost for payments sent via ACH, BACS, SEPA or equivalent direct
+            debit
+          </LI>
+          <LI>No cost for payments sent via Payoneer</LI>
+          <LI>$15.00 USD fee for payments sent via bank wire</LI>
+          <LI>2% up to a max of $20 for payments sent via PayPal</LI>
+        </UL>
+        <P>
+          Your use of the FastSpring service constitutes your ongoing agreement
+          to the Order Form and Terms of Service. The Order Form and Terms of
+          Service update and supersede the existing Reseller Agreement:{" "}
+          <a href="https://fastspring.com/terms/" target="_blank">
+            https://fastspring.com/terms/
+          </a>
         </P>
       </section>
     </section>

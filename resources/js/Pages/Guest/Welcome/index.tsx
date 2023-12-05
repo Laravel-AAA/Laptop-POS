@@ -11,7 +11,10 @@ import { useEffect } from "react";
 
 export default function Welcome() {
   useEffect(() => {
-    if (!location.host.includes("test"))
+    //don't show alert for developers
+    if (
+      !(location.host.includes("test") || location.host.includes("localhost"))
+    )
       setTimeout(
         () =>
           alert(

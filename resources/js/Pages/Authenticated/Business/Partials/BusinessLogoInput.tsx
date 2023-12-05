@@ -31,7 +31,7 @@ export default function BusinessLogoInput<
           className="pointer-events-none absolute bottom-0 left-0 right-0  top-0 rounded-md
         bg-[radial-gradient(#000,#00000030,#00000010,transparent)] opacity-0 transition duration-200 group-hover:opacity-100"
         >
-          <p className="flex h-full w-full items-center justify-center gap-2 text-center text-lg text-gray-100">
+          <p className="flex drop-shadow-lg h-full w-full items-center justify-center gap-2 text-center text-lg text-gray-100">
             <FaEdit />
             Edit Business Logo
           </p>

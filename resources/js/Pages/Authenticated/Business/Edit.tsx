@@ -7,6 +7,8 @@ import IdentitySection from "./Partials/IdentitySection";
 import LocationContactSection from "./Partials/LocationContactSection";
 import FinancialSection from "./Partials/FinancialSection";
 import DeleteBusinessSection from "./Partials/DeleteBusinessSection";
+import PricingCards from "@/Pages/Guest/Welcome/Partials/PricingCards";
+import SubscriptionSection from "./Partials/SubscriptionSection";
 
 export default function Edit({ auth }: AuthPageProps) {
   const business =
@@ -20,6 +22,7 @@ export default function Edit({ auth }: AuthPageProps) {
       <div className="py-12">
         <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
           <AccountsTable business={business} />
+          <SubscriptionSection business={business}/>
           <IdentitySection business={business} />
           <LocationContactSection business={business} />
           <FinancialSection business={business} />

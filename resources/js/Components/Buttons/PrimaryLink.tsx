@@ -1,4 +1,5 @@
-import { AnchorHTMLAttributes } from "react";
+import BetterLink from "./BetterLink";
+import { InertiaLinkProps } from "@inertiajs/react";
 
 export default function PrimaryLink({
   href,
@@ -6,14 +7,15 @@ export default function PrimaryLink({
   children,
   disabled,
   ...props
-}: AnchorHTMLAttributes<HTMLAnchorElement> & { disabled?: boolean }) {
+}: InertiaLinkProps ) {
   return (
-    <a
+    <BetterLink
       {...props}
       href={href}
-      className={`inline-block items-center rounded-md border
+      disabled={disabled}
+      className={`block items-center rounded-md border
         border-transparent bg-primary-700 px-4
-        py-2 text-center  text-xs font-semibold
+        py-2 text-center text-xs font-semibold
         uppercase tracking-wider
         text-white transition duration-200
         ease-in-out hover:bg-primary-600 focus:outline-none
@@ -24,6 +26,6 @@ export default function PrimaryLink({
         } ${className} `}
     >
       {children}
-    </a>
+    </BetterLink>
   );
 }
