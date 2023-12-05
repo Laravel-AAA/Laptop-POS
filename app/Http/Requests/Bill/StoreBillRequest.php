@@ -24,9 +24,9 @@ class StoreBillRequest extends FormRequest
     {
         return [
             'cashReceived' => 'nullable|decimal:0,8|min:0|max:999999999',
-            'transactions' => 'required|array|min:1',
-            'transactions.*.quantity' => 'required|integer|min:0|max:9999',
-            'transactions.*.product_id'=> 'required|exists:products,id',
+            'bill_details' => 'required|array|min:1',
+            'bill_details.*.quantity' => 'required|integer|min:0|max:9999',
+            'bill_details.*.product_id'=> 'required|exists:products,id',
         ];
     }
 }

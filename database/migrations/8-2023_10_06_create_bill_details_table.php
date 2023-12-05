@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('bill_details', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->integer('quantity');
             $table->timestamps();
@@ -24,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('bill_details');
     }
 };

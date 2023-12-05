@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { BsDashLg, BsPlusLg } from "react-icons/bs";
-import { ICreateTransaction, IProduct } from "@/types";
+import { ICreateBillDetail, IProduct } from "@/types";
 import { MAX_QUANTITY } from "@/Utilities/Constant";
 
 export default function ItemOptions({
@@ -8,13 +8,13 @@ export default function ItemOptions({
   requestChanged,
   requestIncrease,
   requestDecrease,
-  transaction,
+  bill_detail,
 }: {
   product: IProduct;
   requestChanged: (qty: number) => any;
   requestIncrease: () => any;
   requestDecrease: () => any;
-  transaction: ICreateTransaction;
+  bill_detail: ICreateBillDetail;
 }) {
   return (
     <div
@@ -24,7 +24,7 @@ export default function ItemOptions({
       <div className="mx-2 flex justify-between">
         <ItemBtn
           onClick={() => requestDecrease()}
-          disabled={transaction.quantity <= 0}
+          disabled={bill_detail.quantity <= 0}
           icon={<BsDashLg className="text-2xl" />}
         />
         <input
@@ -33,11 +33,11 @@ export default function ItemOptions({
           maxLength={4}
           max={MAX_QUANTITY}
           className={`remove-arrow mx-5 block min-w-0 rounded-md border border-transparent bg-white bg-opacity-90 p-2 text-center font-semibold shadow  ${
-            transaction.quantity > (product.stock ?? Infinity)
+            bill_detail.quantity > (product.stock ?? Infinity)
               ? "text-danger-600 focus:border-danger-500 focus:ring-danger-500"
               : " text-black focus:border-gray-700 focus:ring-gray-700"
           }`}
-          value={transaction.quantity}
+          value={bill_detail.quantity}
           onFocus={(e) => e.target.select()}
           onChange={(e) => {
             const n = Number(e.target.value);
@@ -47,7 +47,7 @@ export default function ItemOptions({
         <ItemBtn
           onClick={() => requestIncrease()}
           disabled={
-            product.stock != null && transaction.quantity >= product.stock
+            product.stock != null && bill_detail.quantity >= product.stock
           }
           icon={<BsPlusLg className="text-2xl" />}
         />

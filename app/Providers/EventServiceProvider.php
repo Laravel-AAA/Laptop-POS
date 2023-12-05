@@ -4,9 +4,9 @@ namespace App\Providers;
 
 use App\Listeners\SendEmailGreetingNewCustomer;
 use App\Models\Bill;
-use App\Models\Transaction;
+use App\Models\BillDetail;
 use App\Observers\BillObserver;
-use App\Observers\TransactionObserver;
+use App\Observers\BillDetailObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -35,7 +35,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $observers = [
         Bill::class => [BillObserver::class],
-        Transaction::class => [TransactionObserver::class],
+        BillDetail::class => [BillDetailObserver::class],
     ];
 
     /**

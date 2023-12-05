@@ -23,9 +23,9 @@ _________________________________________
 | Product         Qty    Price   Amount |
 |---------------------------------------|
 |                                       |
-| Pizza           2      $10     $20    | <-- This is a single Transaction
-| Burger          1      $8      $8     | <-- another Transaction
-| Fries           1      $4      $4     | <-- another Transaction
+| Pizza           2      $10     $20    | <-- This is a single Bill_detail
+| Burger          1      $8      $8     | <-- another Bill_detail
+| Fries           1      $4      $4     | <-- another Bill_detail
 |                                       |
 |---------------------------------------|
 |                                       |
@@ -36,7 +36,7 @@ _________________________________________
 |---------------------------------------|
 |              Thank You!               |
 |_______________________________________|*/
-class Transaction extends Model
+class BillDetail extends Model
 {
     use HasFactory, HasUlids;
 
@@ -45,7 +45,7 @@ class Transaction extends Model
      *
      * @var string
      */
-    protected $table = 'transactions';
+    protected $table = 'bill_details';
 
     /**
      * The attributes that should be cast.

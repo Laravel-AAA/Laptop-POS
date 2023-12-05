@@ -43,7 +43,7 @@ class ProductPolicy
             $user->business_id == $product->business_id
             && ($user->id == $product->createdBy_id || in_array($user->role, ['Owner', 'Maintainer']))
         ) {
-            $count = $product->transactions()->count();
+            $count = $product->bill_details()->count();
             if ($count != 0) {
                 throw ValidationException::withMessages(['serverError' => 'This product ('.$product->name.') is used by ' .$count. ' bills. Please make sure no bill is using this product before deleting.']);
             }

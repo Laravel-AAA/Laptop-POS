@@ -1,7 +1,7 @@
 import KeyValue from "@/Utilities/KeyValue";
 import { IBill } from "@/types";
 import React, { useMemo } from "react";
-import TransactionsTable from "./TransactionsTable";
+import BillDetailsTable from "./BillDetailsTable";
 import ID from "@/Utilities/ID";
 import Num from "@/Utilities/Num";
 import QRCode from "react-qr-code";
@@ -14,11 +14,11 @@ export default function BillInfo({ bill }: { bill: IBill }) {
 
   const subTotalPrice = useMemo(
     () =>
-      bill.transactions.reduce(
+      bill.bill_details.reduce(
         (v, t) => v + (t.product.price ?? 0) * t.quantity,
         0,
       ),
-    [bill.transactions],
+    [bill.bill_details],
   );
 
   const totalPrice = subTotalPrice * (1 + bill.business.taxPercent);
@@ -70,7 +70,7 @@ export default function BillInfo({ bill }: { bill: IBill }) {
             <KeyValue k="Cashier" v={bill.created_by?.name} />
           </section>
 
-          <TransactionsTable bill={bill} />
+          <BillDetailsTable bill={bill} />
 
           <section>
             <KeyValue

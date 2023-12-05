@@ -79,14 +79,14 @@ class DashboardController extends Controller
         $tax = request()->user()->business->taxPercent + 1;
 
         $res = request()->user()->business->bills()
-            ->selectRaw("DAY(bills.created_at) AS day, SUM(COALESCE(products.price, 0) * transactions.quantity * $tax) AS daily_sales")
-            ->join('transactions', 'bills.id', '=', 'transactions.bill_id')
-            ->join('products', 'products.id', '=', 'transactions.product_id')
+            ->selectRaw("DAY(bills.created_at) AS day, SUM(COALESCE(products.price, 0) * bill_details.quantity * $tax) AS daily_sales")
+            ->join('bill_details', 'bills.id', '=', 'bill_details.bill_id')
+            ->join('products', 'products.id', '=', 'bill_details.product_id')
             ->whereBetween('bills.created_at', [Carbon::now()->subDays(2), Carbon::now()])
             ->groupBy('day')
             ->orderByDesc('day')
             ->get();
-            
+
         //if there is only sales for yesterday then $res[0] is yesterday which is not what expected below. So, we correct that.
         if (count($res) == 1 && isset($res[0]?->day) && $res[0]->day != date('d')) {
             $res[1] = $res[0];
@@ -136,9 +136,9 @@ class DashboardController extends Controller
         $tax = request()->user()->business->taxPercent + 1;
 
         $res = request()->user()->business->bills()
-            ->selectRaw("MONTH(bills.created_at) AS month, SUM(COALESCE(products.price, 0) * transactions.quantity * $tax) AS month_sales")
-            ->join('transactions', 'bills.id', '=', 'transactions.bill_id')
-            ->join('products', 'products.id', '=', 'transactions.product_id')
+            ->selectRaw("MONTH(bills.created_at) AS month, SUM(COALESCE(products.price, 0) * bill_details.quantity * $tax) AS month_sales")
+            ->join('bill_details', 'bills.id', '=', 'bill_details.bill_id')
+            ->join('products', 'products.id', '=', 'bill_details.product_id')
             ->whereBetween('bills.created_at', [Carbon::now()->subYear()->addDay(), Carbon::now()])
             ->groupByRaw('month')
             ->get();

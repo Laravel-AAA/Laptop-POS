@@ -26,8 +26,8 @@ export default function Items({
         {products.map((v, i) => (
           <ProductItem
             key={i}
-            transaction={
-              bill.transactions.find((t) => t.product_id === v.id) ?? {
+            bill_detail={
+              bill.bill_details.find((t) => t.product_id === v.id) ?? {
                 product: v,
                 product_id: v.id,
                 quantity: 0,

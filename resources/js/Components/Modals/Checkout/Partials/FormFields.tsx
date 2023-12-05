@@ -17,7 +17,7 @@ export default function FormFields({
   const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
 
   function subTotal(): number {
-    return form.data.transactions.reduce(
+    return form.data.bill_details.reduce(
       (sum, t) => (t.product.price ?? 0) * t.quantity + sum,
       0,
     );

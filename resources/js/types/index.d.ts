@@ -63,7 +63,7 @@ export interface ICreateProduct {
 
 export interface ICreateBill {
   cashReceived: number | null;
-  transactions: ICreateTransaction[];
+  bill_details: ICreateBillDetail[];
 }
 
 export interface IBill extends ICreateBill, BasicModel {
@@ -71,17 +71,17 @@ export interface IBill extends ICreateBill, BasicModel {
   business?: IBusiness;
   createdBy_id: string;
   created_by?: IUser;
-  override transactions: ITransaction[];
+  override bill_details: IBillDetail[];
 
 }
 
-export interface ICreateTransaction {
+export interface ICreateBillDetail {
   quantity: number;
   product_id: string;
   product: IProduct;
 }
 
-export interface ITransaction extends ICreateTransaction, BasicModel {
+export interface IBillDetail extends ICreateBillDetail, BasicModel {
   bill_id: string;
 }
 

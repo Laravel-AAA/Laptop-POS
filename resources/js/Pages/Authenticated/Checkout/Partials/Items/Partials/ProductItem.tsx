@@ -1,4 +1,4 @@
-import { AuthPageProps, ICreateProduct, ICreateTransaction, IProduct } from "@/types";
+import { AuthPageProps, ICreateProduct, ICreateBillDetail, IProduct } from "@/types";
 import ItemOptions from "./ItemOptions";
 import Num from "@/Utilities/Num";
 import { usePage } from "@inertiajs/react";
@@ -7,17 +7,17 @@ export default function ProductItem({
   requestChanged,
   requestIncrease,
   requestDecrease,
-  transaction,
+  bill_detail,
   changeStockNumber,
 }: {
   requestChanged: (qty: number) => any;
   requestIncrease: () => any;
   requestDecrease: () => any;
-  transaction: ICreateTransaction;
+  bill_detail: ICreateBillDetail;
   changeStockNumber: boolean;
 }) {
   const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
-  const product = transaction.product;
+  const product = bill_detail.product;
 
   return (
     <div className="group relative m-1 my-4 flex w-3/4 flex-col overflow-hidden rounded-md bg-white shadow-sm transition duration-300 ease-in-out hover:shadow-lg sm:my-1 sm:w-52">
@@ -26,7 +26,7 @@ export default function ProductItem({
         requestChanged={requestChanged}
         requestDecrease={requestDecrease}
         requestIncrease={requestIncrease}
-        transaction={transaction}
+        bill_detail={bill_detail}
       />
       <div>
         {product.img && (
@@ -75,7 +75,7 @@ export default function ProductItem({
           <div className="flex flex-col justify-center">
             {product.stock === 0 ? (
               <p className="font-normal text-danger-400">Out of Stock</p>
-            ) : transaction.quantity >= (product.stock || Infinity) ? (
+            ) : bill_detail.quantity >= (product.stock || Infinity) ? (
               <p className="font-normal text-danger-400">
                 Stock{" "}
                 {product.stock === null

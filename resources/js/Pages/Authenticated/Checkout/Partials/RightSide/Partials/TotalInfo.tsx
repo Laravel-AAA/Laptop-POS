@@ -7,7 +7,7 @@ export default function TotalInfo({ bill }: { bill: ICreateBill }) {
 
   /**Total without Taxes */
   function subTotal() {
-    return bill.transactions.reduce(
+    return bill.bill_details.reduce(
       (sum, t) => (t.product.price ?? 0) * t.quantity + sum,
       0,
     );

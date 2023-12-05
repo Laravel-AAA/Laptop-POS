@@ -25,9 +25,9 @@ export default function CheckoutBtn({
           //  Some classes can not be overridden here so we use style attribute
           style={{ fontSize: "1.2rem", fontWeight: 800 }}
           className="bottom-0  h-[50px] w-full min-w-full rounded-none"
-          disabled={form.processing || form.data.transactions.length == 0}
+          disabled={form.processing || form.data.bill_details.length == 0}
           title={
-            form.processing || form.data.transactions.length == 0
+            form.processing || form.data.bill_details.length == 0
               ? "You can't Checkout with an empty cart!"
               : ""
           }

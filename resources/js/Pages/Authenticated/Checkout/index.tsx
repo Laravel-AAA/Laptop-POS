@@ -19,7 +19,7 @@ export interface BillOperations {
   changeQty: (product: IProduct, qty: number) => void;
   increaseQty: (product: IProduct) => void;
   decreaseQty: (product: IProduct) => void;
-  removeTransaction: (productId: string) => void;
+  removeBillDetail: (productId: string) => void;
 }
 /**If bill.id exist then checkout page is Editing an existed bill */
 export default function Checkout({
@@ -34,7 +34,7 @@ export default function Checkout({
   const products: IProduct[] = paginateProducts.data;
   const form = useBetterForm<ICreateBill | IBill>(
     bill ?? {
-      transactions: [],
+      bill_details: [],
       cashReceived: null,
     },
   );
@@ -43,71 +43,71 @@ export default function Checkout({
     data: (previousData: ICreateBill | IBill) => ICreateBill | IBill,
   ) => form.setAllData(data);
 
-  /** @param product is used to change the qty of the correspond Transaction */
+  /** @param product is used to change the qty of the correspond bill_detail */
   function changeQty(product: IProduct, qty: number) {
     setBill((b) => {
       const updatedBill = { ...b };
-      const transaction = updatedBill.transactions.find(
+      const bill_detail = updatedBill.bill_details.find(
         (t) => t.product_id === product.id,
       );
       if (qty !== 0) {
-        if (transaction) transaction.quantity = qty;
+        if (bill_detail) bill_detail.quantity = qty;
         else
-          updatedBill.transactions = [
-            ...updatedBill.transactions,
+          updatedBill.bill_details = [
+            ...updatedBill.bill_details,
             { product, product_id: product.id, quantity: qty },
           ];
-      } else if (transaction)
-        updatedBill.transactions = updatedBill.transactions.filter(
+      } else if (bill_detail)
+        updatedBill.bill_details = updatedBill.bill_details.filter(
           (t) => t.product_id !== product.id,
         );
       return updatedBill;
     });
   }
 
-  /** @param product is used to change the qty of the correspond Transaction */
+  /** @param product is used to change the qty of the correspond bill_detail */
   function decreaseQty(product: IProduct) {
     setBill((b) => {
       const updatedBill = { ...b };
-      const transaction = updatedBill.transactions.find(
+      const bill_detail = updatedBill.bill_details.find(
         (t) => t.product_id === product.id,
       );
-      if (transaction) transaction.quantity--;
+      if (bill_detail) bill_detail.quantity--;
       else
         throw new Error(
-          "Transaction not found in the bill but there is a decreaseQty request!",
-          { cause: transaction },
+          "bill_detail not found in the bill but there is a decreaseQty request!",
+          { cause: bill_detail },
         );
-      if (transaction.quantity === 0)
-        updatedBill.transactions = updatedBill.transactions.filter(
-          (t) => t.product_id !== transaction.product_id,
+      if (bill_detail.quantity === 0)
+        updatedBill.bill_details = updatedBill.bill_details.filter(
+          (t) => t.product_id !== bill_detail.product_id,
         );
       return updatedBill;
     });
   }
 
-  /** @param product is used to change the qty of the correspond Transaction */
+  /** @param product is used to change the qty of the correspond bill_detail */
   function increaseQty(product: IProduct) {
     setBill((b) => {
       const updatedBill = { ...b };
-      const transaction = updatedBill.transactions.find(
+      const bill_detail = updatedBill.bill_details.find(
         (t) => t.product_id === product.id,
       );
-      if (transaction) transaction.quantity++;
+      if (bill_detail) bill_detail.quantity++;
       else
-        updatedBill.transactions = [
-          ...updatedBill.transactions,
+        updatedBill.bill_details = [
+          ...updatedBill.bill_details,
           { product, product_id: product.id, quantity: 1 },
         ];
       return updatedBill;
     });
   }
 
-  function removeTransaction(productId: string) {
+  function removeBillDetail(productId: string) {
     setBill((b) => {
       const updatedBill = { ...b };
-      updatedBill.transactions = [
-        ...updatedBill.transactions.filter((t) => t.product_id !== productId),
+      updatedBill.bill_details = [
+        ...updatedBill.bill_details.filter((t) => t.product_id !== productId),
       ];
       return updatedBill;
     });
@@ -118,7 +118,7 @@ export default function Checkout({
     increaseQty,
     form,
     changeQty,
-    removeTransaction,
+    removeBillDetail,
   };
   // console.log("screen width", window.innerWidth);
   return (

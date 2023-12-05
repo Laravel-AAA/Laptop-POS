@@ -19,11 +19,11 @@ export default function DeleteConfirmBillModal({
 
   // const subTotalPrice = useMemo(
   //   () =>
-  //     bill.transactions.reduce(
+  //     bill.bill_details.reduce(
   //       (v, t) => v + (t.product.price ?? 0) * t.quantity,
   //       0,
   //     ),
-  //   [bill.transactions],
+  //   [bill.bill_details],
   // );
 
   // const totalPrice = subTotalPrice * (1 + taxPercent);

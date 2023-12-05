@@ -16,11 +16,11 @@ export default function Product({ bill }: PropsProduct) {
 
   const subTotalPrice = useMemo(
     () =>
-      bill.transactions.reduce(
+      bill.bill_details.reduce(
         (v, t) => v + (t.product.price ?? 0) * t.quantity,
         0,
       ),
-    [bill.transactions],
+    [bill.bill_details],
   );
   const totalPrice = subTotalPrice * (1 + taxPercent);
 
@@ -79,7 +79,7 @@ export default function Product({ bill }: PropsProduct) {
         />
       </TD>
       <TD>
-        <Num amount={bill.transactions.reduce((v, t) => v + t.quantity, 0)} />
+        <Num amount={bill.bill_details.reduce((v, t) => v + t.quantity, 0)} />
       </TD>
       <td>
         <BillOptions bill={bill} user={auth.user} />

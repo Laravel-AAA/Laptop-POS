@@ -1,8 +1,8 @@
 import { IBill } from "@/types";
 import React from "react";
-import TransactionRow from "./TransactionRow";
+import BillDetailRow from "./BillDetailRow";
 
-export default function TransactionsTable({ bill }: { bill: IBill }) {
+export default function BillDetailsTable({ bill }: { bill: IBill }) {
   return (
     <div className="relative h-full overflow-y-auto rounded-md shadow-sm">
       <table className="w-full table-auto text-left">
@@ -30,7 +30,7 @@ export default function TransactionsTable({ bill }: { bill: IBill }) {
         </thead>
         <tbody>
           {bill.transactions.map((t) => (
-            <TransactionRow
+            <BillDetailRow
               key={t.id}
               transaction={t}
               taxPercent={bill.business?.taxPercent ?? 0}

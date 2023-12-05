@@ -1,12 +1,12 @@
 import Num from "@/Utilities/Num";
-import { ITransaction } from "@/types";
+import { IBillDetail } from "@/types";
 import React from "react";
 
-export default function TransactionRow({
+export default function BillDetailRow({
   transaction: t,
   taxPercent,
 }: {
-  transaction: ITransaction;
+  transaction: IBillDetail;
   taxPercent: number;
 }) {
   return (

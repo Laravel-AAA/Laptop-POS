@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Business;
-use App\Models\Transaction;
+use App\Models\BillDetail;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,9 +25,9 @@ _________________________________________
 | Product         Qty    Price   Amount |
 |---------------------------------------|
 |                                       |
-| Pizza           2      $10     $20    | <-- This is a single Transaction
-| Burger          1      $8      $8     | <-- another Transaction
-| Fries           1      $4      $4     | <-- another Transaction
+| Pizza           2      $10     $20    | <-- This is a single Bill_detail
+| Burger          1      $8      $8     | <-- another Bill_detail
+| Fries           1      $4      $4     | <-- another Bill_detail
 |                                       |
 |---------------------------------------|
 |                                       |
@@ -57,7 +57,7 @@ class Bill extends Model
      */
     protected $fillable = [
         'cashReceived',
-        'transactions',
+        'bill_details',
         'createdBy_id',
         'business_id',
     ];
@@ -82,9 +82,9 @@ class Bill extends Model
         return $this->belongsTo(Business::class);
     }
 
-    public function transactions(): HasMany
+    public function bill_details(): HasMany
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(BillDetail::class);
     }
 
 

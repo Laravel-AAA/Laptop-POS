@@ -6,11 +6,11 @@ namespace App\Providers;
 
 use App\Models\Bill;
 use App\Models\Product;
-use App\Models\Transaction;
+use App\Models\BillDetail;
 use App\Models\User;
 use App\Policies\BillPolicy;
 use App\Policies\ProductPolicy;
-use App\Policies\TransactionPolicy;
+use App\Policies\BillDetailPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -27,7 +27,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Product::class => ProductPolicy::class,
         Bill::class => BillPolicy::class,
-        Transaction::class => TransactionPolicy::class,
+        BillDetail::class => BillDetailPolicy::class,
         User::class => UserPolicy::class,
     ];
 

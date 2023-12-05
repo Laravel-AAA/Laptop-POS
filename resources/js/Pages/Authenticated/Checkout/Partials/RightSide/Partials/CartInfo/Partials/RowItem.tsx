@@ -1,16 +1,16 @@
 import { BillOperations } from "@/Pages/Authenticated/Checkout";
 import Num from "@/Utilities/Num";
-import { AuthPageProps, ICreateTransaction,  } from "@/types";
+import { AuthPageProps, ICreateBillDetail,  } from "@/types";
 import { usePage } from "@inertiajs/react";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { BsDash, BsPlusLg } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
 
 export default function RowItem({
-  transaction,
-  billOperations: { increaseQty, decreaseQty, removeTransaction },
+  bill_detail,
+  billOperations: { increaseQty, decreaseQty, removeBillDetail},
 }: {
-  transaction: ICreateTransaction;
+  bill_detail: ICreateBillDetail;
   billOperations: BillOperations;
 }) {
   const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
@@ -18,23 +18,23 @@ export default function RowItem({
   return (
     <tr className="group h-10 max-h-10 border-y">
       <td className="flex h-10 w-14 items-center justify-center">
-        {transaction.product.img && (
+        {bill_detail.product.img && (
           <img
             className="max-w-14 max-h-10 group-hover:hidden"
             src={
-              transaction.product.img.startsWith("http")
-                ? transaction.product.img
-                : "/products-images/" + transaction.product.img
+              bill_detail.product.img.startsWith("http")
+                ? bill_detail.product.img
+                : "/products-images/" + bill_detail.product.img
             }
-            alt={"Image of Product " + transaction.product.name}
+            alt={"Image of Product " + bill_detail.product.name}
           />
         )}
         <RemoveBtn
           className="max-w-14 hidden h-10 max-h-14 text-right group-hover:block "
-          onClick={() => removeTransaction(transaction.product_id)}
+          onClick={() => removeBillDetail(bill_detail.product_id)}
         />
       </td>
-      <td title={transaction.product.name}>
+      <td title={bill_detail.product.name}>
         <span
           style={{
             display: "-webkit-box",
@@ -43,25 +43,25 @@ export default function RowItem({
           }}
           className="mx-1 inline-block overflow-hidden"
         >
-          {transaction.product.name}
+          {bill_detail.product.name}
         </span>
       </td>
       <td className="h-10">
         <Quantity
           decreaseQty={decreaseQty}
           increaseQty={increaseQty}
-          transaction={transaction}
+          bill_detail={bill_detail}
         />
       </td>
-      <td title={transaction.product.price ? "Tax included" : ""}>
+      <td title={bill_detail.product.price ? "Tax included" : ""}>
         {/* `ch` is a unit to measure the character `0` width relative to font family and size (e.g., `6ch` means width of `000000` (six zeros) ) */}
         <span className="mx-1 inline-block w-[6ch]">
-          {transaction.product.price == null ? (
+          {bill_detail.product.price == null ? (
             <span className="text-danger-600">N/A</span>
           ) : (
             <Num
               className="font-semibold text-primary-700"
-              amount={transaction.product.price * (1 + taxPercent)}
+              amount={bill_detail.product.price * (1 + taxPercent)}
             />
           )}
         </span>
@@ -73,38 +73,38 @@ export default function RowItem({
 function Quantity({
   decreaseQty,
   increaseQty,
-  transaction,
+  bill_detail,
 }: {
   decreaseQty: BillOperations["decreaseQty"];
   increaseQty: BillOperations["increaseQty"];
-  transaction: ICreateTransaction;
+  bill_detail: ICreateBillDetail;
 }) {
   return (
     <div className="mx-1 flex h-10 w-24 justify-between">
       <IncDecQtyBtn
         className="rounded-s-md"
         title="Decrease quantity"
-        onClick={() => decreaseQty(transaction.product)}
+        onClick={() => decreaseQty(bill_detail.product)}
         icon={<BsDash className="m-auto" />}
       />
       <div className="flex grow border-x border-gray-800 border-opacity-10 bg-secondary-400">
         <Num
           className="grow self-center text-center"
-          amount={transaction.quantity}
+          amount={bill_detail.quantity}
         />
       </div>
       <IncDecQtyBtn
         className="rounded-e-md"
         title={
-          transaction.product.stock != null &&
-          transaction.quantity >= transaction.product.stock
+          bill_detail.product.stock != null &&
+          bill_detail.quantity >= bill_detail.product.stock
             ? "Stock is empty!"
             : "Increase quantity"
         }
-        onClick={() => increaseQty(transaction.product)}
+        onClick={() => increaseQty(bill_detail.product)}
         disabled={
-          transaction.product.stock != null &&
-          transaction.quantity >= transaction.product.stock
+          bill_detail.product.stock != null &&
+          bill_detail.quantity >= bill_detail.product.stock
         }
         icon={<BsPlusLg className="m-auto" />}
       />

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Bill;
 use App\Models\Business;
 use App\Models\Product;
-use App\Models\Transaction;
+use App\Models\BillDetail;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -24,13 +24,13 @@ class DatabaseSeeder extends Seeder
         // each user will make $PRODUCTS products and $BILLS bills where products won't exceeds number of bills.
         $PRODUCTS = 20;//total products = $USERS * $PRODUCTS
         $BILLS = 900;//  total bills    = $USERS * $BILLS
-        //transactions should be proportioned to number of bills to prevent unrealistic result we will use $TRANSACTIONS_PROPORTION
-        $TRANSACTIONS_PROPORTION = 3;//float number
+        //bill_details should be proportioned to number of bills to prevent unrealistic result we will use $BILL_DETAILS_PROPORTION
+        $BILL_DETAILS_PROPORTION = 3;//float number
         //-----
         //loop $BUSINESSES times for each business
         //each $BUSINESSES iteration loop $USERS times for each users
         //each $USERS creates $PRODUCTS products & $BILLS bills for each user
-        //each bill creates nearly $TRANSACTIONS_PROPORTION times of transactions.
+        //each bill creates nearly $BILL_DETAILS_PROPORTION times of bill_details.
 
         $businesses = [];
         for ($b = 0; $b < $BUSINESSES; $b++) {
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
                         $products[] = Product::factory()->recycle($businesses[$b])->recycle($users[$u])->createQuietly();
                     $bills[] = Bill::factory()->recycle($businesses[$b])->recycle($users[$u])->createQuietly();
                 }
-                Transaction::factory()->count(ceil($BILLS * $TRANSACTIONS_PROPORTION))->recycle($products)->recycle($bills)->createQuietly();
+                BillDetail::factory()->count(ceil($BILLS * $BILL_DETAILS_PROPORTION))->recycle($products)->recycle($bills)->createQuietly();
             }
         }
     }

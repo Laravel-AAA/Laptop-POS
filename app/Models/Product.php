@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Business;
-use App\Models\Transaction;
+use App\Models\BillDetail;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -57,9 +57,9 @@ class Product extends Model
         return $this->belongsTo(Business::class);
     }
 
-    public function transactions(): HasMany
+    public function bill_details(): HasMany
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(BillDetail::class);
     }
 
 

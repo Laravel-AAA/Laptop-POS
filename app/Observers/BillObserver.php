@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\Transaction;
+use App\Models\BillDetail;
 use App\Models\Bill;
 
 class BillObserver
@@ -12,11 +12,11 @@ class BillObserver
      */
     public function deleting(Bill $bill): void
     {
-        $transactions = $bill->transactions()->with('product')->get();
-        foreach ($transactions as $transaction) {
-            $product = $transaction->product;
+        $bill_details = $bill->bill_details()->with('product')->get();
+        foreach ($bill_details as $bill_detail) {
+            $product = $bill_detail->product;
             if (isset($product->stock)) {
-                $product->stock += $transaction->quantity;
+                $product->stock += $bill_detail->quantity;
                 $product->save();
             }
         }

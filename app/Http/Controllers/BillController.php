@@ -20,7 +20,7 @@ class BillController extends Controller
                 $query->withTrashed();
             }
             ,
-            'transactions.product'
+            'bill_details.product'
         ])
             ->filter($request->only('search', 'product'))
             ->paginate(15)->appends($request->all());
@@ -36,7 +36,7 @@ class BillController extends Controller
     {
         Gate::authorize('show', $bill);
         $bill = $bill->load([
-            'transactions.product',
+            'bill_details.product',
             'business',
             'createdBy' => function ($query) {
                 $query->withTrashed();
@@ -52,7 +52,7 @@ class BillController extends Controller
     protected function edit(Request $request, Bill $bill)
     {
         Gate::authorize('edit', $bill);
-        $bill = $bill->load('transactions.product');
+        $bill = $bill->load('bill_details.product');
         return $this->checkoutPage($request, $bill);
     }
 
@@ -82,13 +82,13 @@ class BillController extends Controller
      */
     public function store(StoreBillRequest $request)
     {
-        //Store is for creating new bill and Updating which is destroy then renew because there is one to many relationship with Transactions and each transaction could be updated with the Bill.
+        //Store is for creating new bill and Updating which is destroy then renew because there is one to many relationship with Bill_details and each bill_detail could be updated with the Bill.
         $bill = $request->validated();
         $bill['business_id'] = $request->user()->business_id;
         $bill['createdBy_id'] = $request->user()->id;
 
-        $transactions = $bill['transactions'];
-        unset($bill['transactions']); //There is no column called transactions 😑
+        $bill_details = $bill['bill_details'];
+        unset($bill['bill_details']); //There is no column called bill_details 😑
 
         if ($request->get('id')) {
             $oldBill = Bill::findOrFail($request->get('id'));
@@ -96,7 +96,7 @@ class BillController extends Controller
         }
 
         $createdBill = Bill::create($bill);
-        $createdBill->transactions()->createMany($transactions);
+        $createdBill->bill_details()->createMany($bill_details);
 
         if ($request->get('id')) {
             Bill::destroy($request->get('id'));

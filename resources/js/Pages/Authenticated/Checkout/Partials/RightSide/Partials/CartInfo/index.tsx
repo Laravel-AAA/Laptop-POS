@@ -26,16 +26,16 @@ export default function CartInfo({
           </tr>
         </thead>
         <tbody>
-          {billOperations.form.data.transactions.map((t, i) => (
+          {billOperations.form.data.bill_details.map((t, i) => (
             <RowItem
               key={i}
               billOperations={billOperations}
-              transaction={t}
+              bill_detail={t}
             />
           ))}
         </tbody>
       </table>
-      <EmptyCart length={billOperations.form.data.transactions.length} />
+      <EmptyCart length={billOperations.form.data.bill_details.length} />
     </section>
   );
 }
