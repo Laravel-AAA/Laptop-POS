@@ -62,16 +62,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.293.5",
+            "version": "3.293.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f2002e52b382b45231da3f9552033f769acfebd8"
+                "reference": "1e01734856f8ec2b6d525d1c99c5a34029217598"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f2002e52b382b45231da3f9552033f769acfebd8",
-                "reference": "f2002e52b382b45231da3f9552033f769acfebd8",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1e01734856f8ec2b6d525d1c99c5a34029217598",
+                "reference": "1e01734856f8ec2b6d525d1c99c5a34029217598",
                 "shasum": ""
             },
             "require": {
@@ -151,9 +151,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.293.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.293.6"
             },
-            "time": "2023-12-06T19:09:15+00:00"
+            "time": "2023-12-07T19:29:50+00:00"
         },
         {
             "name": "brick/math",
@@ -1612,16 +1612,16 @@
         },
         {
             "name": "laravel/cashier-paddle",
-            "version": "v2.0.1",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/cashier-paddle.git",
-                "reference": "1d85ba5052521bca79417d8b073c14b2445f1f67"
+                "reference": "7af86f03678fac2734c320db3417472b2a8a5611"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/cashier-paddle/zipball/1d85ba5052521bca79417d8b073c14b2445f1f67",
-                "reference": "1d85ba5052521bca79417d8b073c14b2445f1f67",
+                "url": "https://api.github.com/repos/laravel/cashier-paddle/zipball/7af86f03678fac2734c320db3417472b2a8a5611",
+                "reference": "7af86f03678fac2734c320db3417472b2a8a5611",
                 "shasum": ""
             },
             "require": {
@@ -1690,7 +1690,7 @@
                 "issues": "https://github.com/laravel/cashier-paddle/issues",
                 "source": "https://github.com/laravel/cashier-paddle"
             },
-            "time": "2023-12-05T19:28:08+00:00"
+            "time": "2023-12-07T15:44:41+00:00"
         },
         {
             "name": "laravel/framework",
