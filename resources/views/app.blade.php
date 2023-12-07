@@ -27,7 +27,7 @@
     <meta property="og:description" content="{{ $description }}">
     <meta property="og:image" itemprop="image" content="{{ $mediumLogo }}">
 
-    <!-- Twitter -->
+    <!-- Twitter/X -->
     <meta property="twitter:card" content="summary">
     <meta property="twitter:url" content="{{ $url }}">
     <meta property="twitter:title" content="{{ $title }}">
@@ -38,12 +38,17 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
+
     <!-- Scripts -->
     @routes
     @viteReactRefresh
     @vite(['resources/js/app.tsx', "resources/js/Pages/{$page['component']}.tsx"])
+
     <!-- Styles -->
     @inertiaHead
+
+    <!-- Cashier Paddle -->
+    @paddleJS
 </head>
 
 <body class="font-sans antialiased">

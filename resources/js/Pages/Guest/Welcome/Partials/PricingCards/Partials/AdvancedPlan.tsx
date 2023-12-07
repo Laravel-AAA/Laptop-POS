@@ -1,20 +1,16 @@
 import React from "react";
-import Plan, { PlanProps } from "./Plan";
-import { PlanPeriod } from "@/types";
+import Plan, { PlanItemProps, PlanProps } from "./Plan";
 
 export default function AdvancedPlan({
   period,
-  planProps = {},
-}: {
-  period: PlanPeriod;
-  planProps?: Partial<PlanProps>;
-}) {
+  planProps,
+}: PlanItemProps) {
   //period === "Monthly"
   let price = 19;
-  let p: PlanProps["period"] = "month";
+  let periodText: PlanProps["periodText"] = "month";
   if (period === "Annually") {
     price = 179;
-    p = "year";
+    periodText = "year";
   }
 
   return (
@@ -22,8 +18,8 @@ export default function AdvancedPlan({
       title="Advanced"
       desc="Designed for large businesses or enterprises who require a robust and advanced POS system"
       price={price}
-      period={p}
-      link={"#"}
+      periodText={periodText}
+      actionProps={{href:'#'}}
       benefits={[
         <span>Individual configuration</span>,
         <span>No setup, or hidden fees</span>,

@@ -1,23 +1,21 @@
 import React from "react";
-import Plan, { PlanProps } from "./Plan";
-import { PlanPeriod } from "@/types";
+import Plan, { PlanItemProps, PlanProps } from "./Plan";
 
-export default function BasicPlan({ period, planProps={} }: { period: PlanPeriod;planProps?:Partial<PlanProps> }) {
+export default function BasicPlan({ period, planProps }: PlanItemProps) {
   //period === "Monthly"
   let price = 3.99;
-  let p: PlanProps["period"] = "month";
+  let periodText: PlanProps["periodText"] = "month";
   if (period === "Annually") {
     price = 39.9;
-    p = "year";
+    periodText = "year";
   }
 
   return (
     <Plan
-      title="Starter"
+      title="Basic"
       desc="Suitable for small businesses or individuals who need a simple and affordable POS system"
       price={price}
-      period={p}
-      link="#"
+      periodText={periodText}
       benefits={[
         <span>Individual configuration</span>,
         <span>No setup, or hidden fees</span>,

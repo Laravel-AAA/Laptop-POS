@@ -1,20 +1,16 @@
 import React from "react";
-import Plan, { PlanProps } from "./Plan";
-import { PlanPeriod } from "@/types";
+import Plan, { PlanItemProps, PlanProps } from "./Plan";
 
 export default function EnhancedPlan({
   period,
-  planProps = {},
-}: {
-  period: PlanPeriod;
-  planProps?: Partial<PlanProps>;
-}) {
+  planProps,
+}: PlanItemProps) {
   //period === "Monthly"
   let price = 9;
-  let p: PlanProps["period"] = "month";
+  let periodText: PlanProps["periodText"] = "month";
   if (period === "Annually") {
     price = 89;
-    p = "year";
+    periodText = "year";
   }
 
   return (
@@ -22,8 +18,8 @@ export default function EnhancedPlan({
       title="Enhanced"
       desc="Ideal for medium-sized businesses or professionals who want a more comprehensive POS system"
       price={price}
-      period={p}
-      link={"#"}
+      periodText={periodText}
+      actionProps={{href:'#'}}
       benefits={[
         <span>Individual configuration</span>,
         <span>No setup, or hidden fees</span>,

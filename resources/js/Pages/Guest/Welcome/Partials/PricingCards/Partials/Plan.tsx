@@ -1,26 +1,33 @@
+import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import PrimaryLink from "@/Components/Buttons/PrimaryLink";
-import React, { ReactNode } from "react";
+import { InertiaLinkProps } from "@inertiajs/react";
+import React, { ButtonHTMLAttributes, ReactNode } from "react";
+
+export type PlanPeriod = 'Monthly' | 'Annually';
+
+export interface PlanItemProps {
+  period: PlanPeriod;
+  planProps?:Partial<PlanProps> ;
+}
 
 export interface PlanProps {
   title: string;
   desc: string;
   price: number;
-  period: "month" | "year";
-  link: string;
+  periodText: "month" | "year";
   benefits: ReactNode[];
-  action?: string;
-  actionDisabled?:boolean;
+  actionText?: string;
+  actionProps?: ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
 export default function Plan({
   title,
   desc,
   price,
-  period,
-  link,
+  periodText,
   benefits,
-  action = "Get Started",
-  actionDisabled = false,
+  actionText = "Get Started",
+  actionProps = {},
 }: PlanProps) {
   return (
     <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
@@ -28,7 +35,7 @@ export default function Plan({
       <p className="font-light text-gray-500">{desc}</p>
       <div className="my-8 flex items-baseline justify-center">
         <span className="mr-2 text-5xl font-extrabold">${price}</span>
-        <span className="text-gray-500">/{period}</span>
+        <span className="text-gray-500">/{periodText}</span>
       </div>
       {/* <!-- List --> */}
       <ul role="list" className="mb-8 space-y-4 text-left">
@@ -42,9 +49,9 @@ export default function Plan({
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
             {b}
@@ -52,12 +59,15 @@ export default function Plan({
         ))}
       </ul>
 
-      <PrimaryLink
-        href={link}
-        className="border-none bg-gradient-to-r from-primary-600 to-primary-800 !text-base normal-case shadow hover:shadow-lg"
+      <PrimaryButton
+        {...actionProps}
+        className={
+          "border-none bg-gradient-to-r from-primary-600 to-primary-800 !text-base normal-case shadow hover:shadow-lg " +
+          (actionProps?.className ? actionProps.className : "")
+        }
       >
-        {action}
-      </PrimaryLink>
+        {actionText}
+      </PrimaryButton>
     </div>
   );
 }

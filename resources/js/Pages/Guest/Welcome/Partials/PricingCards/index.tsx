@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import EnhancedPlan from "./Partials/EnhancedPlan";
-import { PlanPeriod } from "@/types";
 import BasicPlan from "./Partials/BasicPlan";
 import AdvancedPlan from "./Partials/AdvancedPlan";
+import { PlanPeriod } from "./Partials/Plan";
 
 export default function PricingCards() {
   const [period, setPeriod] = useState<PlanPeriod>("Monthly");
@@ -20,9 +20,18 @@ export default function PricingCards() {
           </p>
         </div>
         <div className="space-y-8 sm:gap-6 lg:grid lg:grid-cols-3 lg:space-y-0 xl:gap-10">
-          <BasicPlan period={period} />
-          <EnhancedPlan period={period} />
-          <AdvancedPlan period={period} />
+          <BasicPlan
+            period={period}
+            planProps={{ actionProps: {  } }}
+          />
+          <EnhancedPlan
+            period={period}
+            planProps={{ actionProps: {  } }}
+          />
+          <AdvancedPlan
+            period={period}
+            planProps={{ actionProps: {  } }}
+          />
         </div>
       </div>
     </section>

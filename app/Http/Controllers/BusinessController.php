@@ -26,8 +26,23 @@ class BusinessController extends Controller
             }
         ])->find($request->user()->business_id);
         Gate::authorize('edit', $business);
+
+        // $basic = $business
+            // ->subscription()->charge('pri_01hgdfvcng7ya1yhe57d7gpvh3');
+            // ->subscribe('pri_01hgdfvcng7ya1yhe57d7gpvh3')
+            // ->checkout(9.99, 1)
+            // ->checkout('pri_01hgtya73sz695ztffwgmpr2s2')
+            // ->returnTo(route('business.edit'));
+
+        // dd($basic);
+
         return Inertia::render('Authenticated/Business/Edit', [
             'business' => $business,
+            'subscriptionLinks' => [
+                'basic' => '#',
+                'enhanced' => '#',
+                'advanced' => '#',
+            ]
         ]);
     }
 

@@ -184,4 +184,8 @@ export interface IDashboard {
   productsOutOfStock: ILaravelPaginate<IProduct>;
 }
 
-export type PlanPeriod = 'Monthly' | 'Annually';
+export interface ISubscriptionLinks{
+  basic:{monthly:string,yearly:string};
+  enhanced:{monthly:string,yearly:string};
+  advanced:{monthly:string,yearly:string};
+}
