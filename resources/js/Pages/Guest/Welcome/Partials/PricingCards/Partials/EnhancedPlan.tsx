@@ -19,7 +19,6 @@ export default function EnhancedPlan({
       desc="Ideal for medium-sized businesses or professionals who want a more comprehensive POS system"
       price={price}
       periodText={periodText}
-      actionProps={{href:'#'}}
       benefits={[
         <span>Individual configuration</span>,
         <span>No setup, or hidden fees</span>,

@@ -29,7 +29,7 @@ export default function BillDetailsTable({ bill }: { bill: IBill }) {
           </tr>
         </thead>
         <tbody>
-          {bill.transactions.map((t) => (
+          {bill.bill_details.map((t) => (
             <BillDetailRow
               key={t.id}
               transaction={t}

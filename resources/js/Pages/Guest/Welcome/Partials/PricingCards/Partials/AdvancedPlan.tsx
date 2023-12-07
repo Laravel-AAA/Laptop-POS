@@ -19,7 +19,6 @@ export default function AdvancedPlan({
       desc="Designed for large businesses or enterprises who require a robust and advanced POS system"
       price={price}
       periodText={periodText}
-      actionProps={{href:'#'}}
       benefits={[
         <span>Individual configuration</span>,
         <span>No setup, or hidden fees</span>,
