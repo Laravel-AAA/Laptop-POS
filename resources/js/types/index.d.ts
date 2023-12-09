@@ -5,10 +5,12 @@
 // This way we can easily use triple equal `===`/`!==` with null values
 // and be confident we don't treat falsy values (e.g., "false", 0, "",...etc) as `null`.
 
-interface BasicModel {
+interface CreatedUpdated {
+  created_at: string; updated_at: string;
+}
+
+interface BasicModel extends CreatedUpdated {
   id: string;
-  created_at: string;
-  updated_at: string;
 }
 
 interface SoftDelete {
@@ -184,8 +186,38 @@ export interface IDashboard {
   productsOutOfStock: ILaravelPaginate<IProduct>;
 }
 
-export interface ISubscriptionLinks{
-  basic:{monthly:string,yearly:string};
-  enhanced:{monthly:string,yearly:string};
-  advanced:{monthly:string,yearly:string};
+interface ICustomer extends CreatedUpdated {
+  id: number;
+  billable_type: string;//"App\Models\Business"
+  paddle_id: string;
+  name: string;
+  email: string;
+  trial_ends_at: string;
+  billable_id: string;
+}
+
+// type CheckoutRes = {
+//   items: { priceId: string, quantity: number }[];
+//   customer: ICustomer;
+//   custom: object[];
+//   returnUrl: string;
+// }
+
+type CheckoutOptions = {
+  settings: {
+    displayMode: string;
+    frameStyle: string;
+    successUrl: string;
+    theme: 'light' | 'dark';
+    frameTarget: string;
+    frameInitialHeight: string;
+  },
+  items: { priceId: string, quantity: number }[];
+  customer: { id: string; },
+}
+
+export interface ISubscriptionLinks {
+  basic: { monthly: CheckoutOptions, annually: CheckoutOptions };
+  enhanced: { monthly: CheckoutOptions, annually: CheckoutOptions };
+  advanced: { monthly: CheckoutOptions, annually: CheckoutOptions };
 }

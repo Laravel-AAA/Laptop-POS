@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateUserRequest;
-use App\Mail\InviteAccountToBusiness;
 use App\Models\User;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InviteAccountToBusiness;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class UserController extends Controller
 {

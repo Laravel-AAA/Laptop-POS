@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use Inertia\Response;
 use App\Models\Business;
-use App\Http\Requests\Business\UpdateBusinessRequest;
-use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
-use Inertia\Inertia;
-use Inertia\Response;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Filesystem\FilesystemAdapter;
+use App\Http\Requests\Business\UpdateBusinessRequest;
 
 class BusinessController extends Controller
 {
@@ -27,21 +27,63 @@ class BusinessController extends Controller
         ])->find($request->user()->business_id);
         Gate::authorize('edit', $business);
 
-        // $basic = $business
-            // ->subscription()->charge('pri_01hgdfvcng7ya1yhe57d7gpvh3');
-            // ->subscribe('pri_01hgdfvcng7ya1yhe57d7gpvh3')
-            // ->checkout(9.99, 1)
-            // ->checkout('pri_01hgtya73sz695ztffwgmpr2s2')
-            // ->returnTo(route('business.edit'));
+        // dd($business->subscribed());
 
-        // dd($basic);
+        $basicMonthly = $business
+            ->subscribe('pri_01hgdfq62x4cc9q0f3v0syncbn')
+            ->returnTo(route('business.edit'));
+        $basicAnnually = $business
+            ->subscribe('pri_01hgdfvcng7ya1yhe57d7gpvh3')
+            ->returnTo(route('business.edit'));
+        $enhancedMonthly = $business
+            ->subscribe('pri_01hgty1we0xpxgw6qefkqeeyb3')
+            ->returnTo(route('business.edit'));
+        $enhancedAnnually = $business
+            ->subscribe('pri_01hgty2w4t8f04s7pajmvty7sf')
+            ->returnTo(route('business.edit'));
+        $advancedMonthly = $business
+            ->subscribe('pri_01hgty9577w7t2g96f7zbe2qaf')
+            ->returnTo(route('business.edit'));
+        $advancedAnnually = $business
+            ->subscribe('pri_01hgtya73sz695ztffwgmpr2s2')
+            ->returnTo(route('business.edit'));
+
+        $optionsBasicMonthly = $basicMonthly->options();
+        $optionsBasicAnnually = $basicAnnually->options();
+        $optionsEnhancedMonthly = $enhancedMonthly->options();
+        $optionsEnhancedAnnually = $enhancedAnnually->options();
+        $optionsAdvancedMonthly = $advancedMonthly->options();
+        $optionsAdvancedAnnually = $advancedAnnually->options();
+
+        $optionsBasicMonthly['settings']['displayMode'] = 'overlay';
+        $optionsBasicAnnually['settings']['displayMode'] = 'overlay';
+        $optionsEnhancedMonthly['settings']['displayMode'] = 'overlay';
+        $optionsEnhancedAnnually['settings']['displayMode'] = 'overlay';
+        $optionsAdvancedMonthly['settings']['displayMode'] = 'overlay';
+        $optionsAdvancedAnnually['settings']['displayMode'] = 'overlay';
+
+        $optionsBasicMonthly['settings']['theme'] = 'light';
+        $optionsBasicAnnually['settings']['theme'] = 'light';
+        $optionsEnhancedMonthly['settings']['theme'] = 'light';
+        $optionsEnhancedAnnually['settings']['theme'] = 'light';
+        $optionsAdvancedMonthly['settings']['theme'] = 'light';
+        $optionsAdvancedAnnually['settings']['theme'] = 'light';
 
         return Inertia::render('Authenticated/Business/Edit', [
             'business' => $business,
             'subscriptionLinks' => [
-                'basic' => '#',
-                'enhanced' => '#',
-                'advanced' => '#',
+                'basic' => [
+                    'monthly' => $optionsBasicMonthly,
+                    'annually' => $optionsBasicAnnually,
+                ],
+                'enhanced' => [
+                    'monthly' => $optionsEnhancedMonthly,
+                    'annually' => $optionsEnhancedAnnually,
+                ],
+                'advanced' => [
+                    'monthly' => $optionsAdvancedMonthly,
+                    'annually' => $optionsAdvancedAnnually,
+                ],
             ]
         ]);
     }

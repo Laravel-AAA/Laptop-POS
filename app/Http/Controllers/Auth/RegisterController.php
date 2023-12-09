@@ -34,12 +34,15 @@ class RegisterController extends Controller
         $user = new User($registerInfo);
         $business = new Business($registerInfo['business']);
         $business->save();
-        if($request->hasValidSignature() && isset($request->email)){
+        if ($request->hasValidSignature() && isset($request->email)) {
             $user->email = $request->email;
             $user->email_verified_at = now();
         }
         $user->business_id = $business->id;
         $user->save();
+        $user->createAsCustomer([
+            'trial_ends_at' => now()->addDays(3),
+        ]);
         event(new Registered($user));
 
         Auth::login($user);

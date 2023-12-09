@@ -1,13 +1,11 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import PrimaryLink from "@/Components/Buttons/PrimaryLink";
-import { InertiaLinkProps } from "@inertiajs/react";
 import React, { ButtonHTMLAttributes, ReactNode } from "react";
 
-export type PlanPeriod = 'Monthly' | 'Annually';
+export type PlanPeriod = "Monthly" | "Annually";
 
 export interface PlanItemProps {
   period: PlanPeriod;
-  planProps?:Partial<PlanProps> ;
+  planProps?: Partial<PlanProps>;
 }
 
 export interface PlanProps {
@@ -17,7 +15,7 @@ export interface PlanProps {
   periodText: "month" | "year";
   benefits: ReactNode[];
   actionText?: string;
-  actionProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  actionProps?:ButtonHTMLAttributes<HTMLButtonElement>; //Omit<InertiaLinkProps, "href">; //ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
 export default function Plan({
@@ -27,7 +25,7 @@ export default function Plan({
   periodText,
   benefits,
   actionText = "Get Started",
-  actionProps = {},
+  actionProps,
 }: PlanProps) {
   return (
     <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
@@ -62,7 +60,7 @@ export default function Plan({
       <PrimaryButton
         {...actionProps}
         className={
-          "border-none bg-gradient-to-r from-primary-600 to-primary-800 !text-base normal-case shadow hover:shadow-lg " +
+          "paddle_button border-none bg-gradient-to-r from-primary-600 to-primary-800 !text-base normal-case shadow hover:shadow-lg " +
           (actionProps?.className ? actionProps.className : "")
         }
       >
