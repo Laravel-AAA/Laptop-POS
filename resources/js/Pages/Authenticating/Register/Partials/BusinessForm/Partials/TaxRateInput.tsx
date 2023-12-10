@@ -26,7 +26,7 @@ export default function TaxRateInput({
       min={0}
       type="number"
       icon={<span>%</span>}
-      value={Number(value.toFixed(2))}
+      value={value.toString()}
       onChange={(e) => onChange?.(e)}
       disabled={disabled}
       required
