@@ -28,61 +28,50 @@ class BusinessController extends Controller
         Gate::authorize('edit', $business);
 
         // dd($business->subscribed());
-
-        $basicMonthly = $business
+        // dd($business->transactions);
+        $plans = [];
+        $plans[] = $business
             ->subscribe('pri_01hgdfq62x4cc9q0f3v0syncbn')
             ->returnTo(route('business.edit'));
-        $basicAnnually = $business
+        $plans[] = $business
             ->subscribe('pri_01hgdfvcng7ya1yhe57d7gpvh3')
             ->returnTo(route('business.edit'));
-        $enhancedMonthly = $business
+        $plans[] = $business
             ->subscribe('pri_01hgty1we0xpxgw6qefkqeeyb3')
             ->returnTo(route('business.edit'));
-        $enhancedAnnually = $business
+        $plans[] = $business
             ->subscribe('pri_01hgty2w4t8f04s7pajmvty7sf')
             ->returnTo(route('business.edit'));
-        $advancedMonthly = $business
+        $plans[] = $business
             ->subscribe('pri_01hgty9577w7t2g96f7zbe2qaf')
             ->returnTo(route('business.edit'));
-        $advancedAnnually = $business
+        $plans[] = $business
             ->subscribe('pri_01hgtya73sz695ztffwgmpr2s2')
             ->returnTo(route('business.edit'));
 
-        $optionsBasicMonthly = $basicMonthly->options();
-        $optionsBasicAnnually = $basicAnnually->options();
-        $optionsEnhancedMonthly = $enhancedMonthly->options();
-        $optionsEnhancedAnnually = $enhancedAnnually->options();
-        $optionsAdvancedMonthly = $advancedMonthly->options();
-        $optionsAdvancedAnnually = $advancedAnnually->options();
+        $planOptions = [];
+        foreach($plans as $plan)
+            $planOptions[] = $plan->options();
 
-        $optionsBasicMonthly['settings']['displayMode'] = 'overlay';
-        $optionsBasicAnnually['settings']['displayMode'] = 'overlay';
-        $optionsEnhancedMonthly['settings']['displayMode'] = 'overlay';
-        $optionsEnhancedAnnually['settings']['displayMode'] = 'overlay';
-        $optionsAdvancedMonthly['settings']['displayMode'] = 'overlay';
-        $optionsAdvancedAnnually['settings']['displayMode'] = 'overlay';
-
-        $optionsBasicMonthly['settings']['theme'] = 'light';
-        $optionsBasicAnnually['settings']['theme'] = 'light';
-        $optionsEnhancedMonthly['settings']['theme'] = 'light';
-        $optionsEnhancedAnnually['settings']['theme'] = 'light';
-        $optionsAdvancedMonthly['settings']['theme'] = 'light';
-        $optionsAdvancedAnnually['settings']['theme'] = 'light';
+        foreach($planOptions as &$option){
+            $option['settings']['displayMode'] = 'overlay';
+            $option['settings']['theme'] = 'light';
+        }
 
         return Inertia::render('Authenticated/Business/Edit', [
             'business' => $business,
             'subscriptionLinks' => [
                 'basic' => [
-                    'monthly' => $optionsBasicMonthly,
-                    'annually' => $optionsBasicAnnually,
+                    'monthly' => $planOptions[0],
+                    'annually' => $planOptions[1],
                 ],
                 'enhanced' => [
-                    'monthly' => $optionsEnhancedMonthly,
-                    'annually' => $optionsEnhancedAnnually,
+                    'monthly' => $planOptions[2],
+                    'annually' => $planOptions[3],
                 ],
                 'advanced' => [
-                    'monthly' => $optionsAdvancedMonthly,
-                    'annually' => $optionsAdvancedAnnually,
+                    'monthly' => $planOptions[4],
+                    'annually' => $planOptions[5],
                 ],
             ]
         ]);
