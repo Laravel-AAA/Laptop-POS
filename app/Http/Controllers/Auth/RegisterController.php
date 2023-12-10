@@ -40,9 +40,13 @@ class RegisterController extends Controller
         }
         $user->business_id = $business->id;
         $user->save();
-        $user->createAsCustomer([
-            'trial_ends_at' => now()->addDays(3),
-        ]);
+
+        //Laravel should be exposed to internet for this function to work
+        if (env('APP_ENV') !== 'testing')
+            $business->createAsCustomer([
+                'trial_ends_at' => now()->addDays(3),
+            ]);
+            
         event(new Registered($user));
 
         Auth::login($user);
