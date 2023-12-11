@@ -217,10 +217,11 @@ type CheckoutOptions = {
 }
 
 export type ISubscriptionLinks = {
-  basic?: { monthly: CheckoutOptions, annually: CheckoutOptions };
-  enhanced?: { monthly: CheckoutOptions, annually: CheckoutOptions };
-  advanced?: { monthly: CheckoutOptions, annually: CheckoutOptions };
+  basic: { monthly: CheckoutOptions, annually: CheckoutOptions } | null;
+  enhanced: { monthly: CheckoutOptions, annually: CheckoutOptions } | null;
+  advanced: { monthly: CheckoutOptions, annually: CheckoutOptions } | null;
   subscribedTo: 'Advanced' | 'Enhanced' | 'Basic' | 'Trial' | null;//Trail is not Plan. null means not subscribed
+  onTrial: string | null;//trial ends date if on trial otherwise null
   /**
    * Recurring: Active sub and not trail nor grace period.
    * Canceled: Was active sub but has canceled now.
@@ -232,12 +233,15 @@ export type ISubscriptionLinks = {
   subscribedTo: 'Advanced';
   basic: { monthly: CheckoutOptions, annually: CheckoutOptions };
   enhanced: { monthly: CheckoutOptions, annually: CheckoutOptions };
+  advanced: null;
 } | {
   subscribedTo: 'Enhanced';
   basic: { monthly: CheckoutOptions, annually: CheckoutOptions };
+  enhanced: null;
   advanced: { monthly: CheckoutOptions, annually: CheckoutOptions };
 } | {
   subscribedTo: 'Basic';
+  basic: null;
   enhanced: { monthly: CheckoutOptions, annually: CheckoutOptions };
   advanced: { monthly: CheckoutOptions, annually: CheckoutOptions };
 } | {

@@ -1,4 +1,6 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
+import PrimaryLink from "@/Components/Buttons/PrimaryLink";
+import { InertiaLinkProps } from "@inertiajs/react";
 import React, { ButtonHTMLAttributes, ReactNode } from "react";
 
 export type PlanPeriod = "Monthly" | "Annually";
@@ -8,15 +10,19 @@ export interface PlanItemProps {
   planProps?: Partial<PlanProps>;
 }
 
-export interface PlanProps {
+export type PlanProps = {
   title: string;
   desc: string;
   price: number;
   periodText: "month" | "year";
   benefits: ReactNode[];
   actionText?: string;
-  actionProps?:ButtonHTMLAttributes<HTMLButtonElement>; //Omit<InertiaLinkProps, "href">; //ButtonHTMLAttributes<HTMLButtonElement>;
-}
+  actionProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  actionNode?: ReactNode;
+} & {
+  actionHref?: string;
+  actionProps?: Omit<InertiaLinkProps, "href">;
+};
 
 export default function Plan({
   title,
@@ -26,6 +32,8 @@ export default function Plan({
   benefits,
   actionText = "Get Started",
   actionProps,
+  actionNode,
+  actionHref,
 }: PlanProps) {
   return (
     <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
@@ -57,15 +65,30 @@ export default function Plan({
         ))}
       </ul>
 
-      <PrimaryButton
-        {...actionProps}
-        className={
-          "paddle_button paddle-checkout border-none bg-gradient-to-r from-primary-600 to-primary-800 !text-base normal-case shadow hover:shadow-lg " +
-          (actionProps?.className ? actionProps.className : "")
-        }
-      >
-        {actionText}
-      </PrimaryButton>
+      {actionNode ? (
+        actionNode
+      ) : actionHref ? (
+        <PrimaryLink
+          {...actionProps}
+          href={actionHref}
+          className={
+            "paddle_button paddle-checkout border-none bg-gradient-to-r from-primary-600 to-primary-800 !text-base normal-case shadow hover:shadow-lg " +
+            (actionProps?.className ? actionProps.className : "")
+          }
+        >
+          {actionText}
+        </PrimaryLink>
+      ) : (
+        <PrimaryButton
+          {...actionProps}
+          className={
+            "paddle_button paddle-checkout border-none bg-gradient-to-r from-primary-600 to-primary-800 !text-base normal-case shadow hover:shadow-lg " +
+            (actionProps?.className ? actionProps.className : "")
+          }
+        >
+          {actionText}
+        </PrimaryButton>
+      )}
     </div>
   );
 }

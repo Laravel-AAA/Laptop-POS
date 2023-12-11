@@ -36,16 +36,23 @@ const Dropdown = ({ children }: PropsWithChildren) => {
   );
 };
 
-const Trigger = ({ children }: PropsWithChildren) => {
+const Trigger = ({
+  children,
+  ...buttonProps
+}: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>) => {
   const { open, setOpen, toggleOpen } = useContext(DropDownContext);
 
   return (
     <>
       <button
-        className="div-style"
+        {...buttonProps}
+        className={
+          "div-style " + (buttonProps.className ? buttonProps.className : "")
+        }
         onClick={(e) => {
           e.stopPropagation();
           toggleOpen();
+          buttonProps.onClick?.(e);
         }}
       >
         {children}
@@ -72,7 +79,7 @@ const Content = ({
   children,
 }: PropsWithChildren<{
   align?: "left" | "right";
-  width?: "48";
+  width?: "48" | string;
   contentClasses?: string;
 }>) => {
   const { open, setOpen } = useContext(DropDownContext);
@@ -89,7 +96,7 @@ const Content = ({
 
   if (width === "48") {
     widthClasses = "w-48";
-  }
+  } else widthClasses = width;
 
   return (
     <>

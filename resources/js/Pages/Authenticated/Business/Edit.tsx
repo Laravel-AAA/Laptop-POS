@@ -7,7 +7,7 @@ import IdentitySection from "./Partials/IdentitySection";
 import LocationContactSection from "./Partials/LocationContactSection";
 import FinancialSection from "./Partials/FinancialSection";
 import DeleteBusinessSection from "./Partials/DeleteBusinessSection";
-import SubscriptionSection from "./Partials/SubscriptionSection";
+import SubscriptionSection from "./Partials/SubscriptionSection/SubscriptionSection";
 
 export default function Edit({
   auth,

@@ -48,7 +48,10 @@ Route::middleware(['auth', 'verified', 'role:Owner'])->group(function () {
     Route::post('/account/{id}/restore', [UserController::class, 'restore'])->name('account.restore');
     Route::delete('/account/{id}/force-destroy', [UserController::class, 'forceDestroy'])->name('account.forceDestroy');
 
-    Route::get('/update-payment-method',[PaymentController::class,'updatePaymentMethod'])->name('updatePaymentMethod');
+    Route::get('/update-payment-method', [PaymentController::class, 'updatePaymentMethod'])->name('updatePaymentMethod');
+    Route::get('/payment/swap-to-advanced', [PaymentController::class, 'swapToAdvanced'])->name('swapToAdvanced');
+    Route::get('/payment/swap-to-enhanced', [PaymentController::class, 'swapToEnhanced'])->name('swapToEnhanced');
+    Route::get('/payment/swap-to-basic', [PaymentController::class, 'swapToBasic'])->name('swapToBasic');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -78,7 +81,6 @@ Route::middleware(['guest'])->group(function () {
             //'phpVersion' => PHP_VERSION,//8.1.10
         ]);
     });
-
 });
 
 //Anyone

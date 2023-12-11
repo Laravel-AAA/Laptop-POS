@@ -26,7 +26,7 @@ class BusinessController extends Controller
             }
         ])->find($request->user()->business_id);
         Gate::authorize('edit', $business);
-        
+
         // dd(
         //     'Subscribed:',
         //     $business->subscribed(),
@@ -76,45 +76,53 @@ class BusinessController extends Controller
             $subscribedTo = 'Trial';
         }
 
+        //                                                monthly,                          annually
+        $basicPrices    = $subscribedTo === 'Basic'    ? [null, null] : ['pri_01hgdfq62x4cc9q0f3v0syncbn', 'pri_01hgdfvcng7ya1yhe57d7gpvh3'];
+        $enhancedPrices = $subscribedTo === 'Enhanced' ? [null, null] : ['pri_01hgty1we0xpxgw6qefkqeeyb3', 'pri_01hgty2w4t8f04s7pajmvty7sf'];
+        $advancedPrices = $subscribedTo === 'Advanced' ? [null, null] : ['pri_01hgty9577w7t2g96f7zbe2qaf', 'pri_01hgtya73sz695ztffwgmpr2s2'];
 
         $prices = [
-            'pri_01hgdfq62x4cc9q0f3v0syncbn', 'pri_01hgdfvcng7ya1yhe57d7gpvh3', //Basic    (Monthly, Annually)
-            'pri_01hgty1we0xpxgw6qefkqeeyb3', 'pri_01hgty2w4t8f04s7pajmvty7sf', //Enhanced (Monthly, Annually)
-            'pri_01hgty9577w7t2g96f7zbe2qaf', 'pri_01hgtya73sz695ztffwgmpr2s2', //Advanced (Monthly, Annually)
+            ...$basicPrices,
+            ...$enhancedPrices,
+            ...$advancedPrices,
         ];
         $plans = [];
         foreach ($prices as $price) {
-            $plans[] = $business
-                ->subscribe($price)
-                ->returnTo(route('business.edit'));
+            if (isset($price))
+                $plans[] = $business
+                    ->subscribe($price)
+                    ->returnTo(route('business.edit'));
+            else $plans[] = null;
         }
-
         $planOptions = [];
         foreach ($plans as $plan)
-            $planOptions[] = $plan->options();
+            $planOptions[] = $plan?->options();
 
         foreach ($planOptions as &$option) {
-            $option['settings']['displayMode'] = 'overlay';
-            $option['settings']['theme'] = 'light';
+            if (isset($option)) {
+                $option['settings']['displayMode'] = 'overlay';
+                $option['settings']['theme'] = 'light';
+            }
         }
 
         return Inertia::render('Authenticated/Business/Edit', [
             'business' => $business,
             'subscriptionLinks' => [
-                'basic' => [
+                'basic' => $subscribedTo === 'Basic' ? null : [
                     'monthly' => $planOptions[0],
                     'annually' => $planOptions[1],
                 ],
-                'enhanced' => [
+                'enhanced' => $subscribedTo === 'Enhanced' ? null : [
                     'monthly' => $planOptions[2],
                     'annually' => $planOptions[3],
                 ],
-                'advanced' => [
+                'advanced' => $subscribedTo === 'Advanced' ? null : [
                     'monthly' => $planOptions[4],
                     'annually' => $planOptions[5],
                 ],
                 'subscribedTo' => $subscribedTo,
                 'state' => $state,
+                'onTrial' => $subscribedTo === 'Trial' ? $business->customer->trial_ends_at : null,
             ]
         ]);
     }
