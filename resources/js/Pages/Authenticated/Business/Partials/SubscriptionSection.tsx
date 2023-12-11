@@ -13,8 +13,14 @@ export default function SubscriptionSection({
   subscriptionLinks: ISubscriptionLinks;
 }) {
   const [period, setPeriod] = useState<PlanPeriod>("Monthly");
-  const { basic, enhanced, advanced } = subscriptionLinks;
-  console.log(basic.monthly);
+  console.log(subscriptionLinks);
+  const { state, subscribedTo } = subscriptionLinks;
+  // if(subscriptionLinks.subscribedTo === 'Advanced'){
+  // }
+  // console.log(basic.monthly);
+  const downgradeClass = "!from-danger-500 !to-danger-700";
+  const currentClass = "!from-gray-600 !to-gray-800";
+
   return (
     <section className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
       <div className="space-y-6">
@@ -26,12 +32,24 @@ export default function SubscriptionSection({
           <BasicPlan
             period={period}
             planProps={{
-              actionText: "Downgrade",
+              actionText:
+                subscribedTo === "Basic"
+                  ? "Current Plan"
+                  : subscribedTo === "Enhanced" || subscribedTo === "Advanced"
+                    ? "Downgrade"
+                    : "Subscribe",
               actionProps: {
-                className: "paddle-checkout !from-danger-500 !to-danger-700",
+                className:
+                  subscribedTo === "Basic"
+                    ? currentClass
+                    : subscribedTo === "Enhanced" || subscribedTo === "Advanced"
+                      ? downgradeClass
+                      : "",
                 onClick: () =>
                   (window as any).Paddle.Checkout.open(
-                    period === "Monthly" ? basic.monthly : basic.annually,
+                    period === "Monthly"
+                      ? subscriptionLinks.basic?.monthly
+                      : subscriptionLinks.basic?.annually,
                   ),
               },
             }}
@@ -39,12 +57,26 @@ export default function SubscriptionSection({
           <EnhancedPlan
             period={period}
             planProps={{
-              actionText: "Current Plan",
+              actionText:
+                subscribedTo === "Basic"
+                  ? "Upgrade"
+                  : subscribedTo === "Enhanced"
+                    ? "Current Plan"
+                    : subscribedTo === "Advanced"
+                      ? "Downgrade"
+                      : "Subscribe",
               actionProps: {
-                className: "!from-gray-600 !to-gray-800",
+                className:
+                  subscribedTo === "Enhanced"
+                    ? currentClass
+                    : subscribedTo === "Advanced"
+                      ? downgradeClass
+                      : "",
                 onClick: () =>
                   (window as any).Paddle.Checkout.open(
-                    period === "Monthly" ? enhanced.monthly : enhanced.annually,
+                    period === "Monthly"
+                      ? subscriptionLinks.enhanced?.monthly
+                      : subscriptionLinks.enhanced?.annually,
                   ),
               },
             }}
@@ -52,11 +84,20 @@ export default function SubscriptionSection({
           <AdvancedPlan
             period={period}
             planProps={{
-              actionText: "Upgrade",
+              actionText:
+                subscribedTo === "Basic" || subscribedTo === 'Enhanced'
+                  ? "Upgrade"
+                  : subscribedTo === "Advanced"
+                    ? "Current Plan"
+                      : "Subscribe",
+
               actionProps: {
+                className: subscribedTo === "Advanced" ? currentClass : "",
                 onClick: () =>
                   (window as any).Paddle.Checkout.open(
-                    period === "Monthly" ? advanced.monthly : advanced.annually,
+                    period === "Monthly"
+                      ? subscriptionLinks.advanced?.monthly
+                      : subscriptionLinks.advanced?.annually,
                   ),
               },
             }}

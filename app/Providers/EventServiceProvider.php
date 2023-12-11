@@ -35,29 +35,9 @@ class EventServiceProvider extends ServiceProvider
         Verified::class => [
             SendEmailGreetingNewCustomer::class,
         ],
-        WebhookReceived::class => [
-            PaddleEventListener::class,
-        ], CustomerUpdated::class => [
-            PaddleEventListener::class,
-        ],
-        TransactionCompleted::class => [
-            PaddleEventListener::class,
-        ],
-        TransactionUpdated::class => [
-            PaddleEventListener::class,
-        ],
-        SubscriptionCreated::class => [
-            PaddleEventListener::class,
-        ],
-        SubscriptionUpdated::class => [
-            PaddleEventListener::class,
-        ],
-        SubscriptionPaused::class => [
-            PaddleEventListener::class,
-        ],
-        SubscriptionCanceled::class => [
-            PaddleEventListener::class,
-        ],
+        // WebhookReceived::class => [
+        //     PaddleEventListener::class,
+        // ],
     ];
 
     /**

@@ -14,13 +14,21 @@ class Business extends Model
 {
     use HasFactory, HasUlids, SoftDeletes, Billable;
 
+    public function onTrial(){
+        return isset($this->customer) && isset($this->customer->trial_ends_at) && $this->customer->trial_ends_at->gt(now());
+    }
+
+    public function subscribedOrOnTrial(){
+        return $this->onTrial() || $this->subscribed();
+    }
+
     /**
      * Billable calls "$this->email" under the hood so we need to pass the owner's email, because Business model dose not have email property.
      */
     public function __get($key)
     {
-        if($key === 'email'){
-            $user = $this->users()->where('role','Owner')->oldest('created_at')->first();
+        if ($key === 'email') {
+            $user = $this->users()->where('role', 'Owner')->oldest('created_at')->first();
             return $user->email;
         }
         return $this->getAttribute($key);

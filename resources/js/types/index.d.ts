@@ -216,8 +216,33 @@ type CheckoutOptions = {
   customer: { id: string; },
 }
 
-export interface ISubscriptionLinks {
+export type ISubscriptionLinks = {
+  basic?: { monthly: CheckoutOptions, annually: CheckoutOptions };
+  enhanced?: { monthly: CheckoutOptions, annually: CheckoutOptions };
+  advanced?: { monthly: CheckoutOptions, annually: CheckoutOptions };
+  subscribedTo: 'Advanced' | 'Enhanced' | 'Basic' | 'Trial' | null;//Trail is not Plan. null means not subscribed
+  /**
+   * Recurring: Active sub and not trail nor grace period.
+   * Canceled: Was active sub but has canceled now.
+   * Grace Period: Canceled but still active until expires.
+   * Past Due: payment failed, customer should update payment method.
+   */
+  state: 'Recurring' | 'Canceled' | 'Grace Period' | 'Past Due' | null;
+} & ({
+  subscribedTo: 'Advanced';
+  basic: { monthly: CheckoutOptions, annually: CheckoutOptions };
+  enhanced: { monthly: CheckoutOptions, annually: CheckoutOptions };
+} | {
+  subscribedTo: 'Enhanced';
+  basic: { monthly: CheckoutOptions, annually: CheckoutOptions };
+  advanced: { monthly: CheckoutOptions, annually: CheckoutOptions };
+} | {
+  subscribedTo: 'Basic';
+  enhanced: { monthly: CheckoutOptions, annually: CheckoutOptions };
+  advanced: { monthly: CheckoutOptions, annually: CheckoutOptions };
+} | {
+  subscribedTo: 'Trial' | null;
   basic: { monthly: CheckoutOptions, annually: CheckoutOptions };
   enhanced: { monthly: CheckoutOptions, annually: CheckoutOptions };
   advanced: { monthly: CheckoutOptions, annually: CheckoutOptions };
-}
+})

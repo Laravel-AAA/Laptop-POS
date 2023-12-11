@@ -2,8 +2,7 @@
 
 namespace App\Listeners;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 use Laravel\Paddle\Events\WebhookReceived;
 
 class PaddleEventListener
@@ -21,6 +20,7 @@ class PaddleEventListener
      */
     public function handle(WebhookReceived $event): void
     {
-        dd($payload = $event->payload['alert_name'], $payload, $event);
+        Log::emergency('PaddleEventListener', [$event]);
+        // dd($payload = $event->payload['alert_name'], $payload, $event);
     }
 }

@@ -26,34 +26,74 @@ class BusinessController extends Controller
             }
         ])->find($request->user()->business_id);
         Gate::authorize('edit', $business);
+        
+        // dd(
+        //     'Subscribed:',
+        //     $business->subscribed(),
+        //     'Subscription:',
+        //     $business->subscription(),
+        //     'Transactions:',
+        //     $business->transactions,
+        //     'On Trail:',
+        //     $business->onTrial(),
+        //     'Subscribed OR on Trial:',
+        //     $business->subscribedOrOnTrial(),
+        //     'Recurring (Active sub and not trail nor grace period):',
+        //     $business->subscription()?->recurring(),
+        //     'Canceled (Was active sub but has canceled now):',
+        //     $business->subscription()?->canceled(),
+        //     'Grace period (Canceled but still active until expires):',
+        //     $business->subscription()?->onGracePeriod(),
+        //     'Past Due (payment failed, customer should update payment method):',
+        //     $business->subscription()?->pastDue(),
+        //     'Subscribed to Advance:',
+        //     $business->subscription()?->hasProduct('pro_01hgty8g40zg8sd39s1ncgq3ha'),
+        //     'Subscribed to Enhanced:',
+        //     $business->subscription()?->hasProduct('pro_01hgtwypkq83jz2vca3p4gkby8'),
+        //     'Subscribed to Basic:',
+        //     $business->subscription()?->hasProduct('pro_01hgdf1tk5c8s9msfa15gwbrx2'),
+        // );
 
-        // dd($business->subscribed());
-        // dd($business->transactions);
+        $state = null;
+        $subscribedTo = null;
+        if ($sub = $business->subscription()) {
+            if ($sub->recurring())
+                $state = 'Recurring';
+            else if ($sub->canceled())
+                $state = 'Canceled';
+            else if ($sub->onGracePeriod())
+                $state = 'Grace Period';
+            else if ($sub->pastDue())
+                $state = 'Past Due';
+
+            if ($sub->hasProduct('pro_01hgty8g40zg8sd39s1ncgq3ha'))
+                $subscribedTo = 'Advanced';
+            else if ($sub->hasProduct('pro_01hgtwypkq83jz2vca3p4gkby8'))
+                $subscribedTo = 'Enhanced';
+            else if ($sub->hasProduct('pro_01hgdf1tk5c8s9msfa15gwbrx2'))
+                $subscribedTo = 'Basic';
+        } else if ($business->onTrial()) {
+            $subscribedTo = 'Trial';
+        }
+
+
+        $prices = [
+            'pri_01hgdfq62x4cc9q0f3v0syncbn', 'pri_01hgdfvcng7ya1yhe57d7gpvh3', //Basic    (Monthly, Annually)
+            'pri_01hgty1we0xpxgw6qefkqeeyb3', 'pri_01hgty2w4t8f04s7pajmvty7sf', //Enhanced (Monthly, Annually)
+            'pri_01hgty9577w7t2g96f7zbe2qaf', 'pri_01hgtya73sz695ztffwgmpr2s2', //Advanced (Monthly, Annually)
+        ];
         $plans = [];
-        $plans[] = $business
-            ->subscribe('pri_01hgdfq62x4cc9q0f3v0syncbn')
-            ->returnTo(route('business.edit'));
-        $plans[] = $business
-            ->subscribe('pri_01hgdfvcng7ya1yhe57d7gpvh3')
-            ->returnTo(route('business.edit'));
-        $plans[] = $business
-            ->subscribe('pri_01hgty1we0xpxgw6qefkqeeyb3')
-            ->returnTo(route('business.edit'));
-        $plans[] = $business
-            ->subscribe('pri_01hgty2w4t8f04s7pajmvty7sf')
-            ->returnTo(route('business.edit'));
-        $plans[] = $business
-            ->subscribe('pri_01hgty9577w7t2g96f7zbe2qaf')
-            ->returnTo(route('business.edit'));
-        $plans[] = $business
-            ->subscribe('pri_01hgtya73sz695ztffwgmpr2s2')
-            ->returnTo(route('business.edit'));
+        foreach ($prices as $price) {
+            $plans[] = $business
+                ->subscribe($price)
+                ->returnTo(route('business.edit'));
+        }
 
         $planOptions = [];
-        foreach($plans as $plan)
+        foreach ($plans as $plan)
             $planOptions[] = $plan->options();
 
-        foreach($planOptions as &$option){
+        foreach ($planOptions as &$option) {
             $option['settings']['displayMode'] = 'overlay';
             $option['settings']['theme'] = 'light';
         }
@@ -73,6 +113,8 @@ class BusinessController extends Controller
                     'monthly' => $planOptions[4],
                     'annually' => $planOptions[5],
                 ],
+                'subscribedTo' => $subscribedTo,
+                'state' => $state,
             ]
         ]);
     }

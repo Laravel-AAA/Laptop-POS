@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamp('ends_at')->nullable();
             $table->timestamps();
 
-            $table->foreignId('billable_id');
+            $table->foreignUlid('billable_id')->constrained('business', 'id');
             $table->index(['billable_id', 'billable_type']);
         });
     }

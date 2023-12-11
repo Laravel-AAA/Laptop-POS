@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,8 @@ Route::middleware(['auth', 'verified', 'role:Owner'])->group(function () {
     Route::delete('/account/{account}', [UserController::class, 'destroy'])->name('account.destroy');
     Route::post('/account/{id}/restore', [UserController::class, 'restore'])->name('account.restore');
     Route::delete('/account/{id}/force-destroy', [UserController::class, 'forceDestroy'])->name('account.forceDestroy');
+
+    Route::get('/update-payment-method',[PaymentController::class,'updatePaymentMethod'])->name('updatePaymentMethod');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
