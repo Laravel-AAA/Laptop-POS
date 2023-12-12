@@ -4,6 +4,7 @@ import Input from "@/Components/Inputs/Input";
 import DefaultProductImg from "@/Pages/Authenticated/Inventory/Partials/DefaultProductImg";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { ICreateProduct, IModalAction, IProduct } from "@/types";
+import { Progress } from "@material-tailwind/react";
 import { useState } from "react";
 
 export default function FormImage({
@@ -124,8 +125,8 @@ function InputImage({
           state === "create"
             ? "Choose "
             : editImageState === "change"
-            ? "Change "
-            : "") + "Image"
+              ? "Change "
+              : "") + "Image"
         }
         type="file"
         className="mt-1 block w-full"
@@ -140,14 +141,7 @@ function InputImage({
         hideError={form.isDirty("img") || form.isDirty("imageFile")}
         hint="We recommend an image with white background"
       />
-      {form.progress && (
-        <div className="my-1 h-2.5 w-full rounded-md bg-gray-200 dark:bg-gray-700">
-          <div
-            style={{ width: form.progress + "%" }}
-            className="h-2.5 rounded-md bg-green-600 dark:bg-green-500"
-          ></div>
-        </div>
-      )}
+      {/* {form.progress && <Progress value={50}/>} */}
     </>
   );
 }

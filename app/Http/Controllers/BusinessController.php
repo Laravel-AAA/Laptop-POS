@@ -105,6 +105,8 @@ class BusinessController extends Controller
             }
         }
 
+
+        // $subscribedTo = 'Basic'; //todo delete me
         return Inertia::render('Authenticated/Business/Edit', [
             'business' => $business,
             'subscriptionLinks' => [
@@ -123,6 +125,7 @@ class BusinessController extends Controller
                 'subscribedTo' => $subscribedTo,
                 'state' => $state,
                 'onTrial' => $subscribedTo === 'Trial' ? $business->customer->trial_ends_at : null,
+                'progress' => $business->progress(strtolower($subscribedTo)),
             ]
         ]);
     }

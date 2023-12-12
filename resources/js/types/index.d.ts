@@ -216,10 +216,20 @@ type CheckoutOptions = {
   customer: { id: string; },
 }
 
+
+
 export type ISubscriptionLinks = {
   basic: { monthly: CheckoutOptions, annually: CheckoutOptions } | null;
   enhanced: { monthly: CheckoutOptions, annually: CheckoutOptions } | null;
   advanced: { monthly: CheckoutOptions, annually: CheckoutOptions } | null;
+  /**
+   * Business's progress reached.
+   */
+  progress: {
+    accounts: { reached: number; max: number };
+    products: { reached: number; max: number };
+    bills: { reached: number; max: number };
+  } | null;
   subscribedTo: 'Advanced' | 'Enhanced' | 'Basic' | 'Trial' | null;//Trail is not Plan. null means not subscribed
   onTrial: string | null;//trial ends date if on trial otherwise null
   /**

@@ -14,11 +14,13 @@ class Business extends Model
 {
     use HasFactory, HasUlids, SoftDeletes, Billable;
 
-    public function onTrial(){
+    public function onTrial()
+    {
         return isset($this->customer) && isset($this->customer->trial_ends_at) && $this->customer->trial_ends_at->gt(now());
     }
 
-    public function subscribedOrOnTrial(){
+    public function subscribedOrOnTrial()
+    {
         return $this->onTrial() || $this->subscribed();
     }
 
@@ -32,6 +34,46 @@ class Business extends Model
             return $user->email;
         }
         return $this->getAttribute($key);
+    }
+
+    /**
+     * @param $subscribedTo is 'basic'|'enhanced'|'advanced'
+     */
+    public function progress(string $subscribedTo = null): null|array
+    {
+        //return null if subscribedTo not valid plan OR business is not subscribed
+        if (
+            !(isset($subscribedTo) &&
+                ($subscribedTo === 'advanced' || $subscribedTo === 'basic' || $subscribedTo === 'enhanced'))
+        ) {
+            if ($sub = $this->subscription()) {
+                if ($sub->hasProduct('pro_01hgty8g40zg8sd39s1ncgq3ha'))
+                    $subscribedTo = 'advanced';
+                else if ($sub->hasProduct('pro_01hgtwypkq83jz2vca3p4gkby8'))
+                    $subscribedTo = 'enhanced';
+                else if ($sub->hasProduct('pro_01hgdf1tk5c8s9msfa15gwbrx2'))
+                    $subscribedTo = 'basic';
+            } else return null;
+        }
+
+        $accounts = $this->users()->count();
+        $products = $this->products()->count();
+        $bills    = $this->bills()->count();
+
+        return [
+            'accounts' => [
+                'reached' => $accounts,
+                'max' => config('constants.plans.' . $subscribedTo . '.accounts')
+            ],
+            'products' => [
+                'reached' => $products,
+                'max' => config('constants.plans.' . $subscribedTo . '.products')
+            ],
+            'bills' => [
+                'reached' => $bills,
+                'max' => config('constants.plans.' . $subscribedTo . '.bills')
+            ],
+        ];
     }
 
     /**
