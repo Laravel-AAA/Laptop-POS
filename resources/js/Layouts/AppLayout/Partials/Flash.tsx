@@ -25,7 +25,7 @@ export default function Flash({ flash }: { flash: PageProps["flash"] }) {
         leave="transform duration-300 transition ease-in"
         leaveFrom="opacity-100 translate-x-0 scale-100 "
         leaveTo="opacity-0 translate-x-96 scale-95"
-        className="opacity-90"
+        className="opacity-100"
       >
         {flash.message && (
           <Alert>{flash.message}</Alert>

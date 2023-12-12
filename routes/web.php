@@ -54,14 +54,18 @@ Route::middleware(['auth', 'verified', 'role:Owner'])->group(function () {
     Route::get('/payment/swap-to-basic', [PaymentController::class, 'swapToBasic'])->name('swapToBasic');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/inventory', [ProductController::class, 'index'])->name('product.index'); //notice the endpoint `/inventory` can easily change but the real deal url is `product.index` that will be used in frontend.
+Route::middleware(['auth','verified','subscribed'])->group(function(){
     Route::post('/inventory', [ProductController::class, 'store'])->name('product.store');
     Route::patch('/inventory/{product}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/inventory/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+    Route::Resource('bill', BillController::class)->only(['store', 'create', 'edit', 'update', 'destroy']);
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/bill', [ BillController::class, 'index' ])->name('bill.index');
+    Route::get('/inventory', [ProductController::class, 'index'])->name('product.index'); //notice the endpoint `/inventory` can easily change but the real deal url is `product.index` that will be used in frontend.
     Route::get('/inventory/{product}', [ProductController::class, 'show'])->name('product.show');
 
-    Route::Resource('bill', BillController::class)->only(['index', 'store', 'create', 'edit', 'update', 'destroy']);
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
