@@ -9,11 +9,14 @@ class UserPolicy
 {
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the user can create the model.
      */
-    public function store(User $user, User $userEntity): bool
+    public function store(User $user): bool
     {
-        return $user->id == $userEntity->id || ($user->business_id == $userEntity->business_id && $user->role == 'Owner');
+        $progress = $user->business->progressOrFail();
+        if ($progress['accounts']['reached'] < $progress['accounts']['max'])
+            return true;
+        else abort(403, 'You have reached the maximum number of accounts that you can create with your current plan. To create more accounts, you can upgrade your plan, delete some existing accounts, or contact our support team for assistance (support@laptop-pos.com).');
     }
 
     /**
@@ -33,12 +36,16 @@ class UserPolicy
     public function destroy(User $user, User $account): bool
     {
         return $user->id != $account->id && $user->role == 'Owner' && $user->business_id == $account->business_id;
-
     }
 
     public function restore(User $user, User $account): bool
     {
-        return $user->id != $account->id && $user->role == 'Owner' && $user->business_id == $account->business_id;
+        if ($user->id != $account->id && $user->role == 'Owner' && $user->business_id == $account->business_id) {
+            $progress = $user->business->progressOrFail('enhanced');
+            if ($progress['accounts']['reached'] < $progress['accounts']['max'])
+                return true;
+            else abort(403, 'You have reached the maximum number of accounts that you can create with your current plan. To create more accounts, you can upgrade your plan, delete some existing accounts, or contact our support team for assistance (support@laptop-pos.com).');
+        } else return false;
     }
 
     public function forceDestroy(User $user, User $account): bool
@@ -52,5 +59,4 @@ class UserPolicy
         } else
             return false;
     }
-
 }

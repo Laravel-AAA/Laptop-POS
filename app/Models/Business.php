@@ -41,7 +41,7 @@ class Business extends Model
      */
     public function progress(string $subscribedTo = null): null|array
     {
-        //return null if subscribedTo not valid plan OR business is not subscribed
+        //return null if subscribedTo not valid plan OR ( business is not subscribed AND trial expired )
         if (
             !(isset($subscribedTo) &&
                 ($subscribedTo === 'advanced' || $subscribedTo === 'basic' || $subscribedTo === 'enhanced'))
@@ -53,6 +53,8 @@ class Business extends Model
                     $subscribedTo = 'enhanced';
                 else if ($sub->hasProduct('pro_01hgdf1tk5c8s9msfa15gwbrx2'))
                     $subscribedTo = 'basic';
+            } else if ($this->onTrial()) {//trial considered a Basic Plan in terms of progress limit.
+                $subscribedTo = 'basic';
             } else return null;
         }
 
@@ -74,6 +76,17 @@ class Business extends Model
                 'max' => config('constants.plans.' . $subscribedTo . '.bills')
             ],
         ];
+    }
+
+    /**
+     * Get progress status, or abort with 403 and (you have to subscribe) message
+     */
+    public function progressOrFail(string $subscribedTo = null): array
+    {
+        if (($p = $this->progress($subscribedTo)) != null) {
+            return $p;
+        }
+        abort(403, 'You need to have an active subscription to perform this action!');
     }
 
     /**

@@ -38,6 +38,7 @@ class ProductController extends Controller
 
     protected function store(StoreProductRequest $request)
     {
+        Gate::authorize('store',Product::class);
         $product = $request->validated();
         $product = new Product($product);
         $product->business_id = $request->user()->business_id;

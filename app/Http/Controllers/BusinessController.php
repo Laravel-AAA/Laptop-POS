@@ -105,8 +105,6 @@ class BusinessController extends Controller
             }
         }
 
-
-        // $subscribedTo = 'Basic'; //todo delete me
         return Inertia::render('Authenticated/Business/Edit', [
             'business' => $business,
             'subscriptionLinks' => [

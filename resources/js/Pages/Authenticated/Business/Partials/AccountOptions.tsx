@@ -52,7 +52,7 @@ export default function AccountOptions({
               preserveState={false}
             >
               <div className="flex items-center gap-3 text-danger-600">
-                <FaUserMinus className="text-base" /> Delete
+                <FaUserMinus className="text-base" /> Soft Delete
               </div>
             </Dropdown.Link>
           )}

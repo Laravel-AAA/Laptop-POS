@@ -93,7 +93,7 @@ class BillController extends Controller
         if ($request->get('id')) {
             $oldBill = Bill::findOrFail($request->get('id'));
             Gate::authorize('update', $oldBill);
-        }
+        } else Gate::authorize('store',Bill::class);
 
         $createdBill = Bill::create($bill);
         $createdBill->bill_details()->createMany($bill_details);

@@ -1,3 +1,4 @@
+import { Tooltip } from "@material-tailwind/react";
 import moment from "moment";
 import React from "react";
 
@@ -9,11 +10,10 @@ export default function FromDate({
   className?: string;
 }) {
   return (
-    <span
-      title={moment(date).format('LLLL')}
-      className={className}
-    >
-      {moment(date).fromNow()}
+    <span className={className}>
+      <Tooltip content={moment(date).format("LLLL")}>
+        {moment(date).fromNow()}
+      </Tooltip>
     </span>
   );
 }

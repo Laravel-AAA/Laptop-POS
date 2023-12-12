@@ -31,7 +31,7 @@ class UserController extends Controller
     //Create an account by business's Owner. Registering is in RegisterController
     public function store(Request $request)
     {
-
+        Gate::authorize('store',User::class);
         $newUser = new User($request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:' . User::class,
@@ -68,7 +68,6 @@ class UserController extends Controller
             return redirect()->back()
                 ->with('success', 'Successfully updated');
         }
-
     }
 
     /**
