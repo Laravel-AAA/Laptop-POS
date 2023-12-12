@@ -1,6 +1,4 @@
-import SwitchToggle from "@/Components/SwitchToggle";
 import { PlanPeriod } from "@/Pages/Guest/Welcome/Partials/PricingCards/Partials/Plan";
-import { Switch } from "@material-tailwind/react";
 import React from "react";
 
 export default function ToggleMonthlyYearly({
@@ -11,14 +9,14 @@ export default function ToggleMonthlyYearly({
   setPeriod: (e: PlanPeriod) => void;
 }) {
   return (
-      <div className="m-auto mb-8 flex max-w-[14rem] justify-center lg:mb-16">
+      <div className="m-auto mb-6 flex max-w-[14rem] justify-center">
         <div className="relative flex w-full rounded-full bg-gray-50 p-1">
           <span
             className="pointer-events-none absolute inset-0 m-1"
             aria-hidden="true"
           >
             <span
-              className={`shadow-indigo-950/10 absolute inset-0 w-1/2 transform rounded-full bg-secondary-400 shadow-sm transition-transform duration-150 ease-in-out  ${
+              className={`shadow-indigo-950/10 absolute inset-0 w-1/2 transform rounded-full bg-secondary-400 shadow-sm transition-transform duration-200 ease-in-out  ${
                 period !== "Annually" ? "translate-x-0" : "translate-x-full"
               }`}
             ></span>
