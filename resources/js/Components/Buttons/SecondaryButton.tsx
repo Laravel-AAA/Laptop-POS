@@ -21,7 +21,7 @@ export default function SecondaryButton({
          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
         focus-visible:ring-offset-2 active:scale-95
         disabled:opacity-25 disabled:active:scale-100 ${
-          disabled ? "cursor-not-allowed opacity-25" : "cursor-pointer"
+          disabled ? "cursor-default opacity-25" : "cursor-pointer"
         } ` + className
       }
       disabled={disabled}

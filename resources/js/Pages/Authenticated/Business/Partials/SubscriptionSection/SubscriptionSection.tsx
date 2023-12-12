@@ -7,6 +7,7 @@ import { IBusiness, ISubscriptionLinks } from "@/types";
 import React, { useState } from "react";
 import SubscriptionState from "./Partials/SubscriptionState";
 import CurrentPlanAction from "./Partials/CurrentPlanAction";
+import ToggleMonthlyYearly from "./Partials/ToggleMonthlyYearly";
 
 export default function SubscriptionSection({
   business,
@@ -17,7 +18,7 @@ export default function SubscriptionSection({
 }) {
   const [period, setPeriod] = useState<PlanPeriod>("Monthly");
   console.log(subscriptionLinks);
-  const { state, subscribedTo:s, onTrial } = subscriptionLinks;
+  const { state, subscribedTo: s, onTrial } = subscriptionLinks;
   const subscribedTo = "Enhanced" as ISubscriptionLinks["subscribedTo"];
   // const onTrial = new Date('2024-01-01').toISOString() as ISubscriptionLinks['onTrial'];
   // console.log(basic.monthly);
@@ -41,6 +42,10 @@ export default function SubscriptionSection({
             </p>
           )}
         </header>
+        <ToggleMonthlyYearly
+          period={period}
+          setPeriod={(p: PlanPeriod) => setPeriod(p)}
+        />
         <div className="space-y-8 sm:gap-6 lg:grid lg:grid-cols-3 lg:space-y-0 xl:gap-10">
           <BasicPlan
             period={period}

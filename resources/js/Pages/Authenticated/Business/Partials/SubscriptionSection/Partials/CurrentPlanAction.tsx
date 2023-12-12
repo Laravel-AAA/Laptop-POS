@@ -5,7 +5,7 @@ export default function CurrentPlanAction() {
   return (
     <Dropdown>
       <Dropdown.Trigger
-        className="align-center flex w-full items-center justify-center
+        className="align-middle flex w-full items-center justify-center
         rounded-md border border-none border-transparent
         bg-gradient-to-r from-gray-600
         to-gray-800 py-2 text-center
