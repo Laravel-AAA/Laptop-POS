@@ -16,10 +16,10 @@ export default function LastSection() {
       <div className="mt-10 self-center lg:mt-0">
         <PrimaryLink
           href={route("register.method")}
-          className=" flex border-none bg-gradient-to-r from-primary-600 to-primary-800 !px-32 !py-3 !text-base normal-case shadow hover:shadow-lg"
+          className="group flex border-none bg-gradient-to-r from-primary-600 to-primary-800 !px-32 !py-3 !text-base normal-case shadow hover:shadow-lg"
         >
           <span>Register&nbsp;&nbsp;</span>
-          <FaArrowRight />
+          <FaArrowRight className="group-hover:translate-x-2 transition" />
         </PrimaryLink>
       </div>
     </section>

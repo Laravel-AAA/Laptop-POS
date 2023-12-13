@@ -85,11 +85,11 @@ export default function MobileMenu() {
             <li>
               <PrimaryLink
                 href={route("register.method")}
-                className="flex justify-center normal-case"
+                className="flex justify-center normal-case group"
                 onClick={() => setMobileNavOpen(false)}
               >
                 <span>Register&nbsp;</span>
-                <FaArrowRight />
+                <FaArrowRight className="group-hover:translate-x-2 transition"/>
               </PrimaryLink>
             </li>
           </ul>

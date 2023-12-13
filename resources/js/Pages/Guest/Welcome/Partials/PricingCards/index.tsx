@@ -13,7 +13,7 @@ export default function PricingCards() {
       <div className="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16">
         <div className="mx-auto mb-10 max-w-screen-md text-center">
           <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-            Designed for business teams like yours
+            Designed for businesses like yours
           </h2>
           <p className="mb-5 font-light text-gray-500 dark:text-gray-400 sm:text-xl">
             Here at Flowbite we focus on markets where technology, innovation,

@@ -37,6 +37,36 @@ export default function Welcome() {
                         filter: "blur(120px)",
                     }}></div> */}
       <PricingCards />
+      {/**todo:
+       * Grow Your Retail Business With Laptop POS:
+       * Laptop POS software is a VAT ready cloud-based point of sale solution. Whether it is a supermarket, multi-brand retailer, lifestyle stores, hypermarket, fast food shop or boutique outlet; Laptop POS is the best point of sale systems for any retail businesses out there.
+       *
+       * Scalable and easy-to-use application:
+Retail establishments often face multiple challenges in store optimization and integration. We offer you an efficient retail management software that is scalable, easy to use and quick to deploy.
+
+Robust Retail Billing Software:
+Whether you run a retail shop or a restaurant, Laptop POS acts as a reliable billing software, streamlining the checkout process, enhancing accuracy, and accelerating transaction times.
+
+Advanced POS Inventory Software:
+Laptop POS aids in effective inventory management, providing real-time updates on stock levels, ensuring that your business never runs out of crucial products.
+
+Efficient Retail Point of Sale Software
+Laptop POS facilitates quicker and efficient checkouts, leading to higher customer satisfaction.
+
+Insightful Retail Analytics
+The system provides valuable insights into sales, customer behavior, and inventory movement, aiding in strategic planning and decision-making.
+
+Manage your business with a robust Laptop POS system.
+Process transactions and manage your stock on the go with Laptop POS system. Our app is intuitive to use and easy to train on, so you and your staff can get started right away.
+-Work anywhere with a fully featured Laptop POS system.
+-Manage your business by any device from anywhere with tools like dashboard and inventory management.
+
+Work wherever you want with a cloud-based POS system.
+Using Laptop POS means your data is available wherever you are—at work, at home or on the road. Whether you're a restaurateur making quick menu edits on the fly or a retailer checking on end-of-day reports in your home office, being cloud-based means managing your business wherever it works for you.
+-Work on any device, anywhere you are, with cloud-based tools
+-Access your dashboard and data from any location
+-Monitor inventory levels from anywhere, and manage stock between locations as needed
+      */}
       {/** todo:
        * All plans above include:
 Online store
