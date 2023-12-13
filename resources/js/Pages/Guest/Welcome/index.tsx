@@ -8,6 +8,7 @@ import Features from "./Partials/Features";
 import PricingCards from "./Partials/PricingCards";
 import LastSection from "./Partials/LastSection";
 import { useEffect } from "react";
+import OpenSourceSection from "./Partials/OpenSourceSection";
 
 export default function Welcome() {
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function Welcome() {
       <Head title="Welcome" />
       <Hero />
       <Features />
+      <OpenSourceSection />
       {/* todo segment about the flexibility */}
 
       {/* <div className="hidden absolute inset-0 -z-1 md:block" style={{
