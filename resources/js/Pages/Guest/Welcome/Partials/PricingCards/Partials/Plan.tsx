@@ -1,5 +1,7 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import PrimaryLink from "@/Components/Buttons/PrimaryLink";
+import A from "@/Components/Typography/A";
+import P from "@/Components/Typography/P";
 import { InertiaLinkProps } from "@inertiajs/react";
 import React, { ButtonHTMLAttributes, ReactNode } from "react";
 
@@ -36,7 +38,7 @@ export default function Plan({
   actionHref,
 }: PlanProps) {
   return (
-    <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
+    <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 !pb-3 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
       <h3 className="mb-4 text-2xl font-semibold">{title}</h3>
       <p className="font-light text-gray-500">{desc}</p>
       <div className="my-8 flex items-baseline justify-center">
@@ -89,6 +91,13 @@ export default function Plan({
           {actionText}
         </PrimaryButton>
       )}
+
+      <A
+        className="mt-2 text-xs text-gray-500 hover:underline"
+        href={route("paymentServicePolicy")}
+      >
+        Payment & Refund Policy
+      </A>
     </div>
   );
 }

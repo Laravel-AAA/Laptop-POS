@@ -98,6 +98,9 @@ Route::get('/privacy-policy', function () {
 Route::get('/terms-and-conditions', function () {
     return Inertia::render('Anyone/TermsAndConditions');
 })->name('termsAndConditions');
+Route::get('/payment-service-policy', function () {
+    return Inertia::render('Anyone/PaymentServicePolicy');
+})->name('paymentServicePolicy');
 
 
 

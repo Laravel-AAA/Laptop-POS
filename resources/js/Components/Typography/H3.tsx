@@ -6,7 +6,7 @@ export function H3({
   className = "",
 }: PropsWithChildren<{ className?: string }>) {
   return (
-    <Typography variant="h3" className={"text-gray-900 mb-1 " + className}>
+    <Typography variant="h3" className={"text-gray-900 font-extrabold mb-1 " + className}>
       {children}
     </Typography>
   );
