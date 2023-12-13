@@ -26,7 +26,7 @@ export default function Features() {
     <section className="relative overflow-hidden ">
       {/* Section background (needs .relative class on parent and next sibling elements) */}
       <div
-        className="pointer-events-none absolute inset-0 top-10 bg-blue-gray-100 bg-opacity-20"
+        className="pointer-events-none absolute inset-0 top-10 "
         aria-hidden="true"
       ></div>
       <div className="absolute left-0 right-0 m-auto h-40 w-px -translate-y-1/2 transform bg-gray-300 p-px"></div>

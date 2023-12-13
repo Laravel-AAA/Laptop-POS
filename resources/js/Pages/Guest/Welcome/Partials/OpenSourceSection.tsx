@@ -1,13 +1,11 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
-import PrimaryLink from "@/Components/Buttons/PrimaryLink";
-import A from "@/Components/Typography/A";
-import React from "react";
 import { FaGithub } from "react-icons/fa";
 import { FaCodeBranch } from "react-icons/fa6";
 
 export default function OpenSourceSection() {
   return (
-    <section className="overflow-hidden bg-[#475569] py-20">
+    <section className="overflow-hidden bg-[#475569] py-24">
+
       <div className="container mx-auto pb-24">
         <div className="flex flex-wrap justify-center">
           <div className="ml-auto mr-auto w-full px-12 md:mt-28 md:w-5/12 md:px-4">
