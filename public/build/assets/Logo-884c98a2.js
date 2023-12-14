@@ -1,1 +1,0 @@
-import{j as p}from"./app-b20a99f8.js";function r({className:l,businessLogo:t}){let o=null;return t?o=t.startsWith("http")?t:"/businesses-logo/"+t:o="/assets/logo/laptop-pos-logo.svg",p.jsx("img",{className:l,src:o,alt:"Application Logo"})}export{r as L};
