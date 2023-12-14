@@ -1,12 +1,14 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import PrimaryLink from "@/Components/Buttons/PrimaryLink";
 import A from "@/Components/Typography/A";
-import P from "@/Components/Typography/P";
 import { InertiaLinkProps } from "@inertiajs/react";
 import React, { ButtonHTMLAttributes, ReactNode } from "react";
 
 export type PlanPeriod = "Monthly" | "Annually";
 
+/**
+ * Priority is to actionNode if not exist default actionProps will apply to (if actionHref exists then <a> else <button>)
+ */
 export interface PlanItemProps {
   period: PlanPeriod;
   planProps?: Partial<PlanProps>;
@@ -19,7 +21,7 @@ export type PlanProps = {
   periodText: "month" | "year";
   benefits: ReactNode[];
   actionText?: string;
-  actionProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  actionProps?: ButtonHTMLAttributes<HTMLButtonElement>;//or Omit<InertiaLinkProps, "href"> if actionHref exist
   actionNode?: ReactNode;
 } & {
   actionHref?: string;

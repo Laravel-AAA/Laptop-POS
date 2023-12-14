@@ -66,12 +66,14 @@ export default function SubscriptionSection({
                   subscribedTo === "Enhanced" || subscribedTo === "Advanced"
                     ? downgradeClass
                     : "",
-                onClick: () =>
-                  (window as any).Paddle.Checkout.open(
-                    period === "Monthly"
-                      ? subscriptionLinks.basic?.monthly
-                      : subscriptionLinks.basic?.annually,
-                  ),
+                onClick: !isSubscribed
+                  ? () =>
+                      (window as any).Paddle.Checkout.open(
+                        period === "Monthly"
+                          ? subscriptionLinks.basic?.monthly
+                          : subscriptionLinks.basic?.annually,
+                      )
+                  : undefined,
               },
             }}
           />
@@ -92,11 +94,13 @@ export default function SubscriptionSection({
               actionProps: {
                 className: subscribedTo === "Advanced" ? downgradeClass : "",
                 onClick: () =>
-                  (window as any).Paddle.Checkout.open(
-                    period === "Monthly"
-                      ? subscriptionLinks.enhanced?.monthly
-                      : subscriptionLinks.enhanced?.annually,
-                  ),
+                  !isSubscribed
+                    ? (window as any).Paddle.Checkout.open(
+                        period === "Monthly"
+                          ? subscriptionLinks.enhanced?.monthly
+                          : subscriptionLinks.enhanced?.annually,
+                      )
+                    : undefined,
               },
             }}
           />
@@ -113,12 +117,14 @@ export default function SubscriptionSection({
                 ? route("swapToAdvanced", period)
                 : undefined,
               actionProps: {
-                onClick: () =>
-                  (window as any).Paddle.Checkout.open(
-                    period === "Monthly"
-                      ? subscriptionLinks.advanced?.monthly
-                      : subscriptionLinks.advanced?.annually,
-                  ),
+                onClick: !isSubscribed
+                  ? () =>
+                      (window as any).Paddle.Checkout.open(
+                        period === "Monthly"
+                          ? subscriptionLinks.advanced?.monthly
+                          : subscriptionLinks.advanced?.annually,
+                      )
+                  : undefined,
               },
             }}
           />
