@@ -24,7 +24,7 @@ export default function RegisterMethod() {
           >
             <div className="relative mt-0.5 flex items-center justify-center space-x-4">
               <img
-                src="https://www.svgrepo.com/show/475656/google-color.svg"
+                src="/assets/google-icon.png"
                 className="absolute left-0 w-5"
                 alt="google logo"
               />
