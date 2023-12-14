@@ -58,7 +58,9 @@ export default function SubscriptionSection({
                 subscribedTo === "Enhanced" || subscribedTo === "Advanced"
                   ? "Downgrade"
                   : "Subscribe",
-              actionHref: isSubscribed ? route("swapToBasic",period) : undefined,
+              actionHref: isSubscribed
+                ? route("swapToBasic", period)
+                : undefined,
               actionProps: {
                 className:
                   subscribedTo === "Enhanced" || subscribedTo === "Advanced"
@@ -84,7 +86,9 @@ export default function SubscriptionSection({
                   : subscribedTo === "Advanced"
                     ? "Downgrade"
                     : "Subscribe",
-              actionHref: isSubscribed ? route("swapToEnhanced",period) : undefined,
+              actionHref: isSubscribed
+                ? route("swapToEnhanced", period)
+                : undefined,
               actionProps: {
                 className: subscribedTo === "Advanced" ? downgradeClass : "",
                 onClick: () =>
@@ -105,7 +109,9 @@ export default function SubscriptionSection({
                 subscribedTo === "Basic" || subscribedTo === "Enhanced"
                   ? "Upgrade"
                   : "Subscribe",
-              actionHref: isSubscribed ? route("swapToAdvanced",period) : undefined,
+              actionHref: isSubscribed
+                ? route("swapToAdvanced", period)
+                : undefined,
               actionProps: {
                 onClick: () =>
                   (window as any).Paddle.Checkout.open(
