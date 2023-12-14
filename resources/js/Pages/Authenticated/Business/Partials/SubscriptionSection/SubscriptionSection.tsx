@@ -76,7 +76,7 @@ export default function SubscriptionSection({
           { text: "Cancel", type: "secondary" },
         ]}
       />
-      
+
       {/** Cancel Subscription Alert */}
       <AlertModal
         title="Cancel Subscription"
@@ -104,13 +104,7 @@ export default function SubscriptionSection({
         <header className="max-w-3xl">
           <h2 className="text-lg font-medium text-gray-900">Subscription</h2>
           <p className="text-normal text-gray-600">blah blah</p>
-          <SubscriptionState state={state} onTrial={onTrial} />
-          {onTrial && (
-            <p className="text-normal text-gray-600">
-              Trial ends:&nbsp;
-              <FromDate className="text-orange-700" date={onTrial} />
-            </p>
-          )}
+          <SubscriptionState subscriptionData={subscriptionLinks}/>
         </header>
         {progress && <SubscriptionProgress progress={progress} />}
         <ToggleMonthlyYearly

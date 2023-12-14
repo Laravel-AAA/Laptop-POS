@@ -239,6 +239,12 @@ export type ISubscriptionLinks = {
    * Past Due: payment failed, customer should update payment method.
    */
   state: 'Recurring' | 'Canceled' | 'Grace Period' | 'Past Due' | null;
+  lastPayment: {
+    amount: number;
+    currency: string;
+    date: string;
+  } | null;
+  gracePeriodExpiresAt: string | null;//date
 } & ({
   subscribedTo: 'Advanced';
   basic: { monthly: CheckoutOptions, annually: CheckoutOptions };

@@ -53,17 +53,21 @@ class BusinessController extends Controller
         //     'Subscribed to Basic:',
         //     $business->subscription()?->hasProduct('pro_01hgdf1tk5c8s9msfa15gwbrx2'),
         // );
+        // dd('Next billing cycle:', $business->subscription()->nextPayment());
 
         $state = null;
         $subscribedTo = null;
+        $gracePeriodExpiresAt = null;
         if ($sub = $business->subscription()) {
+            $lastPayment = $sub->lastPayment();
             if ($sub->recurring())
                 $state = 'Recurring';
             else if ($sub->canceled())
                 $state = 'Canceled';
-            else if ($sub->onGracePeriod())
+            else if ($sub->onGracePeriod()) {
+                $gracePeriodExpiresAt = $sub->ends_at;
                 $state = 'Grace Period';
-            else if ($sub->pastDue())
+            } else if ($sub->pastDue())
                 $state = 'Past Due';
 
             if ($sub->hasProduct('pro_01hgty8g40zg8sd39s1ncgq3ha'))
@@ -124,6 +128,8 @@ class BusinessController extends Controller
                 'state' => $state,
                 'onTrial' => $subscribedTo === 'Trial' ? $business->customer->trial_ends_at : null,
                 'progress' => $business->progress(strtolower($subscribedTo)),
+                'lastPayment' => $lastPayment,
+                'gracePeriodExpiresAt' => $gracePeriodExpiresAt,
             ]
         ]);
     }
