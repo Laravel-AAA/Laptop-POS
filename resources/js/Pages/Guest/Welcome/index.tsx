@@ -31,7 +31,7 @@ export default function Welcome() {
       <Head title="Welcome" />
       <Hero />
       <Features />
-      <PoweredBySection/>
+      <PoweredBySection />
       <OpenSourceSection />
 
       {/* todo segment about the flexibility */}
@@ -41,6 +41,8 @@ export default function Welcome() {
                         backgroundImage: "radial-gradient(circle, #8a64fc 0%, #9bedff 100%)",
                         filter: "blur(120px)",
                     }}></div> */}
+      {/* <span className="bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] blur-lg filter opacity-30 w-full h-full absolute inset-0"></span> */}
+
       <PricingCards />
       {/**todo:
        * Grow Your Retail Business With Laptop POS:

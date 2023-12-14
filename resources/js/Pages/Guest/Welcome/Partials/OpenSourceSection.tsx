@@ -34,7 +34,7 @@ export default function OpenSourceSection() {
               {" "}If you like our system, please give us a star on GitHub.
             </p>
             <a target="_blank" href="https://github.com/Laravel-AAA/Laptop-POS">
-              <PrimaryButton className="github-star mt-4 inline-block rounded bg-blue-gray-900 px-6 py-4 text-sm font-bold shadow hover:!bg-black hover:shadow-lg">
+              <PrimaryButton className="github-star mt-4 inline-block rounded !bg-blue-gray-900 px-6 py-4 text-sm font-bold shadow hover:!bg-black hover:shadow-lg">
                 Source Code
               </PrimaryButton>
             </a>

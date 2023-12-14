@@ -7,7 +7,7 @@ export default function Features() {
   const [tab, setTab] = useState<number>(1);
 
   useEffect(() => {
-    const interval = setTimeout(() => setTab((t) => (t + 1) % 4 || 1), 6000);
+    const interval = setTimeout(() => setTab((t) => (t + 1) % 4 || 1), 8000);
     return () => clearTimeout(interval);
   }, [tab]);
 

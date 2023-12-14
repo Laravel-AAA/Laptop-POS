@@ -14,7 +14,7 @@ export default function PaymentServicePolicy({ auth }: PageProps) {
   return (
     <>
       <Head title="Payment Service Policy" />
-      <GuestAuthLayout user={auth.user} header="Privacy Policy">
+      <GuestAuthLayout user={auth.user} header="Payment Service Policy">
         <Content />
       </GuestAuthLayout>
     </>
