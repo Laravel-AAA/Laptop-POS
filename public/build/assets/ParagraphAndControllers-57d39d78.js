@@ -1,9 +1,0 @@
-import{j as e}from"./app-dd5d3fa9.js";import{B as l}from"./BetterLink-cfdc02a6.js";import{q as s}from"./index.esm-be27e063.js";import"./iconBase-0bb2734a.js";function n({href:t,className:a="",children:r,disabled:o,...i}){return e.jsx(l,{...i,href:t,className:`block items-center rounded-md border
-        border-transparent bg-secondary-400 px-4
-        py-2 text-center  text-xs font-semibold
-        uppercase tracking-wider
-        text-gray-900 transition duration-200
-        ease-in-out hover:bg-secondary-300 focus:outline-none
-       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
-        focus-visible:ring-offset-2 active:scale-95
-        disabled:opacity-25 disabled:active:scale-100 ${o?"cursor-default opacity-25":"cursor-pointer"} `+a,children:r})}function u(){return e.jsxs("div",{className:"mx-auto max-w-3xl",children:[e.jsx("p",{className:"mb-8 text-xl text-gray-600","data-aos":"zoom-y-out","data-aos-delay":"150",children:"Streamline your business operations with our user-friendly Point of Sale app"}),e.jsx("div",{className:"mx-auto flex max-w-xs justify-center","data-aos":"zoom-y-out","data-aos-delay":"300",children:e.jsx(n,{href:route("register.method"),className:"!bg-gradient-to-br !from-yellow-600  to-secondary-400 px-7 py-4 normal-case shadow-lg ",children:e.jsx("span",{className:"text-sm tracking-wide",children:"Create FREE Account"})})}),e.jsxs("div",{className:"md:translate-x-0 mt-4 text-gray-500 flex-col justify-center md:flex-row md:space-x-4 flex translate-x-1/4 ",children:[e.jsxs("div",{className:"flex ",children:[e.jsx(s,{className:"mr-1 mt-0.5 text-lg text-green-400"}),"Free Trial"]}),e.jsxs("div",{className:"flex",children:[e.jsx(s,{className:"mr-1 mt-0.5 text-lg text-green-400"}),"No credit card required"]}),e.jsxs("div",{className:"flex",children:[e.jsx(s,{className:"mr-1 mt-0.5 text-lg text-green-400"}),"Unlimited access to all features"," "]})]})]})}export{u as default};
