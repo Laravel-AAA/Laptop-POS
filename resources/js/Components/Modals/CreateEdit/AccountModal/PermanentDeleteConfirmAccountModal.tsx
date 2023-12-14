@@ -24,8 +24,9 @@ export default function PermanentDeleteConfirmAccountModal({
           account?
         </span>
       }
-      buttons={{
-        danger: {
+      buttons={[
+        {
+          type: "danger",
           text: "Delete",
           props: {
             onClick: () => {
@@ -42,8 +43,8 @@ export default function PermanentDeleteConfirmAccountModal({
             disabled: progress,
           },
         },
-        secondary: { text: "Cancel" },
-      }}
+        { type: "secondary", text: "Cancel" },
+      ]}
       isOpen={isOpen}
       requestClose={(clickedButtonText) => requestClose(clickedButtonText)}
     />

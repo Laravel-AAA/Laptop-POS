@@ -1,14 +1,18 @@
 import Dropdown from "@/Components/Dropdown";
 import { FaChevronDown } from "react-icons/fa6";
 
-export default function CurrentPlanAction() {
+export default function CurrentPlanAction({
+  requestShowCancelSubAlert,
+}: {
+  requestShowCancelSubAlert: () => any;
+}) {
   return (
     <Dropdown>
       <Dropdown.Trigger
-        className="align-middle flex w-full items-center justify-center
-        rounded-md border border-none border-transparent
-        bg-gradient-to-r from-gray-600
-        to-gray-800 py-2 text-center
+        className="flex w-full items-center justify-center rounded-md
+        border border-none border-transparent bg-gradient-to-r
+        from-gray-600 to-gray-800
+        py-2 text-center align-middle
         text-base font-semibold
         uppercase normal-case tracking-wider
         text-white shadow transition
@@ -31,8 +35,9 @@ export default function CurrentPlanAction() {
     >
           Update Payment Method
     </a> */}
-        <Dropdown.Link href={route("business.edit")}>Business</Dropdown.Link>
-        <Dropdown.Link href={route("logout")}>Log Out</Dropdown.Link>
+        <Dropdown.Button onClick={() => requestShowCancelSubAlert()}>
+          Cancel Subscription
+        </Dropdown.Button>
       </Dropdown.Content>
     </Dropdown>
   );

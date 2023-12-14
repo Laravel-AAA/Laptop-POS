@@ -37,8 +37,9 @@ export default function DeleteConfirmBillModal({
           You are about to delete the bill <ID id={bill.id} />
         </span>
       }
-      buttons={{
-        danger: {
+      buttons={[
+        {
+          type: "danger",
           text: "Delete",
           props: {
             onClick: () => {
@@ -51,8 +52,8 @@ export default function DeleteConfirmBillModal({
             disabled: deleteProgress,
           },
         },
-        secondary: { text: "Cancel" },
-      }}
+        { type: "secondary", text: "Cancel" },
+      ]}
       isOpen={isOpen}
       requestClose={(clickedButtonText) => requestClose(clickedButtonText)}
     />

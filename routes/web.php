@@ -49,9 +49,13 @@ Route::middleware(['auth', 'verified', 'role:Owner'])->group(function () {
     Route::delete('/account/{id}/force-destroy', [UserController::class, 'forceDestroy'])->name('account.forceDestroy');
 
     Route::get('/update-payment-method', [PaymentController::class, 'updatePaymentMethod'])->name('updatePaymentMethod');
-    Route::get('/payment/swap-to-advanced/{period}', [PaymentController::class, 'swapToAdvanced'])->name('swapToAdvanced');
-    Route::get('/payment/swap-to-enhanced/{period}', [PaymentController::class, 'swapToEnhanced'])->name('swapToEnhanced');
-    Route::get('/payment/swap-to-basic/{period}', [PaymentController::class, 'swapToBasic'])->name('swapToBasic');
+    Route::get('/subscription/swap-to-advanced/{period}', [PaymentController::class, 'swapToAdvanced'])->name('swapToAdvanced');
+    Route::get('/subscription/swap-to-enhanced/{period}', [PaymentController::class, 'swapToEnhanced'])->name('swapToEnhanced');
+    Route::get('/subscription/swap-to-basic/{period}', [PaymentController::class, 'swapToBasic'])->name('swapToBasic');
+    Route::get('/subscription/cancel', [PaymentController::class, 'cancel'])->name('subscription.cancel');
+    Route::get('/subscription/cancel-now', [PaymentController::class, 'cancelNow'])->name('subscription.cancelNow');
+    Route::get('/subscription/stop-cancellation', [PaymentController::class, 'stopCancellation'])->name('subscription.stopCancellation');
+    //cancellation
 });
 
 Route::middleware(['auth','verified','subscribed'])->group(function(){

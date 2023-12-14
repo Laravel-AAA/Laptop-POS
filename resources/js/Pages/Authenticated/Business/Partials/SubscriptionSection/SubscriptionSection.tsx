@@ -20,12 +20,13 @@ export default function SubscriptionSection({
   subscriptionLinks: ISubscriptionLinks;
 }) {
   const [period, setPeriod] = useState<PlanPeriod>("Monthly");
-  const [upDownGrade, setUpDownGrade] = useState<{
+  const [upDownGradeAlert, setUpDownGradeAlert] = useState<{
     from: Plan;
     to: Plan;
     isShow: boolean;
     route: string;
   }>({ from: "Basic", to: "Basic", isShow: false, route: "" });
+  const [showCancelSubAlert, setShowCancelSubAlert] = useState<boolean>(false);
   console.log(subscriptionLinks);
   const { state, subscribedTo, onTrial, progress } = subscriptionLinks;
   // const subscribedTo = "Enhanced" as ISubscriptionLinks["subscribedTo"];
@@ -39,36 +40,65 @@ export default function SubscriptionSection({
 
   return (
     <section className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+      {/**Upgrade/Downgrade alert */}
       <AlertModal
         title={`${
-          isUpgrade(upDownGrade.from, upDownGrade.to) ? "Upgrade" : "Downgrade"
-        } to ${upDownGrade.to}`}
+          isUpgrade(upDownGradeAlert.from, upDownGradeAlert.to)
+            ? "Upgrade"
+            : "Downgrade"
+        } to ${upDownGradeAlert.to}`}
         paragraph={`You are about to ${
-          isUpgrade(upDownGrade.from, upDownGrade.to) ? "upgrade" : "downgrade"
-        } your subscription plan from ${upDownGrade.from} to ${
-          upDownGrade.to
+          isUpgrade(upDownGradeAlert.from, upDownGradeAlert.to)
+            ? "upgrade"
+            : "downgrade"
+        } your subscription plan from ${upDownGradeAlert.from} to ${
+          upDownGradeAlert.to
         }. We will charge or refund the difference between the old and new billing amount right away. The calculation is based on the number of days left in the current billing cycle.`}
-        isOpen={upDownGrade.isShow}
+        isOpen={upDownGradeAlert.isShow}
         requestClose={() =>
-          setUpDownGrade((p) => ({
+          setUpDownGradeAlert((p) => ({
             ...p,
             isShow: false,
           }))
         }
-        buttons={{
-          danger: !isUpgrade(upDownGrade.from, upDownGrade.to)
-            ? {
-                text: "Downgrade",
-                props: { onClick: () => router.visit(upDownGrade.route) },
-              }
-            : undefined,
-          primary: isUpgrade(upDownGrade.from, upDownGrade.to)
-            ? {
-                text: "Upgrade",
-                props: { onClick: () => router.visit(upDownGrade.route) },
-              }
-            : undefined,
-        }}
+        buttons={[
+          {
+            type: isUpgrade(upDownGradeAlert.from, upDownGradeAlert.to)
+              ? "primary"
+              : "danger",
+            text: isUpgrade(upDownGradeAlert.from, upDownGradeAlert.to)
+              ? "Upgrade"
+              : "Downgrade",
+            props: {
+              onClick: () => router.visit(upDownGradeAlert.route),
+            },
+          },
+          { text: "Cancel", type: "secondary" },
+        ]}
+      />
+      
+      {/** Cancel Subscription Alert */}
+      <AlertModal
+        title="Cancel Subscription"
+        paragraph="Your subscription stays active until the end of this billing cycle. You won’t be charged after that. Click ‘cancel now’ to end it immediately (not advised)."
+        isOpen={showCancelSubAlert}
+        requestClose={() => setShowCancelSubAlert(false)}
+        buttons={[
+          {
+            type: "danger",
+            text: "Cancel",
+            props: {
+              onClick: () => router.visit(route("subscription.cancel")),
+            },
+          },
+          {
+            type: "danger",
+            text: "Cancel Now",
+            props: {
+              onClick: () => router.visit(route("subscription.cancelNow")),
+            },
+          },
+        ]}
       />
       <div className="space-y-6">
         <header className="max-w-3xl">
@@ -92,7 +122,13 @@ export default function SubscriptionSection({
             period={period}
             planProps={{
               actionNode:
-                subscribedTo !== "Basic" ? undefined : <CurrentPlanAction />,
+                subscribedTo !== "Basic" ? undefined : (
+                  <CurrentPlanAction
+                    requestShowCancelSubAlert={() =>
+                      setShowCancelSubAlert(true)
+                    }
+                  />
+                ),
               actionText:
                 subscribedTo === "Enhanced" || subscribedTo === "Advanced"
                   ? "Downgrade"
@@ -104,7 +140,7 @@ export default function SubscriptionSection({
                     : "",
                 onClick: () =>
                   isSubscribed
-                    ? setUpDownGrade({
+                    ? setUpDownGradeAlert({
                         from: subscribedTo,
                         to: "Basic",
                         isShow: true,
@@ -122,7 +158,13 @@ export default function SubscriptionSection({
             period={period}
             planProps={{
               actionNode:
-                subscribedTo !== "Enhanced" ? undefined : <CurrentPlanAction />,
+                subscribedTo !== "Enhanced" ? undefined : (
+                  <CurrentPlanAction
+                    requestShowCancelSubAlert={() =>
+                      setShowCancelSubAlert(true)
+                    }
+                  />
+                ),
               actionText:
                 subscribedTo === "Basic"
                   ? "Upgrade"
@@ -133,7 +175,7 @@ export default function SubscriptionSection({
                 className: subscribedTo === "Advanced" ? downgradeClass : "",
                 onClick: () =>
                   isSubscribed
-                    ? setUpDownGrade({
+                    ? setUpDownGradeAlert({
                         from: subscribedTo,
                         to: "Enhanced",
                         isShow: true,
@@ -151,7 +193,13 @@ export default function SubscriptionSection({
             period={period}
             planProps={{
               actionNode:
-                subscribedTo !== "Advanced" ? undefined : <CurrentPlanAction />,
+                subscribedTo !== "Advanced" ? undefined : (
+                  <CurrentPlanAction
+                    requestShowCancelSubAlert={() =>
+                      setShowCancelSubAlert(true)
+                    }
+                  />
+                ),
               actionText:
                 subscribedTo === "Basic" || subscribedTo === "Enhanced"
                   ? "Upgrade"
@@ -159,7 +207,7 @@ export default function SubscriptionSection({
               actionProps: {
                 onClick: () =>
                   isSubscribed
-                    ? setUpDownGrade({
+                    ? setUpDownGradeAlert({
                         from: subscribedTo,
                         to: "Advanced",
                         isShow: true,

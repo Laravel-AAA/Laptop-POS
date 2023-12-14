@@ -3,7 +3,7 @@ import { FaExclamationTriangle, FaInfo } from "react-icons/fa";
 import TemplateModal, { IModalButtons } from "./TemplateModal";
 interface IAlertModal {
   icon?: "info" | "danger";
-  buttons?: IModalButtons;
+  buttons?: IModalButtons[];
   title: string;
   paragraph: string | ReactNode;
 }

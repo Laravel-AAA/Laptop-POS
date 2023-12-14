@@ -7,6 +7,27 @@ use Illuminate\Support\Facades\Response;
 
 class PaymentController extends Controller
 {
+    public function cancel(Request $request)
+    {
+        $request->user()->business->subscription()->cancel();
+
+        return redirect()->back()->with('success', 'Successfully canceled');
+    }
+
+    public function cancelNow(Request $request)
+    {
+        $request->user()->business->subscription()->cancelNow();
+        return redirect()->back()->with('success', 'Successfully canceled');
+    }
+
+    public function stopCancellation(Request $request)
+    {
+        if (($sub = $request->user()->business->subscription())->onGracePeriod())
+            $sub->stopCancelation();
+        else abort(400, 'Your subscription was not canceled to be stopped in the first place');
+        return redirect()->back()->with('success', 'Successfully cancellation stopped');
+    }
+
     public function updatePaymentMethod(Request $request)
     {
         return $request->user()->business
@@ -25,7 +46,7 @@ class PaymentController extends Controller
         $request->user()->business
             ->subscription()
             ->swapAndInvoice($advancedPrices[$period === 'monthly' ? 0 : 1]);
-        return redirect()->back()->with('success', 'Successfully updated');
+        return redirect()->back()->with('success', 'Successfully upgraded');
     }
 
     public function swapToEnhanced(Request $request, string $period)
@@ -54,6 +75,6 @@ class PaymentController extends Controller
         $request->user()->business
             ->subscription()
             ->swapAndInvoice($basicPrices[$period === 'monthly' ? 0 : 1]);
-        return redirect()->back()->with('success', 'Successfully updated');
+        return redirect()->back()->with('success', 'Successfully downgraded');
     }
 }

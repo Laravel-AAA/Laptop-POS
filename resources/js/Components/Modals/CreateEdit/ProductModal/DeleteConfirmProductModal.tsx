@@ -23,8 +23,9 @@ export default function DeleteConfirmProductModal({
           You are about to delete the product <strong>{product.name}</strong>
         </span>
       }
-      buttons={{
-        danger: {
+      buttons={[
+        {
+          type: "danger",
           text: "Delete",
           props: {
             onClick: () => {
@@ -40,8 +41,8 @@ export default function DeleteConfirmProductModal({
             disabled: deleteProgress,
           },
         },
-        secondary: { text: "Cancel" },
-      }}
+        { type: "secondary", text: "Cancel" },
+      ]}
       isOpen={isOpen}
       requestClose={(clickedButtonText) => requestClose(clickedButtonText)}
     />

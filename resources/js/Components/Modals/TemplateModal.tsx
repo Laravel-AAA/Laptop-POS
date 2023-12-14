@@ -11,9 +11,9 @@ import PrimaryMaterialBtn from "../Buttons/Material/PrimaryMaterialBtn";
 import SecondaryMaterialBtn from "../Buttons/Material/SecondaryMaterialBtn";
 
 export interface IModalButtons {
-  primary?: { text: string; props?: ButtonHTMLAttributes<HTMLButtonElement> };
-  danger?: { text: string; props?: ButtonHTMLAttributes<HTMLButtonElement> };
-  secondary?: { text: string; props?: ButtonHTMLAttributes<HTMLButtonElement> };
+  text: string;
+  props?: ButtonHTMLAttributes<HTMLButtonElement>;
+  type: "primary" | "danger" | "secondary";
 }
 export default function TemplateModal({
   children,
@@ -25,7 +25,7 @@ export default function TemplateModal({
 }: PropsWithChildren<{
   open: boolean;
   closeModal: (clickedButtonText?: string) => any;
-  buttons?: IModalButtons;
+  buttons?: IModalButtons[];
   title: string;
   icon?: ReactNode;
 }>) {
@@ -80,46 +80,49 @@ export default function TemplateModal({
                   <div className="mx-0 p-4 pt-0 sm:mx-3">{children}</div>
                 </div>
 
-                {(buttons?.primary ||
-                  buttons?.secondary ||
-                  buttons?.danger) && (
-                  <div className="bg-gray-50 space-y-2 sm:space-y-0 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    {buttons?.danger && (
-                      <DangerButton
-                        className="w-full shadow sm:ml-3 sm:w-auto"
-                        {...buttons?.danger?.props}
-                        onClick={(e) => {
-                          closeModal(buttons?.danger?.text);
-                          buttons?.danger?.props?.onClick?.(e);
-                        }}
-                      >
-                        {buttons.danger.text}
-                      </DangerButton>
-                    )}
-                    {buttons?.primary && (
-                      <PrimaryMaterialBtn
-                        className="w-full sm:ml-3 sm:w-auto"
-                        {...buttons?.primary?.props}
-                        onClick={(e) => {
-                          closeModal(buttons?.primary?.text);
-                          buttons.primary?.props?.onClick?.(e);
-                        }}
-                      >
-                        {buttons.primary.text}
-                      </PrimaryMaterialBtn>
-                    )}
-                    {buttons?.secondary && (
-                      <SecondaryMaterialBtn
-                        className="w-full sm:ml-3 sm:w-auto"
-                        {...buttons?.secondary?.props}
-                        onClick={(e) => {
-                          closeModal(buttons?.secondary?.text);
-                          buttons.secondary?.props?.onClick?.(e);
-                        }}
-                      >
-                        {buttons.secondary.text}
-                      </SecondaryMaterialBtn>
-                    )}
+                {buttons && (
+                  <div className="space-y-2 bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:space-y-0 sm:px-6">
+                    {buttons?.map((b) => (
+                      <>
+                        {b.type === "danger" && (
+                          <DangerButton
+                            className="w-full shadow sm:ml-3 sm:w-auto"
+                            {...b.props}
+                            onClick={(e) => {
+                              closeModal(b.text);
+                              b.props?.onClick?.(e);
+                            }}
+                          >
+                            {b.text}
+                          </DangerButton>
+                        )}
+
+                        {b.type === "primary" && (
+                          <PrimaryMaterialBtn
+                            className="w-full sm:ml-3 sm:w-auto"
+                            {...b.props}
+                            onClick={(e) => {
+                              closeModal(b.text);
+                              b.props?.onClick?.(e);
+                            }}
+                          >
+                            {b.text}
+                          </PrimaryMaterialBtn>
+                        )}
+                        {b.type === "secondary" && (
+                          <SecondaryMaterialBtn
+                            className="w-full sm:ml-3 sm:w-auto"
+                            {...b.props}
+                            onClick={(e) => {
+                              closeModal(b.text);
+                              b.props?.onClick?.(e);
+                            }}
+                          >
+                            {b.text}
+                          </SecondaryMaterialBtn>
+                        )}
+                      </>
+                    ))}
                   </div>
                 )}
               </Dialog.Panel>
