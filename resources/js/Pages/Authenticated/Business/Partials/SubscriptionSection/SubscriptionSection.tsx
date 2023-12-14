@@ -3,12 +3,14 @@ import BasicPlan from "@/Pages/Guest/Welcome/Partials/PricingCards/Partials/Basi
 import EnhancedPlan from "@/Pages/Guest/Welcome/Partials/PricingCards/Partials/EnhancedPlan";
 import { PlanPeriod } from "@/Pages/Guest/Welcome/Partials/PricingCards/Partials/Plan";
 import FromDate from "@/Utilities/FromDate";
-import { IBusiness, ISubscriptionLinks } from "@/types";
+import { IBusiness, ISubscriptionLinks, Plan } from "@/types";
 import React, { useState } from "react";
 import SubscriptionState from "./Partials/SubscriptionState";
 import CurrentPlanAction from "./Partials/CurrentPlanAction";
 import ToggleMonthlyYearly from "./Partials/ToggleMonthlyYearly";
 import SubscriptionProgress from "./Partials/SubscriptionProgress";
+import AlertModal from "@/Components/Modals/AlertModal";
+import { router } from "@inertiajs/react";
 
 export default function SubscriptionSection({
   business,
@@ -18,6 +20,12 @@ export default function SubscriptionSection({
   subscriptionLinks: ISubscriptionLinks;
 }) {
   const [period, setPeriod] = useState<PlanPeriod>("Monthly");
+  const [upDownGrade, setUpDownGrade] = useState<{
+    from: Plan;
+    to: Plan;
+    isShow: boolean;
+    route: string;
+  }>({ from: "Basic", to: "Basic", isShow: false, route: "" });
   console.log(subscriptionLinks);
   const { state, subscribedTo, onTrial, progress } = subscriptionLinks;
   // const subscribedTo = "Enhanced" as ISubscriptionLinks["subscribedTo"];
@@ -31,6 +39,37 @@ export default function SubscriptionSection({
 
   return (
     <section className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+      <AlertModal
+        title={`${
+          isUpgrade(upDownGrade.from, upDownGrade.to) ? "Upgrade" : "Downgrade"
+        } to ${upDownGrade.to}`}
+        paragraph={`You are about to ${
+          isUpgrade(upDownGrade.from, upDownGrade.to) ? "upgrade" : "downgrade"
+        } your subscription plan from ${upDownGrade.from} to ${
+          upDownGrade.to
+        }. We will charge or refund the difference between the old and new billing amount right away. The calculation is based on the number of days left in the current billing cycle.`}
+        isOpen={upDownGrade.isShow}
+        requestClose={() =>
+          setUpDownGrade((p) => ({
+            ...p,
+            isShow: false,
+          }))
+        }
+        buttons={{
+          danger: !isUpgrade(upDownGrade.from, upDownGrade.to)
+            ? {
+                text: "Downgrade",
+                props: { onClick: () => router.visit(upDownGrade.route) },
+              }
+            : undefined,
+          primary: isUpgrade(upDownGrade.from, upDownGrade.to)
+            ? {
+                text: "Upgrade",
+                props: { onClick: () => router.visit(upDownGrade.route) },
+              }
+            : undefined,
+        }}
+      />
       <div className="space-y-6">
         <header className="max-w-3xl">
           <h2 className="text-lg font-medium text-gray-900">Subscription</h2>
@@ -58,22 +97,24 @@ export default function SubscriptionSection({
                 subscribedTo === "Enhanced" || subscribedTo === "Advanced"
                   ? "Downgrade"
                   : "Subscribe",
-              actionHref: isSubscribed
-                ? route("swapToBasic", period)
-                : undefined,
               actionProps: {
                 className:
                   subscribedTo === "Enhanced" || subscribedTo === "Advanced"
                     ? downgradeClass
                     : "",
-                onClick: !isSubscribed
-                  ? () =>
-                      (window as any).Paddle.Checkout.open(
+                onClick: () =>
+                  isSubscribed
+                    ? setUpDownGrade({
+                        from: subscribedTo,
+                        to: "Basic",
+                        isShow: true,
+                        route: route("swapToBasic", period),
+                      })
+                    : (window as any).Paddle.Checkout.open(
                         period === "Monthly"
                           ? subscriptionLinks.basic?.monthly
                           : subscriptionLinks.basic?.annually,
-                      )
-                  : undefined,
+                      ),
               },
             }}
           />
@@ -88,19 +129,21 @@ export default function SubscriptionSection({
                   : subscribedTo === "Advanced"
                     ? "Downgrade"
                     : "Subscribe",
-              actionHref: isSubscribed
-                ? route("swapToEnhanced", period)
-                : undefined,
               actionProps: {
                 className: subscribedTo === "Advanced" ? downgradeClass : "",
                 onClick: () =>
-                  !isSubscribed
-                    ? (window as any).Paddle.Checkout.open(
+                  isSubscribed
+                    ? setUpDownGrade({
+                        from: subscribedTo,
+                        to: "Enhanced",
+                        isShow: true,
+                        route: route("swapToEnhanced", period),
+                      })
+                    : (window as any).Paddle.Checkout.open(
                         period === "Monthly"
                           ? subscriptionLinks.enhanced?.monthly
                           : subscriptionLinks.enhanced?.annually,
-                      )
-                    : undefined,
+                      ),
               },
             }}
           />
@@ -113,23 +156,32 @@ export default function SubscriptionSection({
                 subscribedTo === "Basic" || subscribedTo === "Enhanced"
                   ? "Upgrade"
                   : "Subscribe",
-              actionHref: isSubscribed
-                ? route("swapToAdvanced", period)
-                : undefined,
               actionProps: {
-                onClick: !isSubscribed
-                  ? () =>
-                      (window as any).Paddle.Checkout.open(
+                onClick: () =>
+                  isSubscribed
+                    ? setUpDownGrade({
+                        from: subscribedTo,
+                        to: "Advanced",
+                        isShow: true,
+                        route: route("swapToAdvanced", period),
+                      })
+                    : (window as any).Paddle.Checkout.open(
                         period === "Monthly"
                           ? subscriptionLinks.advanced?.monthly
                           : subscriptionLinks.advanced?.annually,
-                      )
-                  : undefined,
+                      ),
               },
             }}
           />
         </div>
       </div>
     </section>
+  );
+}
+
+function isUpgrade(from: Plan, to: Plan) {
+  return (
+    (from === "Basic" && (to === "Enhanced" || to === "Advanced")) ||
+    (from === "Enhanced" && to === "Advanced")
   );
 }

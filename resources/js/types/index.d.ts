@@ -216,7 +216,7 @@ type CheckoutOptions = {
   customer: { id: string; },
 }
 
-
+export type Plan = 'Advanced' | 'Enhanced' | 'Basic';
 
 export type ISubscriptionLinks = {
   basic: { monthly: CheckoutOptions, annually: CheckoutOptions } | null;
@@ -230,7 +230,7 @@ export type ISubscriptionLinks = {
     products: { reached: number; max: number };
     bills: { reached: number; max: number };
   } | null;
-  subscribedTo: 'Advanced' | 'Enhanced' | 'Basic' | 'Trial' | null;//Trail is not Plan. null means not subscribed
+  subscribedTo: Plan | 'Trial' | null;//Trail is not Plan. null means not subscribed
   onTrial: string | null;//trial ends date if on trial otherwise null
   /**
    * Recurring: Active sub and not trail nor grace period.
