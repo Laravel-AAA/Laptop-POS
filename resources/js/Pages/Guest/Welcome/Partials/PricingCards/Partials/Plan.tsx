@@ -74,7 +74,7 @@ export default function Plan({
           {...actionProps}
           href={actionHref}
           className={
-            "paddle_button paddle-checkout border-none bg-gradient-to-r from-primary-600 to-primary-800 !text-base normal-case shadow hover:shadow-lg " +
+            "border-none bg-gradient-to-r from-primary-600 to-primary-800 !text-base normal-case shadow hover:shadow-lg " +
             (actionProps?.className ? actionProps.className : "")
           }
         >

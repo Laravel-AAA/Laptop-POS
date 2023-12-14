@@ -49,9 +49,9 @@ Route::middleware(['auth', 'verified', 'role:Owner'])->group(function () {
     Route::delete('/account/{id}/force-destroy', [UserController::class, 'forceDestroy'])->name('account.forceDestroy');
 
     Route::get('/update-payment-method', [PaymentController::class, 'updatePaymentMethod'])->name('updatePaymentMethod');
-    Route::get('/payment/swap-to-advanced', [PaymentController::class, 'swapToAdvanced'])->name('swapToAdvanced');
-    Route::get('/payment/swap-to-enhanced', [PaymentController::class, 'swapToEnhanced'])->name('swapToEnhanced');
-    Route::get('/payment/swap-to-basic', [PaymentController::class, 'swapToBasic'])->name('swapToBasic');
+    Route::get('/payment/swap-to-advanced/{period}', [PaymentController::class, 'swapToAdvanced'])->name('swapToAdvanced');
+    Route::get('/payment/swap-to-enhanced/{period}', [PaymentController::class, 'swapToEnhanced'])->name('swapToEnhanced');
+    Route::get('/payment/swap-to-basic/{period}', [PaymentController::class, 'swapToBasic'])->name('swapToBasic');
 });
 
 Route::middleware(['auth','verified','subscribed'])->group(function(){
