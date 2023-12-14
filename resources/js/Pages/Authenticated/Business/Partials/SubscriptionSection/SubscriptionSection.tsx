@@ -2,7 +2,6 @@ import AdvancedPlan from "@/Pages/Guest/Welcome/Partials/PricingCards/Partials/A
 import BasicPlan from "@/Pages/Guest/Welcome/Partials/PricingCards/Partials/BasicPlan";
 import EnhancedPlan from "@/Pages/Guest/Welcome/Partials/PricingCards/Partials/EnhancedPlan";
 import { PlanPeriod } from "@/Pages/Guest/Welcome/Partials/PricingCards/Partials/Plan";
-import FromDate from "@/Utilities/FromDate";
 import { IBusiness, ISubscriptionLinks, Plan } from "@/types";
 import React, { useState } from "react";
 import SubscriptionState from "./Partials/SubscriptionState";
@@ -28,7 +27,7 @@ export default function SubscriptionSection({
   }>({ from: "Basic", to: "Basic", isShow: false, route: "" });
   const [showCancelSubAlert, setShowCancelSubAlert] = useState<boolean>(false);
   console.log(subscriptionLinks);
-  const { state, subscribedTo, onTrial, progress } = subscriptionLinks;
+  const { state, subscribedTo, progress } = subscriptionLinks;
   // const subscribedTo = "Enhanced" as ISubscriptionLinks["subscribedTo"];
   // const onTrial = new Date('2024-01-01').toISOString() as ISubscriptionLinks['onTrial'];
   // console.log(basic.monthly);
@@ -104,7 +103,7 @@ export default function SubscriptionSection({
         <header className="max-w-3xl">
           <h2 className="text-lg font-medium text-gray-900">Subscription</h2>
           <p className="text-normal text-gray-600">blah blah</p>
-          <SubscriptionState subscriptionData={subscriptionLinks}/>
+          <SubscriptionState subscriptionData={subscriptionLinks} />
         </header>
         {progress && <SubscriptionProgress progress={progress} />}
         <ToggleMonthlyYearly
@@ -118,6 +117,7 @@ export default function SubscriptionSection({
               actionNode:
                 subscribedTo !== "Basic" ? undefined : (
                   <CurrentPlanAction
+                    state={state}
                     requestShowCancelSubAlert={() =>
                       setShowCancelSubAlert(true)
                     }
@@ -154,6 +154,7 @@ export default function SubscriptionSection({
               actionNode:
                 subscribedTo !== "Enhanced" ? undefined : (
                   <CurrentPlanAction
+                    state={state}
                     requestShowCancelSubAlert={() =>
                       setShowCancelSubAlert(true)
                     }
@@ -189,6 +190,7 @@ export default function SubscriptionSection({
               actionNode:
                 subscribedTo !== "Advanced" ? undefined : (
                   <CurrentPlanAction
+                    state={state}
                     requestShowCancelSubAlert={() =>
                       setShowCancelSubAlert(true)
                     }
