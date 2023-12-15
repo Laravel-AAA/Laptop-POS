@@ -76,17 +76,19 @@ export default function SubscriptionState({
         />
       )}
 
-      {nextPayment?.date && (
-        <KeyValue
-          k="Next billing cycle"
-          v={
+      <KeyValue
+        k="Next billing cycle"
+        v={
+          nextPayment ? (
             <span className="text-primary-600">
               {nextPayment.amount},{" "}
               <FromDate className="text-gray-900" date={nextPayment.date} />
             </span>
-          }
-        />
-      )}
+          ) : (
+            <span className="text-danger-500">N/A</span>
+          )
+        }
+      />
 
       {gracePeriodExpiresAt && (
         <KeyValue

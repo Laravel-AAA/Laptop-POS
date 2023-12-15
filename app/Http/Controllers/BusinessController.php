@@ -55,6 +55,7 @@ class BusinessController extends Controller
         // );
         // dd('Next billing cycle:', $business->subscription()->nextPayment());
         // dd('paused:', $business->subscription()->paused());
+        // dd('pause grace period:',$business->subscription()->onPausedGracePeriod());
 
 
         $state = null;
@@ -64,14 +65,15 @@ class BusinessController extends Controller
         $nextPayment = null;
         if ($sub = $business->subscription()) {
             $lastPayment = $sub->lastPayment();
-            if ($sub->recurring()) {
-                $state = 'Recurring';
-                $nextPayment = $sub->nextPayment();
-            } else if ($sub->canceled())
-                $state = 'Canceled';
-            else if ($sub->onGracePeriod() || $sub->onPausedGracePeriod()) {
+                     $nextPayment = $sub->nextPayment();
+
+            if ($sub->onGracePeriod() || $sub->onPausedGracePeriod()) {
                 $gracePeriodExpiresAt = $sub->ends_at;
                 $state = 'Grace Period';
+            } else if ($sub->canceled())
+                $state = 'Canceled';
+            else if ($sub->recurring()) {
+                $state = 'Recurring';
             } else if ($sub->pastDue())
                 $state = 'Past Due';
             else if ($sub->paused())

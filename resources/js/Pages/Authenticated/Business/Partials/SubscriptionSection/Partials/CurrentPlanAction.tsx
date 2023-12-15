@@ -43,12 +43,11 @@ export default function CurrentPlanAction({
             Pause Subscription
           </Dropdown.Button>
         )}
-        {state === "Grace Period" ||
-          (state === "Paused" && (
-            <Dropdown.Link href={route("subscription.resume")}>
-              Resume
-            </Dropdown.Link>
-          ))}
+        {(state === "Grace Period" || state === "Paused") && (
+          <Dropdown.Link href={route("subscription.resume")}>
+            Resume
+          </Dropdown.Link>
+        )}
       </Dropdown.Content>
     </Dropdown>
   );
