@@ -1,0 +1,1 @@
+import{j as o}from"./app-e30e3373.js";function r(){return o.jsx("a",{href:"mailto:support@laptop-pos.com",className:"group inline-flex items-center  transition duration-200 hover:text-gray-700",children:o.jsx("span",{className:"font-bold",children:"support@laptop-pos.com"})})}export{r as S};
