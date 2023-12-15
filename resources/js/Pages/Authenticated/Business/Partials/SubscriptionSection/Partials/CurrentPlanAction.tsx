@@ -3,10 +3,10 @@ import { ISubscriptionLinks } from "@/types";
 import { FaChevronDown } from "react-icons/fa6";
 
 export default function CurrentPlanAction({
-  requestShowCancelSubAlert,
+  requestShowPauseSubAlert,
   state,
 }: {
-  requestShowCancelSubAlert: () => any;
+  requestShowPauseSubAlert: () => any;
   state: ISubscriptionLinks["state"];
 }) {
   return (
@@ -39,7 +39,7 @@ export default function CurrentPlanAction({
           Update Payment Method
     </a> */}
         {state === "Recurring" && (
-          <Dropdown.Button onClick={() => requestShowCancelSubAlert()}>
+          <Dropdown.Button onClick={() => requestShowPauseSubAlert()}>
             Cancel Subscription
           </Dropdown.Button>
         )}

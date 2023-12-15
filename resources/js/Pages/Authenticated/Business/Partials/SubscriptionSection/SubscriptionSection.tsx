@@ -25,7 +25,7 @@ export default function SubscriptionSection({
     isShow: boolean;
     route: string;
   }>({ from: "Basic", to: "Basic", isShow: false, route: "" });
-  const [showCancelSubAlert, setShowCancelSubAlert] = useState<boolean>(false);
+  const [showPauseSubAlert, setShowPauseSubAlert] = useState<boolean>(false);
   console.log(subscriptionLinks);
   const { state, subscribedTo, progress } = subscriptionLinks;
   // const subscribedTo = "Enhanced" as ISubscriptionLinks["subscribedTo"];
@@ -76,27 +76,28 @@ export default function SubscriptionSection({
         ]}
       />
 
-      {/** Cancel Subscription Alert */}
+      {/** Pause Subscription Alert */}
       <AlertModal
-        title="Cancel Subscription"
-        paragraph="Your subscription stays active until the end of this billing cycle. You won’t be charged after that. Click ‘cancel now’ to end it immediately (not advised)."
-        isOpen={showCancelSubAlert}
-        requestClose={() => setShowCancelSubAlert(false)}
+        title="Pause Subscription"
+        paragraph="Your subscription stays active until the end of this billing cycle. You won’t be charged after that. Click ‘pause now’ to pause it immediately (not advised)."
+        isOpen={showPauseSubAlert}
+        requestClose={() => setShowPauseSubAlert(false)}
         buttons={[
           {
             type: "danger",
-            text: "Cancel",
+            text: "Pause",
             props: {
-              onClick: () => router.visit(route("subscription.cancel")),
+              onClick: () => router.visit(route("subscription.pause")),
             },
           },
           {
             type: "danger",
-            text: "Cancel Now",
+            text: "Pause Now",
             props: {
-              onClick: () => router.visit(route("subscription.cancelNow")),
+              onClick: () => router.visit(route("subscription.pauseNow")),
             },
           },
+          { text: "Cancel", type: "secondary" },
         ]}
       />
       <div className="space-y-6">
@@ -118,8 +119,8 @@ export default function SubscriptionSection({
                 subscribedTo !== "Basic" ? undefined : (
                   <CurrentPlanAction
                     state={state}
-                    requestShowCancelSubAlert={() =>
-                      setShowCancelSubAlert(true)
+                    requestShowPauseSubAlert={() =>
+                      setShowPauseSubAlert(true)
                     }
                   />
                 ),
@@ -128,6 +129,7 @@ export default function SubscriptionSection({
                   ? "Downgrade"
                   : "Subscribe",
               actionProps: {
+                disabled:state=== 'Canceled',
                 className:
                   subscribedTo === "Enhanced" || subscribedTo === "Advanced"
                     ? downgradeClass
@@ -155,8 +157,8 @@ export default function SubscriptionSection({
                 subscribedTo !== "Enhanced" ? undefined : (
                   <CurrentPlanAction
                     state={state}
-                    requestShowCancelSubAlert={() =>
-                      setShowCancelSubAlert(true)
+                    requestShowPauseSubAlert={() =>
+                      setShowPauseSubAlert(true)
                     }
                   />
                 ),
@@ -167,6 +169,7 @@ export default function SubscriptionSection({
                     ? "Downgrade"
                     : "Subscribe",
               actionProps: {
+                disabled:state=== 'Canceled',
                 className: subscribedTo === "Advanced" ? downgradeClass : "",
                 onClick: () =>
                   isSubscribed
@@ -191,8 +194,8 @@ export default function SubscriptionSection({
                 subscribedTo !== "Advanced" ? undefined : (
                   <CurrentPlanAction
                     state={state}
-                    requestShowCancelSubAlert={() =>
-                      setShowCancelSubAlert(true)
+                    requestShowPauseSubAlert={() =>
+                      setShowPauseSubAlert(true)
                     }
                   />
                 ),
@@ -201,6 +204,7 @@ export default function SubscriptionSection({
                   ? "Upgrade"
                   : "Subscribe",
               actionProps: {
+                disabled:state=== 'Canceled',
                 onClick: () =>
                   isSubscribed
                     ? setUpDownGradeAlert({

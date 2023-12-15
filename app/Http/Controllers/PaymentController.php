@@ -7,25 +7,25 @@ use Illuminate\Support\Facades\Response;
 
 class PaymentController extends Controller
 {
-    public function cancel(Request $request)
+    public function pause(Request $request)
     {
-        $request->user()->business->subscription()->cancel();
+        $request->user()->business->subscription()->pause();
 
-        return redirect()->back()->with('success', 'Successfully canceled');
+        return redirect()->back()->with('success', 'Successfully paused');
     }
 
-    public function cancelNow(Request $request)
+    public function pauseNow(Request $request)
     {
-        $request->user()->business->subscription()->cancelNow();
-        return redirect()->back()->with('success', 'Successfully canceled');
+        $request->user()->business->subscription()->pauseNow();
+        return redirect()->back()->with('success', 'Successfully paused');
     }
 
-    public function stopCancellation(Request $request)
+    public function resume(Request $request)
     {
-        if (($sub = $request->user()->business->subscription())->onGracePeriod())
-            $sub->stopCancelation();
-        else abort(400, 'Your subscription was not canceled to be stopped in the first place');
-        return redirect()->back()->with('success', 'Successfully cancellation stopped');
+        if (($sub = $request->user()->business->subscription())->onPausedGracePeriod())
+            $sub->resume();
+        else abort(400, 'Your subscription has not paused in the first place to be resumed');
+        return redirect()->back()->with('success', 'Successfully resumed');
     }
 
     public function updatePaymentMethod(Request $request)

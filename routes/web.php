@@ -52,10 +52,9 @@ Route::middleware(['auth', 'verified', 'role:Owner'])->group(function () {
     Route::get('/subscription/swap-to-advanced/{period}', [PaymentController::class, 'swapToAdvanced'])->name('swapToAdvanced');
     Route::get('/subscription/swap-to-enhanced/{period}', [PaymentController::class, 'swapToEnhanced'])->name('swapToEnhanced');
     Route::get('/subscription/swap-to-basic/{period}', [PaymentController::class, 'swapToBasic'])->name('swapToBasic');
-    Route::get('/subscription/cancel', [PaymentController::class, 'cancel'])->name('subscription.cancel');
-    Route::get('/subscription/cancel-now', [PaymentController::class, 'cancelNow'])->name('subscription.cancelNow');
-    Route::get('/subscription/stop-cancellation', [PaymentController::class, 'stopCancellation'])->name('subscription.stopCancellation');
-    //cancellation
+    Route::get('/subscription/pause', [PaymentController::class, 'pause'])->name('subscription.pause');
+    Route::get('/subscription/pause-now', [PaymentController::class, 'pauseNow'])->name('subscription.pauseNow');
+    Route::get('/subscription/resume', [PaymentController::class, 'resume'])->name('subscription.resume');
 });
 
 Route::middleware(['auth','verified','subscribed'])->group(function(){
