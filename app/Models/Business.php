@@ -21,7 +21,8 @@ class Business extends Model
 
     public function subscribedOrOnTrial()
     {
-        return $this->onTrial() || $this->subscribed();
+        return $this->onTrial() || ($this->subscribed() && (
+            ($sub = $this->subscription())->recurring() || $sub->onGracePeriod() || $sub->onPausedGracePeriod()));
     }
 
     /**
@@ -53,7 +54,7 @@ class Business extends Model
                     $subscribedTo = 'enhanced';
                 else if ($sub->hasProduct('pro_01hgdf1tk5c8s9msfa15gwbrx2'))
                     $subscribedTo = 'basic';
-            } else if ($this->onTrial()) {//trial considered a Basic Plan in terms of progress limit.
+            } else if ($this->onTrial()) { //trial considered a Basic Plan in terms of progress limit.
                 $subscribedTo = 'basic';
             } else return null;
         }

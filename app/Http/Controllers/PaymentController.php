@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 
 class PaymentController extends Controller
 {
@@ -22,7 +21,7 @@ class PaymentController extends Controller
 
     public function resume(Request $request)
     {
-        if (($sub = $request->user()->business->subscription())->onPausedGracePeriod())
+        if (($sub = $request->user()->business->subscription())->onPausedGracePeriod() || $sub->paused())
             $sub->resume();
         else abort(400, 'Your subscription has not paused in the first place to be resumed');
         return redirect()->back()->with('success', 'Successfully resumed');
