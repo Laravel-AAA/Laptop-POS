@@ -40,14 +40,15 @@ export default function CurrentPlanAction({
     </a> */}
         {state === "Recurring" && (
           <Dropdown.Button onClick={() => requestShowPauseSubAlert()}>
-            Cancel Subscription
+            Pause Subscription
           </Dropdown.Button>
         )}
-        {state === "Grace Period" && (
-          <Dropdown.Link href={route("subscription.stopCancellation")}>
-            Stop Cancellation
-          </Dropdown.Link>
-        )}
+        {state === "Grace Period" ||
+          (state === "Paused" && (
+            <Dropdown.Link href={route("subscription.resume")}>
+              Resume
+            </Dropdown.Link>
+          ))}
       </Dropdown.Content>
     </Dropdown>
   );

@@ -5,7 +5,13 @@ import { Tooltip } from "@material-tailwind/react";
 import React from "react";
 
 export default function SubscriptionState({
-  subscriptionData: { state, onTrial, lastPayment, gracePeriodExpiresAt },
+  subscriptionData: {
+    state,
+    onTrial,
+    lastPayment,
+    nextPayment,
+    gracePeriodExpiresAt,
+  },
 }: {
   subscriptionData: ISubscriptionLinks;
 }) {
@@ -20,7 +26,7 @@ export default function SubscriptionState({
             </span>
           ) : state === "Grace Period" ? (
             <span className="text-orange-700">
-              <Tooltip content="Subscription is canceled, but still active until the subscription fully expires">
+              <Tooltip content="Subscription is paused, but still active until the subscription fully expires">
                 Grace Period
               </Tooltip>
             </span>
@@ -33,6 +39,10 @@ export default function SubscriptionState({
           ) : state === "Recurring" ? (
             <span className="text-green-700">
               <Tooltip content="Subscribed">Active</Tooltip>
+            </span>
+          ) : state === "Paused" ? (
+            <span className="text-danger-500">
+              <Tooltip content="Subscription paused">Paused</Tooltip>
             </span>
           ) : onTrial ? (
             <span className="text-orange-700">
@@ -61,6 +71,18 @@ export default function SubscriptionState({
             <span className="text-primary-600">
               {lastPayment.amount},{" "}
               <FromDate className="text-gray-900" date={lastPayment.date} />
+            </span>
+          }
+        />
+      )}
+
+      {nextPayment?.date && (
+        <KeyValue
+          k="Next billing cycle"
+          v={
+            <span className="text-primary-600">
+              {nextPayment.amount},{" "}
+              <FromDate className="text-gray-900" date={nextPayment.date} />
             </span>
           }
         />

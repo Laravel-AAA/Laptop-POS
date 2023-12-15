@@ -238,8 +238,13 @@ export type ISubscriptionLinks = {
    * Grace Period: Canceled but still active until expires.
    * Past Due: payment failed, customer should update payment method.
    */
-  state: 'Recurring' | 'Canceled' | 'Grace Period' | 'Past Due' | null;
+  state: 'Recurring' | 'Canceled' | 'Grace Period' | 'Past Due' | 'Paused' | null;
   lastPayment: {
+    amount: number;
+    currency: string;
+    date: string;
+  } | null;
+  nextPayment: {
     amount: number;
     currency: string;
     date: string;
