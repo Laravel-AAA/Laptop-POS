@@ -9,8 +9,8 @@ export default function LastSection() {
         <Typography variant="h2" className="text-gray-800">
           Ready to get started?
         </Typography>
-        <Typography variant="h3" className="text-gray-500">
-          Get in touch or create an account.
+        <Typography variant="h4" className="text-gray-500">
+        Try Laptop POS for free. No credit card required.
         </Typography>
       </div>
       <div className="mt-10 self-center lg:mt-0">
@@ -18,7 +18,7 @@ export default function LastSection() {
           href={route("register.method")}
           className="group flex border-none bg-gradient-to-r from-primary-600 to-primary-800 !px-32 !py-3 !text-base normal-case shadow hover:shadow-lg"
         >
-          <span>Register&nbsp;&nbsp;</span>
+          <span>Get Started&nbsp;&nbsp;</span>
           <FaArrowRight className="group-hover:translate-x-2 transition" />
         </PrimaryLink>
       </div>
