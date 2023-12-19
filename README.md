@@ -4,6 +4,21 @@
 
 This is a simple Point of Sale (POS) application.
 
+# Main Pages 
+
+### Inventory Page
+
+![Inventory page](public/assets/screenshots/2023-11-26%2009_43_52-Inventory - Laptop POS%20-%20Brave.png)
+
+### Checkout Page
+
+![Checkout page](public/assets/screenshots/2023-11-26%2010_05_34-Checkout - Laptop POS%20-%20Brave.png)
+
+### Dashboard Page
+
+![Dashboard page](public/assets/screenshots/2023-11-26%2010_43_36-Dashboard - Laptop POS%20-%20Brave.png)
+
+
 # Workflow
 
 - All commits should be pushed to the `dev` branch.
