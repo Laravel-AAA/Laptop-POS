@@ -10,6 +10,7 @@ import ToggleMonthlyYearly from "./Partials/ToggleMonthlyYearly";
 import SubscriptionProgress from "./Partials/SubscriptionProgress";
 import AlertModal from "@/Components/Modals/AlertModal";
 import { router } from "@inertiajs/react";
+import SupportEmailLink from "@/Components/SupportEmailLink";
 
 export default function SubscriptionSection({
   business,
@@ -101,9 +102,9 @@ export default function SubscriptionSection({
         ]}
       />
       <div className="space-y-6">
-        <header className="max-w-3xl">
+        <header className="max-w-xl">
           <h2 className="text-lg font-medium text-gray-900">Subscription</h2>
-          <p className="text-normal text-gray-600">blah blah</p>
+          <p className="text-normal mb-4 text-gray-600">If you need more resources for your POS system, please contact us and we will be happy to assist you with a custom plan. <SupportEmailLink/></p>
           <SubscriptionState subscriptionData={subscriptionLinks} />
         </header>
         {progress && <SubscriptionProgress progress={progress} />}

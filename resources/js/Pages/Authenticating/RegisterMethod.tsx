@@ -1,4 +1,3 @@
-import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import PrimaryLink from "@/Components/Buttons/PrimaryLink";
 import AppName from "@/Components/Logo/AppName";
 import A from "@/Components/Typography/A";
@@ -6,16 +5,16 @@ import Divider from "@/Components/Typography/Divider";
 import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
 import { Head } from "@inertiajs/react";
 import { FaGithub } from "react-icons/fa";
-import { FaEnvelope, FaXTwitter } from "react-icons/fa6";
+import { FaEnvelope } from "react-icons/fa6";
 
 export default function RegisterMethod() {
   return (
     <GuestFormLayout>
       <Head title="Register Method" />
       <div className="p-4">
-        <h2 className="mb-8 text-2xl font-bold text-primary-900 dark:text-white">
-          Register to unlock the <br />
-          best of <AppName className="!font-extrabold" />.
+        <h2 className="mb-1 text-2xl font-bold text-primary-900 dark:text-white">
+          Signing up for <AppName className="!font-extrabold" /> is fast and
+          free.
         </h2>
         <div className="mt-10 grid space-y-4">
           <PrimaryLink

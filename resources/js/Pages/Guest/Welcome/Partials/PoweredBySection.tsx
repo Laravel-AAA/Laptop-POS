@@ -27,7 +27,7 @@ export default function PoweredBySection() {
       <div className="container mx-auto">
         <div className="flex flex-wrap items-center">
           <div className="-mt-32 ml-auto mr-auto w-10/12 px-12 md:w-6/12 md:px-4 lg:w-4/12">
-            <div className="relative mb-6 flex w-full min-w-0 flex-col break-words rounded-lg bg-primary-500 shadow-lg">
+            <div className="relative mb-6 flex w-full min-w-0 flex-col break-words rounded-lg bg-primary-600 shadow-lg">
               <img
                 alt="..."
                 src="assets/cloud-service-cut.jpg"
@@ -43,13 +43,13 @@ export default function PoweredBySection() {
                 >
                   <polygon
                     points="-30,95 583,95 583,65"
-                    className="fill-current text-primary-500"
+                    className="fill-current text-primary-600"
                   ></polygon>
                 </svg>
-                <h4 className="text-xl font-bold text-white">
+                <h4 className="text-xl font-bold text-blue-gray-50">
                   Powered by Amazon Web Services
                 </h4>
-                <p className="text-md mt-2 font-light text-white">
+                <p className="text-md mt-2 font-light text-blue-gray-50">
                   Our system is built on the Amazon Web Services (AWS) platform,
                   the world’s most comprehensive and broadly adopted cloud
                   provider

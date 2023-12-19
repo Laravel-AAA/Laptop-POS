@@ -34,8 +34,25 @@ export default function Welcome() {
       <PoweredBySection />
       <OpenSourceSection />
 
-      {/* todo segment about the flexibility */}
+      {/* By selling your product through Paddle, you can immediately accept purchases via:
 
+Cards (including Mastercard, Visa, Maestro, American Express, Discover, Diners Club, JCB, UnionPay, and Mada)
+PayPal
+Alipay (in Early Access)*
+iDEAL*
+Google Pay (Chrome only)
+Apple Pay (HTTPS pages on Safari only)
+Wire Transfers (ACH/SEPA/BACS; for transactions over $100)*
+
+
+Cards are always turned on for checkouts. Other payment options presented to your customer depend on the transaction currency, location of your customer, and device used to purchase. For example:
+
+iDEAL is only presented to customers in the Netherlands for transactions in euro.
+Apple Pay is only presented when customers are using a compatible Apple device or browser.
+PayPal is only presented when making a purchase in a currency that PayPal supports.
+Paddle automatically determines which payment methods to show to your customer, so you don't need to handle this yourself.
+
+*/}
       {/* <div className="hidden absolute inset-0 -z-1 md:block" style={{
                         height: "120%",
                         backgroundImage: "radial-gradient(circle, #8a64fc 0%, #9bedff 100%)",

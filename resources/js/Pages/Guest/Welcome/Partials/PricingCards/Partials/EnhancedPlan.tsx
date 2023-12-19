@@ -1,36 +1,31 @@
 import React from "react";
-import Plan, { PlanItemProps, PlanProps } from "./Plan";
+import Plan, { PlanItemProps } from "./Plan";
+import {
+  AccessPeriodBenefit,
+  NoSetupFeesBenefit,
+  NumberOfAccountsBenefit,
+  NumberOfInvoicesBenefit,
+  NumberOfProductsBenefit,
+  ResponsiveBenefit,
+  SupportTeamBenefit,
+} from "./SharedBenefits";
 
-export default function EnhancedPlan({
-  period,
-  planProps,
-}: PlanItemProps) {
-  //period === "Monthly"
-  let price = 9;
-  let periodText: PlanProps["periodText"] = "month";
-  if (period === "Annually") {
-    price = 89;
-    periodText = "year";
-  }
-
+export default function EnhancedPlan({ period, planProps }: PlanItemProps) {
   return (
     <Plan
       title="Enhanced"
       desc="Ideal for medium-sized businesses or professionals who want a more comprehensive POS system"
-      price={price}
-      periodText={periodText}
+      period={period}
+      monthlyPrice={9}
+      annualPrice={89}
       benefits={[
-        <span>Individual configuration</span>,
-        <span>No setup, or hidden fees</span>,
-        <span>
-          Team size: <span className="font-semibold">10 developers</span>
-        </span>,
-        <span>
-          Premium support: <span className="font-semibold">24 months</span>
-        </span>,
-        <span>
-          Free updates: <span className="font-semibold">24 months</span>
-        </span>,
+        <NumberOfAccountsBenefit numberOfAccounts={10} />,
+        <NumberOfProductsBenefit numberOfProducts={1000} />,
+        <NumberOfInvoicesBenefit numberOfInvoices={500000} />,
+        <NoSetupFeesBenefit />,
+        <AccessPeriodBenefit />,
+        <ResponsiveBenefit />,
+        <SupportTeamBenefit />,
       ]}
       {...planProps}
     />

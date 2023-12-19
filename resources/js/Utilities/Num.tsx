@@ -10,6 +10,10 @@ export type NumProps = {
   prefixProps?: HTMLAttributes<HTMLSpanElement>;
   suffixProps?: HTMLAttributes<HTMLSpanElement>;
   currency?: string;
+  /**
+   * compact will format large number such as 50000 to 50K
+   */
+  compact?: boolean;
 } & ( //if amount is possibly null then you should declare either `defaultNoAmount` or specify custom `noAmount`. Typescript will help us force such specification.
   | { amount: number; noAmount?: string }
   | ({ amount: number | null } & (
@@ -23,13 +27,14 @@ export default function Num({
   amount,
   noAmount,
   showCurrency = false,
-  currency: currencySymbol,//when user is not authorized then showCurrency will throw an exception in usePage hook. So, you should provide the currency symbol.
+  currency: currencySymbol, //when user is not authorized then showCurrency will throw an exception in usePage hook. So, you should provide the currency symbol.
   //prefix will be shown even if amount is null
   prefix = "",
   suffix = "",
   prefixProps = {},
   suffixProps = {},
   fixed = 2,
+  compact = false,
 }: NumProps) {
   let number: string; //number is either number or noAmount. Ex: '1123' or 'N/A'
   const currency =
@@ -45,8 +50,11 @@ export default function Num({
     );
 
   if (amount === null) number = noAmount ?? "N/A";
-  else {
-    amount = Number(Number( amount ).toFixed(fixed));
+  else if (compact && amount !== 0) {
+    let formatter = new Intl.NumberFormat("en", { notation: "compact" });
+    number = formatter.format(amount);
+  } else {
+    amount = Number(Number(amount).toFixed(fixed));
 
     //Welcome to javascript where (0 * -1 = -0) 😑
     //also (-0 === 0 is true)
@@ -56,8 +64,8 @@ export default function Num({
 
   return (
     <span className={className}>
-      {prefix && <span {...prefixProps}>{prefix}&#8239;</span>}
       {/* &#8239; is thin space */}
+      {prefix && <span {...prefixProps}>{prefix}&#8239;</span>}
       {currency}
       {number}
       {suffix && <span {...suffixProps}>&#8239;{suffix}</span>}
