@@ -29,11 +29,11 @@ function Content() {
 
         <P>
           <AppName /> uses{" "}
-          <a target="_blank" href="http://paddle.com">
+          <a target="_blank" href="https://paddle.com">
             Paddle
           </a>{" "}
           to handle subscription.{" "}
-          <a target="_blank" href="http://paddle.com">
+          <a target="_blank" href="https://paddle.com">
             Paddle
           </a>{" "}
           takes care of a lot of complicated back-office work, like global
@@ -297,7 +297,7 @@ function Content() {
         <P>
           To cancel your order, you must inform Paddle of your decision. To
           ensure immediate processing, please do so by contacting us{" "}
-          <a target="_blank" href="http://paddle.net">
+          <a target="_blank" href="https://paddle.net">
             here
           </a>
           . Please note that in respect of subscription services your right to
@@ -308,7 +308,7 @@ function Content() {
           You also have the right to inform us using the model cancellation form
           below or by making any other clear, unambiguous statement through our
           available communication channels. If you use our{" "}
-          <a target="_blank" href="http://paddle.net">
+          <a target="_blank" href="https://paddle.net">
             “Contact Us”
           </a>{" "}
           form online, we will communicate acknowledgment of receipt of your
@@ -387,7 +387,7 @@ function Content() {
           continue. You’ll be charged between 00:00 and 01:00 (UTC) on the day
           the Paid Subscription period renews. If you wish to cancel your
           subscription, please contact us{" "}
-          <a href="http://paddle.net" target="_blank">
+          <a href="https://paddle.net" target="_blank">
             here
           </a>{" "}
           at least 48 hours before the end of the current billing period. Please
@@ -400,7 +400,7 @@ function Content() {
           If you decide to unsubscribe from a Paid Subscription before we start
           charging your payment method, you must cancel the subscription before
           the expiration of the trial period by contacting us{" "}
-          <a href="http://paddle.net">here</a>. If we cannot charge your payment
+          <a href="https://paddle.net">here</a>. If we cannot charge your payment
           method for any reason (such as expiration or insufficient funds), and
           you have not cancelled your Paid Subscription, you remain responsible
           for any uncollected amounts. We reserve the right to cancel your Paid

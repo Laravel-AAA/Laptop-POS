@@ -26,12 +26,16 @@ export default function ProgressWithLabel({
   return (
     <div className="w-full">
       <div className="mb-2 flex items-center justify-between gap-4">
-        <Typography color="blue-gray" variant="h6">
-          {leftLabel && leftLabel}
-        </Typography>
-        <Typography color="blue-gray" variant="h6">
-          {rightLabel && rightLabel}
-        </Typography>
+        {leftLabel && (
+          <Typography color="blue-gray" variant="h6">
+            {leftLabel}
+          </Typography>
+        )}
+        {rightLabel && (
+          <Typography color="blue-gray" variant="h6">
+            {rightLabel}
+          </Typography>
+        )}
       </div>
       <Progress color={progressColor} label={progressLabel} value={progress} />
     </div>
