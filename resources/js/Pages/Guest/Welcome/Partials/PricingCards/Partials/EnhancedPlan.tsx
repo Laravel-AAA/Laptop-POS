@@ -22,8 +22,8 @@ export default function EnhancedPlan({ period, planProps }: PlanItemProps) {
         <NumberOfAccountsBenefit numberOfAccounts={10} />,
         <NumberOfProductsBenefit numberOfProducts={1000} />,
         <NumberOfInvoicesBenefit numberOfInvoices={500000} />,
-        <NoSetupFeesBenefit />,
         <AccessPeriodBenefit />,
+        <NoSetupFeesBenefit />,
         <ResponsiveBenefit />,
         <SupportTeamBenefit />,
       ]}

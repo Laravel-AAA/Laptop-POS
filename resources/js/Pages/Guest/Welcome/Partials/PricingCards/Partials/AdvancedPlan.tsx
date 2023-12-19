@@ -22,8 +22,8 @@ export default function AdvancedPlan({ period, planProps }: PlanItemProps) {
         <NumberOfAccountsBenefit numberOfAccounts={30} />,
         <NumberOfProductsBenefit numberOfProducts={10000} />,
         <NumberOfInvoicesBenefit numberOfInvoices={10000000} />,
-        <NoSetupFeesBenefit />,
         <AccessPeriodBenefit />,
+        <NoSetupFeesBenefit />,
         <ResponsiveBenefit />,
         <SupportTeamBenefit />,
       ]}

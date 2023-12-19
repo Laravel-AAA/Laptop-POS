@@ -69,15 +69,15 @@ export default function RegisterMethod() {
             </div>
           </PrimaryLink>
         </div>
+        <p className="text-md mt-6 text-center text-gray-600">
+          Already registered? <A href={route("login")}>Login</A>
+        </p>
 
-        <p className="mt-8 text-center text-xs text-gray-600">
+        <p className="mt-4 text-center text-xs text-gray-600">
           By creating an account, you agree to our{" "}
           <A href={route("termsAndConditions")}>Terms & Conditions</A> and
           confirm you have read our{" "}
           <A href={route("privacyPolicy")}>Privacy and Cookie Statement</A>.
-        </p>
-        <p className="text-md mt-3 text-center text-gray-600">
-          Already registered? <A href={route("login")}>Login</A>
         </p>
       </div>
     </GuestFormLayout>

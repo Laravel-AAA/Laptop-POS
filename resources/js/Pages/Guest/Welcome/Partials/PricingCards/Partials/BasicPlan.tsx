@@ -22,8 +22,8 @@ export default function BasicPlan({ period, planProps }: PlanItemProps) {
         <NumberOfAccountsBenefit numberOfAccounts={2} />,
         <NumberOfProductsBenefit numberOfProducts={100} />,
         <NumberOfInvoicesBenefit numberOfInvoices={50000} />,
-        <NoSetupFeesBenefit />,
         <AccessPeriodBenefit />,
+        <NoSetupFeesBenefit />,
         <ResponsiveBenefit />,
         <SupportTeamBenefit />,
       ]}
