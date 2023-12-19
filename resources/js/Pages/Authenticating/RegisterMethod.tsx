@@ -3,7 +3,7 @@ import AppName from "@/Components/Logo/AppName";
 import A from "@/Components/Typography/A";
 import Divider from "@/Components/Typography/Divider";
 import GuestFormLayout from "@/Layouts/GuestLayout/GuestFormLayout";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { FaGithub } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa6";
 
@@ -69,8 +69,17 @@ export default function RegisterMethod() {
             </div>
           </PrimaryLink>
         </div>
-        <p className="text-md mt-6 text-center text-gray-600">
+        {/* <p className="text-md mt-6 text-center text-gray-600">
           Already registered? <A href={route("login")}>Login</A>
+        </p> */}
+
+        <p className="text-base mt-6 text-center">
+          <Link
+            href={route("login")}
+            className="text-gray-600 underline hover:text-gray-900 focus:outline-none "
+          >
+            Already registered?
+          </Link>
         </p>
 
         <p className="mt-4 text-center text-xs text-gray-600">
