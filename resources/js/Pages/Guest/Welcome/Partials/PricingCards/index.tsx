@@ -10,7 +10,7 @@ export default function PricingCards() {
   const [period, setPeriod] = useState<PlanPeriod>("Monthly");
 
   return (
-    <section className="bg-white bg-opacity-50 dark:bg-gray-900">
+    <section className="bg-gray-100 dark:bg-gray-900">
       <div className="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16">
         <header className="mx-auto mb-10 max-w-screen-md text-center">
 
