@@ -38,7 +38,7 @@ export default function Solutions() {
       <div className="block md:inline ">
         <div className="-ml-10 inline md:ml-0">
           <AppName/> is built
-          for&nbsp;<span className="text-secondary-600 md:hidden">all stores</span>
+          for&nbsp;<span className="text-secondary-600 md:hidden">all retailers</span>
           {businesses.map((b, i) => (
             <Transition
               appear={true}

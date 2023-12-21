@@ -4,7 +4,7 @@ import { FaGaugeHigh, FaLock, FaShield } from "react-icons/fa6";
 
 export default function PoweredBySection() {
   return (
-    <section className="relative md:mt-20 mt-52 bg-blue-gray-100 bg-opacity-50 pb-32">
+    <section className="relative md:mt-20 mt-64 bg-blue-gray-100 bg-opacity-50 pb-32">
       <div
         className="absolute bottom-auto left-0 right-0 top-0 -mt-20 w-full"
         style={{ height: "80px" }}
@@ -26,7 +26,7 @@ export default function PoweredBySection() {
       </div>
       <div className="container mx-auto">
         <div className="flex flex-wrap items-center">
-          <div className="-mt-32 ml-auto mr-auto w-10/12 px-12 md:w-6/12 md:px-4 lg:w-4/12">
+          <div className="-mt-32 ml-auto mr-auto w-10/12 px-1 sm:px-8 md:w-6/12 md:px-4 lg:w-4/12">
             <div className="relative mb-6 flex w-full min-w-0 flex-col break-words rounded-lg bg-primary-600 shadow-lg">
               <img
                 alt="..."
@@ -57,9 +57,9 @@ export default function PoweredBySection() {
               </blockquote>
             </div>
           </div>
-          <div className="w-full px-4 md:w-6/12">
+          <div className="w-full px-4 lg:w-7/12">
             <div className="flex flex-wrap">
-              <div className="w-full px-4 md:w-6/12">
+              <div className="w-full px-4 lg:w-6/12">
                 <div className="relative mt-4 flex flex-col">
                   <div className="flex-auto px-4 py-5">
                     <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white p-3 text-center shadow-md">

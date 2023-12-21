@@ -8,7 +8,7 @@ export default function OpenSourceSection() {
 
       <div className="container mx-auto pb-24">
         <div className="flex flex-wrap justify-center">
-          <div className="ml-auto mr-auto w-full px-12 md:mt-28 md:w-5/12 md:px-4">
+          <div className="ml-auto mr-auto w-full px-12 lg:mt-28 lg:w-5/12 lg:px-4">
             <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-white p-3 text-center text-blue-gray-700 shadow-lg">
               <FaCodeBranch className="text-xl"/>
             </div>
@@ -39,14 +39,12 @@ export default function OpenSourceSection() {
               </PrimaryButton>
             </a>
           </div>
-          <div className="relative ml-auto mr-auto mt-32 w-full px-4 md:w-4/12">
+          <div className="relative ml-auto mr-auto mt-32 w-full px-4 lg:w-4/12">
             <FaGithub
-              className="fab fa-github text-black"
+              className="fab fa-github right-[-50%] md:right-[-80%] md:text-[47rem] text-[27rem] text-black"
               style={{
-                fontSize: "47rem",
                 position: "absolute",
                 top: "-170px",
-                right: "-80%",
                 left: "auto",
                 opacity: ".8",
               }}

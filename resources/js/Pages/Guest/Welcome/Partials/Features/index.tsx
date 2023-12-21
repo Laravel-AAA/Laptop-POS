@@ -23,13 +23,13 @@ export default function Features() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden ">
+    <section className="relative  pt-6 md:pt-10  overflow-hidden ">
       {/* Section background (needs .relative class on parent and next sibling elements) */}
       <div
         className="pointer-events-none absolute inset-0 top-10 "
         aria-hidden="true"
       ></div>
-      <div className="absolute left-0 right-0 m-auto h-40 w-px -translate-y-1/2 transform bg-gray-300 p-px"></div>
+      <div className="absolute left-0 right-0 m-auto h-24 w-px -translate-y-1/4 transform bg-gray-300 p-px"></div>
 
       <div className="relative mx-auto mt-16 max-w-6xl px-4 sm:px-6">
         <div className="pt-12 xl:pt-20">

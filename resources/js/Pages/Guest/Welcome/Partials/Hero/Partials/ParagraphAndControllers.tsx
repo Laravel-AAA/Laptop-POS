@@ -24,7 +24,7 @@ export default function ParagraphAndControllers() {
           <span className="text-sm tracking-wide">Create FREE Account</span>
         </SecondaryLink>
       </div>
-        <div className="md:translate-x-0 mt-4 text-gray-500 flex-col justify-center md:flex-row md:space-x-4 flex translate-x-1/4 ">
+        <div className="md:translate-x-0 mt-5 text-gray-500 flex-col justify-center md:flex-row md:space-x-4 flex translate-x-[20%] ">
           <div className="flex ">
             <FaCircleCheck className="mr-1 mt-0.5 text-lg text-green-400" />
             Free Trial
