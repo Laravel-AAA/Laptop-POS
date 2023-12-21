@@ -20,7 +20,7 @@ export default function Welcome() {
       setTimeout(
         () =>
           alert(
-            "This website is still in the process of development and may not perform as intended. Your data may not be preserved or may be deleted due to database development phases",
+            "Laptop POS is still in the process of development and may not perform as intended. Your data may not be preserved or may be deleted due to database development phases",
           ),
         10000,
       );

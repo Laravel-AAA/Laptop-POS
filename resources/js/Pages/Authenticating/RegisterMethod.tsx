@@ -17,9 +17,9 @@ export default function RegisterMethod() {
           free.
         </h2>
         <div className="mt-10 grid space-y-4">
-          <PrimaryLink
+          <a
             href={route("register.OAuth", "google")}
-            className="group h-12 !rounded-full border-2 !border-gray-300 bg-white px-6 normal-case  hover:!border-primary-800 hover:bg-white"
+            className="group block h-12 items-center rounded-full border-2 !border-gray-300 bg-white px-6 py-2 text-center text-xs font-semibold normal-case tracking-wider text-white transition duration-200 ease-in-out hover:!border-primary-800  hover:bg-white focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:scale-95 disabled:opacity-25 disabled:active:scale-100"
           >
             <div className="relative mt-0.5 flex items-center justify-center space-x-4">
               <img
@@ -31,7 +31,7 @@ export default function RegisterMethod() {
                 Register with Google
               </span>
             </div>
-          </PrimaryLink>
+          </a>
           {/* X do not provide user's email which is west of time because user then had to verify the email🤷‍♂️ <PrimaryLink
             href={route("register.OAuth", "x")}
             className="group h-12 !rounded-full border-2 !border-gray-300 bg-white px-6 normal-case  hover:!border-primary-800 hover:bg-white"
@@ -43,9 +43,9 @@ export default function RegisterMethod() {
               </span>
             </div>
           </PrimaryLink> */}
-          <PrimaryLink
+          <a
             href={route("register.OAuth", "github")}
-            className="group h-12 !rounded-full border-2 !border-gray-300 bg-white px-6 normal-case hover:!border-primary-800 hover:bg-white"
+            className="group block h-12 items-center rounded-full border-2 !border-gray-300 bg-white px-6 py-2 text-center text-xs font-semibold normal-case tracking-wider text-white transition duration-200 ease-in-out hover:!border-primary-800  hover:bg-white focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:scale-95 disabled:opacity-25 disabled:active:scale-100"
           >
             <div className="relative mt-0.5 flex items-center justify-center space-x-4">
               <FaGithub className="absolute left-0 h-5 w-5 text-black transition duration-300 group-hover:text-primary-800 " />
@@ -53,7 +53,7 @@ export default function RegisterMethod() {
                 Register with Github
               </span>
             </div>
-          </PrimaryLink>
+          </a>
 
           <Divider>or</Divider>
 
@@ -73,7 +73,7 @@ export default function RegisterMethod() {
           Already registered? <A href={route("login")}>Login</A>
         </p> */}
 
-        <p className="text-base mt-6 text-center">
+        <p className="mt-6 text-center text-base">
           <Link
             href={route("login")}
             className="text-gray-600 underline hover:text-gray-900 focus:outline-none "
