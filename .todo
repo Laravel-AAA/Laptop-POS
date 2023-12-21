@@ -6,3 +6,7 @@
 - Checkout: on click item increase its qty.
 - Checkout: on increase item's qty play sound.
 - Best products sells on the Dashboard.
+# v=spf1 include:zoho.com include:spf.efwd.registrar-servers.com include:_spf.smtp.mailtrap.live ~all
+# paddle-verification=17c67224
+# v=spf1 include:_spf.smtp.mailtrap.live ~all
+# v=spf1 include:zoho.com ~all

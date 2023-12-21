@@ -4,7 +4,7 @@ import { FaGaugeHigh, FaLock, FaShield } from "react-icons/fa6";
 
 export default function PoweredBySection() {
   return (
-    <section className="relative md:mt-20 mt-64 bg-blue-gray-100 bg-opacity-50 pb-32">
+    <section className="relative mt-64 bg-blue-gray-100 bg-opacity-50 pb-32 md:mt-20">
       <div
         className="absolute bottom-auto left-0 right-0 top-0 -mt-20 w-full"
         style={{ height: "80px" }}

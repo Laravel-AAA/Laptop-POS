@@ -104,7 +104,11 @@ export default function SubscriptionSection({
       <div className="space-y-6">
         <header className="max-w-xl">
           <h2 className="text-lg font-medium text-gray-900">Subscription</h2>
-          <p className="text-normal mb-4 text-gray-600">If you need more resources for your POS system, please contact us and we will be happy to assist you with a custom plan. <SupportEmailLink/></p>
+          <p className="text-normal mb-4 text-gray-600">
+            If you need more resources for your POS system, please contact us
+            and we will be happy to assist you with a custom plan.{" "}
+            <SupportEmailLink />
+          </p>
           <SubscriptionState subscriptionData={subscriptionLinks} />
         </header>
         {progress && <SubscriptionProgress progress={progress} />}
@@ -120,9 +124,7 @@ export default function SubscriptionSection({
                 subscribedTo !== "Basic" ? undefined : (
                   <CurrentPlanAction
                     state={state}
-                    requestShowPauseSubAlert={() =>
-                      setShowPauseSubAlert(true)
-                    }
+                    requestShowPauseSubAlert={() => setShowPauseSubAlert(true)}
                   />
                 ),
               actionText:
@@ -130,7 +132,7 @@ export default function SubscriptionSection({
                   ? "Downgrade"
                   : "Subscribe",
               actionProps: {
-                disabled:state=== 'Canceled',
+                disabled: state === "Canceled",
                 className:
                   subscribedTo === "Enhanced" || subscribedTo === "Advanced"
                     ? downgradeClass
@@ -158,9 +160,7 @@ export default function SubscriptionSection({
                 subscribedTo !== "Enhanced" ? undefined : (
                   <CurrentPlanAction
                     state={state}
-                    requestShowPauseSubAlert={() =>
-                      setShowPauseSubAlert(true)
-                    }
+                    requestShowPauseSubAlert={() => setShowPauseSubAlert(true)}
                   />
                 ),
               actionText:
@@ -170,7 +170,7 @@ export default function SubscriptionSection({
                     ? "Downgrade"
                     : "Subscribe",
               actionProps: {
-                disabled:state=== 'Canceled',
+                disabled: state === "Canceled",
                 className: subscribedTo === "Advanced" ? downgradeClass : "",
                 onClick: () =>
                   isSubscribed
@@ -195,9 +195,7 @@ export default function SubscriptionSection({
                 subscribedTo !== "Advanced" ? undefined : (
                   <CurrentPlanAction
                     state={state}
-                    requestShowPauseSubAlert={() =>
-                      setShowPauseSubAlert(true)
-                    }
+                    requestShowPauseSubAlert={() => setShowPauseSubAlert(true)}
                   />
                 ),
               actionText:
@@ -205,7 +203,7 @@ export default function SubscriptionSection({
                   ? "Upgrade"
                   : "Subscribe",
               actionProps: {
-                disabled:state=== 'Canceled',
+                disabled: state === "Canceled",
                 onClick: () =>
                   isSubscribed
                     ? setUpDownGradeAlert({
@@ -223,6 +221,13 @@ export default function SubscriptionSection({
             }}
           />
         </div>
+        <p className="max-w-2xl text-danger-500">
+          <b>WARNING</b>: This application is still in development and not ready for
+          real subscription. Do not use your real credit card information to
+          test the application. Instead, you can use the following test card
+          details: Card Number:<b>4242 4242 4242 4242</b>, CVC:<b>100</b>, Name on card can be anything, and Expiration date can be any date in the future. Using any other card
+          information may result in unwanted charges or errors.
+        </p>
       </div>
     </section>
   );

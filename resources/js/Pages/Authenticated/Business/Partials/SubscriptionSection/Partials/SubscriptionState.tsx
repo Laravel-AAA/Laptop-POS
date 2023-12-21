@@ -59,9 +59,7 @@ export default function SubscriptionState({
       />
 
       {onTrial && (
-        <p className="text-normal text-gray-600">
-          Trial ends: <FromDate className="text-orange-700" date={onTrial} />
-        </p>
+        <KeyValue k="Trial ends" v={<FromDate className="text-orange-700" date={onTrial} />}/>
       )}
 
       {lastPayment?.date && (
