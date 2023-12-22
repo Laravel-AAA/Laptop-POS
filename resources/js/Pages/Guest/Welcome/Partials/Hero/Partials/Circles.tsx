@@ -26,7 +26,8 @@ export default function Circles() {
           </linearGradient>
         </defs>
         <g fill="url(#illustration-01)" fillRule="evenodd">
-          <circle cx="1208" cy="28" r="128" />
+          {/* <circle cx="1208" cy="87" r="128" /> */}
+          <circle cx="1230" cy="156" r="128" />
           <circle cx="155" cy="343" r="64" />
         </g>
       </svg>
