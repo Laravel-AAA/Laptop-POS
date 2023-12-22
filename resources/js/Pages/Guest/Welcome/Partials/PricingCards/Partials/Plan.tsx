@@ -44,7 +44,7 @@ export default function Plan({
       <div className="my-8 ">
         <div className="flex items-baseline justify-center">
           <span className="mr-2 text-5xl font-extrabold">
-            ${period === "Annually" ? annualPrice : monthlyPrice}
+            <Num prefix="$" amount={period === "Annually" ? annualPrice : monthlyPrice} />
           </span>
           <span className="text-gray-500">
             {period === "Annually" ? "/year" : "/month"}

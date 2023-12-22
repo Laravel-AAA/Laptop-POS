@@ -8,6 +8,9 @@ import { FaGithub } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa6";
 
 export default function RegisterMethod() {
+  const params = new URLSearchParams(window.location.search);
+  const subParam = params.get("sub") ? { sub: params.get("sub") } : {};
+  
   return (
     <GuestFormLayout>
       <Head title="Register Method" />
@@ -18,7 +21,7 @@ export default function RegisterMethod() {
         </h2>
         <div className="mt-10 grid space-y-4">
           <a
-            href={route("register.OAuth", "google")}
+            href={route("register.OAuth", ["google", subParam])}
             className="group block h-12 items-center rounded-full border-2 !border-gray-300 bg-white px-6 py-2 text-center text-xs font-semibold normal-case tracking-wider text-white transition duration-200 ease-in-out hover:!border-primary-800  hover:bg-white focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:scale-95 disabled:opacity-25 disabled:active:scale-100"
           >
             <div className="relative mt-0.5 flex items-center justify-center space-x-4">
@@ -33,7 +36,7 @@ export default function RegisterMethod() {
             </div>
           </a>
           {/* X do not provide user's email which is west of time because user then had to verify the email🤷‍♂️ <PrimaryLink
-            href={route("register.OAuth", "x")}
+            href={route("register.OAuth", [ "x",subParam ])}
             className="group h-12 !rounded-full border-2 !border-gray-300 bg-white px-6 normal-case  hover:!border-primary-800 hover:bg-white"
           >
             <div className="relative mt-0.5 flex items-center justify-center space-x-4">
@@ -44,7 +47,7 @@ export default function RegisterMethod() {
             </div>
           </PrimaryLink> */}
           <a
-            href={route("register.OAuth", "github")}
+            href={route("register.OAuth", ["github", subParam])}
             className="group block h-12 items-center rounded-full border-2 !border-gray-300 bg-white px-6 py-2 text-center text-xs font-semibold normal-case tracking-wider text-white transition duration-200 ease-in-out hover:!border-primary-800  hover:bg-white focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:scale-95 disabled:opacity-25 disabled:active:scale-100"
           >
             <div className="relative mt-0.5 flex items-center justify-center space-x-4">
@@ -58,7 +61,7 @@ export default function RegisterMethod() {
           <Divider>or</Divider>
 
           <PrimaryLink
-            href={route("register")}
+            href={route("register",subParam)}
             className="group h-12 !rounded-full border-2 !border-gray-300 bg-white px-6 normal-case  hover:!border-primary-800 hover:bg-white"
           >
             <div className="relative mt-0.5 flex items-center justify-center space-x-4">

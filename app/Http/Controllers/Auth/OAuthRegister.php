@@ -17,7 +17,7 @@ class OAuthRegister extends Controller
         ) {
             if ($provider == 'x')
                 $provider = 'twitter-oauth-2';
-            return Socialite::driver($provider)->redirect();
+            return Socialite::driver($provider)->with(['state' => 'sub=' . request()->query('sub')])->redirect();
         }
         abort(404);
     }
@@ -28,7 +28,11 @@ class OAuthRegister extends Controller
             if ($provider == 'x')
                 $provider = 'twitter-oauth-2';
 
-            $userInfo = Socialite::driver($provider)->user();
+            try {
+                $userInfo = Socialite::driver($provider)->stateless()->user();
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Whoops, something went wrong');
+            }
 
             if (isset($userInfo->name))
                 $name = $userInfo->name;
@@ -36,14 +40,21 @@ class OAuthRegister extends Controller
                 $name = $userInfo->nickname;
 
             $emailParam = [];
-            $nameParam = [];
+            $otherParams = [];
             if (isset($name))
-                $nameParam['name'] =  $name;
+                $otherParams['name'] =  $name;
             if (isset($userInfo->email))
                 $emailParam['email'] =  $userInfo->email;
             $url = URL::temporarySignedRoute('register', now()->addDay(), $emailParam);
-            if (isset($nameParam['name']))
-                $url = $url . '&' . http_build_query($nameParam);
+
+            //append unsigned params
+            $state = request()->input('state');
+            parse_str($state, $result);
+            if (isset($result) && isset($result['sub']))
+                $otherParams['sub'] = 'true';
+
+            if (isset($otherParams['name']))
+                $url = $url . '&' . http_build_query($otherParams);
             return redirect($url);
         }
 
