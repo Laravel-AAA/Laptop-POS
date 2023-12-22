@@ -1,0 +1,1 @@
+import{j as o}from"./app-097abe58.js";import{o as a}from"./index.esm-722edfeb.js";import"./iconBase-295ae749.js";function s({className:t=""}){return o.jsx(a,{className:"mx-auto mt-4 h-auto w-16 text-gray-900 "+t})}export{s as default};
