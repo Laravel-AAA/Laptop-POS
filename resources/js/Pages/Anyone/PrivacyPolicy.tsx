@@ -29,7 +29,7 @@ function Content() {
         </H2>
 
         <P>
-          At <AppName />, accessible from laptop-pos.com, one of our main
+          At <AppName />, accessible from www.laptop-pos.com, one of our main
           priorities is the privacy of our visitors. This Privacy Policy
           document contains types of information that is collected and recorded
           by Laptop POS and how we use it.
