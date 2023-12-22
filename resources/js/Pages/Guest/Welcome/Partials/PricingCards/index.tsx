@@ -37,7 +37,9 @@ export default function PricingCards() {
             planProps={{
               actionProps: {
                 onClick: () =>
-                  router.visit(route("register.method", { sub: "true" })),
+                  router.visit(
+                    route("register.method", { plan: "Basic", period }),
+                  ),
               },
             }}
           />
@@ -46,7 +48,9 @@ export default function PricingCards() {
             planProps={{
               actionProps: {
                 onClick: () =>
-                  router.visit(route("register.method", { sub: "true" })),
+                  router.visit(
+                    route("register.method", { plan: "Enhanced", period }),
+                  ),
               },
             }}
           />
@@ -55,7 +59,9 @@ export default function PricingCards() {
             planProps={{
               actionProps: {
                 onClick: () =>
-                  router.visit(route("register.method", { sub: "true" })),
+                  router.visit(
+                    route("register.method", { plan: "Advanced", period }),
+                  ),
               },
             }}
           />

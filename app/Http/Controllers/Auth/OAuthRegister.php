@@ -17,7 +17,11 @@ class OAuthRegister extends Controller
         ) {
             if ($provider == 'x')
                 $provider = 'twitter-oauth-2';
-            return Socialite::driver($provider)->with(['state' => 'sub=' . request()->query('sub')])->redirect();
+            if (($plan = request()->query('plan')) && ($period = request()->query('period')))
+                $with = ['state' => 'plan=' . $plan . '&period=' . $period];
+            else $with = [];
+            // $query = request
+            return Socialite::driver($provider)->with($with)->redirect();
         }
         abort(404);
     }
@@ -50,8 +54,10 @@ class OAuthRegister extends Controller
             //append unsigned params
             $state = request()->input('state');
             parse_str($state, $result);
-            if (isset($result) && isset($result['sub']))
-                $otherParams['sub'] = 'true';
+            if (isset($result) && isset($result['plan']) && isset($result['period'])) {
+                $otherParams['plan'] = $result['plan'];
+                $otherParams['period'] = $result['period'];
+            }
 
             if (isset($otherParams['name']))
                 $url = $url . '&' . http_build_query($otherParams);

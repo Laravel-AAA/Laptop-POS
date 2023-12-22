@@ -9,8 +9,11 @@ import { FaEnvelope } from "react-icons/fa6";
 
 export default function RegisterMethod() {
   const params = new URLSearchParams(window.location.search);
-  const subParam = params.get("sub") ? { sub: params.get("sub") } : {};
-  
+  const subParam =
+    params.get("plan") && params.get("period")
+      ? { plan: params.get("plan"), period: params.get("period") }
+      : {};
+
   return (
     <GuestFormLayout>
       <Head title="Register Method" />
@@ -61,7 +64,7 @@ export default function RegisterMethod() {
           <Divider>or</Divider>
 
           <PrimaryLink
-            href={route("register",subParam)}
+            href={route("register", subParam)}
             className="group h-12 !rounded-full border-2 !border-gray-300 bg-white px-6 normal-case  hover:!border-primary-800 hover:bg-white"
           >
             <div className="relative mt-0.5 flex items-center justify-center space-x-4">
