@@ -3,6 +3,5 @@
 - Pay-as-you-go OR limited db records depends on the plan.
 - Validate phone number, base on the phone country.
 - Customize checkout product size with slider for product size.
-- Checkout: on click item increase its qty.
 - Checkout: on increase item's qty play sound.
 - Best products sells on the Dashboard.

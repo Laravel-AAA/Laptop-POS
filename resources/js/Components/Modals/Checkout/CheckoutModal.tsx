@@ -25,6 +25,7 @@ export default function CheckoutModal({
         requestClose();
         form.clearErrors();
         form.reset();
+        new Audio("/assets/Audio/checkout-21.mp3").play();
       },
       onError: (e) => {
         console.error(e);

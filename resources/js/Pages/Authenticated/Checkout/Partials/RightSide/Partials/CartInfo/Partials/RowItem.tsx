@@ -89,7 +89,7 @@ function Quantity({
       />
       <div className="flex grow border-x border-gray-800 border-opacity-10 bg-secondary-400">
         <Num
-          className="grow self-center text-center"
+          className="grow select-none self-center text-center"
           amount={bill_detail.quantity}
         />
       </div>

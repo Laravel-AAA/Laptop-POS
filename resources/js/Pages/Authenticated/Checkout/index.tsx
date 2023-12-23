@@ -32,6 +32,7 @@ export default function Checkout({
   bill?: IBill;
 }>) {
   const products: IProduct[] = paginateProducts.data;
+  const beepAudio = new Audio("/assets/Audio/beep-29.mp3");
   const form = useBetterForm<ICreateBill | IBill>(
     bill ?? {
       bill_details: [],
@@ -84,6 +85,7 @@ export default function Checkout({
         );
       return updatedBill;
     });
+    beepAudio.play();
   }
 
   /** @param product is used to change the qty of the correspond bill_detail */
@@ -101,6 +103,7 @@ export default function Checkout({
         ];
       return updatedBill;
     });
+    beepAudio.play();
   }
 
   function removeBillDetail(productId: string) {
