@@ -61,8 +61,8 @@ class Business extends Model
 
         $accounts = $this->users()->count();
         $products = $this->products()->count();
-        $bills    = $this->bills()->count();
-
+        $bills    = $this->bills()->whereBetween('updated_at', [now()->subMonth(), now()])->count();
+        
         return [
             'accounts' => [
                 'reached' => $accounts,

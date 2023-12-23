@@ -34,7 +34,7 @@ export function NumberOfProductsBenefit({
     <span>
       <FaWarehouse className="inline text-primary-800" />
       <div className="ml-2 inline align-middle">
-        <Num amount={numberOfProducts} /> Products
+        <Num compact amount={numberOfProducts} /> Products
       </div>
     </span>
   );
@@ -49,7 +49,7 @@ export function NumberOfInvoicesBenefit({
     <span>
       <FaReceipt className="inline text-primary-800" />
       <div className="ml-2 inline align-middle">
-        <Num compact amount={numberOfInvoices} /> Invoices
+        <Num compact amount={numberOfInvoices} /> Invoices per month
       </div>
     </span>
   );
