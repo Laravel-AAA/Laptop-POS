@@ -29,15 +29,9 @@ export default function Subscribe({
   const plan: Plan = params.get("plan") as Plan;
 
   useEffect(() => {
-    // (window as any).Paddle.Environment.set("sandbox");
-    (window as any).Paddle.Setup({
-      eventCallback: function (e) {
-        console.log(e);
-      },
-    });
     (window as any).Paddle.Checkout.open(planOption);
   }, []);
-  console.log(planOption, period, plan);
+
   return (
     <>
       <section className="block px-5 !text-gray-900 sm:px-10 md:px-16 xl:hidden">
@@ -113,9 +107,9 @@ export default function Subscribe({
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M14 5l7 7m0 0l-7 7m7-7H3"
                     ></path>
                   </svg>

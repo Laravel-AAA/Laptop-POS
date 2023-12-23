@@ -32,7 +32,7 @@ export default function AdvancedPlan({ period, planProps }: PlanItemProps) {
 export function AdvancedPlanBenefits() {
   const { advanced } = usePage<{ plansMaxRes: PlansMaxResources }>().props
     .plansMaxRes;
-    
+
   const benefits = [
     <NumberOfAccountsBenefit numberOfAccounts={advanced.accounts} />,
     <NumberOfProductsBenefit numberOfProducts={advanced.products} />,

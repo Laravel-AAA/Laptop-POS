@@ -56,11 +56,9 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        if (//registered by clicking a specific subscription plan
-            isset($request->period) &&
-            isset($request->plan) &&
-            strlen($request->period) > 1 &&
-            strlen($request->plan) > 1
+        if ( //registered by clicking a specific subscription plan
+            !empty($request->period) &&
+            !empty($request->plan)
         )
             return redirect(route('subscription.subscribe', ['period' => $request->period, 'plan' => $request->plan]));
 

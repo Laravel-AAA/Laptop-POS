@@ -46,7 +46,9 @@ export function PhoneInput<
               disabled={form.processing}
               variant="text"
               color="blue-gray"
-              className="flex h-11 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
+              className="flex h-11 items-center gap-2
+        rounded-r-none border border-r-0
+        border-blue-gray-200 bg-blue-gray-500/10 pl-3 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1"
             >
               <img
                 src={country.flags.svg}

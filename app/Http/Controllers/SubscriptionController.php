@@ -38,7 +38,7 @@ class SubscriptionController extends Controller
             $planOption['settings']['theme'] = 'light';
             $planOption['settings']['frameTarget'] = 'checkout-container';
             $planOption['settings']['frameInitialHeight'] = '600';
-            return Inertia::render('Authenticated/Subscribe/index', ['planOption' => $planOption]);
+            return Inertia::render('Authenticated/Subscribe/index', ['planOption' => $planOption, 'plansMaxRes' => config('constants.plans')]);
         }
         return abort(404);
     }
