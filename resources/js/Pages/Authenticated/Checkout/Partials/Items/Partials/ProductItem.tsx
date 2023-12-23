@@ -1,4 +1,9 @@
-import { AuthPageProps, ICreateProduct, ICreateBillDetail, IProduct } from "@/types";
+import {
+  AuthPageProps,
+  ICreateProduct,
+  ICreateBillDetail,
+  IProduct,
+} from "@/types";
 import ItemOptions from "./ItemOptions";
 import Num from "@/Utilities/Num";
 import { usePage } from "@inertiajs/react";
@@ -20,7 +25,19 @@ export default function ProductItem({
   const product = bill_detail.product;
 
   return (
-    <div className="group relative m-1 my-4 flex w-3/4 flex-col overflow-hidden rounded-md bg-white shadow-sm transition duration-300 ease-in-out hover:shadow-lg sm:my-1 sm:w-52">
+    <div
+      role="button"
+      onClick={() => {
+        if (bill_detail.quantity < (product.stock ?? Infinity))
+          requestIncrease();
+      }}
+      className={
+        "user group relative m-1 my-4 flex w-3/4 select-none flex-col overflow-hidden rounded-md bg-white shadow-sm transition duration-300 ease-in-out hover:shadow-lg sm:my-1 sm:w-52 " +
+        (bill_detail.quantity >= (product.stock ?? Infinity)
+          ? "cursor-not-allowed"
+          : "cursor-pointer")
+      }
+    >
       <ItemOptions
         product={product}
         requestChanged={requestChanged}
@@ -77,20 +94,13 @@ export default function ProductItem({
               <p className="font-normal text-danger-400">Out of Stock</p>
             ) : bill_detail.quantity >= (product.stock || Infinity) ? (
               <p className="font-normal text-danger-400">
-                Stock{" "}
-                {product.stock === null
-                  ? "N/A"
-                  : product.stock}
+                Stock {product.stock === null ? "N/A" : product.stock}
               </p>
             ) : (
               <p className="text-gray-200">
                 Stock&nbsp;
                 <Num
-                  amount={
-                    product.stock === null
-                      ? null
-                      : product.stock
-                  }
+                  amount={product.stock === null ? null : product.stock}
                   defaultNoAmount
                   className="font-normal text-secondary-100"
                 />
