@@ -92,7 +92,7 @@ export default function BillDetailRow({
               WebkitBoxOrient: "vertical",
               WebkitLineClamp: 1,
             }}
-            className="mx-1 inline-block overflow-hidden"
+            className="mx-1 text-blue-gray-800 inline-block overflow-hidden"
           >
             {t.product.name}
           </span>

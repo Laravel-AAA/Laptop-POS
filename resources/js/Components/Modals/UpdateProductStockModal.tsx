@@ -14,7 +14,7 @@ export default function UpdateProductStockModal({
   close: () => void;
   modalAction:
     | { open: true; product: IProduct }
-    | { open: false; product: null };
+    | { open: false; product?: IProduct };
 }) {
   const product = modalAction.product;
   const [increase, setIncrease] = useState<number>(0);
@@ -23,12 +23,12 @@ export default function UpdateProductStockModal({
     product?.id,
   );
 
-  useEffect(()=>setIncrease(0),[product]);
+  useEffect(() => setIncrease(0), [product]);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     form.patch(route(`product.update`, product?.id), {
-      preserveScroll:true,
+      preserveScroll: true,
       onSuccess: () => {
         form.clearErrors();
         form.reset();

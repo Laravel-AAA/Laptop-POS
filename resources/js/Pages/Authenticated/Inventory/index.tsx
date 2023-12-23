@@ -30,19 +30,21 @@ export default function Inventory({
     data: null,
   });
   const [updateStockAction, setUpdateStockAction] = useState<
-    { open: true; product: IProduct } | { open: false; product: null }
-  >({ open: false, product: null });
+    { open: true; product: IProduct } | { open: false; product?: IProduct }
+  >({ open: false });
 
   return (
     <>
       <Head title="Inventory" />
       <CreateEditProductModal
+        key="12312"
         modalAction={modalAction}
         setModalAction={setModalAction}
       />
       <UpdateProductStockModal
+        key="98345433"
         modalAction={updateStockAction}
-        close={() => setUpdateStockAction({ product: null, open: false })}
+        close={() => setUpdateStockAction((p) => ({ ...p, open: false }))}
       />
       <AuthenticatedLayout
         user={auth.user}

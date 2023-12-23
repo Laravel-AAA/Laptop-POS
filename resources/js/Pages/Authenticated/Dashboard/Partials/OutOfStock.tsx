@@ -19,8 +19,8 @@ export default function OutOfStock({
     data: null,
   });
   const [updateStockAction, setUpdateStockAction] = useState<
-    { open: true; product: IProduct } | { open: false; product: null }
-  >({ open: false, product: null });
+    { open: true; product: IProduct } | { open: false; product?: IProduct }
+  >({ open: false });
   return (
     <>
       <CreateEditProductModal
@@ -29,7 +29,7 @@ export default function OutOfStock({
       />
       <UpdateProductStockModal
         modalAction={updateStockAction}
-        close={() => setUpdateStockAction({ product: null, open: false })}
+        close={() => setUpdateStockAction((p) => ({ ...p, open: false }))}
       />
       <Card className="rounded-none shadow sm:rounded-lg">
         <div className="p-6">

@@ -2,6 +2,10 @@
 
 namespace App\Console;
 
+use App\Mail\DatabaseTablesCounts;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,7 +16,24 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        //delete old bills
+        $schedule->call(function () {
+            $deletedCount = DB::table('bills')
+                ->where('updated_at', '<', now()->subYear())
+                ->orWhere('created_at', '<', now()->subYears(2))
+                ->delete();
+            Log::warning('Annual Schedule: Delete Old Bills: have deleted ' . $deletedCount . ' bills.');
+        })->yearly()->name('Delete Old Bills');
+
+        //email me database table counts
+        $schedule->call(function () {
+            $businesses = DB::table('business')->count();
+            $users = DB::table('users')->count();
+            $products = DB::table('products')->count();
+            $bills = DB::table('bills')->count();
+            Log::warning('Daily Schedule: Email Me Database Tables Counts: businesses(' . $businesses . '), users(' . $users . '), products(' . $products . '), bills(' . $bills . ').');
+            Mail::to('ahmad.alkaf.ahk@gmail.com')->send(new DatabaseTablesCounts($businesses,$users,$products,$bills));
+        })->everyDay()->name('Email Me Database Tables Counts');
     }
 
     /**
@@ -20,7 +41,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
