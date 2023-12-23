@@ -65,7 +65,7 @@ class BusinessController extends Controller
         $nextPayment = null;
         if ($sub = $business->subscription()) {
             $lastPayment = $sub->lastPayment();
-                     $nextPayment = $sub->nextPayment();
+            $nextPayment = $sub->nextPayment();
 
             if ($sub->onGracePeriod() || $sub->onPausedGracePeriod()) {
                 $gracePeriodExpiresAt = $sub->ends_at;

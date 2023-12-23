@@ -82,10 +82,11 @@ export default function TemplateModal({
 
                 {buttons && (
                   <div className="space-y-2 bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:space-y-0 sm:px-6">
-                    {buttons?.map((b) => (
+                    {buttons?.map((b, i) => (
                       <>
                         {b.type === "danger" && (
                           <DangerButton
+                            key={i}
                             className="w-full shadow sm:ml-3 sm:w-auto"
                             {...b.props}
                             onClick={(e) => {
@@ -99,6 +100,7 @@ export default function TemplateModal({
 
                         {b.type === "primary" && (
                           <PrimaryMaterialBtn
+                            key={i}
                             className="w-full sm:ml-3 sm:w-auto"
                             {...b.props}
                             onClick={(e) => {
@@ -111,6 +113,7 @@ export default function TemplateModal({
                         )}
                         {b.type === "secondary" && (
                           <SecondaryMaterialBtn
+                            key={i}
                             className="w-full sm:ml-3 sm:w-auto"
                             {...b.props}
                             onClick={(e) => {

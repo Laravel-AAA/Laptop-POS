@@ -17,7 +17,7 @@ class OAuthRegister extends Controller
         ) {
             if ($provider == 'x')
                 $provider = 'twitter-oauth-2';
-            if (($plan = request()->query('plan')) && ($period = request()->query('period')))
+            if (($plan = request()->query('plan')) && ($period = request()->query('period')) && !empty($plan) && !empty($period))
                 $with = ['state' => 'plan=' . $plan . '&period=' . $period];
             else $with = [];
             // $query = request
@@ -54,7 +54,8 @@ class OAuthRegister extends Controller
                 $otherParams['name'] =  $name;
             $state = request()->input('state');
             parse_str($state, $result);
-            if (isset($result) && isset($result['plan']) && isset($result['period'])) {
+            //empty consider null and empty string the same thing
+            if (isset($result) && !empty($result['plan']) && !empty($result['period'])) {
                 $otherParams['plan'] = $result['plan'];
                 $otherParams['period'] = $result['period'];
             }

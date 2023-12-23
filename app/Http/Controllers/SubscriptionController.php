@@ -2,10 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
-class PaymentController extends Controller
+class SubscriptionController extends Controller
 {
+    public function plans()
+    {
+        return Inertia::render('Authenticated/Plans/index');
+    }
+
+    public function subscribe(Request $request)
+    {
+        $prices = [
+            'Basic' => [
+                'Monthly' => 'pri_01hgdfq62x4cc9q0f3v0syncbn',
+                'Annually' =>  'pri_01hgdfvcng7ya1yhe57d7gpvh3'
+            ], 'Enhanced' => [
+                'Monthly' => 'pri_01hgty1we0xpxgw6qefkqeeyb3',
+                'Annually' => 'pri_01hgty2w4t8f04s7pajmvty7sf'
+            ],
+            'Advanced' => [
+                'Monthly' => 'pri_01hgty9577w7t2g96f7zbe2qaf',
+                'Annually' => 'pri_01hgtya73sz695ztffwgmpr2s2'
+            ],
+        ];
+        if (
+            isset(($prices[$request->query('plan')][$request->query('period')]))
+        ) {
+            $plan = $prices[$request->query('plan')][$request->query('period')];
+            $planOption = $request->user()->business
+                ->subscribe($plan)
+                ->returnTo(route('business.edit'))->options();
+            $planOption['settings']['displayMode'] = 'inline';
+            $planOption['settings']['theme'] = 'light';
+            $planOption['settings']['frameTarget'] = 'checkout-container';
+            $planOption['settings']['frameInitialHeight'] = '600';
+            return Inertia::render('Authenticated/Subscribe/index', ['planOption' => $planOption]);
+        }
+        return abort(404);
+    }
+
+
     public function pause(Request $request)
     {
         $request->user()->business->subscription()->pause();

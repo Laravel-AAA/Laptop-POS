@@ -42,6 +42,7 @@ export default function SubscriptionSection({
     <section className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
       {/**Upgrade/Downgrade alert */}
       <AlertModal
+      key="upgrade/downgrade alert"
         title={`${
           isUpgrade(upDownGradeAlert.from, upDownGradeAlert.to)
             ? "Upgrade"
@@ -80,6 +81,7 @@ export default function SubscriptionSection({
       {/** Pause Subscription Alert */}
       <AlertModal
         title="Pause Subscription"
+        key="Pause Subscription"
         paragraph="Your subscription stays active until the end of this billing cycle. You won’t be charged after that. Click ‘pause now’ to pause it immediately (not advised)."
         isOpen={showPauseSubAlert}
         requestClose={() => setShowPauseSubAlert(false)}
@@ -143,7 +145,7 @@ export default function SubscriptionSection({
                         from: subscribedTo,
                         to: "Basic",
                         isShow: true,
-                        route: route("swapToBasic", period),
+                        route: route("subscription.swapToBasic", period),
                       })
                     : (window as any).Paddle.Checkout.open(
                         period === "Monthly"
@@ -178,7 +180,7 @@ export default function SubscriptionSection({
                         from: subscribedTo,
                         to: "Enhanced",
                         isShow: true,
-                        route: route("swapToEnhanced", period),
+                        route: route("subscription.swapToEnhanced", period),
                       })
                     : (window as any).Paddle.Checkout.open(
                         period === "Monthly"
@@ -210,7 +212,7 @@ export default function SubscriptionSection({
                         from: subscribedTo,
                         to: "Advanced",
                         isShow: true,
-                        route: route("swapToAdvanced", period),
+                        route: route("subscription.swapToAdvanced", period),
                       })
                     : (window as any).Paddle.Checkout.open(
                         period === "Monthly"

@@ -21,7 +21,6 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        // \App\Http\Middleware\RedirectSubdomain::class,
     ];
 
     /**
@@ -69,5 +68,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \App\Http\Middleware\UserRole::class,
         'subscribed' => \App\Http\Middleware\EnsureSubscribed::class,
+        'unsubscribed' => \App\Http\Middleware\EnsureSubscribed::class,
     ];
 }

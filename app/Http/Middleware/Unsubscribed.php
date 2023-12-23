@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class RedirectSubdomain
+class Unsubscribed
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,8 @@ class RedirectSubdomain
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (env('APP_DOMAIN') === $request->getHttpHost())
-            return $next($request);
-
-        return redirect()->to(str_replace($request->getHttpHost(), env('APP_DOMAIN'), $request->fullUrl()));
+        if ($request->user()?->business?->subscribed())
+            return redirect('business.edit');
+        return $next($request);
     }
 }

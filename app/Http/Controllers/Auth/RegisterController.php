@@ -62,7 +62,7 @@ class RegisterController extends Controller
             strlen($request->period) > 1 &&
             strlen($request->plan) > 1
         )
-            return redirect(route('subscribe', ['period' => $request->period, 'plan' => $request->plan]));
+            return redirect(route('subscription.subscribe', ['period' => $request->period, 'plan' => $request->plan]));
 
         return redirect(RouteServiceProvider::HOME)->with('message', 'Welcome ' . $user->name);
     }

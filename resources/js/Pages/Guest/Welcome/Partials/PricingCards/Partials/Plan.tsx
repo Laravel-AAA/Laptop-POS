@@ -18,7 +18,7 @@ export type PlanProps = {
   title: string;
   desc: string;
   period: PlanPeriod;
-  benefits: ReactNode[];
+  benefits: ReactNode;
   actionText?: string;
   actionProps?: ButtonHTMLAttributes<HTMLButtonElement>; //or Omit<InertiaLinkProps, "href"> if actionHref exist
   actionNode?: ReactNode;
@@ -38,13 +38,16 @@ export default function Plan({
   annualPrice,
 }: PlanProps) {
   return (
-    <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 !pb-3 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
+    <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 !pb-3 text-center text-gray-900 shadow xl:p-8">
       <h3 className="mb-4 text-2xl font-semibold">{title}</h3>
       <p className="font-light text-gray-500">{desc}</p>
       <div className="my-8 ">
         <div className="flex items-baseline justify-center">
           <span className="mr-2 text-5xl font-extrabold">
-            <Num prefix="$" amount={period === "Annually" ? annualPrice : monthlyPrice} />
+            <Num
+              prefix="$"
+              amount={period === "Annually" ? annualPrice : monthlyPrice}
+            />
           </span>
           <span className="text-gray-500">
             {period === "Annually" ? "/year" : "/month"}
@@ -70,11 +73,7 @@ export default function Plan({
       </div>
       {/* <!-- List --> */}
       <ul role="list" className="mb-8 space-y-4 text-left">
-        {benefits.map((b, i) => (
-          <li key={i} className="flex items-center space-x-3">
-            {b}
-          </li>
-        ))}
+        {benefits}
       </ul>
 
       {actionNode ? (

@@ -203,7 +203,7 @@ interface ICustomer extends CreatedUpdated {
 //   returnUrl: string;
 // }
 
-type CheckoutOptions = {
+export type CheckoutOptions = {
   settings: {
     displayMode: string;
     frameStyle: string;

@@ -7,7 +7,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
   const flash = usePage<PageProps>().props.flash;
   return (
     <>
-      <div className="bg-dots-darker dark:bg-dots-lighter relative min-h-screen bg-gray-100 bg-center dark:bg-gray-900">
+      <div className="relative min-h-screen bg-gray-100 bg-center">
         {children}
       </div>
       <div className="fixed bottom-5 z-50 right-3">

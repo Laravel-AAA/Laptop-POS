@@ -3,7 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BusinessController;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -48,13 +48,13 @@ Route::middleware(['auth', 'verified', 'role:Owner'])->group(function () {
     Route::post('/account/{id}/restore', [UserController::class, 'restore'])->name('account.restore');
     Route::delete('/account/{id}/force-destroy', [UserController::class, 'forceDestroy'])->name('account.forceDestroy');
 
-    Route::get('/update-payment-method', [PaymentController::class, 'updatePaymentMethod'])->name('updatePaymentMethod');
-    Route::get('/subscription/swap-to-advanced/{period}', [PaymentController::class, 'swapToAdvanced'])->name('swapToAdvanced');
-    Route::get('/subscription/swap-to-enhanced/{period}', [PaymentController::class, 'swapToEnhanced'])->name('swapToEnhanced');
-    Route::get('/subscription/swap-to-basic/{period}', [PaymentController::class, 'swapToBasic'])->name('swapToBasic');
-    Route::get('/subscription/pause', [PaymentController::class, 'pause'])->name('subscription.pause');
-    Route::get('/subscription/pause-now', [PaymentController::class, 'pauseNow'])->name('subscription.pauseNow');
-    Route::get('/subscription/resume', [PaymentController::class, 'resume'])->name('subscription.resume');
+    Route::get('/update-payment-method', [SubscriptionController::class, 'updatePaymentMethod'])->name('subscription.updatePaymentMethod');
+    Route::get('/subscription/swap-to-advanced/{period}', [SubscriptionController::class, 'swapToAdvanced'])->name('subscription.swapToAdvanced');
+    Route::get('/subscription/swap-to-enhanced/{period}', [SubscriptionController::class, 'swapToEnhanced'])->name('subscription.swapToEnhanced');
+    Route::get('/subscription/swap-to-basic/{period}', [SubscriptionController::class, 'subscription.swapToBasic'])->name('subscription.swapToBasic');
+    Route::get('/subscription/pause', [SubscriptionController::class, 'pause'])->name('subscription.pause');
+    Route::get('/subscription/pause-now', [SubscriptionController::class, 'pauseNow'])->name('subscription.pauseNow');
+    Route::get('/subscription/resume', [SubscriptionController::class, 'resume'])->name('subscription.resume');
 });
 
 Route::middleware(['auth', 'verified', 'subscribed'])->group(function () {
@@ -73,10 +73,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
-Route::middleware(['auth', 'role:Owner'])->group(function () {
-    Route::get('/subscribe', function () {
-        return Inertia::render('Authenticated/Subscribe/index');
-    })->name('subscribe');
+Route::middleware(['auth', 'role:Owner', 'unsubscribed'])->group(function () {
+    Route::get('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscription.subscribe');
+    Route::get('/subscription/plans', [SubscriptionController::class, 'plans'])->name('subscription.plans');
 });
 
 Route::middleware(['auth'])->group(function () {
