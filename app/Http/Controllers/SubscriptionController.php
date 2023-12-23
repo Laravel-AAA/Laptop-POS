@@ -9,7 +9,7 @@ class SubscriptionController extends Controller
 {
     public function plans()
     {
-        return Inertia::render('Authenticated/Plans/index');
+        return Inertia::render('Authenticated/Plans/index', ['plansMaxRes' => config('constants.plans')]);
     }
 
     public function subscribe(Request $request)

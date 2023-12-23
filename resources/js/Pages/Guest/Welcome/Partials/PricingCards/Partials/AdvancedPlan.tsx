@@ -9,6 +9,8 @@ import {
   ResponsiveBenefit,
   SupportTeamBenefit,
 } from "./SharedBenefits";
+import { usePage } from "@inertiajs/react";
+import { PlansMaxResources } from "@/types";
 
 export const ADVANCED_MONTHLY_PRICE = 19;
 export const ADVANCED_ANNUAL_PRICE = 179;
@@ -28,10 +30,13 @@ export default function AdvancedPlan({ period, planProps }: PlanItemProps) {
 }
 
 export function AdvancedPlanBenefits() {
+  const { advanced } = usePage<{ plansMaxRes: PlansMaxResources }>().props
+    .plansMaxRes;
+    
   const benefits = [
-    <NumberOfAccountsBenefit numberOfAccounts={30} />,
-    <NumberOfProductsBenefit numberOfProducts={10000} />,
-    <NumberOfInvoicesBenefit numberOfInvoices={10000000} />,
+    <NumberOfAccountsBenefit numberOfAccounts={advanced.accounts} />,
+    <NumberOfProductsBenefit numberOfProducts={advanced.products} />,
+    <NumberOfInvoicesBenefit numberOfInvoices={advanced.bills} />,
     <AccessPeriodBenefit />,
     <NoSetupFeesBenefit />,
     <ResponsiveBenefit />,

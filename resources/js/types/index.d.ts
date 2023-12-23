@@ -217,6 +217,24 @@ export type CheckoutOptions = {
 }
 
 export type Plan = 'Advanced' | 'Enhanced' | 'Basic';
+export type PlansMaxResources = {
+  basic: {
+    accounts: number,
+    products: number,
+    bills: number,
+  },
+  enhanced: {
+    accounts: number,
+    products: number,
+    bills: number,
+  },
+  advanced: {
+    accounts: number,
+    products: number,
+    bills: number,
+  },
+}
+  ;
 
 export type ISubscriptionLinks = {
   basic: { monthly: CheckoutOptions, annually: CheckoutOptions } | null;

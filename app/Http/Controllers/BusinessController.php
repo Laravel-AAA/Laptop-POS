@@ -120,6 +120,7 @@ class BusinessController extends Controller
 
         return Inertia::render('Authenticated/Business/Edit', [
             'business' => $business,
+            'plansMaxRes' => config('constants.plans'),
             'subscriptionLinks' => [
                 'basic' => $subscribedTo === 'Basic' ? null : [
                     'monthly' => $planOptions[0],
