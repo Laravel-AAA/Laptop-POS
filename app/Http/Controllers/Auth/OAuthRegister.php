@@ -45,13 +45,13 @@ class OAuthRegister extends Controller
 
             $emailParam = [];
             $otherParams = [];
-            if (isset($name))
-                $otherParams['name'] =  $name;
             if (isset($userInfo->email))
                 $emailParam['email'] =  $userInfo->email;
             $url = URL::temporarySignedRoute('register', now()->addDay(), $emailParam);
 
             //append unsigned params
+            if (isset($name))
+                $otherParams['name'] =  $name;
             $state = request()->input('state');
             parse_str($state, $result);
             if (isset($result) && isset($result['plan']) && isset($result['period'])) {

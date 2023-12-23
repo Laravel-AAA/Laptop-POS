@@ -76,7 +76,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'role:Owner'])->group(function () {
     Route::get('/subscribe', function () {
         return Inertia::render('Authenticated/Subscribe/index');
-    });
+    })->name('subscribe');
 });
 
 Route::middleware(['auth'])->group(function () {

@@ -39,6 +39,8 @@ export default function Register() {
         email: params.get("email") ?? "",
         expires: params.get("expires") ?? "",
         signature: params.get("signature") ?? "",
+        plan: params.get("plan") ?? "",
+        period: params.get("period") ?? "",
       }),
       {
         ...userForm.data,
@@ -56,6 +58,7 @@ export default function Register() {
           businessForm.setProcessing(false);
         },
         onError: (e) => {
+          console.log(e);
           for (let k in e) {
             if (k.startsWith("business."))
               businessForm.setError(k.substring(9) as any, e[k]);
