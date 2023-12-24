@@ -40,7 +40,7 @@ export default function Subscribe({
         </div>
         <Link
           href={route("subscription.plans")}
-          className="text-md group relative mb-2 w-full justify-center text-center inline-flex items-center overflow-hidden  rounded-md border border-primary-600 px-8 py-2 font-medium text-primary-600 hover:bg-gray-50 hover:text-gray-100"
+          className="text-md group relative mb-2 inline-flex w-full items-center justify-center overflow-hidden rounded-md  border border-primary-600 px-8 py-2 text-center font-medium text-primary-600 hover:bg-gray-50 hover:text-gray-100"
         >
           <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-gradient-to-r from-primary-600 to-primary-800 opacity-100 transition-all group-hover:top-0 group-hover:h-full"></span>
           <span className="ease absolute right-0 flex h-10 w-10 translate-x-full transform items-center justify-start duration-300 group-hover:translate-x-0">
@@ -95,7 +95,7 @@ export default function Subscribe({
             <section className="z-10 -mt-52 w-full max-w-md">
               <Link
                 href={route("subscription.plans")}
-                className="text-xs group relative mb-2 inline-flex items-center overflow-hidden  rounded-md border border-secondary-400 px-8 py-2 font-medium text-secondary-400 hover:bg-secondary-300 hover:text-gray-900"
+                className="group relative mb-2 inline-flex items-center overflow-hidden rounded-md  border border-secondary-400 px-8 py-2 text-xs font-medium text-secondary-400 hover:bg-secondary-300 hover:text-gray-900"
               >
                 <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-gradient-to-r from-secondary-400 to-secondary-500 opacity-100 transition-all group-hover:top-0 group-hover:h-full"></span>
                 <span className="ease absolute right-0 flex h-10 w-10 translate-x-full transform items-center justify-start duration-300 group-hover:translate-x-0">
@@ -155,6 +155,16 @@ export default function Subscribe({
               <div className="checkout-container mt-8 space-y-6">
                 {/* Checkout form will render here */}
               </div>
+              <p className="max-w-2xl text-danger-500">
+                <b>WARNING</b>: This application is still in development and not
+                ready for real subscription. Do not use your real credit card
+                information to test the application. Instead, you can use the
+                following test card details: Card Number:
+                <b>4242 4242 4242 4242</b>, CVC:<b>100</b>, Name on card can be
+                anything, and Expiration date can be any date in the future.
+                Using any other card information may result in unwanted charges
+                or errors.
+              </p>
             </div>
           </section>
         </div>
