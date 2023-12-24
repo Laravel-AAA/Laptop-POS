@@ -1,7 +1,4 @@
 - Workflow for testing & building React.
-- Subscription plans AND free trial for month.
-- Pay-as-you-go OR limited db records depends on the plan.
 - Validate phone number, base on the phone country.
 - Customize checkout product size with slider for product size.
-- Checkout: on increase item's qty play sound.
 - Best products sells on the Dashboard.
