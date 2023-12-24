@@ -38,7 +38,10 @@ class RegisterController extends Controller
         DB::transaction(function () use ($registerInfo, $request, &$user) {
             $business = new Business($registerInfo['business']);
             $business->save();
-            if ($request->hasValidSignature() && isset($request->email)) {
+            if (
+                $request->hasValidSignatureWhileIgnoring(['plan', 'period'])
+                && isset($request->email)
+            ) {
                 $user->email = $request->email;
                 $user->email_verified_at = now();
             }

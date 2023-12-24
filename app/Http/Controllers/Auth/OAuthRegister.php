@@ -35,7 +35,7 @@ class OAuthRegister extends Controller
             try {
                 $userInfo = Socialite::driver($provider)->stateless()->user();
             } catch (\Exception $e) {
-                return redirect()->back()->with('error', 'Whoops, something went wrong');
+                return redirect()->back()->with('error', 'Whoops, something went wrong!');
             }
 
             if (isset($userInfo->name))
@@ -44,17 +44,17 @@ class OAuthRegister extends Controller
                 $name = $userInfo->nickname;
 
             $emailParam = [];
-            $otherParams = [];
             if (isset($userInfo->email))
                 $emailParam['email'] =  $userInfo->email;
             $url = URL::temporarySignedRoute('register', now()->addDay(), $emailParam);
 
-            //append unsigned params
+            //append other unsigned params
+            $otherParams = [];
             if (isset($name))
                 $otherParams['name'] =  $name;
             $state = request()->input('state');
             parse_str($state, $result);
-            //empty consider null and empty string the same thing
+            //empty() treats null and empty string as the same falsy value
             if (isset($result) && !empty($result['plan']) && !empty($result['period'])) {
                 $otherParams['plan'] = $result['plan'];
                 $otherParams['period'] = $result['period'];
@@ -68,93 +68,3 @@ class OAuthRegister extends Controller
         abort(404);
     }
 }
-
-
-/**
- * Github user info structure:
- * {
- * +id: 81206551
- * +nickname: "Ahmad-Alkaf"
- * +name: null
- * +email: "Ahmad.Alkaf.AHK@gmail.com"
- * +avatar: "https://avatars.githubusercontent.com/u/81206551?v=4"
- * +user: array:32 [▼
- *   "login" => "Ahmad-Alkaf"
- *   "id" => 81201236551
- *   "node_id" => "MDQ6VXNabclcjgxMjA2NTUx"
- *   "avatar_url" => "https://avatars.githubusercontent.com/u/81206551?v=4"
- *   "gravatar_id" => ""
- *   "url" => "https://api.github.com/users/Ahmad-Alkaf"
- *   "html_url" => "https://github.com/Ahmad-Alkaf"
- *   "followers_url" => "https://api.github.com/users/Ahmad-Alkaf/followers"
- *   "following_url" => "https://api.github.com/users/Ahmad-Alkaf/following{/other_user}"
- *   "gists_url" => "https://api.github.com/users/Ahmad-Alkaf/gists{/gist_id}"
- *   "starred_url" => "https://api.github.com/users/Ahmad-Alkaf/starred{/owner}{/repo}"
- *   "subscriptions_url" => "https://api.github.com/users/Ahmad-Alkaf/subscriptions"
- *   "organizations_url" => "https://api.github.com/users/Ahmad-Alkaf/orgs"
- *   "repos_url" => "https://api.github.com/users/Ahmad-Alkaf/repos"
- *   "events_url" => "https://api.github.com/users/Ahmad-Alkaf/events{/privacy}"
- *   "received_events_url" => "https://api.github.com/users/Ahmad-Alkaf/received_events"
- *   "type" => "User"
- *   "site_admin" => false
- *   "name" => null
- *   "company" => null
- *   "blog" => "https://ahmad.alkaf.org"
- *   "location" => null
- *   "email" => "Ahmad.Alkaf.AHK@gmail.com"
- *   "hireable" => true
- *   "bio" => null
- *   "twitter_username" => null
- *   "public_repos" => 14
- *   "public_gists" => 0
- *   "followers" => 5
- *   "following" => 8
- *   "created_at" => "2021-03-23T03:02:19Z"
- *   "updated_at" => "2023-11-13T21:41:24Z"
- * ]
- * +attributes: array:6 [▼
- *   "id" => 81206123551
- *   "nodeId" => "MDQ6VXNabclcjgxMjA2NTUx"
- *   "nickname" => "Ahmad-Alkaf"
- *   "name" => null
- *   "email" => "Ahmad.Alkaf.AHK@gmail.com"
- *   "avatar" => "https://avatars.githubusercontent.com/u/81206551?v=4"
- * ]
- * +token: "blah blah"
- * +refreshToken: null
- * +expiresIn: null
- * +approvedScopes: array:1 [▼
- *   0 => "user:email"
- * ]
- *}
- *
- *
- *
- * X user structure:
- *{
- *  +id: "1678450000093642752"
- *  +nickname: "Ahmad_Alkaf_ahk"
- *  +name: "أحمد الكاف"
- *  +email: null
- *  +avatar: "https://pbs.twimg.com/profile_images/1680551353431515137/7i3yzkEt_normal.jpg"
- *  +user: array:4 [▼
- *    "profile_image_url" => "https://pbs.twimg.com/profile_images/1680551353431515137/7i3yzkEt_normal.jpg"
- *    "id" => "1678450000093642752"
- *    "username" => "Ahmad_Alkaf_ahk"
- *    "name" => "أحمد الكاف"
- *  ]
- *  +attributes: array:4 [▼
- *    "id" => "1678450000093642752"
- *    "nickname" => "Ahmad_Alkaf_ahk"
- *    "name" => "أحمد الكاف"
- *    "avatar" => "https://pbs.twimg.com/profile_images/1680551353431515137/7i3yzkEt_normal.jpg"
- *  ]
- *  +token: "blah bah"
- *  +refreshToken: null
- *  +expiresIn: 7200
- *  +approvedScopes: array:2 [▼
- *    0 => "users.read"
- *    1 => "tweet.read"
- *  ]
- *}
- * */
