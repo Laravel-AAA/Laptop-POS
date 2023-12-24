@@ -95,12 +95,12 @@ export default function Subscribe({
             <section className="z-10 -mt-52 w-full max-w-md">
               <Link
                 href={route("subscription.plans")}
-                className="text-md group relative mb-2 inline-flex items-center overflow-hidden  rounded-md border border-secondary-400 px-8 py-2 font-medium text-secondary-400 hover:bg-secondary-300 hover:text-gray-900"
+                className="text-xs group relative mb-2 inline-flex items-center overflow-hidden  rounded-md border border-secondary-400 px-8 py-2 font-medium text-secondary-400 hover:bg-secondary-300 hover:text-gray-900"
               >
                 <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-gradient-to-r from-secondary-400 to-secondary-500 opacity-100 transition-all group-hover:top-0 group-hover:h-full"></span>
                 <span className="ease absolute right-0 flex h-10 w-10 translate-x-full transform items-center justify-start duration-300 group-hover:translate-x-0">
                   <svg
-                    className="ml-3 h-5 w-5"
+                    className="ml-3 h-4 w-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
