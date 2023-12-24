@@ -20,7 +20,6 @@ class PaddleEventListener
      */
     public function handle(WebhookReceived $event): void
     {
-        Log::emergency('PaddleEventListener', [$event]);
-        // dd($payload = $event->payload['alert_name'], $payload, $event);
+        Log::warning('PaddleEventListener', [$event]);
     }
 }

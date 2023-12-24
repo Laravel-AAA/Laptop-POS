@@ -23,6 +23,6 @@ class UserRole
                 abort(401, 'Unauthorized');
             }
         } else
-            dd('Unexpected role: ', array_diff($roles, User::$ROLES));
+            abort(403, 'Unexpected role: ', array_diff($roles, User::$ROLES));
     }
 }
