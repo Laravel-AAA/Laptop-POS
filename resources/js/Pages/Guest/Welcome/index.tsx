@@ -10,6 +10,7 @@ import LastSection from "./Partials/LastSection";
 import { useEffect } from "react";
 import OpenSourceSection from "./Partials/OpenSourceSection";
 import PoweredBySection from "./Partials/PoweredBySection";
+import PaymentMethodsSection from "./Partials/PaymentMethodsSection";
 
 export default function Welcome() {
   useEffect(() => {
@@ -34,33 +35,16 @@ export default function Welcome() {
       <PoweredBySection />
       <OpenSourceSection />
 
-      {/* By selling your product through Paddle, you can immediately accept purchases via:
-
-Cards (including Mastercard, Visa, Maestro, American Express, Discover, Diners Club, JCB, UnionPay, and Mada)
-PayPal
-Alipay (in Early Access)*
-iDEAL*
-Google Pay (Chrome only)
-Apple Pay (HTTPS pages on Safari only)
-Wire Transfers (ACH/SEPA/BACS; for transactions over $100)*
-
-
-Cards are always turned on for checkouts. Other payment options presented to your customer depend on the transaction currency, location of your customer, and device used to purchase. For example:
-
-iDEAL is only presented to customers in the Netherlands for transactions in euro.
-Apple Pay is only presented when customers are using a compatible Apple device or browser.
-PayPal is only presented when making a purchase in a currency that PayPal supports.
-Paddle automatically determines which payment methods to show to your customer, so you don't need to handle this yourself.
-
-*/}
+     
       {/* <div className="hidden absolute inset-0 -z-1 md:block" style={{
                         height: "120%",
                         backgroundImage: "radial-gradient(circle, #8a64fc 0%, #9bedff 100%)",
                         filter: "blur(120px)",
-                    }}></div> */}
+                      }}></div> */}
       {/* <span className="bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] blur-lg filter opacity-30 w-full h-full absolute inset-0"></span> */}
 
       <PricingCards />
+      <PaymentMethodsSection />
       {/**todo:
        * Grow Your Retail Business With Laptop POS:
        * Laptop POS software is a VAT ready cloud-based point of sale solution. Whether it is a supermarket, multi-brand retailer, lifestyle stores, hypermarket, fast food shop or boutique outlet; Laptop POS is the best point of sale systems for any retail businesses out there.

@@ -77,6 +77,15 @@ export default withMT({
           900: '#1c1917',
           950: '#0c0a09',
         }
+      },
+      animation:{
+        'infinite-scroll':'infinite-scroll 30s linear infinite',
+      },
+      keyframes:{
+        'infinite-scroll':{
+          from:{transform:'translateX(0)'},
+          to:{transform:'translateX(-100%)'},
+        }
       }
     },
   },
