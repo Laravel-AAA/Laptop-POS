@@ -4,7 +4,7 @@ import { FaCodeBranch } from "react-icons/fa6";
 
 export default function OpenSourceSection() {
   return (
-    <section className="overflow-hidden bg-[#475569] py-24">
+    <section id="public-source" className="overflow-hidden bg-[#475569] py-24">
 
       <div className="container mx-auto pb-24">
         <div className="flex flex-wrap justify-center">

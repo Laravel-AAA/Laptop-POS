@@ -23,7 +23,7 @@ export default function Features() {
   }, []);
 
   return (
-    <section className="relative  pt-6 md:pt-10  overflow-hidden ">
+    <section id="features" className="relative  pt-6 md:pt-10  overflow-hidden ">
       {/* Section background (needs .relative class on parent and next sibling elements) */}
       <div
         className="pointer-events-none absolute inset-0 top-10 "

@@ -4,7 +4,7 @@ import { FaArrowRight } from "react-icons/fa6";
 
 export default function LastSection() {
   return (
-    <section className="mb-8 -mt-8 flex flex-col rounded-t-3xl bg-white px-4 py-32 shadow-lg md:px-14 lg:flex-row lg:px-24">
+    <section id="ready-to-get-started" className="mb-8 -mt-8 flex flex-col rounded-t-3xl bg-white px-4 py-32 shadow-lg md:px-14 lg:flex-row lg:px-24">
       <div className="w-full">
         <Typography variant="h2" className="text-gray-800">
           Ready to get started?

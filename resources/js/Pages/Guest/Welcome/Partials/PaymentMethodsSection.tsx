@@ -3,7 +3,7 @@ import React, { HTMLAttributes, ImgHTMLAttributes } from "react";
 
 export default function PaymentMethodsSection() {
   return (
-    <section className="bg-blue-gray-100 py-1 pb-10">
+    <section id="payment-options" className="bg-blue-gray-100 py-1 pb-10">
       <div className="inline-flex w-full flex-nowrap overflow-hidden py-8 [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
         {/* By selling your product through Paddle, you can immediately accept purchases via:
 
