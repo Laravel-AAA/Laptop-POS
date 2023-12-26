@@ -23,7 +23,10 @@ export default function Features() {
   }, []);
 
   return (
-    <section id="features" className="relative  pt-6 md:pt-10  overflow-hidden ">
+    <section
+      id="features"
+      className="relative  overflow-hidden pt-6  md:pt-10 "
+    >
       {/* Section background (needs .relative class on parent and next sibling elements) */}
       <div
         className="pointer-events-none absolute inset-0 top-10 "
@@ -164,12 +167,14 @@ export default function Features() {
                         className="w-[280px]  min-w-[280px] md:w-[500px] md:min-w-[500px]"
                         src="/assets/screen-tv-mockup/index.png"
                         alt="Mockup laptop to show pages on screen"
+                        loading="lazy"
                       />
                       <img
                         className="absolute w-[209px] md:w-[372px]"
                         src="/assets/screenshots/2023-11-26 09_43_52-Inventory - Laptop POS - Brave.png"
                         alt="Inventory page with food products"
                         style={{ top: "5.58%", left: "13.8%" }}
+                        loading="lazy"
                       />
                     </div>
                   </Transition>
@@ -192,12 +197,14 @@ export default function Features() {
                         className="w-[280px]  min-w-[280px] md:w-[500px] md:min-w-[500px]"
                         src="/assets/screen-tv-mockup/index.png"
                         alt="Mockup laptop to show pages on screen"
+                        loading="lazy"
                       />
                       <img
                         className="absolute w-[209px] md:w-[372px]"
                         src="/assets/screenshots/2023-11-26 10_05_34-Checkout - Laptop POS - Brave.png"
                         alt="Inventory page with food products"
                         style={{ top: "5.58%", left: "13.8%" }}
+                        loading="lazy"
                       />
                     </div>
                   </Transition>
@@ -220,12 +227,14 @@ export default function Features() {
                         className="w-[280px]  min-w-[280px] md:w-[500px] md:min-w-[500px]"
                         src="/assets/screen-tv-mockup/index.png"
                         alt="Mockup laptop to show pages on screen"
+                        loading="lazy"
                       />
                       <img
                         className="absolute w-[209px] md:w-[372px]"
                         src="/assets/screenshots/2023-11-26 10_43_36-Dashboard - Laptop POS - Brave.png"
                         alt="Inventory page with food products"
                         style={{ top: "5.58%", left: "13.8%" }}
+                        loading="lazy"
                       />
                     </div>
                   </Transition>

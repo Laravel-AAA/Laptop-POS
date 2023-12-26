@@ -27,7 +27,7 @@ Paddle automatically determines which payment methods to show to your customer, 
         <Images />
         <Images aria-hidden="true" />
       </div>
-      <p className="text-center px-4 text-xs text-gray-700">
+      <p className="px-4 text-center text-xs text-gray-700">
         *Payment options presented to you on checkout depend on the currency,
         location, and device used when subscribing.{" "}
         <a
@@ -121,6 +121,7 @@ function Img({
     <li className="mx-8">
       <img
         {...props}
+        loading="lazy"
         className={"h-14 w-auto max-w-none md:h-20 " + className}
       />
     </li>

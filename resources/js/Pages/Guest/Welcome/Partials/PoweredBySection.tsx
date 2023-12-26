@@ -4,7 +4,10 @@ import { FaGaugeHigh, FaLock, FaShield } from "react-icons/fa6";
 
 export default function PoweredBySection() {
   return (
-    <section id="powered-by-aws" className="relative mt-64 bg-blue-gray-100 bg-opacity-50 pb-32 md:mt-20">
+    <section
+      id="powered-by-aws"
+      className="relative mt-64 bg-blue-gray-100 bg-opacity-50 pb-32 md:mt-20"
+    >
       <div
         className="absolute bottom-auto left-0 right-0 top-0 -mt-20 w-full"
         style={{ height: "80px" }}
@@ -29,9 +32,10 @@ export default function PoweredBySection() {
           <div className="-mt-32 ml-auto mr-auto w-10/12 px-1 sm:px-8 md:w-6/12 md:px-4 lg:w-4/12">
             <div className="relative mb-6 flex w-full min-w-0 flex-col break-words rounded-lg bg-primary-600 shadow-lg">
               <img
-                alt="..."
                 src="assets/cloud-service-cut.jpg"
                 className="w-full rounded-t-lg align-middle"
+                alt="AWS servers"
+                loading="lazy"
               />
               <blockquote className="relative mb-4 p-8">
                 <svg
