@@ -8,9 +8,9 @@
     @php
         $favicon = '/favicon.ico';
         $title = 'Laptop POS';
-        $description = 'Simplify your sales process and boost your productivity. Organize and manage your product inventory, Efficiently organize product information like names, descriptions, SKUs (Stock Keeping Units), and prices. Stay on top of your inventory with accurate and easily updated product details.';
+        $description = 'Simplify your sales process and boost your productivity.';
         $url = env('APP_URL', 'http://localhost:8000');
-        $mediumLogo = '/assets/logo/laptop-pos-logo.svg';
+        $mediumLogo = '/assets/logo/laptop-pos-logo-medium.png';
 
     @endphp
 
@@ -33,7 +33,7 @@
     <meta property="twitter:title" content="{{ $title }}">
     <meta property="twitter:description" content="{{ $description }}">
     <meta property="twitter:image" content="{{ $mediumLogo }}">
-    <meta name="twitter:site" content="@Ahmad_Alkaf_ahk">
+    <meta name="twitter:site" content="@Ahmad_Alkaf_">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
