@@ -7,6 +7,7 @@ import Num from "@/Utilities/Num";
 import { usePage } from "@inertiajs/react";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import TextArea from "@/Components/Inputs/TextArea";
+import { Tooltip } from "@material-tailwind/react";
 
 export default function FormInputs({
   formProps: form,
@@ -66,6 +67,7 @@ export default function FormInputs({
           hint={modalAction.state==='edit'&&<span>If you change the price of this product, it may affect the bills that have already been issued with the old price. This could result in incorrect calculations, such as the total price of a bill. Please make sure you have no bills that have this product.</span>}
         />
 
+<div title={taxPercent === 0?'Tax is 0%':''}>
         <Checkbox
           label={
             <span>
@@ -75,7 +77,7 @@ export default function FormInputs({
           }
           checked={priceIncludeTax}
           errorMsg={undefined}
-          disabled={form.processing}
+          disabled={form.processing || taxPercent === 0}
           onChange={(e) => {
             setPriceIncludeTax((v) => {
               form.setData(
@@ -90,6 +92,7 @@ export default function FormInputs({
             });
           }}
         />
+</div>
       </div>
       <div className="mt-3">
         <Input

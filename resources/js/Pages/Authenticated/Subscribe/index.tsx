@@ -1,5 +1,4 @@
 import FullLogo from "@/Components/Logo/FullLogo";
-import Logo from "@/Components/Logo/Logo";
 import {
   ADVANCED_ANNUAL_PRICE,
   ADVANCED_MONTHLY_PRICE,
@@ -34,6 +33,12 @@ export default function Subscribe({
 
   return (
     <>
+      {/*todo:
+✔ Payment through a trusted payment service
+✔ SSL Secure / 256-bit SSL secure checkout
+How can I cancel?
+You can easily cancel your subscription by simply pausing your subscription on "Business Details" page. Or by contacting our support team via email.
+Your payment is protected by: Paddle & HTTPS */}
       <section className="block px-5 !text-gray-900 sm:px-10 md:px-16 xl:hidden">
         <div className="my-5 flex justify-center">
           <FullLogo />
