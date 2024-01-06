@@ -86,7 +86,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
         return Inertia::render('Guest/Welcome/index', [
-            'plansMaxRes' => config('constants.plans'),
+            'plansMaxRes' => config('constants.planResources'),
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             //'laravelVersion' => Application::VERSION,//10.25.2

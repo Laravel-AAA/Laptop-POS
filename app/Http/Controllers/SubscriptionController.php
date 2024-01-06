@@ -9,22 +9,22 @@ class SubscriptionController extends Controller
 {
     public function plans()
     {
-        return Inertia::render('Authenticated/Plans/index', ['plansMaxRes' => config('constants.plans')]);
+        return Inertia::render('Authenticated/Plans/index', ['plansMaxRes' => config('constants.planResources')]);
     }
 
     public function subscribe(Request $request)
     {
         $prices = [
             'Basic' => [
-                'Monthly' => 'pri_01hgdfq62x4cc9q0f3v0syncbn',
-                'Annually' =>  'pri_01hgdfvcng7ya1yhe57d7gpvh3'
+                'Monthly' => env('PADDLE_PRICE_ID_BASIC_MONTHLY'),
+                'Annually' =>  env('PADDLE_PRICE_ID_BASIC_ANNUALLY')
             ], 'Enhanced' => [
-                'Monthly' => 'pri_01hgty1we0xpxgw6qefkqeeyb3',
-                'Annually' => 'pri_01hgty2w4t8f04s7pajmvty7sf'
+                'Monthly' => env('PADDLE_PRICE_ID_ENHANCED_MONTHLY'),
+                'Annually' => env('PADDLE_PRICE_ID_ENHANCED_ANNUALLY')
             ],
             'Advanced' => [
-                'Monthly' => 'pri_01hgty9577w7t2g96f7zbe2qaf',
-                'Annually' => 'pri_01hgtya73sz695ztffwgmpr2s2'
+                'Monthly' => env('PADDLE_PRICE_ID_ADVANCED_MONTHLY'),
+                'Annually' => env('PADDLE_PRICE_ID_ADVANCED_ANNUALLY')
             ],
         ];
         if (
@@ -38,7 +38,7 @@ class SubscriptionController extends Controller
             $planOption['settings']['theme'] = 'light';
             $planOption['settings']['frameTarget'] = 'checkout-container';
             $planOption['settings']['frameInitialHeight'] = '600';
-            return Inertia::render('Authenticated/Subscribe/index', ['planOption' => $planOption, 'plansMaxRes' => config('constants.plans')]);
+            return Inertia::render('Authenticated/Subscribe/index', ['planOption' => $planOption, 'plansMaxRes' => config('constants.planResources')]);
         }
         return abort(404);
     }
@@ -79,7 +79,7 @@ class SubscriptionController extends Controller
             if ($period !== 'monthly' && $period !== 'annually')
                 abort(400);
         } else abort(400);
-        $advancedPrices = ['pri_01hgty9577w7t2g96f7zbe2qaf', 'pri_01hgtya73sz695ztffwgmpr2s2'];
+        $advancedPrices = [env('PADDLE_PRICE_ID_ADVANCED_MONTHLY'), env('PADDLE_PRICE_ID_ADVANCED_ANNUALLY')];
         $request->user()->business
             ->subscription()
             ->swapAndInvoice($advancedPrices[$period === 'monthly' ? 0 : 1]);
@@ -94,7 +94,7 @@ class SubscriptionController extends Controller
             if ($period !== 'monthly' && $period !== 'annually')
                 abort(400);
         } else abort(400);
-        $enhancedPrices = ['pri_01hgty1we0xpxgw6qefkqeeyb3', 'pri_01hgty2w4t8f04s7pajmvty7sf'];
+        $enhancedPrices = [env('PADDLE_PRICE_ID_ENHANCED_MONTHLY'), env('PADDLE_PRICE_ID_ENHANCED_ANNUALLY')];
         $request->user()->business
             ->subscription()
             ->swapAndInvoice($enhancedPrices[$period === 'monthly' ? 0 : 1]);
@@ -108,7 +108,7 @@ class SubscriptionController extends Controller
             if ($period !== 'monthly' && $period !== 'annually')
                 abort(400);
         } else abort(400);
-        $basicPrices    = ['pri_01hgdfq62x4cc9q0f3v0syncbn', 'pri_01hgdfvcng7ya1yhe57d7gpvh3'];
+        $basicPrices    = [env('PADDLE_PRICE_ID_BASIC_MONTHLY'), env('PADDLE_PRICE_ID_BASIC_ANNUALLY')];
         $request->user()->business
             ->subscription()
             ->swapAndInvoice($basicPrices[$period === 'monthly' ? 0 : 1]);

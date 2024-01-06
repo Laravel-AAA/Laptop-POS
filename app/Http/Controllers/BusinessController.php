@@ -47,11 +47,11 @@ class BusinessController extends Controller
         //     'Past Due (payment failed, customer should update payment method):',
         //     $business->subscription()?->pastDue(),
         //     'Subscribed to Advance:',
-        //     $business->subscription()?->hasProduct('pro_01hgty8g40zg8sd39s1ncgq3ha'),
+        //     $business->subscription()?->hasProduct(env( 'PADDLE_PRODUCT_ID_ADVANCED' )),
         //     'Subscribed to Enhanced:',
-        //     $business->subscription()?->hasProduct('pro_01hgtwypkq83jz2vca3p4gkby8'),
+        //     $business->subscription()?->hasProduct(env( 'PADDLE_PRODUCT_ID_ENHANCED' )),
         //     'Subscribed to Basic:',
-        //     $business->subscription()?->hasProduct('pro_01hgdf1tk5c8s9msfa15gwbrx2'),
+        //     $business->subscription()?->hasProduct(env( 'PADDLE_PRODUCT_ID_BASIC' )),
         // );
         // dd('Next billing cycle:', $business->subscription()->nextPayment());
         // dd('paused:', $business->subscription()->paused());
@@ -79,20 +79,20 @@ class BusinessController extends Controller
             else if ($sub->paused())
                 $state = 'Paused';
 
-            if ($sub->hasProduct('pro_01hgty8g40zg8sd39s1ncgq3ha'))
+            if ($sub->hasProduct(env('PADDLE_PRODUCT_ID_ADVANCED')))
                 $subscribedTo = 'Advanced';
-            else if ($sub->hasProduct('pro_01hgtwypkq83jz2vca3p4gkby8'))
+            else if ($sub->hasProduct(env('PADDLE_PRODUCT_ID_ENHANCED')))
                 $subscribedTo = 'Enhanced';
-            else if ($sub->hasProduct('pro_01hgdf1tk5c8s9msfa15gwbrx2'))
+            else if ($sub->hasProduct(env('PADDLE_PRODUCT_ID_BASIC')))
                 $subscribedTo = 'Basic';
         } else if ($business->onTrial()) {
             $subscribedTo = 'Trial';
         }
 
         //                                                monthly,                          annually
-        $basicPrices    = $subscribedTo === 'Basic'    ? [null, null] : ['pri_01hgdfq62x4cc9q0f3v0syncbn', 'pri_01hgdfvcng7ya1yhe57d7gpvh3'];
-        $enhancedPrices = $subscribedTo === 'Enhanced' ? [null, null] : ['pri_01hgty1we0xpxgw6qefkqeeyb3', 'pri_01hgty2w4t8f04s7pajmvty7sf'];
-        $advancedPrices = $subscribedTo === 'Advanced' ? [null, null] : ['pri_01hgty9577w7t2g96f7zbe2qaf', 'pri_01hgtya73sz695ztffwgmpr2s2'];
+        $basicPrices    = $subscribedTo === 'Basic'    ? [null, null] : [env('PADDLE_PRICE_ID_BASIC_MONTHLY'), env('PADDLE_PRICE_ID_BASIC_ANNUALLY')];
+        $enhancedPrices = $subscribedTo === 'Enhanced' ? [null, null] : [env('PADDLE_PRICE_ID_ENHANCED_MONTHLY'), env('PADDLE_PRICE_ID_ENHANCED_ANNUALLY')];
+        $advancedPrices = $subscribedTo === 'Advanced' ? [null, null] : [env('PADDLE_PRICE_ID_ADVANCED_MONTHLY'), env('PADDLE_PRICE_ID_ADVANCED_ANNUALLY')];
 
         $prices = [
             ...$basicPrices,
@@ -120,7 +120,7 @@ class BusinessController extends Controller
 
         return Inertia::render('Authenticated/Business/Edit', [
             'business' => $business,
-            'plansMaxRes' => config('constants.plans'),
+            'plansMaxRes' => config('constants.planResources'),
             'subscriptionLinks' => [
                 'basic' => $subscribedTo === 'Basic' ? null : [
                     'monthly' => $planOptions[0],

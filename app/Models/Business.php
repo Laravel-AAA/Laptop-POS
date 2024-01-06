@@ -48,11 +48,11 @@ class Business extends Model
                 ($subscribedTo === 'advanced' || $subscribedTo === 'basic' || $subscribedTo === 'enhanced'))
         ) {
             if ($sub = $this->subscription()) {
-                if ($sub->hasProduct('pro_01hgty8g40zg8sd39s1ncgq3ha'))
+                if ($sub->hasProduct(env('PADDLE_PRODUCT_ID_ADVANCED')))
                     $subscribedTo = 'advanced';
-                else if ($sub->hasProduct('pro_01hgtwypkq83jz2vca3p4gkby8'))
+                else if ($sub->hasProduct(env('PADDLE_PRODUCT_ID_ENHANCED')))
                     $subscribedTo = 'enhanced';
-                else if ($sub->hasProduct('pro_01hgdf1tk5c8s9msfa15gwbrx2'))
+                else if ($sub->hasProduct(env('PADDLE_PRODUCT_ID_BASIC')))
                     $subscribedTo = 'basic';
             } else if ($this->onTrial()) { //trial considered a Basic Plan in terms of progress limit.
                 $subscribedTo = 'basic';
@@ -62,19 +62,19 @@ class Business extends Model
         $accounts = $this->users()->count();
         $products = $this->products()->count();
         $bills    = $this->bills()->whereBetween('updated_at', [now()->subMonth(), now()])->count();
-        
+
         return [
             'accounts' => [
                 'reached' => $accounts,
-                'max' => config('constants.plans.' . $subscribedTo . '.accounts')
+                'max' => config('constants.planResources.' . $subscribedTo . '.accounts')
             ],
             'products' => [
                 'reached' => $products,
-                'max' => config('constants.plans.' . $subscribedTo . '.products')
+                'max' => config('constants.planResources.' . $subscribedTo . '.products')
             ],
             'bills' => [
                 'reached' => $bills,
-                'max' => config('constants.plans.' . $subscribedTo . '.bills')
+                'max' => config('constants.planResources.' . $subscribedTo . '.bills')
             ],
         ];
     }

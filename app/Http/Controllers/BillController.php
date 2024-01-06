@@ -11,15 +11,14 @@ use Inertia\Inertia;
 class BillController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource (Bills page).
      */
     public function index(Request $request)
     {
         $bills = $request->user()->business->bills()->latest()->with([
             'createdBy' => function ($query) {
                 $query->withTrashed();
-            }
-            ,
+            },
             'bill_details.product'
         ])
             ->filter($request->only('search', 'product'))
@@ -31,7 +30,7 @@ class BillController extends Controller
         ]);
     }
 
-    /**Bill show can be accessed by anyone for QR link on the bill paper */
+    /**Bill show can be accessed by anyone for QR link on the bill paper (Bill/Invoice page) */
     protected function show(Bill $bill)
     {
         Gate::authorize('show', $bill);
@@ -68,12 +67,12 @@ class BillController extends Controller
         $products = $request->user()->business->products()->latest()
             ->filter($request->only('search', 'barcode'))
             ->paginate(30)->appends($request->all());
-
         return Inertia::render('Authenticated/Checkout/index', [
             'products' => $products,
             'filter' => $request->only('search', 'barcode'),
             //$request->user()->business(),
             'bill' => $bill,
+            'createdUpdatedBill' => $request->route('createdUpdatedBill'),
         ]);
     }
 
@@ -93,17 +92,18 @@ class BillController extends Controller
         if ($request->get('id')) {
             $oldBill = Bill::findOrFail($request->get('id'));
             Gate::authorize('update', $oldBill);
-        } else Gate::authorize('store',Bill::class);
+        } else Gate::authorize('store', Bill::class);
 
         $createdBill = Bill::create($bill);
         $createdBill->bill_details()->createMany($bill_details);
+        // dd($createdBill);
 
         if ($request->get('id')) {
             Bill::destroy($request->get('id'));
 
-            return to_route('bill.create')->with('success', 'Successfully updated');
+            return to_route('bill.create', ['createdUpdatedBill' => $createdBill])->with('success', 'Successfully updated');
         } else
-            return to_route('bill.create')->with('success', 'Successfully created');
+            return to_route('bill.create', ['createdUpdatedBill' => $createdBill])->with('success', 'Successfully created');
     }
 
     /**
