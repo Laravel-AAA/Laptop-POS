@@ -7,6 +7,7 @@ import Num from "@/Utilities/Num";
 import QRCode from "react-qr-code";
 import FromDate from "@/Utilities/FromDate";
 import Logo from "@/Components/Logo/Logo";
+import { Link } from "@inertiajs/react";
 
 export default function BillInfo({ bill }: { bill: IBill }) {
   if (!bill.business)
@@ -28,7 +29,7 @@ export default function BillInfo({ bill }: { bill: IBill }) {
       <div className="mt-6 w-full overflow-hidden bg-white px-6 pb-2 pt-4 shadow-md sm:max-w-md sm:rounded-lg">
         <section className="space-y-4">
           <header>
-            <h1 className="mb-2 text-center text-sm">
+            <h1 className="mb-2 text-center text-xs tracking-wider">
               {/* فاتورة ضريبية مبسطة */}
               Simplified Invoice
             </h1>
@@ -39,12 +40,16 @@ export default function BillInfo({ bill }: { bill: IBill }) {
               />
             )}
 
-            <p className="text-center text-lg font-semibold">{bill.business.name}</p>
+            <p className="text-center text-lg font-semibold">
+              {bill.business.name}
+            </p>
             {/* <p className="text-center">
               {bill.business.countryCallingCode + " " + bill.business.phone}
             </p> */}
             {/* <p className="text-center">{bill.business.city}</p> */}
-            <p className="text-center">{bill.business.address}</p>
+            {bill.business.address && (
+              <p className="text-center">{bill.business.address}</p>
+            )}
             {bill.business.taxIdentificationNumber && (
               <KeyValue
                 k="Tax Identification"
@@ -144,9 +149,16 @@ export default function BillInfo({ bill }: { bill: IBill }) {
           <section className="flex justify-center">
             <QRCode value={location.href} size={150} />
           </section>
-            <p className="text-center text-xl font-semibold">Thank you</p>
+          <p className="text-center text-xl font-semibold">Thank you</p>
           <footer>
-            <KeyValue className="text-xs text-center border-t pt-1" k="Programmed by" v="Laptop POS" noColon/>
+            <Link href="/">
+              <KeyValue
+                className="border-t pt-1 text-center text-xs"
+                k="Developed by"
+                v="Laptop-POS.com"
+                noColon
+              />
+            </Link>
           </footer>
         </section>
       </div>
