@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
-use App\Http\Requests\Bill\StoreBillRequest;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\Bill\StoreBillRequest;
 
 class BillController extends Controller
 {
@@ -67,12 +68,21 @@ class BillController extends Controller
         $products = $request->user()->business->products()->latest()
             ->filter($request->only('search', 'barcode'))
             ->paginate(30)->appends($request->all());
+        $createdUpdatedBill = Session::get('createdUpdatedBill');
+        if (isset($createdUpdatedBill)) {
+            $createdUpdatedBill->load([
+                'bill_details.product',
+                'business',
+                'createdBy' => function ($query) {
+                    $query->withTrashed();
+                }
+            ]);
+        }
         return Inertia::render('Authenticated/Checkout/index', [
             'products' => $products,
             'filter' => $request->only('search', 'barcode'),
-            //$request->user()->business(),
             'bill' => $bill,
-            'createdUpdatedBill' => $request->route('createdUpdatedBill'),
+            'createdUpdatedBill' => $createdUpdatedBill,
         ]);
     }
 
@@ -96,14 +106,12 @@ class BillController extends Controller
 
         $createdBill = Bill::create($bill);
         $createdBill->bill_details()->createMany($bill_details);
-        // dd($createdBill);
 
         if ($request->get('id')) {
             Bill::destroy($request->get('id'));
-
-            return to_route('bill.create', ['createdUpdatedBill' => $createdBill])->with('success', 'Successfully updated');
+            return to_route('bill.create',)->with(['success', 'createdUpdatedBill'], ['Successfully updated', $createdBill]);
         } else
-            return to_route('bill.create', ['createdUpdatedBill' => $createdBill])->with('success', 'Successfully created');
+            return to_route('bill.create',)->with(['success' => 'Successfully created', 'createdUpdatedBill' => $createdBill]);
     }
 
     /**

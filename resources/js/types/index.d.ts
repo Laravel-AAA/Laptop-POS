@@ -233,8 +233,7 @@ export type PlansMaxResources = {
     products: number,
     bills: number,
   },
-}
-  ;
+};
 
 export type ISubscriptionLinks = {
   basic: { monthly: CheckoutOptions, annually: CheckoutOptions } | null;

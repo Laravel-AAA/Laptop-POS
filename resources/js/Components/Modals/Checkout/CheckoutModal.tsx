@@ -1,10 +1,14 @@
-import { IBill, ICreateBill } from "@/types";
+import { AuthPageProps, IBill, ICreateBill } from "@/types";
 import { FormEvent } from "react";
 import TemplateModal from "../TemplateModal";
 import FormFields from "./Partials/FormFields";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn";
 import SecondaryMaterialBtn from "@/Components/Buttons/Material/SecondaryMaterialBtn";
+import { renderToStaticMarkup } from "react-dom/server";
+import BillInfo from "@/Pages/Authenticated/Bill/Partials/BillInfo";
+import KeyValue from "@/Utilities/KeyValue";
+import { usePage } from "@inertiajs/react";
 
 export default function CheckoutModal({
   form,
@@ -15,6 +19,23 @@ export default function CheckoutModal({
   isShow: boolean;
   requestClose: () => void;
 }) {
+  const bill =
+    usePage<AuthPageProps<{ createdUpdatedBill: IBill }>>().props
+      .createdUpdatedBill;
+  function printBill() {
+    let p = window.open("", "", "height=700, width=500");
+    p?.document.write("<html><body><style>");
+    for (let i = 0; i < 10; i++)
+      p?.document.write(
+        document.getElementsByTagName("style")?.[i]?.innerHTML ?? "",
+      );
+    p?.document.write("</style>");
+
+    p?.document.write(renderToStaticMarkup(<BillInfo bill={bill} />));
+    p?.document.write("</body></html>");
+    p?.document.close();
+    p?.print();
+  }
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
@@ -22,10 +43,12 @@ export default function CheckoutModal({
       preserveState: false,
       preserveScroll: false,
       onSuccess: () => {
+        // console.log("success", e);
         requestClose();
         form.clearErrors();
         form.reset();
         new Audio("/assets/Audio/checkout-21.mp3").play();
+        printBill();
       },
       onError: (e) => {
         console.error(e);
@@ -36,6 +59,7 @@ export default function CheckoutModal({
 
   return (
     <TemplateModal
+      key="checkoutTemplateModal"
       title="Checkout"
       open={isShow}
       closeModal={() => requestClose()}
