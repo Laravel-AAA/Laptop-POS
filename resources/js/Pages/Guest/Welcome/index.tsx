@@ -7,25 +7,11 @@ import Hero from "./Partials/Hero";
 import Features from "./Partials/Features";
 import PricingCards from "./Partials/PricingCards";
 import LastSection from "./Partials/LastSection";
-import { useEffect } from "react";
 import OpenSourceSection from "./Partials/OpenSourceSection";
 import PoweredBySection from "./Partials/PoweredBySection";
 import PaymentMethodsSection from "./Partials/PaymentMethodsSection";
 
 export default function Welcome() {
-  useEffect(() => {
-    //don't show alert for developers
-    if (
-      !(location.host.includes("test") || location.host.includes("localhost"))
-    )
-      setTimeout(
-        () =>
-          alert(
-            "Laptop POS is still in the process of development and may not perform as intended. Your data may not be preserved or may be deleted due to database development phases",
-          ),
-        10000,
-      );
-  }, []);
 
   return (
     <GuestLayout>
@@ -35,7 +21,7 @@ export default function Welcome() {
       <PoweredBySection />
       <OpenSourceSection />
 
-     
+
       {/* <div className="hidden absolute inset-0 -z-1 md:block" style={{
                         height: "120%",
                         backgroundImage: "radial-gradient(circle, #8a64fc 0%, #9bedff 100%)",

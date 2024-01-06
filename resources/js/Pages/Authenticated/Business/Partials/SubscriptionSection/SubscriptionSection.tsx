@@ -42,7 +42,7 @@ export default function SubscriptionSection({
     <section className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
       {/**Upgrade/Downgrade alert */}
       <AlertModal
-      key="upgrade/downgrade alert"
+        key="upgrade/downgrade alert"
         title={`${
           isUpgrade(upDownGradeAlert.from, upDownGradeAlert.to)
             ? "Upgrade"
@@ -223,13 +223,6 @@ export default function SubscriptionSection({
             }}
           />
         </div>
-        <p className="max-w-2xl text-danger-500">
-          <b>WARNING</b>: This application is still in development and not ready for
-          real subscription. Do not use your real credit card information to
-          test the application. Instead, you can use the following test card
-          details: Card Number:<b>4242 4242 4242 4242</b>, CVC:<b>100</b>, Name on card can be anything, and Expiration date can be any date in the future. Using any other card
-          information may result in unwanted charges or errors.
-        </p>
       </div>
     </section>
   );

@@ -20,8 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $protocol = env('APP_PROTOCOL', null);
-        if ($protocol === 'https')
+        $url = env('APP_URL', null);
+        if (str_starts_with($url,'https'))
             URL::forceScheme('https');
     }
 }
