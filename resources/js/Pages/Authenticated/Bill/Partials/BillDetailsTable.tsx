@@ -18,7 +18,7 @@ export default function BillDetailsTable({ bill }: { bill: IBill }) {
               <span className="mx-1">Price</span>
             </th>
             <th title="Total items price (Tax not included)" className="w-[6ch]">
-              <span className="mx-1">Sub&#8239;Total</span>
+              <span className="mx-1">Sub-total</span>
             </th>
             <th title="Total items tax price" className="w-[6ch]">
               <span className="mx-1">Tax</span>

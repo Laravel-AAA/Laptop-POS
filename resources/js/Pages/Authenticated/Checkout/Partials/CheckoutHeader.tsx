@@ -5,6 +5,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { FaBarcode, FaSearch } from "react-icons/fa";
 import { usePrevious } from "react-use";
 import { BillOperations } from "..";
+import OptionsMenu from "./OptionsMenu";
 
 export default function CheckoutHeader({
   billOperations: { increaseQty },
@@ -72,27 +73,30 @@ export default function CheckoutHeader({
           />
         </div>
         {/* <form> to allow Submit behavior such as Submit when Enter pressed */}
-        <form onSubmit={submitBarcode}>
-          <Input
-            id="barcode"
-            label="Barcode"
-            icon={<FaBarcode />}
-            type="number"
-            name="barcode"
-            size="md"
-            inputMode="numeric"
-            autoFocus
-            className="remove-arrow w-full md:w-52 "
-            value={filter.barcode}
-            onChange={(v) => {
-              setFilter((p) => ({ ...p, barcode: v.target.value }));
-            }}
-            errorMsg=""
-            hideError={undefined}
-            disabled={false}
-            required={false}
-          />
-        </form>
+        <div className="flex grow justify-between gap-4">
+          <form className="" onSubmit={submitBarcode}>
+            <Input
+              id="barcode"
+              label="Barcode"
+              icon={<FaBarcode />}
+              type="number"
+              name="barcode"
+              size="md"
+              inputMode="numeric"
+              autoFocus
+              className="remove-arrow w-full md:w-52 "
+              value={filter.barcode}
+              onChange={(v) => {
+                setFilter((p) => ({ ...p, barcode: v.target.value }));
+              }}
+              errorMsg=""
+              hideError={undefined}
+              disabled={false}
+              required={false}
+            />
+          </form>
+          <OptionsMenu />
+        </div>
       </div>
     </header>
   );

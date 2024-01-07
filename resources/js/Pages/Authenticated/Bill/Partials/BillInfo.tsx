@@ -25,8 +25,8 @@ export default function BillInfo({ bill }: { bill: IBill }) {
   const totalPrice = subTotalPrice * (1 + bill.business.taxPercent);
 
   return (
-    <div className="flex min-h-screen flex-col items-center pt-6 sm:justify-center sm:pt-0">
-      <div className="mt-6 w-full overflow-hidden bg-white px-6 pb-2 pt-4 shadow-md sm:max-w-md sm:rounded-lg">
+    <div className="flex min-h-screen flex-col items-center pt-6 sm:justify-center print:pt-0 sm:pt-0">
+      <div className="mt-6 print:mt-4 w-full overflow-hidden bg-white px-6 pb-2 pt-4 shadow-md sm:max-w-md sm:rounded-lg">
         <section className="space-y-4">
           <header>
             <h1 className="mb-2 text-center text-xs tracking-wider">

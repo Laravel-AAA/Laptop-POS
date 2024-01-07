@@ -22,9 +22,17 @@ export default function CheckoutModal({
   const bill =
     usePage<AuthPageProps<{ createdUpdatedBill: IBill }>>().props
       .createdUpdatedBill;
+  function printBillIfApplicable() {
+    const isApplicable = JSON.parse(
+      localStorage.getItem("printOnSubmit") ?? "true",
+    );
+    if (isApplicable) printBill();
+  }
   function printBill() {
-    let p = window.open("", "", "height=700, width=500");
-    p?.document.write("<html><body><style>");
+    let p = window.open("", "", "height=800, width=500");
+    p?.document.write(
+      `<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Bill</title></head><body><style>`,
+    );
     for (let i = 0; i < 10; i++)
       p?.document.write(
         document.getElementsByTagName("style")?.[i]?.innerHTML ?? "",
@@ -43,12 +51,11 @@ export default function CheckoutModal({
       preserveState: false,
       preserveScroll: false,
       onSuccess: () => {
-        // console.log("success", e);
         requestClose();
         form.clearErrors();
         form.reset();
         new Audio("/assets/Audio/checkout-21.mp3").play();
-        printBill();
+        printBillIfApplicable();
       },
       onError: (e) => {
         console.error(e);
