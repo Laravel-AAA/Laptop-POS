@@ -5,11 +5,19 @@ import {
   MenuHandler,
   MenuItem,
   MenuList,
+  Slider,
+  Tooltip,
 } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { FaGear } from "react-icons/fa6";
 
-export default function OptionsMenu() {
+export default function OptionsMenu({
+  productItemSize,
+  setProductItemSize,
+}: {
+  productItemSize: number;
+  setProductItemSize: (px: number) => any;
+}) {
   const [isPrintOnSubmit, setPrintOnSubmit] = useState<boolean>(
     JSON.parse(localStorage.getItem("printOnSubmit") ?? "true"),
   );
@@ -38,13 +46,35 @@ export default function OptionsMenu() {
                 setPrintOnSubmit(e.target.checked);
               }}
               containerProps={{ className: "p-0" }}
-              className="hover:before:content-none hover:text-gray-800"
+              className="hover:text-gray-800 hover:before:content-none"
               crossOrigin={undefined}
             />
             Print on Submit
           </label>
         </MenuItem>
-        {/* <MenuItem>Menu Item 2</MenuItem> */}
+        <MenuItem>
+          Products Size
+          <Tooltip placement="bottom" content={productItemSize + " px"}>
+            {/* from:175px. to:275px. default:192px. mapping:0-100 to 175-275 */}
+            <span className="flex  cursor-pointer items-center gap-2 p-2">
+              <label htmlFor="item-2" className="">
+                <Slider
+                  id="item-2"
+                  defaultValue={productItemSize - 175}
+                  onChange={(e) => {
+                    localStorage.setItem(
+                      "productItemSize",
+                      JSON.stringify(Math.round(Number(e.target.value)+175)),
+                    );
+                    setProductItemSize(
+                      Math.round(Number(e.target.value)) + 175,
+                    );
+                  }}
+                />
+              </label>
+            </span>
+          </Tooltip>
+        </MenuItem>
       </MenuList>
     </Menu>
   );

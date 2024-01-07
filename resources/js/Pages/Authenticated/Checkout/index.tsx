@@ -13,6 +13,7 @@ import RightSide from "./Partials/RightSide";
 import { ResizableBox } from "react-resizable";
 import CheckoutHeader from "./Partials/CheckoutHeader";
 import useBetterForm, { UseBetterForm } from "@/Utilities/useBetterForm";
+import { useState } from "react";
 
 export interface BillOperations {
   form: UseBetterForm<ICreateBill | IBill>;
@@ -33,6 +34,10 @@ export default function Checkout({
 }>) {
   const products: IProduct[] = paginateProducts.data;
   const beepAudio = new Audio("/assets/Audio/beep-29.mp3");
+  //size in px
+  const [productItemSize, setProductItemSize] = useState<number>(
+    JSON.parse(localStorage.getItem("productItemSize") ?? "192"),
+  );
   const form = useBetterForm<ICreateBill | IBill>(
     bill ?? {
       bill_details: [],
@@ -156,8 +161,14 @@ export default function Checkout({
           </div>
         </ResizableBox>
         <div className="w-full grow md:w-0">
-          <CheckoutHeader products={products} billOperations={billOperations} />
+          <CheckoutHeader
+            productItemSize={productItemSize}
+            setProductItemSize={(px: number) => setProductItemSize(px)}
+            products={products}
+            billOperations={billOperations}
+          />
           <Items
+            productItemSize={productItemSize}
             paginateProducts={paginateProducts}
             billOperations={billOperations}
           />

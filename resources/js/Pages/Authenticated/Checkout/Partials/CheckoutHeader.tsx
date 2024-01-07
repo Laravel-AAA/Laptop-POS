@@ -10,9 +10,13 @@ import OptionsMenu from "./OptionsMenu";
 export default function CheckoutHeader({
   billOperations: { increaseQty },
   products,
+  productItemSize,
+  setProductItemSize,
 }: {
   billOperations: BillOperations;
   products: IProduct[];
+  productItemSize: number;
+  setProductItemSize: (px: number) => any;
 }) {
   const { filter: filterProps } =
     usePage<PagePropsWithFilter<IFilterCheckout>>().props;
@@ -95,7 +99,10 @@ export default function CheckoutHeader({
               required={false}
             />
           </form>
-          <OptionsMenu />
+          <OptionsMenu
+            productItemSize={productItemSize}
+            setProductItemSize={setProductItemSize}
+          />
         </div>
       </div>
     </header>

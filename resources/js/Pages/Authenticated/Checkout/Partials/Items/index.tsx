@@ -14,10 +14,12 @@ export default function Items({
     decreaseQty,
     form: { data: bill },
   },
+  productItemSize,
 }: {
   paginateProducts: ILaravelPaginate<IProduct>;
   className?: string;
   billOperations: BillOperations;
+  productItemSize:number;
 }) {
   const products = paginateProducts.data;
   return (
@@ -37,6 +39,7 @@ export default function Items({
             requestChanged={(qty) => changeQty(v, qty)}
             requestDecrease={() => decreaseQty(v)}
             requestIncrease={() => increaseQty(v)}
+            size={productItemSize}
           />
         ))}
         {products.length === 0 && (

@@ -14,12 +14,14 @@ export default function ProductItem({
   requestDecrease,
   bill_detail,
   changeStockNumber,
+  size,
 }: {
   requestChanged: (qty: number) => any;
   requestIncrease: () => any;
   requestDecrease: () => any;
   bill_detail: ICreateBillDetail;
   changeStockNumber: boolean;
+  size: number;
 }) {
   const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
   const product = bill_detail.product;
@@ -31,8 +33,9 @@ export default function ProductItem({
         if (bill_detail.quantity < (product.stock ?? Infinity))
           requestIncrease();
       }}
+      style={{ width: size + "px" }}
       className={
-        "user group relative m-1 my-4 flex w-3/4 select-none flex-col overflow-hidden rounded-md bg-white shadow-sm transition duration-300 ease-in-out hover:shadow-lg sm:my-1 sm:w-52 " +
+        "user group relative m-1 my-4 flex w-48 select-none flex-col overflow-hidden rounded-md bg-white shadow-sm transition duration-300 ease-in-out hover:shadow-lg sm:my-1" +
         (bill_detail.quantity >= (product.stock ?? Infinity)
           ? "cursor-not-allowed"
           : "cursor-pointer")
