@@ -31,13 +31,14 @@ export default function CheckoutModal({
   function printBill() {
     let p = window.open("", "", "height=800, width=500");
     p?.document.write(
-      `<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Bill</title></head><body><style>`,
+      `<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Bill</title>`,
     );
-    for (let i = 0; i < 10; i++)
-      p?.document.write(
-        document.getElementsByTagName("style")?.[i]?.innerHTML ?? "",
+    const styles = document.getElementsByTagName("style");
+    for (let i = 0; i < styles.length; i++)
+      p?.document.write('<style>'+
+        ( styles?.[i]?.innerHTML ?? "" )+'</style>',
       );
-    p?.document.write("</style>");
+    p?.document.write("</head><body>");
 
     p?.document.write(renderToStaticMarkup(<BillInfo bill={bill} />));
     p?.document.write("</body></html>");

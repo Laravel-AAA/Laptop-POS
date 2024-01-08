@@ -33,7 +33,7 @@ export default function ProductItem({
         if (bill_detail.quantity < (product.stock ?? Infinity))
           requestIncrease();
       }}
-      style={{ width: size + "px" }}
+      style={{ width: size + "px", height: size + "px" }}
       className={
         "user group relative m-1 my-4 flex w-48 select-none flex-col overflow-hidden rounded-md bg-white shadow-sm transition duration-300 ease-in-out hover:shadow-lg sm:my-1" +
         (bill_detail.quantity >= (product.stock ?? Infinity)
@@ -51,6 +51,8 @@ export default function ProductItem({
       <div>
         {product.img && (
           <img
+            style={{ maxWidth: size + "px", maxHeight: size + "px" }}
+            className="mx-auto h-auto w-auto "
             src={
               product.img.startsWith("http")
                 ? product.img
@@ -71,7 +73,16 @@ export default function ProductItem({
             product.img ? "" : "mt-10"
           }`}
         >
-          {product.name}
+          <span
+            style={{
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3,
+            }}
+            className="inline-block overflow-hidden"
+          >
+            {product.name}
+          </span>
         </h3>
 
         <div className="flex justify-between font-light">
