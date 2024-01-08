@@ -1612,16 +1612,16 @@
         },
         {
             "name": "laravel/cashier-paddle",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/cashier-paddle.git",
-                "reference": "b471acce30f9171aebf460a77f2b54846e783213"
+                "reference": "316d30f79e605fde7689ab5451959e5e8db0aa2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/cashier-paddle/zipball/b471acce30f9171aebf460a77f2b54846e783213",
-                "reference": "b471acce30f9171aebf460a77f2b54846e783213",
+                "url": "https://api.github.com/repos/laravel/cashier-paddle/zipball/316d30f79e605fde7689ab5451959e5e8db0aa2f",
+                "reference": "316d30f79e605fde7689ab5451959e5e8db0aa2f",
                 "shasum": ""
             },
             "require": {
@@ -1690,7 +1690,7 @@
                 "issues": "https://github.com/laravel/cashier-paddle/issues",
                 "source": "https://github.com/laravel/cashier-paddle"
             },
-            "time": "2023-12-19T15:26:50+00:00"
+            "time": "2023-12-21T14:21:46+00:00"
         },
         {
             "name": "laravel/framework",

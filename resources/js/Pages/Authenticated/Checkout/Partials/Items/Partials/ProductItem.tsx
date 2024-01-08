@@ -66,6 +66,7 @@ export default function ProductItem({
         }`}
       >
         <h3
+          title={product.name}
           className={`flex-grow text-center text-lg font-semibold text-white ${
             product.img ? "" : "mt-10"
           }`}
