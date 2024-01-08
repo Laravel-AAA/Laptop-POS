@@ -1,0 +1,1 @@
+import{j as o}from"./app-ab66e090.js";import{G as t}from"./index-5aa2a41a.js";import{F as s}from"./FormLayout-c3038d0d.js";function e({children:r}){return o.jsx(t,{children:o.jsx(s,{children:r})})}export{e as G};
