@@ -7,10 +7,10 @@ export default function AppLayout({ children }: PropsWithChildren) {
   const flash = usePage<PageProps>().props.flash;
   return (
     <>
-      <div className="relative min-h-screen bg-gray-100 bg-center">
+      <div className="relative min-h-screen print:bg-white bg-gray-100 bg-center">
         {children}
       </div>
-      <div className="fixed bottom-5 z-50 right-3">
+      <div className="fixed print:hidden bottom-5 z-50 right-3">
         <Flash flash={flash} />
       </div>
     </>

@@ -24,10 +24,12 @@ export default function OutOfStock({
   return (
     <>
       <CreateEditProductModal
+        key="DashboardOutOfStockCreateEditProductModal"
         modalAction={modalAction}
         setModalAction={setModalAction}
       />
       <UpdateProductStockModal
+        key="DashboardOutOfStockUPdateProductStockModal"
         modalAction={updateStockAction}
         close={() => setUpdateStockAction((p) => ({ ...p, open: false }))}
       />

@@ -11,9 +11,9 @@ export default function HeaderNav({ user }: { user: IUser }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false);
   const businessLogo = usePage<AuthPageProps>().props.auth.business.logo;
-  
+
   return (
-    <nav className="border-b border-gray-100 bg-white">
+    <nav className="border-b print:hidden border-gray-100 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-12 justify-between">
           <div className="flex">

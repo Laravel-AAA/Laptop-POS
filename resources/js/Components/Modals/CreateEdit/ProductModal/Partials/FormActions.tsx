@@ -35,6 +35,7 @@ export default function FormActions({
       </SecondaryMaterialBtn>
 
       <DeleteConfirmProductModal
+        key="createEditProductDeleteConfirmFormActions"
         isOpen={openConfirmDelete}
         requestClose={(clickedButton) => {
           setOpenConfirmDelete(false);

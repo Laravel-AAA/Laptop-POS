@@ -92,6 +92,12 @@ export default function CheckoutHeader({
               value={filter.barcode}
               onChange={(v) => {
                 setFilter((p) => ({ ...p, barcode: v.target.value }));
+                // setTimeout(() => {
+                //   if (products.length === 1 && filter.barcode.length > 3) {
+                //     increaseQty(products[0]);
+                //     setFilter((p) => ({ ...p, barcode: "" }));
+                //   }
+                // }, 100);
               }}
               errorMsg=""
               hideError={undefined}

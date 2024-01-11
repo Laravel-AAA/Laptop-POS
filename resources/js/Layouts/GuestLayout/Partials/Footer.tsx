@@ -6,7 +6,7 @@ export default function Footer({ className = "" }: { className?: string }) {
   return (
     // {/* <hr className="mt-24 border-gray-300" /> */}
 
-    <>
+    <div className="print:hidden">
       {/* <hr className="mt24 border-gray-300" /> */}
       <div className="pb-20"></div>
       <div className="absolute bottom-0 w-full">
@@ -47,6 +47,6 @@ export default function Footer({ className = "" }: { className?: string }) {
           </div>
         </footer>
       </div>
-    </>
+    </div>
   );
 }

@@ -37,6 +37,7 @@ export default function CheckoutBtn({
         </SecondaryButton>
       </div>
       <CheckoutModal
+        key="CheckoutRightSideCheckoutBtnCheckout"
         isShow={isCheckoutModal}
         requestClose={() => setCheckoutModal(false)}
         form={form}

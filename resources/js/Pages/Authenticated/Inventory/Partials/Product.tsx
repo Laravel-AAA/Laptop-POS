@@ -30,6 +30,7 @@ export default function Product({
       className="div-style group relative m-4 flex min-w-[200px] min-h-[212px] cursor-pointer flex-col overflow-hidden rounded-md bg-white shadow transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:w-52"
     >
       <ProductOptions
+        key="inventoryProductOptions"
         product={product}
         requestEdit={requestEdit}
         requestShow={requestShow}

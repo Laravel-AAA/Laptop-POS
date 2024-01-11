@@ -68,21 +68,12 @@ class BillController extends Controller
         $products = $request->user()->business->products()->latest()
             ->filter($request->only('search', 'barcode'))
             ->paginate(30)->appends($request->all());
-        $createdUpdatedBill = Session::get('createdUpdatedBill');
-        if (isset($createdUpdatedBill)) {
-            $createdUpdatedBill->load([
-                'bill_details.product',
-                'business',
-                'createdBy' => function ($query) {
-                    $query->withTrashed();
-                }
-            ]);
-        }
+        $createdUpdatedBillId = Session::get('createdUpdatedBillId');
         return Inertia::render('Authenticated/Checkout/index', [
             'products' => $products,
             'filter' => $request->only('search', 'barcode'),
             'bill' => $bill,
-            'createdUpdatedBill' => $createdUpdatedBill,
+            'createdUpdatedBillId' => $createdUpdatedBillId,
         ]);
     }
 
@@ -109,9 +100,9 @@ class BillController extends Controller
 
         if ($request->get('id')) {
             Bill::destroy($request->get('id'));
-            return to_route('bill.create',)->with(['success', 'createdUpdatedBill'], ['Successfully updated', $createdBill]);
+            return to_route('bill.create',)->with(['success', 'createdUpdatedBillId'], ['Successfully updated', $request->get('id')]);
         } else
-            return to_route('bill.create',)->with(['success' => 'Successfully created', 'createdUpdatedBill' => $createdBill]);
+            return to_route('bill.create',)->with(['success' => 'Successfully created', 'createdUpdatedBillId' => $createdBill->id]);
     }
 
     /**

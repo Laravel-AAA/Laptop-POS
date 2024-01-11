@@ -37,12 +37,12 @@ export default function Inventory({
     <>
       <Head title="Inventory" />
       <CreateEditProductModal
-        key="12312"
+        key="inventoryCreateEditProductMOdal"
         modalAction={modalAction}
         setModalAction={setModalAction}
       />
       <UpdateProductStockModal
-        key="98345433"
+        key="inventoryUpdateProductStockModal"
         modalAction={updateStockAction}
         close={() => setUpdateStockAction((p) => ({ ...p, open: false }))}
       />

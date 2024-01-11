@@ -107,6 +107,7 @@ export default function ProductOptions({
       </Dropdown>
 
       <DeleteConfirmProductModal
+        key="inventoryProductOptionsDeleteConfirmProductModal"
         product={product}
         isOpen={openConfirmDeleteModal}
         requestClose={() => setOpenConfirmDeleteModal(false)}

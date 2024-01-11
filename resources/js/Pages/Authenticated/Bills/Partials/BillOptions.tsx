@@ -4,6 +4,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaEdit, FaList, FaTrashAlt } from "react-icons/fa";
 import { IBill, IUser } from "@/types";
 import DeleteConfirmBillModal from "@/Components/Modals/CreateEdit/BillModal/DeleteConfirmBillModal";
+import { FaPrint } from "react-icons/fa6";
 
 export default function BillOptions({
   bill,
@@ -28,6 +29,13 @@ export default function BillOptions({
           <Dropdown.Link href={route("bill.show", bill.id)}>
             <div className="flex items-center gap-3">
               <FaList className="text-base text-gray-800" /> View
+            </div>
+          </Dropdown.Link>
+          <Dropdown.Link
+            href={route("bill.show", [bill.id, { print: "true" }])}
+          >
+            <div className="flex items-center gap-3">
+              <FaPrint className="text-base text-gray-800" /> Print
             </div>
           </Dropdown.Link>
 
@@ -64,6 +72,7 @@ export default function BillOptions({
       </Dropdown>
 
       <DeleteConfirmBillModal
+        key="billsBillOptionsDeleteConfirmBill"
         bill={bill}
         isOpen={openConfirmDeleteModal}
         requestClose={() => setOpenConfirmDeleteModal(false)}

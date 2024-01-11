@@ -16,6 +16,7 @@ export default function DeleteConfirmProductModal({
   const [deleteProgress, setDeleteProgress] = useState<boolean>(false);
   return (
     <AlertModal
+      key="createEditProductDeleteConfirmProductModal"
       icon="danger"
       title="Are you sure?"
       paragraph={

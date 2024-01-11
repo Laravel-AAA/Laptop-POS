@@ -24,6 +24,7 @@ export default function AccountsTable({
   return (
     <section className="bg-white p-4 pb-0 shadow sm:rounded-lg sm:p-8 sm:pb-0">
       <CreateEditAccountModal
+        key="businessAccountsTableCreateEditAccount"
         modalAction={modalAction}
         setModalAction={setModalAction}
       />
@@ -90,9 +91,10 @@ export default function AccountsTable({
         </div>
       </div>
       <PermanentDeleteConfirmAccountModal
+        key="businessAccountsTablePermanentDeleteConfirmAccountModal"
         account={deleteModal.account as IUser}
         isOpen={deleteModal.open}
-        requestClose={() => setDeleteModal(p=>( {...p, open: false } ))}
+        requestClose={() => setDeleteModal((p) => ({ ...p, open: false }))}
       />
     </section>
   );
