@@ -1,0 +1,3 @@
+import{j as s}from"./app-a977b1de.js";import{r as c}from"./index-b35a75c7.js";import{E as m}from"./ErrorMessage-bdf203da.js";function v({children:t,ref:g,size:l="lg",variant:n="outlined",errorMsg:i,errorMsgProps:o,error:e,hideError:u,required:b,className:f="",...r}){return e===void 0&&(u==!0?e=!1:i?e=!0:e=!1),s.jsxs(s.Fragment,{children:[s.jsx(c.Select,{className:`focus:outline-none
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
+        focus-visible:ring-offset-2 ${f}`,onClick:a=>a.currentTarget.blur(),variant:n,size:l,error:e,...r,children:t}),s.jsx(m,{message:i,...o})]})}export{v as S};
