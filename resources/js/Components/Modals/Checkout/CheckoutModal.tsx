@@ -1,5 +1,5 @@
 import { AuthPageProps, IBill, ICreateBill } from "@/types";
-import { FormEvent } from "react";
+import { AnchorHTMLAttributes, FormEvent, useRef } from "react";
 import TemplateModal from "../TemplateModal";
 import FormFields from "./Partials/FormFields";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
@@ -16,21 +16,23 @@ export default function CheckoutModal({
   isShow: boolean;
   requestClose: () => void;
 }) {
-  const billId =
-    usePage<AuthPageProps<{ createdUpdatedBillId: string }>>().props
-      .createdUpdatedBillId;
-  function printBillIfApplicable() {
+  const linkRef = useRef<HTMLAnchorElement>(null);
+  function printBillIfApplicable(billId: string) {
     const isApplicable = JSON.parse(
       localStorage.getItem("printOnSubmit") ?? "true",
     );
-    console.log(billId);
-    if (isApplicable)
-      setTimeout(() =>
-        window.open(
-          route("bill.show", { bill: billId, print: "true" }),
-          "_blank",
-        ),100
-      );
+    if (isApplicable) {
+      if (linkRef.current) {
+        linkRef.current.href = route("bill.show", {
+          bill: billId ?? "errorID",
+          print: "true",
+        });
+        linkRef.current!.click();
+      } else
+        throw new Error(
+          "Unexpected linkRef.current value. Got=" + linkRef.current,
+        );
+    }
   }
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -38,12 +40,12 @@ export default function CheckoutModal({
     form.post(route(`bill.store`), {
       preserveState: false,
       preserveScroll: false,
-      onSuccess: () => {
+      onSuccess: (e) => {
         requestClose();
         form.clearErrors();
         form.reset();
         new Audio("/assets/Audio/checkout-21.mp3").play();
-        printBillIfApplicable();
+        printBillIfApplicable(e.props.createdUpdatedBillId);
       },
       onError: (e) => {
         console.error(e);
@@ -53,32 +55,35 @@ export default function CheckoutModal({
   }
 
   return (
-    <TemplateModal
-      key="checkoutTemplateModal"
-      title="Checkout"
-      open={isShow}
-      closeModal={() => requestClose()}
-    >
-      <form className="mt-3" onSubmit={handleSubmit}>
-        <FormFields form={form} />
+    <>
+      <a hidden={true} target="_blank" ref={linkRef} href=""></a>
+      <TemplateModal
+        key="checkoutTemplateModal"
+        title="Checkout"
+        open={isShow}
+        closeModal={() => requestClose()}
+      >
+        <form className="mt-3" onSubmit={handleSubmit}>
+          <FormFields form={form} />
 
-        <div className="mt-4 flex flex-col gap-4 sm:flex-row-reverse">
-          <PrimaryMaterialBtn type="submit" disabled={form.processing}>
-            {(form.data as IBill).id === undefined ? "Proceed" : "Update"}
-          </PrimaryMaterialBtn>
+          <div className="mt-4 flex flex-col gap-4 sm:flex-row-reverse">
+            <PrimaryMaterialBtn type="submit" disabled={form.processing}>
+              {(form.data as IBill).id === undefined ? "Proceed" : "Update"}
+            </PrimaryMaterialBtn>
 
-          <SecondaryMaterialBtn
-            type="button"
-            onClick={() => {
-              form.cancel();
-              requestClose();
-              form.clearErrors();
-            }}
-          >
-            Cancel
-          </SecondaryMaterialBtn>
-        </div>
-      </form>
-    </TemplateModal>
+            <SecondaryMaterialBtn
+              type="button"
+              onClick={() => {
+                form.cancel();
+                requestClose();
+                form.clearErrors();
+              }}
+            >
+              Cancel
+            </SecondaryMaterialBtn>
+          </div>
+        </form>
+      </TemplateModal>
+    </>
   );
 }
