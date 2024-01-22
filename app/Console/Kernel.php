@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
             $bills = DB::table('bills')->count();
             Log::warning('Daily Schedule: Email Me Database Tables Counts: businesses(' . $businesses . '), users(' . $users . '), products(' . $products . '), bills(' . $bills . ').');
             Mail::to('ahmad.alkaf.ahk@gmail.com')->send(new DatabaseTablesCounts($businesses,$users,$products,$bills));
-        })->everyDay()->name('Email Me Database Tables Counts');
+        })->daily()->name('Email Me Database Tables Counts');
     }
 
     /**
