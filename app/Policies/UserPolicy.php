@@ -52,8 +52,9 @@ class UserPolicy
     {
         if ($user->id != $account->id && $user->role == 'Owner' && $user->business_id == $account->business_id) {
             $productsCount = $account->products()->count();
-            if ($productsCount != 0) {
-                throw ValidationException::withMessages(['serverError' => 'This account has created ' . $productsCount . ' products. You cannot delete this account unless you delete all the products that belong to it. We do not recommend permanent deletion.']);
+            $billsCount = $account->bills()->count();
+            if ($productsCount != 0 || $billsCount != 0) {
+                throw ValidationException::withMessages(['serverError' => 'This account has created ' . $productsCount . ' products and ' . $billsCount . ' bills. You cannot delete this account unless you delete all the products and bills that belong to it. We do not recommend permanent deletion.']);
             } else
                 return true;
         } else

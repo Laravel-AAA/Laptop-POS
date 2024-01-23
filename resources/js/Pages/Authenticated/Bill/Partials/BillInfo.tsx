@@ -72,7 +72,7 @@ export default function BillInfo({ bill }: { bill: IBill }) {
               }
             />
             <KeyValue k="Invoice ID" v={<ID id={bill.id} />} />
-            <KeyValue k="Cashier" v={bill.created_by?.name} />
+            <KeyValue k="Cashier" v={bill.created_by?.name??'N/A'} />
           </section>
 
           <BillDetailsTable bill={bill} />

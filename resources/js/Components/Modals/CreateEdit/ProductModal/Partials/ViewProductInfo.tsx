@@ -55,7 +55,7 @@ export default function ViewProductInfo({ product }: { product: IProduct }) {
         <KeyValue
           className="mt-3"
           k="Created by"
-          v={product.created_by?.name}
+          v={product.created_by?.name ?? "N/A"}
         />
         <KeyValue
           title={new Date(product.created_at).toDateString()}
