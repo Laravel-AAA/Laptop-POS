@@ -1,17 +1,19 @@
+import { useTranslation } from "react-i18next";
 export default function MainTitle() {
+  const { t } = useTranslation();
   return (
     <h1
-      className="text-5xl mb-4 font-extrabold tracking-tighter md:text-7xl"
+      className="mb-4 text-5xl font-extrabold tracking-tighter md:text-7xl"
       data-aos="zoom-y-out"
     >
       <span className="bg-gradient-to-r from-teal-400 to-secondary-500 bg-clip-text text-transparent">
-        Simplify{" "}
+        {t("Simplify") + " "}
       </span>
-      your sales process and{" "}
+      {t("your sales process and") + " "}
       <span className="bg-gradient-to-r from-teal-400 to-secondary-500 bg-clip-text text-transparent">
-        boost{" "}
+        {t("boost")}{" "}
       </span>
-      your productivity
+      {t("your productivity")}
     </h1>
   );
 }

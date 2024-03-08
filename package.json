@@ -43,8 +43,12 @@
         "@material-tailwind/react": "^2.1.4",
         "@react-icons/all-files": "^4.1.0",
         "apexcharts": "^3.44.0",
+        "i18next": "^23.9.0",
+        "i18next-browser-languagedetector": "^7.2.0",
+        "i18next-http-backend": "^2.4.3",
         "moment": "^2.29.4",
         "react-apexcharts": "^1.4.1",
+        "react-i18next": "^14.0.5",
         "react-qr-code": "^2.0.12",
         "react-resizable": "^3.0.5",
         "react-use": "^17.4.0"
