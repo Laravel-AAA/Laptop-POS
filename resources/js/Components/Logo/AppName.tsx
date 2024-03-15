@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function AppName({
   className = "",
@@ -9,6 +10,7 @@ export default function AppName({
   laptopClassName?: string;
   POSClassName?: string;
 }) {
+  const { t } = useTranslation();
   return (
     <>
       <span
@@ -16,7 +18,7 @@ export default function AppName({
           "font-semibold text-gray-800 " + className + " " + laptopClassName
         }
       >
-        Laptop
+        {t("Laptop")}
       </span>
       {/*narrow space*/}
       &#8239;
@@ -25,7 +27,7 @@ export default function AppName({
           "font-semibold text-primary-700 " + className + " " + POSClassName
         }
       >
-        POS
+        {t("POS")}
       </span>
     </>
   );
