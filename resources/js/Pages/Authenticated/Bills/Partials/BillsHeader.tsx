@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { usePrevious } from "react-use";
 import { TotalResult } from "../../Inventory/Partials/InventoryHeader";
+import { useTranslation } from "react-i18next";
 
 export default function BillsHeader({ totalResult }: { totalResult: number }) {
   const { filter: filterProps } =
@@ -31,15 +32,18 @@ export default function BillsHeader({ totalResult }: { totalResult: number }) {
       return () => router.cancel();
     }
   }, [filter]);
+
+  const { t } = useTranslation();
+
   return (
     <div className="block justify-between py-2 md:flex">
       <div className="flex items-center gap-3">
         <h2 className="mr-4 text-xl font-semibold leading-tight text-gray-800">
-          Bills
+          {t("Bills")}
         </h2>
 
         <Input
-          label="Search by ID #..."
+          label={t("Search by ID #...")}
           type="search"
           inputMode="search"
           size="md"
@@ -59,7 +63,7 @@ export default function BillsHeader({ totalResult }: { totalResult: number }) {
         {filter.search && prevFilter?.search === filter.search && (
           <TotalResult
             className="hidden md:block"
-            text="Result"
+            text={t("Result")}
             number={totalResult}
           />
         )}
@@ -75,7 +79,7 @@ export default function BillsHeader({ totalResult }: { totalResult: number }) {
       {filter.search && prevFilter?.search === filter.search && (
         <TotalResult
           className="mt-1 block md:mt-0 md:hidden"
-          text="Result"
+          text={t("Result")}
           number={totalResult}
         />
       )}

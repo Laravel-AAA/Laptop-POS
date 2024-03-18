@@ -6,12 +6,12 @@ import BillHeader from "./Partials/BillHeader";
 import GuestAuthLayout from "@/Layouts/GuestAuthLayout";
 import { useEffect } from "react";
 
-
 export default function Bill({
-  auth: { user }, bill,
+  auth: { user },
+  bill,
 }: PageProps & {
   bill: IBill;
-  auth: { user: IUser | null; };
+  auth: { user: IUser | null };
 }) {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);

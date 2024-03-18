@@ -5,6 +5,7 @@ import { FaEdit, FaList, FaTrashAlt } from "react-icons/fa";
 import { IBill, IUser } from "@/types";
 import DeleteConfirmBillModal from "@/Components/Modals/CreateEdit/BillModal/DeleteConfirmBillModal";
 import { FaPrint } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
 
 export default function BillOptions({
   bill,
@@ -15,6 +16,8 @@ export default function BillOptions({
 }) {
   const [openConfirmDeleteModal, setOpenConfirmDeleteModal] =
     useState<boolean>(false);
+
+  const { t } = useTranslation();
 
   return (
     <div className="text-center  ">
@@ -28,14 +31,16 @@ export default function BillOptions({
         <Dropdown.Content>
           <Dropdown.Link href={route("bill.show", bill.id)}>
             <div className="flex items-center gap-3">
-              <FaList className="text-base text-gray-800" /> View
+              <FaList className="text-base text-gray-800" />
+              {t("View")}
             </div>
           </Dropdown.Link>
           <Dropdown.Link
             href={route("bill.show", [bill.id, { print: "true" }])}
           >
             <div className="flex items-center gap-3">
-              <FaPrint className="text-base text-gray-800" /> Print
+              <FaPrint className="text-base text-gray-800" />
+              {t("Print")}
             </div>
           </Dropdown.Link>
 
@@ -50,7 +55,8 @@ export default function BillOptions({
             href={route("bill.edit", bill.id)}
           >
             <div className="flex items-center gap-3">
-              <FaEdit className="text-base text-gray-800" /> Edit
+              <FaEdit className="text-base text-gray-800" />
+              {t("Edit")}
             </div>
           </Dropdown.Link>
 
@@ -65,7 +71,8 @@ export default function BillOptions({
             onClick={() => setOpenConfirmDeleteModal(true)}
           >
             <div className="flex items-center gap-3 text-danger-600">
-              <FaTrashAlt className="text-base" /> Delete
+              <FaTrashAlt className="text-base" />
+              {t("Delete")}
             </div>
           </Dropdown.Button>
         </Dropdown.Content>

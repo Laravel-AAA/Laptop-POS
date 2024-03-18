@@ -6,6 +6,7 @@ import ID from "@/Utilities/ID";
 import { PropsWithChildren, useMemo, useState } from "react";
 import { usePage } from "@inertiajs/react";
 import { Tooltip } from "@material-tailwind/react";
+import { useTranslation } from "react-i18next";
 type PropsProduct = {
   bill: IBill;
 };
@@ -26,16 +27,16 @@ export default function Product({ bill }: PropsProduct) {
 
   const [isCopy, setCopy] = useState<boolean>(false);
 
+  const { t } = useTranslation();
+
   return (
     <tr className="even:bg-blue-gray-50/50">
       <TD>
-        <Tooltip content={isCopy ? "Copied" : "Copy"}>
+        <Tooltip content={t(isCopy ? "Copied" : "Copy")}>
           <button
             className="dev-style"
             onClick={() => {
-              navigator.clipboard
-                .writeText(bill.id)
-                .then(() => setCopy(true));
+              navigator.clipboard.writeText(bill.id).then(() => setCopy(true));
             }}
           >
             <ID id={bill.id} />
@@ -46,7 +47,7 @@ export default function Product({ bill }: PropsProduct) {
         {bill.createdBy_id === loggedInId ? (
           <span className="select-none text-gray-600">You</span>
         ) : (
-          bill.created_by?.name ?? "N/A"
+          bill.created_by?.name ?? t("N/A")
         )}
       </TD>
       <TD>
@@ -67,7 +68,7 @@ export default function Product({ bill }: PropsProduct) {
           className={bill.cashReceived === null ? "text-primary-700" : ""}
           showCurrency
           amount={bill.cashReceived}
-          noAmount="Digital Payment"
+          noAmount={t("Digital Payment")}
         />
       </TD>
       <TD>

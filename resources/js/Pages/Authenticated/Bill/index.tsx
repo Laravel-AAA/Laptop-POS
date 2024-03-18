@@ -5,6 +5,7 @@ import { Head } from "@inertiajs/react";
 import BillHeader from "./Partials/BillHeader";
 import GuestAuthLayout from "@/Layouts/GuestAuthLayout";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Bill({
   auth: { user },
@@ -26,9 +27,10 @@ export default function Bill({
     };
   }, []);
 
+  const { t } = useTranslation();
   return (
     <>
-      <Head title="Simplified Invoice" />
+      <Head title={t("Simplified Invoice")} />
       <GuestAuthLayout user={user} header={<BillHeader bill={bill} />}>
         <BillInfo bill={bill} />
       </GuestAuthLayout>
