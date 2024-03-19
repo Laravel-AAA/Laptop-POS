@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function DangerButton({
   type = "button",
@@ -7,6 +8,7 @@ export default function DangerButton({
   children,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
+  const { t } = useTranslation();
   return (
     <button
       type={type}
@@ -25,7 +27,7 @@ export default function DangerButton({
       }
       disabled={disabled}
     >
-      {children}
+      {typeof children === "string" ? t(children) : children}
     </button>
   );
 }

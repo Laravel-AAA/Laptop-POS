@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import BetterLink from "./BetterLink";
 import { InertiaLinkProps } from "@inertiajs/react";
 
@@ -7,7 +8,8 @@ export default function PrimaryLink({
   children,
   disabled,
   ...props
-}: InertiaLinkProps ) {
+}: InertiaLinkProps) {
+  const { t } = useTranslation();
   return (
     <BetterLink
       {...props}
@@ -25,7 +27,7 @@ export default function PrimaryLink({
           disabled ? "opacity-25" : "cursor-pointer"
         } ${className} `}
     >
-      {children}
+      {typeof children === "string" ? t(children) : children}
     </BetterLink>
   );
 }

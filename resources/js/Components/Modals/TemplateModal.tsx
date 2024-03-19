@@ -9,6 +9,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import DangerButton from "../Buttons/DangerButton";
 import PrimaryMaterialBtn from "../Buttons/Material/PrimaryMaterialBtn";
 import SecondaryMaterialBtn from "../Buttons/Material/SecondaryMaterialBtn";
+import { useTranslation } from "react-i18next";
 
 export interface IModalButtons {
   text: string;
@@ -30,6 +31,7 @@ export default function TemplateModal({
   icon?: ReactNode;
 }>) {
   const cancelButtonRef = useRef(null);
+  const { t } = useTranslation();
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -73,7 +75,7 @@ export default function TemplateModal({
                         as="h3"
                         className="mx-3 font-semibold leading-6 text-gray-900"
                       >
-                        {title}
+                        {t(title)}
                       </Dialog.Title>
                     </div>
                   </div>
@@ -93,7 +95,7 @@ export default function TemplateModal({
                               b.props?.onClick?.(e);
                             }}
                           >
-                            {b.text}
+                            {t(b.text)}
                           </DangerButton>
                         )}
 
@@ -106,7 +108,7 @@ export default function TemplateModal({
                               b.props?.onClick?.(e);
                             }}
                           >
-                            {b.text}
+                            {t(b.text)}
                           </PrimaryMaterialBtn>
                         )}
                         {b.type === "secondary" && (
@@ -118,7 +120,7 @@ export default function TemplateModal({
                               b.props?.onClick?.(e);
                             }}
                           >
-                            {b.text}
+                            {t(b.text)}
                           </SecondaryMaterialBtn>
                         )}
                       </span>

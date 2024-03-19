@@ -4,7 +4,7 @@ import { IUser } from "@/types";
 import SelectInput from "@/Components/Inputs/SelectInput";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 
-export default function CountryInput<T extends { role: IUser["role"] }>({
+export default function RoleSelector<T extends { role: IUser["role"] }>({
   form,
 }: {
   form: UseBetterForm<T>;

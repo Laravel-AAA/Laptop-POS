@@ -6,6 +6,7 @@ import { UseBetterForm } from "@/Utilities/useBetterForm";
 import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn";
 import SecondaryMaterialBtn from "@/Components/Buttons/Material/SecondaryMaterialBtn";
 import { router, usePage } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
 
 export default function CheckoutModal({
   form,
@@ -54,12 +55,13 @@ export default function CheckoutModal({
     });
   }
 
+  const { t } = useTranslation();
   return (
     <>
       <a hidden={true} target="_blank" ref={linkRef} href=""></a>
       <TemplateModal
         key="checkoutTemplateModal"
-        title="Checkout"
+        title={t("Checkout")}
         open={isShow}
         closeModal={() => requestClose()}
       >
@@ -68,7 +70,7 @@ export default function CheckoutModal({
 
           <div className="mt-4 flex flex-col gap-4 sm:flex-row-reverse">
             <PrimaryMaterialBtn type="submit" disabled={form.processing}>
-              {(form.data as IBill).id === undefined ? "Proceed" : "Update"}
+              {t((form.data as IBill).id === undefined ? "Proceed" : "Update")}
             </PrimaryMaterialBtn>
 
             <SecondaryMaterialBtn
@@ -79,7 +81,7 @@ export default function CheckoutModal({
                 form.clearErrors();
               }}
             >
-              Cancel
+              {t("Cancel")}
             </SecondaryMaterialBtn>
           </div>
         </form>

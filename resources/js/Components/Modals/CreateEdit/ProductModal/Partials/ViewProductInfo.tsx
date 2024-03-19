@@ -6,6 +6,7 @@ import { AuthPageProps, IProduct } from "@/types";
 import { usePage } from "@inertiajs/react";
 import { IconButton } from "@material-tailwind/react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa6";
 
 export default function ViewProductInfo({ product }: { product: IProduct }) {
@@ -13,6 +14,7 @@ export default function ViewProductInfo({ product }: { product: IProduct }) {
 
   const [showMore, setShowMore] = useState<boolean>(false);
 
+  const { t } = useTranslation();
   return (
     <div className="space-y-3">
       <div className="rounded-md border border-blue-gray-100">
@@ -24,7 +26,7 @@ export default function ViewProductInfo({ product }: { product: IProduct }) {
                 ? product.img
                 : "products-images/" + product.img
             }
-            alt={"Image of product " + product.name}
+            alt={t("Image of product") + " " + product.name}
           />
         ) : (
           <DefaultProductImg className="!my-1" />
@@ -55,7 +57,7 @@ export default function ViewProductInfo({ product }: { product: IProduct }) {
         <KeyValue
           className="mt-3"
           k="Created by"
-          v={product.created_by?.name ?? "N/A"}
+          v={product.created_by?.name ?? t("N/A")}
         />
         <KeyValue
           title={new Date(product.created_at).toDateString()}
@@ -72,7 +74,7 @@ export default function ViewProductInfo({ product }: { product: IProduct }) {
       </div>
       <div className="flex justify-center">
         <IconButton
-          title="More info"
+          title={t("More info")}
           className="rounded-full"
           onClick={() => setShowMore((v) => !v)}
         >

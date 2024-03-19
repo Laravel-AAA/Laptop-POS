@@ -5,6 +5,7 @@ import {
 import { HTMLAttributes, ReactNode, forwardRef } from "react";
 import ErrorMessage from "./ErrorMessage";
 import HintMessage from "./HintMessage";
+import { useTranslation } from "react-i18next";
 export type InputProps = MaterialInputProps & {
   label: string;
   type: MaterialInputProps["type"];
@@ -54,14 +55,15 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
     else error = false;
   }
 
+  const { t } = useTranslation();
   return (
     <div>
       <MaterialInput
         {...props}
         id={id}
         name={name}
-        label={label}
-        aria-label={label}
+        label={t(label)}
+        aria-label={t(label)}
         inputRef={ref}
         ref={null}
         type={type}
@@ -80,9 +82,12 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
         required={disabled === true ? false : required} //remove the red star of required input when disabled.
         crossOrigin={undefined}
       />
-      <ErrorMessage message={errorMsg} {...errorMsgProps} />
+      <ErrorMessage
+        message={typeof errorMsg === "string" ? t(errorMsg) : errorMsg}
+        {...errorMsgProps}
+      />
       {typeof hint === "string" ? (
-        <HintMessage message={hint} {...hintProps} />
+        <HintMessage message={t(hint)} {...hintProps} />
       ) : (
         <HintMessage>{hint}</HintMessage>
       )}

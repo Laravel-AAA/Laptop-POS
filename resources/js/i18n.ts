@@ -9,7 +9,7 @@ i18n
   .use(LanguageDetector)
   .init({
     fallbackLng: "en",
-    lng: 'en',//todo: delete me
+    lng: 'ar',//todo: delete me
     detection: {
       order: ["path", "localStorage", "htmlTag", "cookie"],
       caches: ["localStorage", "cookie"], // cache user language on

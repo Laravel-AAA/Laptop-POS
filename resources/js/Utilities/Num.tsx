@@ -1,6 +1,7 @@
 import { AuthPageProps } from "@/types";
 import { usePage } from "@inertiajs/react";
 import { HTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 export type NumProps = {
   className?: string;
   fixed?: number;
@@ -49,7 +50,8 @@ export default function Num({
       ""
     );
 
-  if (amount === null) number = noAmount ?? "N/A";
+  const { t } = useTranslation();
+  if (amount === null) number = (noAmount ? t(noAmount) : noAmount) ?? t("N/A");
   else if (compact && amount !== 0) {
     let formatter = new Intl.NumberFormat("en", { notation: "compact" });
     number = formatter.format(amount);

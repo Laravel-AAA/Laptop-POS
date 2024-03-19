@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function SecondaryButton({
   type = "button",
@@ -7,6 +8,7 @@ export default function SecondaryButton({
   children,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
+  const { t } = useTranslation();
   return (
     <button
       {...props}
@@ -26,7 +28,7 @@ export default function SecondaryButton({
       }
       disabled={disabled}
     >
-      {children}
+      {typeof children === "string" ? t(children) : children}
     </button>
   );
 }

@@ -4,6 +4,7 @@ import DeleteConfirmProductModal from "../DeleteConfirmProductModal";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn";
 import SecondaryMaterialBtn from "@/Components/Buttons/Material/SecondaryMaterialBtn";
+import { useTranslation } from "react-i18next";
 
 export default function FormActions({
   modalAction,
@@ -16,11 +17,12 @@ export default function FormActions({
 }) {
   const [openConfirmDelete, setOpenConfirmDelete] = useState<boolean>(false);
 
+  const { t } = useTranslation();
   return (
     <div className="mt-4 flex flex-col gap-4 sm:flex-row-reverse">
       <PrimaryMaterialBtn type="submit" disabled={form.processing}>
         {" "}
-        {modalAction.state === "create" ? "Create" : "Save"}
+        {t(modalAction.state === "create" ? "Create" : "Save")}
       </PrimaryMaterialBtn>
       <SecondaryMaterialBtn
         type="button"
@@ -31,7 +33,7 @@ export default function FormActions({
           form.clearErrors();
         }}
       >
-        Cancel
+        {t("Cancel")}
       </SecondaryMaterialBtn>
 
       <DeleteConfirmProductModal

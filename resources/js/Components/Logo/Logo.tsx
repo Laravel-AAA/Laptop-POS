@@ -1,10 +1,11 @@
+import { useTranslation } from "react-i18next";
 
 export default function Logo({
   className,
   businessLogo,
 }: {
   className?: string;
-  businessLogo?: string|null;
+  businessLogo?: string | null;
 }) {
   let src: string | null = null;
 
@@ -14,5 +15,6 @@ export default function Logo({
       : "/businesses-logo/" + businessLogo;
   } else src = "/assets/logo/laptop-pos-logo.svg";
 
-  return <img className={className} src={src} alt="Application Logo" />;
+  const { t } = useTranslation();
+  return <img className={className} src={src} alt={t("Application Logo")} />;
 }

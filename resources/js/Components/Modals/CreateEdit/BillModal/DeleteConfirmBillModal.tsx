@@ -3,6 +3,7 @@ import AlertModal from "../../AlertModal";
 import { IBill } from "@/types";
 import { router } from "@inertiajs/react";
 import ID from "@/Utilities/ID";
+import { useTranslation } from "react-i18next";
 
 export default function DeleteConfirmBillModal({
   bill,
@@ -28,13 +29,14 @@ export default function DeleteConfirmBillModal({
 
   // const totalPrice = subTotalPrice * (1 + taxPercent);
 
+  const { t } = useTranslation();
   return (
     <AlertModal
       icon="danger"
       title="Are you sure?"
       paragraph={
         <span className="space-y-1">
-          You are about to delete the bill <ID id={bill.id} />
+          {t("You are about to delete the bill")} <ID id={bill.id} />
         </span>
       }
       buttons={[

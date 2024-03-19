@@ -1,11 +1,13 @@
 import { InertiaLinkProps, Link } from "@inertiajs/react";
 import { PropsWithChildren } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function BetterLink({
   children,
   disabled,
   ...props
 }: PropsWithChildren<InertiaLinkProps>) {
+  const { t } = useTranslation();
   return (
     <div className="relative">
       {disabled && (
@@ -15,7 +17,7 @@ export default function BetterLink({
         ></div>
       )}
       <Link disabled={disabled} {...props}>
-        {children}
+        {typeof children === "string" ? t(children) : children}
       </Link>
     </div>
   );

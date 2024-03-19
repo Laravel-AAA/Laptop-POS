@@ -2,6 +2,7 @@ import { Textarea, TextareaProps } from "@material-tailwind/react";
 import { HTMLAttributes, ReactNode } from "react";
 import ErrorMessage from "./ErrorMessage";
 import HintMessage from "./HintMessage";
+import { useTranslation } from "react-i18next";
 
 export default function TextArea({
   color = "teal",
@@ -37,13 +38,15 @@ export default function TextArea({
     else if (errorMsg) error = true;
     else error = false;
   }
+
+  const { t } = useTranslation();
   return (
     <>
       <Textarea
         id={id}
         name={name}
-        label={label}
-        aria-label={label}
+        label={t(label)}
+        aria-label={t(label)}
         className={className + ` focus:ring-0`}
         variant={variant}
         color={color}
@@ -53,9 +56,12 @@ export default function TextArea({
         required={disabled === true ? false : required} //remove the red star of required when disabled.
         {...props}
       />
-      <ErrorMessage message={errorMsg} {...errorMsgProps} />
+      <ErrorMessage
+        message={typeof errorMsg === "string" ? t(errorMsg) : errorMsg}
+        {...errorMsgProps}
+      />
       {typeof hint === "string" ? (
-        <HintMessage message={hint} {...hintProps} />
+        <HintMessage message={t(hint)} {...hintProps} />
       ) : (
         <HintMessage>{hint}</HintMessage>
       )}

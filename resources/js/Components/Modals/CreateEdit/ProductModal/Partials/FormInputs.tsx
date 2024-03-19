@@ -7,7 +7,7 @@ import Num from "@/Utilities/Num";
 import { usePage } from "@inertiajs/react";
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import TextArea from "@/Components/Inputs/TextArea";
-import { Tooltip } from "@material-tailwind/react";
+import { useTranslation } from "react-i18next";
 
 export default function FormInputs({
   formProps: form,
@@ -23,12 +23,14 @@ export default function FormInputs({
   function numbering(n: number | string | null) {
     return n == null ? n : Number(Number(n).toFixed(8)); //database decimal type accept at most 8 fraction digits
   }
+
+  const { t } = useTranslation();
   return (
     <div className="">
       <div className="w-full">
         <Input
           id="name"
-          label="Product Name"
+          label={"Product Name"}
           name="name"
           type="text"
           value={form.data.name ?? undefined}
@@ -64,35 +66,44 @@ export default function FormInputs({
           errorMsg={form.errors.price}
           hideError={form.isDirty("price")}
           required={false}
-          hint={modalAction.state==='edit'&&<span>If you change the price of this product, it may affect the bills that have already been issued with the old price. This could result in incorrect calculations, such as the total price of a bill. Please make sure you have no bills that have this product.</span>}
+          hint={
+            modalAction.state === "edit" && (
+              <span>
+                {t(
+                  "If you change the price of this product, it may affect the bills that have already been issued with the old price. This could result in incorrect calculations, such as the total price of a bill. Please make sure you have no bills that have this product.",
+                )}
+              </span>
+            )
+          }
         />
 
-<div title={taxPercent === 0?'Tax is 0%':''}>
-        <Checkbox
-          label={
-            <span>
-              Price includes tax (
-              {<Num showCurrency amount={form.data.price ?? 0} />} without tax)
-            </span>
-          }
-          checked={priceIncludeTax}
-          errorMsg={undefined}
-          disabled={form.processing || taxPercent === 0}
-          onChange={(e) => {
-            setPriceIncludeTax((v) => {
-              form.setData(
-                "price",
-                numbering(
-                  inputPrice != null && !v
-                    ? inputPrice / (1 + taxPercent)
-                    : inputPrice,
-                ),
-              );
-              return !v;
-            });
-          }}
-        />
-</div>
+        <div title={taxPercent === 0 ? "Tax is 0%" : ""}>
+          <Checkbox
+            label={
+              <span>
+                {t("Tax is included.")} (
+                {<Num showCurrency amount={form.data.price ?? 0} />}{" "}
+                {t("without tax")})
+              </span>
+            }
+            checked={priceIncludeTax}
+            errorMsg={undefined}
+            disabled={form.processing || taxPercent === 0}
+            onChange={(e) => {
+              setPriceIncludeTax((v) => {
+                form.setData(
+                  "price",
+                  numbering(
+                    inputPrice != null && !v
+                      ? inputPrice / (1 + taxPercent)
+                      : inputPrice,
+                  ),
+                );
+                return !v;
+              });
+            }}
+          />
+        </div>
       </div>
       <div className="mt-3">
         <Input

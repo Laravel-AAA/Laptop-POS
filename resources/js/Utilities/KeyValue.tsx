@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function KeyValue({
   k: key,
@@ -7,7 +8,7 @@ export default function KeyValue({
   keyClassName = "",
   valueClassName = "",
   title = "",
-  noColon=false,
+  noColon = false,
 }: {
   k: string;
   className?: string;
@@ -15,13 +16,15 @@ export default function KeyValue({
   valueClassName?: string;
   title?: string;
   v?: ReactNode | string | null | undefined;
-  noColon?:boolean
+  noColon?: boolean;
 }) {
+  const { t } = useTranslation();
   return (
     <p className={className}>
-      <span className={"text-blue-gray-500 " + keyClassName}>{key}</span>{!noColon&&':'}&nbsp;
-      <span className={"text-gray-800 " + valueClassName} title={title}>
-        {value??'N/A'}
+      <span className={"text-blue-gray-500 " + keyClassName}>{t(key)}</span>
+      {!noColon && ":"}&nbsp;
+      <span className={"text-gray-800 " + valueClassName} title={t(title)}>
+        {value ?? t("N/A")}
       </span>
     </p>
   );

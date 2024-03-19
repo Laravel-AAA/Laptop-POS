@@ -4,6 +4,7 @@ import { UseBetterForm } from "@/Utilities/useBetterForm";
 import RoleSelector from "./RoleSelector";
 import { useEffect, useState } from "react";
 import Checkbox from "@/Components/Checkbox";
+import { useTranslation } from "react-i18next";
 
 export default function FormInputs({
   form,
@@ -12,6 +13,7 @@ export default function FormInputs({
   form: UseBetterForm<ICreateUser | IUser>;
   modalAction: IModalAction<IUser>;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="space-y-4">
       <Input
@@ -47,12 +49,13 @@ export default function FormInputs({
         hint={
           <>
             {modalAction.state === "create" && (
-              <span>A verification link will be sent to this email</span>
+              <span>{t("A verification link will be sent to this email")}</span>
             )}
             {modalAction.state === "edit" && (
               <span>
-                Note: If you change the email address, the account owner will
-                need to re-verify the new email address.
+                {t(
+                  "Note: If you change the email address, the account owner will need to re-verify the new email address.",
+                )}
               </span>
             )}
           </>

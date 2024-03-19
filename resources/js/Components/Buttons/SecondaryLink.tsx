@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 import BetterLink from "./BetterLink";
 import { InertiaLinkProps } from "@inertiajs/react";
 
@@ -9,6 +9,7 @@ export default function SecondaryLink({
   disabled,
   ...props
 }: InertiaLinkProps & { disabled?: boolean }) {
+  const { t } = useTranslation();
   return (
     <BetterLink
       {...props}
@@ -27,7 +28,7 @@ export default function SecondaryLink({
         } ` + className
       }
     >
-      {children}
+      {typeof children === "string" ? t(children) : children}
     </BetterLink>
   );
 }

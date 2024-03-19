@@ -3,6 +3,7 @@ import AlertModal from "../../AlertModal";
 import { IProduct } from "@/types";
 import { Inertia, Method } from "@inertiajs/inertia";
 import { router } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
 
 export default function DeleteConfirmProductModal({
   product,
@@ -14,6 +15,8 @@ export default function DeleteConfirmProductModal({
   requestClose: (clickedButtonText?: string) => any;
 }) {
   const [deleteProgress, setDeleteProgress] = useState<boolean>(false);
+
+  const { t } = useTranslation();
   return (
     <AlertModal
       key="createEditProductDeleteConfirmProductModal"
@@ -21,7 +24,8 @@ export default function DeleteConfirmProductModal({
       title="Are you sure?"
       paragraph={
         <span>
-          You are about to delete the product <strong>{product.name}</strong>
+          {t("You are about to delete the product")}{" "}
+          <strong>{product.name}</strong>
         </span>
       }
       buttons={[

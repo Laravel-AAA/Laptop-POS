@@ -6,6 +6,7 @@ import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { ICreateProduct, IModalAction, IProduct } from "@/types";
 import { Progress } from "@material-tailwind/react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function FormImage({
   formProps: form,
@@ -116,6 +117,7 @@ function InputImage({
   editImageState: "removed" | "change" | "default";
   form: UseBetterForm<ICreateProduct>;
 }) {
+  const { t } = useTranslation();
   return (
     <>
       <Input
@@ -123,10 +125,12 @@ function InputImage({
           ((img === null && state === "edit") ||
           editImageState === "removed" ||
           state === "create"
-            ? "Choose "
+            ? t("Choose")
             : editImageState === "change"
-              ? "Change "
-              : "") + "Image"
+              ? t("Change")
+              : "") +
+          " " +
+          t("Image")
         }
         type="file"
         className="mt-1 block w-full"
@@ -139,9 +143,9 @@ function InputImage({
         }}
         errorMsg={form.errors.img || form.errors.imageFile}
         hideError={form.isDirty("img") || form.isDirty("imageFile")}
-        hint="We recommend an image with white background"
+        hint={t("We recommend an image with white background")}
       />
-      {/* {form.progress && <Progress value={50}/>} */}
+      {/* {form.progress && <Progress value={50}/>} */},
     </>
   );
 }

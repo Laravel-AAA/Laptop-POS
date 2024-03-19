@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { FaExclamationTriangle, FaInfo } from "react-icons/fa";
 import TemplateModal, { IModalButtons } from "./TemplateModal";
+import { useTranslation } from "react-i18next";
 interface IAlertModal {
   icon?: "info" | "danger";
   buttons?: IModalButtons[];
@@ -32,9 +33,10 @@ export default function AlertModal({
     );
   }
 
+  const { t } = useTranslation();
   return (
     <TemplateModal
-      title={title}
+      title={t(title)}
       buttons={buttons}
       open={isOpen}
       closeModal={(clickedButtonText) => requestClose(clickedButtonText)}
@@ -46,7 +48,9 @@ export default function AlertModal({
         )
       }
     >
-      <h1 className="text-sm text-gray-600">{paragraph}</h1>
+      <h1 className="text-sm text-gray-600">
+        {typeof paragraph === "string" ? t(paragraph) : paragraph}
+      </h1>
     </TemplateModal>
   );
 }

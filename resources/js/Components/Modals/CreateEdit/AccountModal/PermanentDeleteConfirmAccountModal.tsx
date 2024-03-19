@@ -2,6 +2,7 @@ import { useState } from "react";
 import AlertModal from "../../AlertModal";
 import { IUser } from "@/types";
 import { router } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
 
 export default function PermanentDeleteConfirmAccountModal({
   account,
@@ -13,15 +14,17 @@ export default function PermanentDeleteConfirmAccountModal({
   requestClose: (clickedButtonText?: string) => any;
 }) {
   const [progress, setProgress] = useState<boolean>(false);
+
+  const { t } = useTranslation();
   return (
     <AlertModal
       icon="danger"
       title="Are you sure?"
       paragraph={
         <span>
-          You are about to permanently delete{" "}
+          {t("You are about to permanently delete")}{" "}
           <span className="font-semibold text-gray-600">{account?.name}</span>{" "}
-          account?
+          {t("account?")}
         </span>
       }
       buttons={[

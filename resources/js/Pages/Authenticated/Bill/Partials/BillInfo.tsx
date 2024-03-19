@@ -55,7 +55,7 @@ export default function BillInfo({ bill }: { bill: IBill }) {
             )}
             {bill.business.taxIdentificationNumber && (
               <KeyValue
-                k={t("Tax Identification")}
+                k="Tax Identification"
                 v={bill.business.taxIdentificationNumber}
               />
             )}
@@ -74,8 +74,8 @@ export default function BillInfo({ bill }: { bill: IBill }) {
                 </span>
               }
             />
-            <KeyValue k={t("Invoice ID")} v={<ID id={bill.id} />} />
-            <KeyValue k={t("Cashier")} v={bill.created_by?.name ?? t("N/A")} />
+            <KeyValue k="Invoice ID" v={<ID id={bill.id} />} />
+            <KeyValue k="Cashier" v={bill.created_by?.name ?? t("N/A")} />
           </section>
 
           <BillDetailsTable bill={bill} />
@@ -83,7 +83,7 @@ export default function BillInfo({ bill }: { bill: IBill }) {
           <section>
             {bill.business.taxPercent !== 0 && (
               <KeyValue
-                k={t("Total without VAT")}
+                k="Total without VAT"
                 v={
                   <Num
                     amount={subTotalPrice}
@@ -111,7 +111,7 @@ export default function BillInfo({ bill }: { bill: IBill }) {
               />
             )}
             <KeyValue
-              k={t("Net Invoice")}
+              k="Net Invoice"
               v={
                 <Num
                   amount={totalPrice}
@@ -124,7 +124,7 @@ export default function BillInfo({ bill }: { bill: IBill }) {
           </section>
           <section>
             <KeyValue
-              k={t("Received")}
+              k="Received"
               v={
                 <Num
                   amount={bill.cashReceived}
@@ -134,9 +134,9 @@ export default function BillInfo({ bill }: { bill: IBill }) {
                 />
               }
             />
-            {bill.cashReceived && (
+            {bill.cashReceived &&
               <KeyValue
-                k={t("Remaining")}
+                k="Remaining"
                 v={
                   <Num
                     amount={
@@ -144,13 +144,13 @@ export default function BillInfo({ bill }: { bill: IBill }) {
                         ? null
                         : bill.cashReceived - totalPrice
                     }
-                    noAmount={t("Digital Payment")}
+                    noAmount="Digital Payment"
                     currency={bill.business.currency}
                     showCurrency
                   />
                 }
               />
-            )}
+            }
           </section>
 
           <section className="flex justify-center">
@@ -161,7 +161,7 @@ export default function BillInfo({ bill }: { bill: IBill }) {
             <Link href="/">
               <KeyValue
                 className="border-t pt-1 text-center text-xs"
-                k={t("Developed by")}
+                k="Developed by"
                 v="Laptop-POS.com"
                 noColon
               />

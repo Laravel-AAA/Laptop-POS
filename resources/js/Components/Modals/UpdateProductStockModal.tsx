@@ -6,6 +6,7 @@ import useBetterForm from "@/Utilities/useBetterForm";
 import Input from "../Inputs/Input";
 import SecondaryMaterialBtn from "../Buttons/Material/SecondaryMaterialBtn";
 import { VisitOptions } from "@inertiajs/inertia";
+import { useTranslation } from "react-i18next";
 
 export default function UpdateProductStockModal({
   modalAction,
@@ -37,6 +38,7 @@ export default function UpdateProductStockModal({
     } as VisitOptions);
   }
 
+  const { t } = useTranslation();
   return (
     <TemplateModal
       title="Update Stock"
@@ -70,11 +72,12 @@ export default function UpdateProductStockModal({
           required={true}
           hint={
             <span>
-              Curren stock{" "}
+              {t("Current stock")}{" "}
               <span className="font-semibold text-gray-600">
-                {product?.stock ?? "N/A"}
+                {product?.stock ?? t("N/A")}
               </span>
-              . Will update to{" "}
+              {". "}
+              {t("Will update to")}{" "}
               <span className="font-semibold text-gray-600">
                 {(product?.stock ?? 0) + increase}
               </span>

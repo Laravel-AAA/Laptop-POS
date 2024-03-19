@@ -6,6 +6,7 @@ import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { AuthPageProps, IBill, ICreateBill } from "@/types";
 import { usePage } from "@inertiajs/react";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function FormFields({
   form,
@@ -39,13 +40,14 @@ export default function FormFields({
     else form.setData("cashReceived", Number(total().toFixed(2)));
   }, []);
 
+  const { t } = useTranslation();
   return (
     <>
       <TotalInfo bill={form.data} />
       <div className="mt-3 w-full">
         <Input
           ref={cashReceivedRef}
-          label="Cash Received"
+          label={t("Cash Received")}
           name="cashReceived"
           type="number"
           value={
@@ -71,8 +73,8 @@ export default function FormFields({
               style={{ visibility: !isDigitalPayment ? "visible" : "hidden" }}
               className="ml-1 text-lg text-gray-700"
             >
-              Remaining:&nbsp;
-              <Num className="text-gray-900 font-semibold" amount={remaining} />
+              {t("Remaining")}:&nbsp;
+              <Num className="font-semibold text-gray-900" amount={remaining} />
             </span>
           }
         />
@@ -80,7 +82,9 @@ export default function FormFields({
         <div className="mt-1 flex items-center">
           <Checkbox
             label={
-              <span className="text-lg text-gray-600">Digital payment</span>
+              <span className="text-lg text-gray-600">
+                {t("Digital payment")}
+              </span>
             }
             name="isDigitalPayment"
             className="h-5 w-5"
@@ -91,7 +95,7 @@ export default function FormFields({
                 setTimeout(() => {
                   cashReceivedRef.current?.focus();
                   cashReceivedRef.current?.select();
-                },100);
+                }, 100);
               }
               setDigitalPayment((v) => {
                 if (!isDigitalPayment) {

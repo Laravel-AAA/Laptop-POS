@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function SecondaryMaterialBtn({
   type = "button",
@@ -7,16 +8,17 @@ export default function SecondaryMaterialBtn({
   children,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
+  const { t } = useTranslation();
   return (
     <button
       {...props}
       type={type}
       className={
-        `text-stone inline-block items-center rounded-md
-        border border-blue-gray-100 bg-white
-        px-4 py-2  text-center text-xs
-        font-semibold uppercase
-        tracking-wide  transition duration-200
+        `inline-block items-center rounded-md border
+        border-blue-gray-100 bg-white px-4
+        py-2 text-center  text-xs font-semibold
+        uppercase tracking-wide
+        text-stone  transition duration-200
         ease-in-out hover:bg-blue-gray-50 focus:outline-none
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
         focus-visible:ring-offset-2 active:scale-95
@@ -26,7 +28,7 @@ export default function SecondaryMaterialBtn({
       }
       disabled={disabled}
     >
-      {children}
+      {typeof children === "string" ? t(children) : children}
     </button>
   );
 }
