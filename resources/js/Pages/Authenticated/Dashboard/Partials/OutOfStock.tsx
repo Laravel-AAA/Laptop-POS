@@ -6,6 +6,7 @@ import Product from "@/Pages/Authenticated/Inventory/Partials/Product";
 import { ILaravelPaginate, IModalAction, IProduct } from "@/types";
 import { Card, Tooltip, Typography } from "@material-tailwind/react";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FaBoxesStacked, FaChevronRight } from "react-icons/fa6";
 
 export default function OutOfStock({
@@ -21,6 +22,8 @@ export default function OutOfStock({
   const [updateStockAction, setUpdateStockAction] = useState<
     { open: true; product: IProduct } | { open: false; product?: IProduct }
   >({ open: false });
+
+  const { t } = useTranslation();
   return (
     <>
       <CreateEditProductModal
@@ -37,13 +40,13 @@ export default function OutOfStock({
         <div className="p-6">
           <header>
             <Typography variant="h6" color="blue-gray">
-              Out of Stock Products
+              { t( "Out of Stock Products" ) }
             </Typography>
             <A
               href={route("product.index", { stock: "out" })}
               className="font-normal"
             >
-              Viw all out of stock products
+              { t( "Viw all out of stock products" ) }
             </A>
           </header>
           <section>
@@ -84,7 +87,7 @@ export default function OutOfStock({
             ) : (
               <div className="my-20 flex justify-center gap-4 opacity-60">
                 <FaBoxesStacked className="mt-1" />
-                <p>You have no products with empty stock</p>
+                <p>{ t( "You have no products with empty stock" ) }</p>
               </div>
             )}
           </section>

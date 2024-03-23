@@ -8,6 +8,7 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 export function StatisticsCard({
   icon,
@@ -18,6 +19,8 @@ export function StatisticsCard({
   tooltip,
   suffix,
 }: StatisticsCardProps) {
+
+  const { t } = useTranslation();
   return (
     <Card className="rounded-none shadow sm:rounded-lg">
       <CardHeader
@@ -29,13 +32,13 @@ export function StatisticsCard({
       >
         {icon}
       </CardHeader>
-      <Tooltip content={tooltip} className={!tooltip?'hidden':""} >
+      <Tooltip content={tooltip && t( tooltip )} className={!tooltip?'hidden':""} >
         <CardBody className="p-4 pb-2 text-right">
           <Typography
             variant="small"
             className="font-normal text-blue-gray-600"
           >
-            {title}
+            {t( title )}
           </Typography>
           <Typography variant="h4" color="blue-gray">
             <Num amount={value} showCurrency={showCurrency} suffix={suffix} />
@@ -57,7 +60,7 @@ export function StatisticsCard({
               {footer.increase > 0 && "+"}
               <Num amount={footer.increase} suffix="%" />
             </strong>
-            &nbsp;{footer.label}
+            &nbsp;{t( footer.label )}
           </Typography>
         </CardFooter>
       )}

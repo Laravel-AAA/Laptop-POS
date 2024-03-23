@@ -7,6 +7,7 @@ import useStatisticsChartsData from "./Partials/useStatisticsChartsData";
 import { StatisticsChart } from "./Partials/StatisticsChart";
 import Footer from "@/Layouts/GuestLayout/Partials/Footer";
 import OutOfStock from "./Partials/OutOfStock";
+import { useTranslation } from "react-i18next";
 
 export default function Dashboard({
   auth,
@@ -16,9 +17,10 @@ export default function Dashboard({
 
   const chartsData = useStatisticsChartsData(dashboard.charts);
 
+  const { t } = useTranslation();
   return (
-    <AuthenticatedLayout user={auth.user} header="Dashboard">
-      <Head title="Dashboard" />
+    <AuthenticatedLayout user={auth.user} header={ t( "Dashboard"  )}>
+      <Head title={ t( "Dashboard"   )}/>
 
       <div className="pt-12">
         <div className="mx-auto max-w-7xl space-y-11 sm:px-6 lg:px-8">
