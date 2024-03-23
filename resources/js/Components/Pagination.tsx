@@ -25,6 +25,9 @@ export default function Pagination({
               disabled={!paginateItems.prev_page_url}
               variant="outlined"
               className="rounded-r-none border-r-0"
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
             >
               <FaArrowLeft strokeWidth={2} className="h-4 w-4" />
             </IconButton>
@@ -40,6 +43,9 @@ export default function Pagination({
                     "rounded-none border-r-0 text-base " +
                     (v.active ? "bg-primary-800 text-gray-100" : "")
                   }
+                  placeholder={undefined}
+                  onPointerEnterCapture={undefined}
+                  onPointerLeaveCapture={undefined}
                 >
                   {v.label}
                 </IconButton>
@@ -55,6 +61,9 @@ export default function Pagination({
               disabled={!paginateItems.next_page_url}
               variant="outlined"
               className="rounded-l-none"
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
             >
               <FaArrowRight strokeWidth={2} className="h-4 w-4" />
             </IconButton>

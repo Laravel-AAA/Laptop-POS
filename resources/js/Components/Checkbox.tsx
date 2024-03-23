@@ -22,6 +22,8 @@ export default function Checkbox({
   return (
     <>
       <MaterialCheckbox
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
         iconProps={iconProps}
         labelProps={labelProps}
         color={color}
@@ -30,7 +32,7 @@ export default function Checkbox({
       />
 
       <ErrorMessage
-        className="ml-4 !mt-0"
+        className="!mt-0 ml-4"
         message={errorMsg}
         {...errorMsgProps}
       />

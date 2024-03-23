@@ -36,17 +36,28 @@ export default function OutOfStock({
         modalAction={updateStockAction}
         close={() => setUpdateStockAction((p) => ({ ...p, open: false }))}
       />
-      <Card className="rounded-none shadow sm:rounded-lg">
+      <Card
+        className="rounded-none shadow sm:rounded-lg"
+        placeholder={undefined}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+      >
         <div className="p-6">
           <header>
-            <Typography variant="h6" color="blue-gray">
-              { t( "Out of Stock Products" ) }
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+            >
+              {t("Out of Stock Products")}
             </Typography>
             <A
               href={route("product.index", { stock: "out" })}
               className="font-normal"
             >
-              { t( "Viw all out of stock products" ) }
+              {t("Viw all out of stock products")}
             </A>
           </header>
           <section>
@@ -87,7 +98,7 @@ export default function OutOfStock({
             ) : (
               <div className="my-20 flex justify-center gap-4 opacity-60">
                 <FaBoxesStacked className="mt-1" />
-                <p>{ t( "You have no products with empty stock" ) }</p>
+                <p>{t("You have no products with empty stock")}</p>
               </div>
             )}
           </section>

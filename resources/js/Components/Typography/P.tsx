@@ -6,7 +6,13 @@ export default function P({
   className = "",
 }: PropsWithChildren<{ className?: string }>) {
   return (
-    <Typography variant="paragraph" className={"text-gray-700 " + className}>
+    <Typography
+      variant="paragraph"
+      className={"text-gray-700 " + className}
+      placeholder={undefined}
+      onPointerEnterCapture={undefined}
+      onPointerLeaveCapture={undefined}
+    >
       {children}
     </Typography>
   );

@@ -32,7 +32,12 @@ export default function Bills({
       last item will not be shown because dropdown content is display below the
       item and that is outside the table */}
         <div className="mx-auto w-full overflow-x-auto overflow-y-hidden pb-36 pt-6 md:w-11/12 ">
-          <Card className="w-full min-w-fit rounded-md">
+          <Card
+            className="w-full min-w-fit rounded-md"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
             <table className="table-auto text-left">
               <thead>
                 <tr>

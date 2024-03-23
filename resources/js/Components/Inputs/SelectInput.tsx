@@ -34,6 +34,9 @@ export default function SelectInput({
   return (
     <>
       <Select
+        placeholder={undefined}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
         className={`focus:outline-none
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
         focus-visible:ring-offset-2 ${className}`}

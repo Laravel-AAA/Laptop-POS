@@ -16,25 +16,55 @@ export function StatisticsChart({
   footer,
 }: StatisticsChartProps) {
   return (
-    <Card className="rounded-none shadow sm:rounded-lg">
+    <Card
+      className="rounded-none shadow sm:rounded-lg"
+      placeholder={undefined}
+      onPointerEnterCapture={undefined}
+      onPointerLeaveCapture={undefined}
+    >
       <CardHeader
         variant="gradient"
         color="white"
         floated={false}
         shadow={false}
+        placeholder={undefined}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
       >
         <Chart {...chart} />
       </CardHeader>
-      <CardBody className="px-6 pt-0">
-        <Typography variant="h6" color="blue-gray">
+      <CardBody
+        className="px-6 pt-0"
+        placeholder={undefined}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+      >
+        <Typography
+          variant="h6"
+          color="blue-gray"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
           {title}
         </Typography>
-        <Typography variant="small" className="font-normal text-blue-gray-600">
+        <Typography
+          variant="small"
+          className="font-normal text-blue-gray-600"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
           {description}
         </Typography>
       </CardBody>
       {footer && (
-        <CardFooter className="border-t border-blue-gray-50 px-6 py-5">
+        <CardFooter
+          className="border-t border-blue-gray-50 px-6 py-5"
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
           {footer}
         </CardFooter>
       )}

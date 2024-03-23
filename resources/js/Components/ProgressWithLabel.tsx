@@ -27,17 +27,36 @@ export default function ProgressWithLabel({
     <div className="w-full">
       <div className="mb-2 flex items-center justify-between gap-4">
         {leftLabel && (
-          <Typography color="blue-gray" variant="h6">
+          <Typography
+            color="blue-gray"
+            variant="h6"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
             {leftLabel}
           </Typography>
         )}
         {rightLabel && (
-          <Typography color="blue-gray" variant="h6">
+          <Typography
+            color="blue-gray"
+            variant="h6"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
             {rightLabel}
           </Typography>
         )}
       </div>
-      <Progress color={progressColor} label={progressLabel} value={progress} />
+      <Progress
+        color={progressColor}
+        label={progressLabel}
+        value={progress}
+        placeholder={undefined}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+      />
     </div>
   );
 }

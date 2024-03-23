@@ -12,6 +12,9 @@
         "module": "ESNext",
         "moduleResolution": "bundler",
         "skipLibCheck": true,
+        "typeRoots": [
+            "./node_modules/@types"
+        ],
         "lib": [
             "ESNext",
             "DOM"

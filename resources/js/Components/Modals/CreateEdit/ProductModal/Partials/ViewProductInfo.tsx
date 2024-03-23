@@ -77,6 +77,9 @@ export default function ViewProductInfo({ product }: { product: IProduct }) {
           title={t("More info")}
           className="rounded-full"
           onClick={() => setShowMore((v) => !v)}
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
         >
           {/* Show {showMore ? "Less" : "More"}&nbsp; */}
           {showMore ? <FaChevronUp /> : <FaChevronDown />}

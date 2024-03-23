@@ -43,6 +43,8 @@ export default function TextArea({
   return (
     <>
       <Textarea
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
         id={id}
         name={name}
         label={t(label)}

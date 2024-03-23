@@ -25,15 +25,29 @@ export default function OptionsMenu({
   const { t } = useTranslation();
 
   return (
-    <Tooltip content={ t( "Preferences"  )}>
+    <Tooltip content={t("Preferences")}>
       <Menu>
         <MenuHandler>
-          <Button variant="text">
+          <Button
+            variant="text"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
             <FaGear className="text-lg text-blue-gray-500" />
           </Button>
         </MenuHandler>
-        <MenuList>
-          <MenuItem className="p-0">
+        <MenuList
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
+          <MenuItem
+            className="p-0"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
             <label
               htmlFor="item-1"
               className="flex cursor-pointer items-center gap-2 p-2"
@@ -51,11 +65,18 @@ export default function OptionsMenu({
                 }}
                 containerProps={{ className: "p-0" }}
                 className="hover:text-gray-800 hover:before:content-none"
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+                crossOrigin={undefined}
               />
               {t("Print on Submit")}
             </label>
           </MenuItem>
-          <MenuItem>
+          <MenuItem
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
             {t("Products Size")}
             <Tooltip placement="bottom" content={productItemSize + " px"}>
               {/* from:175px. to:275px. default:192px. mapping:0-100 to 175-275 */}
@@ -75,6 +96,9 @@ export default function OptionsMenu({
                         Math.round(Number(e.target.value)) + 175,
                       );
                     }}
+                    placeholder={undefined}
+                    onPointerEnterCapture={undefined}
+                    onPointerLeaveCapture={undefined}
                   />
                 </label>
               </span>

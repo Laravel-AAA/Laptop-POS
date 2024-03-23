@@ -59,6 +59,8 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
   return (
     <div>
       <MaterialInput
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
         {...props}
         id={id}
         name={name}

@@ -6,7 +6,13 @@ export function H2({
   className = "",
 }: PropsWithChildren<{ className?: string }>) {
   return (
-    <Typography variant="h2" className={"text-gray-900 font-extrabold mb-1 " + className}>
+    <Typography
+      variant="h2"
+      className={"mb-1 font-extrabold text-gray-900 " + className}
+      placeholder={undefined}
+      onPointerEnterCapture={undefined}
+      onPointerLeaveCapture={undefined}
+    >
       {children}
     </Typography>
   );

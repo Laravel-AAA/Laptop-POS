@@ -41,6 +41,9 @@ export function PhoneInput<
         <Menu placement="bottom-start">
           <MenuHandler>
             <Button
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+              placeholder={undefined}
               size="lg"
               ripple={false}
               disabled={form.processing}
@@ -58,7 +61,12 @@ export function PhoneInput<
               {country.countryCallingCode}
             </Button>
           </MenuHandler>
-          <MenuList className="max-h-[20rem] max-w-[18rem]">
+          <MenuList
+            className="max-h-[20rem] max-w-[18rem]"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
             {countries.map((c, i) => {
               return (
                 <MenuItem
@@ -68,6 +76,9 @@ export function PhoneInput<
                   onClick={() =>
                     form.setData("countryCallingCode", c.countryCallingCode)
                   }
+                  placeholder={undefined}
+                  onPointerEnterCapture={undefined}
+                  onPointerLeaveCapture={undefined}
                 >
                   <img
                     src={c.flags.svg}
@@ -93,6 +104,8 @@ export function PhoneInput<
           disabled={form.processing}
           required={!form.processing}
           crossOrigin={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
         />
       </div>
       {(form.errors.phone || form.errors.countryCallingCode) && (
