@@ -14,6 +14,7 @@ import { ResizableBox } from "react-resizable";
 import CheckoutHeader from "./Partials/CheckoutHeader";
 import useBetterForm, { UseBetterForm } from "@/Utilities/useBetterForm";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export interface BillOperations {
   form: UseBetterForm<ICreateBill | IBill>;
@@ -128,10 +129,11 @@ export default function Checkout({
     changeQty,
     removeBillDetail,
   };
-  // console.log("screen width", window.innerWidth);
+
+  const { t } = useTranslation();
   return (
     <AuthenticatedLayout user={auth.user} header={null}>
-      <Head title="Checkout" />
+      <Head title={ t( "Checkout"   )}/>
 
       <div className="w-full flex-row-reverse md:flex">
         <ResizableBox
@@ -180,15 +182,10 @@ export default function Checkout({
 
 function computedElementWidthById(id: string): number {
   const e = document.getElementById(id);
-  // console.log("element", e);
   if (e == null) return 240; //default: is average width looks in my DevTools.
   const computedStyle = getComputedStyle(e);
-  // console.log("computedStyle", computedStyle);
   const width = computedStyle.width; //'###px' Ex: '123px'
-  // console.log("width", width);
-  const float = parseFloat(width); // '###' Ex: '123'
-  // console.log("float", float);
-  return float;
+   return parseFloat(width); // '###' Ex: '123'
 }
 
 function convertRemToPixels(rem: number): number {

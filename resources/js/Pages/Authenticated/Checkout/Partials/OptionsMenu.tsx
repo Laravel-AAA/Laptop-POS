@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FaGear } from "react-icons/fa6";
 
 export default function OptionsMenu({
@@ -21,8 +22,10 @@ export default function OptionsMenu({
   const [isPrintOnSubmit, setPrintOnSubmit] = useState<boolean>(
     JSON.parse(localStorage.getItem("printOnSubmit") ?? "true"),
   );
+  const { t } = useTranslation();
+
   return (
-    <Tooltip content="Preferences">
+    <Tooltip content={ t( "Preferences"  )}>
       <Menu>
         <MenuHandler>
           <Button variant="text">
@@ -48,16 +51,15 @@ export default function OptionsMenu({
                 }}
                 containerProps={{ className: "p-0" }}
                 className="hover:text-gray-800 hover:before:content-none"
-                crossOrigin={undefined}
               />
-              Print on Submit
+              {t("Print on Submit")}
             </label>
           </MenuItem>
           <MenuItem>
-            Products Size
+            {t("Products Size")}
             <Tooltip placement="bottom" content={productItemSize + " px"}>
               {/* from:175px. to:275px. default:192px. mapping:0-100 to 175-275 */}
-              <span className="flex  cursor-pointer items-center gap-2 p-2">
+              <span className="flex cursor-pointer items-center gap-2 p-2">
                 <label htmlFor="item-2" className="">
                   <Slider
                     id="item-2"

@@ -1,26 +1,28 @@
 import { BillOperations } from "@/Pages/Authenticated/Checkout";
 import Num from "@/Utilities/Num";
-import { AuthPageProps, ICreateBillDetail,  } from "@/types";
+import { AuthPageProps, ICreateBillDetail } from "@/types";
 import { usePage } from "@inertiajs/react";
 import { ButtonHTMLAttributes, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { BsDash, BsPlusLg } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
 
 export default function RowItem({
   bill_detail,
-  billOperations: { increaseQty, decreaseQty, removeBillDetail},
+  billOperations: { increaseQty, decreaseQty, removeBillDetail },
 }: {
   bill_detail: ICreateBillDetail;
   billOperations: BillOperations;
 }) {
   const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
 
+  const { t } = useTranslation();
   return (
     <tr className="group h-10 max-h-10 border-y">
       <td className="flex h-10 w-14 items-center justify-center">
         {bill_detail.product.img && (
           <img
-            className="max-w-14 max-h-10 group-hover:hidden"
+            className="max-h-10 max-w-14 group-hover:hidden"
             src={
               bill_detail.product.img.startsWith("http")
                 ? bill_detail.product.img
@@ -30,7 +32,7 @@ export default function RowItem({
           />
         )}
         <RemoveBtn
-          className="max-w-14 hidden h-10 max-h-14 text-right group-hover:block "
+          className="hidden h-10 max-h-14 max-w-14 text-right group-hover:block "
           onClick={() => removeBillDetail(bill_detail.product_id)}
         />
       </td>
@@ -53,11 +55,11 @@ export default function RowItem({
           bill_detail={bill_detail}
         />
       </td>
-      <td title={bill_detail.product.price ? "Tax included" : ""}>
+      <td title={bill_detail.product.price ? t("Tax included") : ""}>
         {/* `ch` is a unit to measure the character `0` width relative to font family and size (e.g., `6ch` means width of `000000` (six zeros) ) */}
         <span className="mx-1 inline-block w-[6ch]">
           {bill_detail.product.price == null ? (
-            <span className="text-danger-600">N/A</span>
+            <span className="text-danger-600">{t("N/A")}</span>
           ) : (
             <Num
               className="font-semibold text-primary-700"
@@ -79,11 +81,12 @@ function Quantity({
   increaseQty: BillOperations["increaseQty"];
   bill_detail: ICreateBillDetail;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="mx-1 flex h-10 w-24 justify-between">
       <IncDecQtyBtn
         className="rounded-s-md"
-        title="Decrease quantity"
+        title={t("Decrease quantity")}
         onClick={() => decreaseQty(bill_detail.product)}
         icon={<BsDash className="m-auto" />}
       />
@@ -98,8 +101,8 @@ function Quantity({
         title={
           bill_detail.product.stock != null &&
           bill_detail.quantity >= bill_detail.product.stock
-            ? "Stock is empty!"
-            : "Increase quantity"
+            ? t("Stock is empty!")
+            : t("Increase quantity")
         }
         onClick={() => increaseQty(bill_detail.product)}
         disabled={
@@ -142,9 +145,11 @@ function RemoveBtn({
   className = "",
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
+
+  const { t } = useTranslation();
   return (
     <button
-      title="Remove item"
+      title={ t( "Remove item"  )}
       type="button"
       className={`flex-inline w-full items-center rounded
       bg-danger-600 bg-opacity-80 text-white transition

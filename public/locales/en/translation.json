@@ -408,5 +408,20 @@
 "Location & Contact":"Location & Contact",
 "City":"City",
 "Address":"Address",
-"Business":"Business"
+"Business":"Business",
+"No products found!":"No products found!",
+"Empty cart!":"Empty cart!",
+"Tax included":"Tax included",
+"Decrease quantity":"Decrease quantity",
+"Remove item":"Remove item",
+"Items":"Items",
+"Submit":"Submit",
+"Sub total:":"Sub total",
+"Taxes:":"Taxes",
+"Total:":"Total",
+"Search...":"Search...",
+"Print on Submit":"Print on Submit",
+"Products Size":"Products Size",
+"Preferences":"Preferences",
+"Checkout":"Checkout"
 }
