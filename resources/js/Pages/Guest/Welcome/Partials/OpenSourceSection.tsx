@@ -1,8 +1,11 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
+import { useTranslation } from "react-i18next";
 import { FaGithub } from "react-icons/fa";
 import { FaCodeBranch } from "react-icons/fa6";
 
 export default function OpenSourceSection() {
+
+  const { t } = useTranslation();
   return (
     <section id="public-source" className="overflow-hidden bg-[#475569] py-24">
 
@@ -13,17 +16,14 @@ export default function OpenSourceSection() {
               <FaCodeBranch className="text-xl"/>
             </div>
             <h3 className="mb-2 text-3xl font-semibold leading-normal text-white">
-              Public Source
+              { t( "Public Source" ) }
             </h3>
             <p className="mb-4 mt-4 text-lg font-light leading-relaxed text-blue-gray-300">
-              We value transparency and openness, and that is why our system is
-              Public Source. You can access its code below and see how it's working.
-              You can also report issues, request features, or contribute to our
-              system.{" "}
+              { t( "We value transparency and openness, and that is why our system is Public Source. You can access its code below and see how it's working.  You can also report issues, request features, or contribute to our system." ) }
             </p>
             <p className="mb-4 mt-0 text-lg font-light leading-relaxed text-blue-gray-300">
-              Public Source is free to use for any purpose, as long as you
-              follow the terms of {" "}
+              { t( "Public Source is free to use for any purpose, as long as you follow the terms of" ) }
+              {" "}
               <a
                 target="_blank"
                 href="https://www.gnu.org/licenses/gpl-3.0.en.html"
@@ -31,11 +31,12 @@ export default function OpenSourceSection() {
               >
                 GNU.
               </a>
-              {" "}If you like our system, please give us a star on GitHub.
+              {" "}
+              { t( "If you like our system, please give us a star on GitHub." ) }
             </p>
             <a target="_blank" href="https://github.com/Laravel-AAA/Laptop-POS">
               <PrimaryButton className="github-star mt-4 inline-block rounded !bg-blue-gray-900 px-6 py-4 text-sm font-bold shadow hover:!bg-black hover:shadow-lg">
-                Source Code
+                { t( "Source Code" ) }
               </PrimaryButton>
             </a>
           </div>

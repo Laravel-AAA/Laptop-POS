@@ -1,7 +1,9 @@
-import A from "@/Components/Typography/A";
 import React, { HTMLAttributes, ImgHTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function PaymentMethodsSection() {
+
+  const { t } = useTranslation();
   return (
     <section id="payment-options" className="bg-blue-gray-100 py-1 pb-10">
       <div className="inline-flex w-full flex-nowrap overflow-hidden py-8 [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
@@ -28,14 +30,14 @@ Paddle automatically determines which payment methods to show to your customer, 
         <Images aria-hidden="true" />
       </div>
       <p className="px-4 text-center text-xs text-gray-700">
-        *Payment options presented to you on checkout depend on the currency,
-        location, and device used when subscribing.{" "}
+        *{ t( "Payment options presented to you on checkout depend on the currency, location, and device used when subscribing." ) }
+        {" "}
         <a
           href="https://www.paddle.com/help/start/intro-to-paddle/which-payment-methods-do-you-support"
           target="_blank"
           className="hover:text-blue-400"
         >
-          For more information click here
+          { t( "For more information click here" ) }
         </a>
       </p>
     </section>
@@ -46,7 +48,7 @@ function Images({ ...props }: HTMLAttributes<HTMLUListElement>) {
   return (
     <ul
       {...props}
-      className="animate-infinite-scroll flex items-center justify-center md:justify-start"
+      className="flex animate-infinite-scroll items-center justify-center md:justify-start"
     >
       <Img
         src="/assets/Banks/mastercard.png"

@@ -3,6 +3,7 @@ import A from "@/Components/Typography/A";
 import Num from "@/Utilities/Num";
 import { Tooltip } from "@material-tailwind/react";
 import React, { ButtonHTMLAttributes, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 export type PlanPeriod = "Monthly" | "Annually";
 
@@ -37,10 +38,11 @@ export default function Plan({
   monthlyPrice,
   annualPrice,
 }: PlanProps) {
+  const { t } = useTranslation();
   return (
     <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 !pb-3 text-center text-gray-900 shadow xl:p-8">
-      <h3 className="mb-4 text-2xl font-semibold">{title}</h3>
-      <p className="font-light text-gray-500">{desc}</p>
+      <h3 className="mb-4 text-2xl font-semibold">{t(title)}</h3>
+      <p className="font-light text-gray-500">{t(desc)}</p>
       <div className="my-8 ">
         <div className="flex items-baseline justify-center">
           <span className="mr-2 text-5xl font-extrabold">
@@ -50,7 +52,7 @@ export default function Plan({
             />
           </span>
           <span className="text-gray-500">
-            {period === "Annually" ? "/year" : "/month"}
+            {t(period === "Annually" ? "/year" : "/month")}
           </span>
         </div>
         {period === "Annually" && (
@@ -58,8 +60,8 @@ export default function Plan({
             <span className="text-gray-600">
               <Num prefix="$" amount={annualPrice / 12} fixed={1} />
             </span>{" "}
-            <span className="text-sm">/month</span>{" "}
-            <Tooltip content="Discount">
+            <span className="text-sm">{t("/month")}</span>{" "}
+            <Tooltip content={t("Discount")}>
               <span className="ml-1 rounded-full bg-danger-50 p-1 px-2 text-sm text-danger-400">
                 <Num
                   fixed={1}
@@ -86,7 +88,7 @@ export default function Plan({
             (actionProps?.className ? actionProps.className : "")
           }
         >
-          {actionText}
+          {t(actionText)}
         </PrimaryButton>
       )}
 
@@ -94,7 +96,7 @@ export default function Plan({
         className="mt-2 text-xs text-gray-500 hover:underline"
         href={route("paymentServicePolicy")}
       >
-        Payment & Refund Policy
+        {t("Payment & Refund Policy")}
       </A>
     </div>
   );
