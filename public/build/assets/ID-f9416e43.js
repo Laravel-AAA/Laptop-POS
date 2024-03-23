@@ -1,0 +1,1 @@
+import{j as r}from"./app-b733aa80.js";import{I as o}from"./Constant-3623d3bd.js";import{u as a}from"./useTranslation-c33630a8.js";function m({id:s}){const{t}=a();return r.jsxs("span",{title:"#"+s,className:"flex-nowrap whitespace-nowrap font-semibold italic tracking-wide",children:["#",(s==null?void 0:s.substring(26-o))??t("N/A")]})}export{m as I};

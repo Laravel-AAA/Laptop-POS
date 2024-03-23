@@ -1,0 +1,1 @@
+import{j as n}from"./app-b733aa80.js";import{u as a}from"./useTranslation-c33630a8.js";function i({message:t,className:r="",...o}){const{t:s}=a();return t&&n.jsx("p",{...o,className:"ml-2 mt-2 text-xs text-danger-600 "+r,children:t&&s(t)})}export{i as E};
