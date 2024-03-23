@@ -11,6 +11,7 @@ import SubscriptionProgress from "./Partials/SubscriptionProgress";
 import AlertModal from "@/Components/Modals/AlertModal";
 import { router } from "@inertiajs/react";
 import SupportEmailLink from "@/Components/SupportEmailLink";
+import { useTranslation } from "react-i18next";
 
 export default function SubscriptionSection({
   business,
@@ -38,23 +39,36 @@ export default function SubscriptionSection({
     subscribedTo === "Basic";
   const downgradeClass = "!from-danger-500 !to-danger-700";
 
+  const { t } = useTranslation();
+
   return (
     <section className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
       {/**Upgrade/Downgrade alert */}
       <AlertModal
         key="BusinessSubscriptionSectionUpgradeDowngradeAlert"
-        title={`${
-          isUpgrade(upDownGradeAlert.from, upDownGradeAlert.to)
-            ? "Upgrade"
-            : "Downgrade"
-        } to ${upDownGradeAlert.to}`}
-        paragraph={`You are about to ${
-          isUpgrade(upDownGradeAlert.from, upDownGradeAlert.to)
-            ? "upgrade"
-            : "downgrade"
-        } your subscription plan from ${upDownGradeAlert.from} to ${
-          upDownGradeAlert.to
-        }. We will charge or refund the difference between the old and new billing amount right away. The calculation is based on the number of days left in the current billing cycle.`}
+        title={
+          t(
+            isUpgrade(upDownGradeAlert.from, upDownGradeAlert.to)
+              ? "Upgrade"
+              : "Downgrade",
+          ) +
+          " " +
+          t("to") +
+          " " +
+          t(upDownGradeAlert.to)
+        } //todo variable inside a statement
+        paragraph={t(
+          "You are about to {{isUpgrade}} your subscription plan from {{from}} to {{to}}. We will charge or refund the difference between the old and new billing amount right away. The calculation is based on the number of days left in the current billing cycle.",
+          {
+            isUpgrade: t(
+              isUpgrade(upDownGradeAlert.from, upDownGradeAlert.to)
+                ? "upgrade"
+                : "downgrade",
+            ),
+            from: t(upDownGradeAlert.from),
+            to: t(upDownGradeAlert.to),
+          },
+        )}
         isOpen={upDownGradeAlert.isShow}
         requestClose={() =>
           setUpDownGradeAlert((p) => ({
@@ -107,9 +121,8 @@ export default function SubscriptionSection({
         <header className="max-w-xl">
           <h2 className="text-lg font-medium text-gray-900">Subscription</h2>
           <p className="text-normal mb-4 text-gray-600">
-            If you need more resources for your POS system, please contact us
-            and we will be happy to assist you with a custom plan.{" "}
-            <SupportEmailLink />
+            { t( "If you need more resources for your POS system, please contact us and we will be happy to assist you with a custom plan." ) }
+              <SupportEmailLink />
           </p>
           <SubscriptionState subscriptionData={subscriptionLinks} />
         </header>

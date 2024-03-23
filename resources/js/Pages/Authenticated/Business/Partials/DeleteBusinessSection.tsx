@@ -6,6 +6,7 @@ import useBetterForm from "@/Utilities/useBetterForm";
 import SecondaryMaterialBtn from "@/Components/Buttons/Material/SecondaryMaterialBtn";
 import { IBusiness } from "@/types";
 import SupportEmailLink from "@/Components/SupportEmailLink";
+import { useTranslation } from "react-i18next";
 
 export default function DeleteBusinessSection({
   business,
@@ -50,46 +51,40 @@ export default function DeleteBusinessSection({
     reset();
   };
 
+  const { t } = useTranslation();
   return (
     <section className=" bg-white p-4 shadow sm:rounded-lg sm:p-8">
       <div className="max-w-3xl space-y-6">
         <header>
-          <h2 className="text-lg font-medium text-gray-900">Delete Business</h2>
+          <h2 className="text-lg font-medium text-gray-900">{ t( "Delete Business" ) }</h2>
 
           <p className="text-normal mt-3 text-gray-600">
-            When you delete your business, you will lose access to all the
-            resources associated with it, such as accounts, products, bills, and
-            business data. They will be permanently erased from our system and
-            cannot be recovered.
+            { t( "When you delete your business, you will lose access to all the resources associated with it, such as accounts, products, bills, and business data. They will be permanently erased from our system and cannot be recovered." ) }
           </p>
           <p className="text-normal mt-3 text-gray-600">
-            To prevent accidental deletion of large businesses, you must first
-            delete all other accounts under your business. This
-            is a safety measure to ensure that you are fully aware of the
-            consequences of deleting your business.
+            { t( "To prevent accidental deletion of large businesses, you must first delete all other accounts under your business. This is a safety measure to ensure that you are fully aware of the consequences of deleting your business." ) }
           </p>
           <p className="text-normal mt-3 text-gray-600">
-            If you have any questions or concerns about deleting your business,
-            please contact us at <SupportEmailLink />. We are happy to assist
-            you with any issues you may have.
+            { t( "If you have any questions or concerns about deleting your business, please contact us at" ) }
+            <SupportEmailLink />.{" "}
+            { t( "We are happy to assist you with any issues you may have." ) }
           </p>
         </header>
         <DangerButton onClick={confirmUserDeletion}>
-          Delete Business
+          { t( "Delete Business" ) }
         </DangerButton>
         <Modal show={confirmingUserDeletion} onClose={closeModal}>
           <form onSubmit={submit} className="p-6">
             <h2 className="text-lg font-medium text-gray-900">
-              Are you sure you want to delete{" "}
+              { t( "Are you sure you want to delete" ) }
+              {" "}
               <span className="text-primary-800">{business.name}</span>{" "}
-              business?
+              { t( "business?" ) }
             </h2>
 
             <p className="mt-1 text-sm text-gray-600">
-              You will lose access to all the resources associated with it, such
-              as accounts, products, bills, and business data. They will be
-              permanently erased from our system and cannot be recovered.
-            </p>
+              { t( "You will lose access to all the resources associated with it, such as accounts, products, bills, and business data. They will be permanently erased from our system and cannot be recovered." ) }
+                </p>
 
             <div className="mt-6">
               <Input
@@ -103,7 +98,7 @@ export default function DeleteBusinessSection({
                 className="mt-1 block w-3/4"
                 autoFocus
                 required
-                placeholder="Password"
+                placeholder={ t( "Password"  )}
                 errorMsg={
                   errors.password ||
                   (errors as any).serverError
@@ -123,7 +118,7 @@ export default function DeleteBusinessSection({
                 className="ml-3"
                 disabled={processing}
               >
-                Delete Business
+                { t( "Delete Business" ) }
               </DangerButton>
             </div>
           </form>

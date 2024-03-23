@@ -5,6 +5,7 @@ import useBetterForm from "@/Utilities/useBetterForm";
 import { IBusiness } from "@/types";
 import { FormEventHandler } from "react";
 import PrimaryMaterialBtn from "@/Components/Buttons/Material/PrimaryMaterialBtn";
+import { useTranslation } from "react-i18next";
 
 export default function IdentitySection({ business }: { business: IBusiness }) {
   const form = useBetterForm<{
@@ -15,7 +16,7 @@ export default function IdentitySection({ business }: { business: IBusiness }) {
     name: business.name,
     logo: business.logo,
     logoFile: business.logoFile,
-    ['_method' as any]: "patch", // this is because FormData is available only in post method. Web garbage specification...
+    ["_method" as any]: "patch", // this is because FormData is available only in post method. Web garbage specification...
   });
 
   const submit: FormEventHandler = (e) => {
@@ -25,6 +26,8 @@ export default function IdentitySection({ business }: { business: IBusiness }) {
       preserveScroll: true,
     });
   };
+
+  const { t } = useTranslation();
   return (
     <form
       onSubmit={submit}
@@ -33,10 +36,10 @@ export default function IdentitySection({ business }: { business: IBusiness }) {
       <section className="max-w-xl">
         <header>
           <h2 className="text-lg font-medium text-gray-900">
-            Business Identity
+            { t( "Business Identity" ) }
           </h2>
 
-          <p className="text-normal mt-1 text-gray-600">Name and Logo</p>
+          <p className="text-normal mt-1 text-gray-600">{ t( "Name and Logo" ) }</p>
         </header>
         <div className="mt-6 space-y-6">
           <Input
@@ -67,7 +70,7 @@ export default function IdentitySection({ business }: { business: IBusiness }) {
               leave="transition ease-in-out"
               leaveTo="opacity-0"
             >
-              <p className="text-sm text-green-500">Saved</p>
+              <p className="text-sm text-green-500">{ t( "Saved" ) }</p>
             </Transition>
           </div>
         </div>

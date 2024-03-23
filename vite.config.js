@@ -9,7 +9,7 @@ export default defineConfig({
       refresh: true,
     }),
     react({
-      include: "*.json",
+      include: "public/locales/ar/translation.json",
     }),
   ],
 });

@@ -1,6 +1,7 @@
 import { UseBetterForm } from "@/Utilities/useBetterForm";
 import { IBusiness } from "@/types";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FaEdit } from "react-icons/fa";
 
 export default function BusinessLogoInput<
@@ -14,6 +15,8 @@ export default function BusinessLogoInput<
       ? "/businesses-logo/" + form.data.logo
       : "/assets/logo/laptop-pos-logo.svg",
   );
+    const { t } = useTranslation();
+
   return (
     <div>
       <button
@@ -25,7 +28,7 @@ export default function BusinessLogoInput<
         disabled={form.processing}
       >
         <p className="absolute -top-2 left-3 bg-white px-1 text-xs text-blue-gray-400">
-          Logo
+          { t( "Logo" ) }
         </p>
         <div
           className="pointer-events-none absolute bottom-0 left-0 right-0  top-0 rounded-md
@@ -33,7 +36,7 @@ export default function BusinessLogoInput<
         >
           <p className="flex drop-shadow-lg h-full w-full items-center justify-center gap-2 text-center text-lg text-gray-100">
             <FaEdit />
-            Edit Business Logo
+            { t( "Edit Business Logo" ) }
           </p>
         </div>
         <div className="rounded-md border border-blue-gray-200 shadow-sm ">
@@ -50,7 +53,7 @@ export default function BusinessLogoInput<
               }
             }}
           />
-          <img className="mx-auto h-40" src={logoSrc} alt={"Business logo"} />
+          <img className="mx-auto h-40" src={logoSrc} alt={ t( "Business logo"   )}/>
         </div>
       </button>
 

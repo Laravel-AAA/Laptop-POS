@@ -4,6 +4,7 @@ import { FaUserEdit, FaUserTimes } from "react-icons/fa";
 import { AuthPageProps, IUser } from "@/types";
 import { usePage } from "@inertiajs/react";
 import { FaUserCheck, FaUserMinus } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
 
 export default function AccountOptions({
   account,
@@ -16,6 +17,7 @@ export default function AccountOptions({
 }) {
   const loggedInId = usePage<AuthPageProps>().props.auth.user.id;
 
+  const { t } = useTranslation();
   return (
     <div className="text-center ">
       <Dropdown>
@@ -29,7 +31,8 @@ export default function AccountOptions({
           {account.id !== loggedInId && !account.deleted_at && (
             <Dropdown.Button onClick={() => requestEdit()}>
               <div className="flex items-center gap-3">
-                <FaUserEdit className="text-base text-gray-900" /> Edit
+                <FaUserEdit className="text-base text-gray-900" />
+                { t( "Edit" ) }
               </div>
             </Dropdown.Button>
           )}
@@ -37,7 +40,8 @@ export default function AccountOptions({
           {account.id === loggedInId && (
             <Dropdown.Link href={route("profile.edit")}>
               <div className="flex items-center gap-3">
-                <FaUserEdit className="text-base text-gray-900" /> Edit
+                <FaUserEdit className="text-base text-gray-900" />
+                { t( "Edit" ) }
               </div>
             </Dropdown.Link>
           )}
@@ -52,7 +56,8 @@ export default function AccountOptions({
               preserveState={false}
             >
               <div className="flex items-center gap-3 text-danger-600">
-                <FaUserMinus className="text-base" /> Soft Delete
+                <FaUserMinus className="text-base" />
+                { t( "Soft Delete" ) }
               </div>
             </Dropdown.Link>
           )}
@@ -67,7 +72,8 @@ export default function AccountOptions({
               preserveState={false}
             >
               <div className="flex items-center gap-3">
-                <FaUserCheck className="text-base text-gray-900" /> Restore
+                <FaUserCheck className="text-base text-gray-900" />
+                { t( "Restore" ) }
               </div>
             </Dropdown.Link>
           )}
@@ -78,7 +84,8 @@ export default function AccountOptions({
               onClick={() => requestOpenDeleteModal()}
             >
               <div className="flex items-center gap-3 text-danger-600">
-                <FaUserTimes className="text-base" /> Delete Permanently
+                <FaUserTimes className="text-base" />
+                { t( "Delete Permanently" ) }
               </div>
             </Dropdown.Button>
           )}

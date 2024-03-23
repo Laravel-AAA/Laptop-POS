@@ -2,6 +2,7 @@ import ProgressWithLabel from "@/Components/ProgressWithLabel";
 import Num from "@/Utilities/Num";
 import { ISubscriptionLinks } from "@/types";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function SubscriptionProgress({
   progress,
@@ -9,14 +10,21 @@ export default function SubscriptionProgress({
   progress: NonNullable<ISubscriptionLinks["progress"]>;
 }) {
   const { accounts, products, bills } = progress;
-  const accountsPercentage = Number(( (accounts.reached / accounts.max) * 100 ).toFixed(2));
-  const productsPercentage = Number(( (products.reached / products.max) * 100 ).toFixed(2));
-  const billsPercentage = Number(( (bills.reached / bills.max) * 100 ).toFixed(2));
+  const accountsPercentage = Number(
+    ((accounts.reached / accounts.max) * 100).toFixed(2),
+  );
+  const productsPercentage = Number(
+    ((products.reached / products.max) * 100).toFixed(2),
+  );
+  const billsPercentage = Number(
+    ((bills.reached / bills.max) * 100).toFixed(2),
+  );
 
+  const { t } = useTranslation();
   return (
     <div className="space-y-3">
       <ProgressWithLabel
-        leftLabel="Accounts"
+        leftLabel={t("Accounts")}
         progressColor={colorBaseOnPercentage(accountsPercentage)}
         rightLabel={
           <span>
@@ -29,7 +37,7 @@ export default function SubscriptionProgress({
         progress={accountsPercentage}
       />
       <ProgressWithLabel
-        leftLabel="Products"
+        leftLabel={t("Products")}
         progressColor={colorBaseOnPercentage(productsPercentage)}
         progressLabel={" "}
         rightLabel={
@@ -42,7 +50,7 @@ export default function SubscriptionProgress({
         progress={productsPercentage}
       />
       <ProgressWithLabel
-        leftLabel="Bills"
+        leftLabel={t("Bills")}
         progressLabel={" "}
         progressColor={colorBaseOnPercentage(billsPercentage)}
         rightLabel={

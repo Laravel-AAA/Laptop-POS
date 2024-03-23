@@ -6,6 +6,7 @@ import useBetterForm from "@/Utilities/useBetterForm";
 import { IBusiness } from "@/types";
 import { Transition } from "@headlessui/react";
 import { FormEventHandler } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function LocationContactSection({
   business,
@@ -32,12 +33,14 @@ export default function LocationContactSection({
       preserveScroll: true,
     });
   };
+
+  const { t } = useTranslation();
   return (
     <form onSubmit={submit} className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
       <section className="max-w-xl">
         <header>
           <h2 className="text-lg font-medium text-gray-900">
-            Location & Contact
+            { t( "Location & Contact" ) }
           </h2>
 
           {/* <p className="text-normal mt-1 text-gray-600">Name and Logo</p> */}
@@ -81,9 +84,9 @@ export default function LocationContactSection({
               leave="transition ease-in-out"
               leaveTo="opacity-0"
             >
-              <p className="text-sm text-green-500">Saved</p>
+              <p className="text-sm text-green-500">{ t( "Saved" ) }</p>
             </Transition>
-          </div>{" "}
+          </div>
         </div>
       </section>
     </form>

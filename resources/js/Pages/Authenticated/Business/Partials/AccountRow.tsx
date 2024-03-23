@@ -2,6 +2,7 @@ import { IUser } from "@/types";
 import FromDate from "@/Utilities/FromDate";
 import { PropsWithChildren } from "react";
 import AccountOptions from "./AccountOptions";
+import { useTranslation } from "react-i18next";
 
 export default function AccountRow({
   account,
@@ -12,6 +13,8 @@ export default function AccountRow({
   requestEdit: () => void;
   requestOpenDeleteModal: (account: IUser) => void;
 }) {
+
+  const { t } = useTranslation();
   return (
     <tr className="even:bg-blue-gray-50/50">
       <TD>{account.name}</TD>
@@ -20,24 +23,24 @@ export default function AccountRow({
       <TD>
         {account.deleted_at ? (
           <span
-            title="Deleted account cannot access the system"
+            title={ t( "Deleted account cannot access the system"  )}
             className="rounded-full bg-danger-200 p-1 px-2 text-danger-800"
           >
-            Deleted
+            { t( "Deleted" ) }
           </span>
         ) : account.email_verified_at ? (
           <span
-            title="Verified account can access the system"
+            title={ t( "Verified account can access the system"  )}
             className="rounded-full bg-green-100 p-1 px-2 text-green-800"
           >
-            Verified
+            { t( "Verified" ) }
           </span>
         ) : (
           <span
-            title="Unverified account cannot access the system"
+            title={ t( "Unverified account cannot access the system"  )}
             className="rounded-full bg-yellow-100 p-1 px-2 text-yellow-900"
           >
-            Unverified
+            { t( "Unverified" ) }
           </span>
         )}
       </TD>
