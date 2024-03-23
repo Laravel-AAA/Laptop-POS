@@ -44,7 +44,7 @@ function Content() {
         </P>
         <P>
           {t(
-            'These terms and conditions create a contract (“Agreement”) between you ("Buyer") and Paddle (as defined below) and govern your use of the Services.',
+            'These terms and conditions create a contract (“Agreement”) between you (“Buyer”) and Paddle (as defined below) and govern your use of the Services.',
           )}
         </P>
         <P>
@@ -79,7 +79,7 @@ function Content() {
         </P>
         <P>
           {t(
-            '"Confidential Information" means any commercial, financial or technical information; information relating to the Product; the Services; plans or strategy, know-how or trade secrets which is obviously confidential or has been identified as such, or which is developed by a party in performing its obligations under, or otherwise pursuant to this Agreement;',
+            '“Confidential Information” means any commercial, financial or technical information; information relating to the Product; the Services; plans or strategy, know-how or trade secrets which is obviously confidential or has been identified as such, or which is developed by a party in performing its obligations under, or otherwise pursuant to this Agreement;',
           )}
         </P>
         <P>
@@ -94,7 +94,7 @@ function Content() {
             "“Digital Content” means data which are produced and supplied in digital form;",
           )}
         </P>
-        <P>{t('"Paddle" means,')}</P>
+        <P>{t('“Paddle” means,')}</P>
         <UL>
           <LI>
             {t(
@@ -114,18 +114,18 @@ function Content() {
         </P>
         <P>
           {t(
-            '"Paddle Checkout" means the online checkout that Buyers use to purchase the Product and make payment to Paddle using payment methods such as credit card, PayPal, alternative payment methods and bank transfer;',
+            '“Paddle Checkout” means the online checkout that Buyers use to purchase the Product and make payment to Paddle using payment methods such as credit card, PayPal, alternative payment methods and bank transfer;',
           )}
         </P>
         <P>
           {t(
-            '"Product" means the Supplier\'s software or digital product(s) and/or Digital Content licensed for use by the Buyer under the terms of the Supplier Agreement;',
+            "“Product” means the Supplier's software or digital product(s) and/or Digital Content licensed for use by the Buyer under the terms of the Supplier Agreement;",
           )}
         </P>
-        <P>{t('"Supplier" means the licensor of the Product;')}</P>
+        <P>{t('“Supplier” means the licensor of the Product;')}</P>
         <P>
           {t(
-            '"Supplier Agreement" means the Supplier\'s terms and conditions in respect of the Product;',
+            '“Supplier Agreement” means the Supplier\'s terms and conditions in respect of the Product;',
           )}
         </P>
         <P>
