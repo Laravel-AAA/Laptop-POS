@@ -8,6 +8,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import { usePrevious } from "react-use";
+import { useTranslation } from "react-i18next";
 
 const OrderByInventoryOptions = {
   name: "Name (A-Z)",
@@ -55,16 +56,18 @@ export default function InventoryHeader({
     }
   }, [filter]);
 
+  const { t } = useTranslation();
   return (
     <div className="block justify-between py-2 md:flex">
       <div className="flex items-center gap-3">
         <h2 className="mb-1 mr-4 text-xl font-semibold leading-tight text-gray-800">
           {filter.stock === "out" ? (
             <>
-              <span className="text-danger-600">Out of Stock</span> Products
+              <span className="text-danger-600">{t("Out of Stock")}</span>{" "}
+              {t("Products")}
             </>
           ) : (
-            "Inventory"
+            t("Inventory")
           )}
         </h2>
         <Input
@@ -87,17 +90,13 @@ export default function InventoryHeader({
           disabled={false}
         />
         {filter.search && prevFilter?.search === filter.search && (
-          <TotalResult
-            className=""
-            text="Result"
-            number={totalResult}
-          />
+          <TotalResult className="" text="Result" number={totalResult} />
         )}
       </div>
       <div className="flex flex-col items-center justify-end gap-6 md:my-auto md:flex-row">
         {!filter.search && (
           <TotalResult
-            className="!mx-0 md:mt-0 mt-4"
+            className="!mx-0 mt-4 md:mt-0"
             text="Total"
             number={totalResult}
           />
@@ -131,7 +130,7 @@ export default function InventoryHeader({
             <Option
               key={k}
               value={k}
-              disabled={filter.stock === 'out' && k.includes('stock')}
+              disabled={filter.stock === "out" && k.includes("stock")}
               className="flex items-center"
             >
               {v}
@@ -144,7 +143,7 @@ export default function InventoryHeader({
             onClick={() => requestCreateProduct()}
           >
             <FaPlus className="mr-2" />
-            <span>Add New Product</span>
+            <span>{ t( "Add New Product" ) }</span>
           </PrimaryMaterialBtn>
         )}
       </div>
@@ -162,9 +161,11 @@ export function TotalResult({
   number: number;
   className?: string;
 }) {
+
+  const { t } = useTranslation();
   return (
     <p className={"m-0 mr-3 inline p-0 text-center text-gray-600 " + className}>
-      {text}:&nbsp;
+      {t( text )}:&nbsp;
       <span className="text-gray-900">{number}</span>
     </p>
   );

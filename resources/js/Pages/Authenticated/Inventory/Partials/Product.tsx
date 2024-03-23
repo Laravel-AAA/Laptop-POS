@@ -3,6 +3,7 @@ import ProductOptions from "./ProductOptions";
 import Num from "@/Utilities/Num";
 import { usePage } from "@inertiajs/react";
 import DefaultProductImg from "@/Pages/Authenticated/Inventory/Partials/DefaultProductImg";
+import { useTranslation } from "react-i18next";
 
 type PropsProduct = {
   product: IProduct;
@@ -20,6 +21,7 @@ export default function Product({
 
   const taxPercent = usePage<AuthPageProps>().props.auth.business.taxPercent;
 
+  const { t } = useTranslation();
   return (
     <div
       role="button"
@@ -59,7 +61,7 @@ export default function Product({
         <div className="mt-2 flex justify-between gap-2">
           <p
             title={
-              product.price === null ? "" : "$" + product.price + " without tax"
+              product.price === null ? "" : "$" + product.price +" "+t(  "without tax" )
             }
             className="text-lg font-thin text-primary-700"
           >
@@ -75,7 +77,7 @@ export default function Product({
           <div className="flex flex-col justify-center">
             {product.stock === 0 ? (
                 <span
-                title="Out of Stock"
+                title={ t( "Out of Stock"  )}
                   style={{
                     display: "-webkit-box",
                     WebkitBoxOrient: "vertical",
@@ -83,14 +85,14 @@ export default function Product({
                   }}
                   className="overflow-hidden text- font-thin text-red-500  "
                 >
-                  Out of Stock
+                  { t( "Out of Stock" ) }
                 </span>
             ) : (
               <Num
                 className="font-normal  text-secondary-600"
                 amount={product.stock}
                 defaultNoAmount
-                prefix="Stock"
+                prefix={ t( "Stock"  )}
                 prefixProps={{ className: "text-gray-500 font-thin" }}
               />
             )}

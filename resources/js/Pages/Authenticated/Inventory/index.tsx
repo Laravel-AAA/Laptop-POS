@@ -15,6 +15,7 @@ import CreateEditProductModal from "@/Components/Modals/CreateEdit/ProductModal/
 import InventoryHeader from "./Partials/InventoryHeader";
 import Footer from "@/Layouts/GuestLayout/Partials/Footer";
 import UpdateProductStockModal from "@/Components/Modals/UpdateProductStockModal";
+import { useTranslation } from "react-i18next";
 
 export default function Inventory({
   auth,
@@ -33,9 +34,10 @@ export default function Inventory({
     { open: true; product: IProduct } | { open: false; product?: IProduct }
   >({ open: false });
 
+  const { t } = useTranslation();
   return (
     <>
-      <Head title="Inventory" />
+      <Head title={ t( "Inventory"   )}/>
       <CreateEditProductModal
         key="inventoryCreateEditProductMOdal"
         modalAction={modalAction}
@@ -66,7 +68,7 @@ export default function Inventory({
             {products.length === 0 && (
               <div className="my-20 flex gap-4 opacity-50">
                 <BsSearch className="mt-1" />
-                <p>No products found!</p>
+                <p>{ t( "No products found!" ) }</p>
               </div>
             )}
             {products.map((p) => (
